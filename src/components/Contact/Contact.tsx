@@ -4,10 +4,12 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Section } from '../Layout';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useTranslation } from '../../hooks/useTranslation';
 import { LegalModal } from '../Legal/LegalModal';
 
 export const Contact = () => {
   const { isMobile } = useMediaQuery();
+  const { t } = useTranslation();
   const [impressumOpened, setImpressumOpened] = useState(false);
   const [datenschutzOpened, setDatenschutzOpened] = useState(false);
 
@@ -34,20 +36,20 @@ export const Contact = () => {
   const contactItems = [
     {
       icon: IconMail,
-      label: 'E-Mail',
+      label: t.contact.contactItems.email,
       value: 'info@12ofspades.com',
       href: 'mailto:info@12ofspades.com'
     },
     {
       icon: IconPhone,
-      label: 'Telefon',
+      label: t.contact.contactItems.phone,
       value: '+49 176 8100 1371',
       href: 'tel:+4917681001371'
     },
     {
       icon: IconMapPin,
-      label: 'Standort',
-      value: 'Weisendorf, Deutschland',
+      label: t.contact.contactItems.location,
+      value: t.contact.contactItems.locationValue,
       href: null
     }
   ];
@@ -86,11 +88,10 @@ export const Contact = () => {
                   backgroundClip: 'text'
                 }}
               >
-                Kontakt
+                {t.contact.title}
               </Title>
               <Text size="lg" c="var(--text-secondary)" maw="600px">
-                Bereit für Ihr nächstes Projekt? Lassen Sie uns über Ihre Anforderungen sprechen 
-                und gemeinsam innovative Lösungen entwickeln.
+                {t.contact.subtitle}
               </Text>
             </Stack>
           </motion.div>
@@ -140,7 +141,7 @@ export const Contact = () => {
 
           <motion.div variants={itemVariants}>
             <Stack gap="md" align="center">
-              <Text fw={600} c="var(--text-primary)">Folgen Sie mir</Text>
+              <Text fw={600} c="var(--text-primary)">{t.contact.followMe}</Text>
               <Group gap="md">
                 {socialLinks.map((link) => (
                   <motion.div
@@ -181,7 +182,7 @@ export const Contact = () => {
                   style={{ textDecoration: 'none', cursor: 'pointer' }}
                   onClick={() => setImpressumOpened(true)}
                 >
-                  Impressum
+                  {t.contact.legal.impressum}
                 </Anchor>
                 <Text size="xs" c="var(--text-secondary)">•</Text>
                 <Anchor
@@ -190,7 +191,7 @@ export const Contact = () => {
                   style={{ textDecoration: 'none', cursor: 'pointer' }}
                   onClick={() => setDatenschutzOpened(true)}
                 >
-                  Datenschutz
+                  {t.contact.legal.datenschutz}
                 </Anchor>
               </Group>
             </Stack>

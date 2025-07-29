@@ -4,6 +4,7 @@ export interface Project {
   description: string[];
   primary_tags: string[];
   tags: string[];
+  comment?: string;
 }
 
 export interface ProjectsData {
@@ -20,448 +21,610 @@ export const projectsData: ProjectsData = {
         "As a key developer on the Playground project, I was responsible for the entire development process, from the initial concept to the final deployment. The platform enables users to experiment with various AI applications, such as creating AI experts from uploaded documents, generating images, and defining custom AI scenarios.",
         "To ensure flexibility and scalability, the Playground platform is designed to support multiple tenants, allowing each customer to have their own dedicated workspace. Furthermore, each tenant can be divided into multiple areas, enabling different departments within an organization to have their own private spaces while still being able to share relevant information."
       ],
-      "primary_tags": [
-        "AI",
-        "LLM", 
-        "No Code"
-      ],
+      "primary_tags": ["AI", "LLM", "No Code"],
       "tags": [
         "Anthropic AI",
         "Black Forest Labs",
         "Claude 3 Haiku",
         "Claude 3.5 Sonnet",
-        "Claude 3 Opus",
-        "ComfyUI",
-        "Flux.1 [dev]",
-        "Flux.1 [schnell]",
-        "OpenAI",
-        "OpenAI GPT-4o",
-        "OpenAI GPT-4o-mini",
-        "Postgres",
-        "Pydantic",
+        "DALL·E 3",
+        "FLUX.1 [dev]",
+        "FLUX.1 [pro]",
+        "FLUX.1 [schnell]",
+        "FLUX1.1 [pro]",
+        "Gemini 1.5 Flash",
+        "Gemini 1.5 Pro",
+        "Google Generative AI",
+        "GPT-4o",
+        "OpenAI ChatGPT",
         "React",
-        "JavaScript",
-        "Streamlit",
-        "Stable Diffusion 3",
-        "Supabase",
-        "Next.js",
-        "TypeScript",
-        "Material UI",
-        "FastAPI",
+        "NextJS",
+        "TailwindCSS",
+        "LangChain",
+        "LiveKit",
+        "Prettier",
+        "Prisma",
+        "Puppeteer",
+        "Replicate API",
+        "Typescript",
+        "Typesense",
+        "Zod"
+      ]
+    },
+    {
+      "customer": "WIADOK GmbH & Co. KG",
+      "title": "Workshop for 'Using AI in software for tax advisors'",
+      "description": [
+        "WIADOK, a company that specializes in providing innovative solutions for businesses, particularly tax advisors, is constantly exploring new ways to improve efficiency and productivity through the use of technology.",
+        "I led an AI workshop for WIADOK, where we discussed potential applications of AI within their business. One of the key ideas that emerged was the development of a mobile app that could use AI to process receipts and invoices. End-users could simply take photos of these documents, and the app would use an LLM to extract key information such as date, vendor, and itemized costs. This information could then be automatically uploaded to the tax advisor's office, streamlining the process for both the client and the advisor.",
+        "Another interesting use case was the application of AI to personalize newsletters. By asking subscribers a series of questions, the LLM could create detailed user personas. These personas, combined with the latest tax news and regulations, would enable the LLM to curate highly personalized newsletters tailored to each individual's specific needs and interests."
+      ],
+      "primary_tags": ["AI", "LLM", "Workshop"],
+      "tags": [
+        "Ant Design",
+        "Anthropic AI",
+        "Black Forest Labs",
+        "Claude 3 Haiku",
+        "Claude 3.5 Sonnet",
+        "DALL·E 3",
+        "Elevenlabs",
+        "Expo",
+        "FLUX.1 [dev]",
+        "FLUX.1 [pro]",
+        "FLUX.1 [schnell]",
+        "FLUX1.1 [pro]",
+        "Gemini 1.5 Flash",
+        "Gemini 1.5 Pro",
+        "Google Generative AI",
+        "GPT-4o",
+        "LangChain",
+        "NextJS",
+        "NextJS",
+        "Node.js",
+        "OpenAI ChatGPT",
+        "Prettier",
+        "Prisma",
+        "React Native",
+        "React",
+        "Replicate API",
+        "TailwindCSS",
+        "Typescript"
+      ]
+    },
+    {
+      "customer": "ambiFOX GmbH",
+      "title": "Workshop for 'Using AI in ambiFOX daily business'",
+      "description": [
+        "ambiFOX is a technology company specializing in network operations. They offer a range of services, including network design, implementation, and maintenance. Their goal is to streamline network operations and improve overall IT efficiency.",
+        "I led a workshop for ambiFOX, where we explored the potential applications of AI within their business. One idea that emerged was to use AI to automate the generation of network device configurations. This could significantly reduce the time and effort required to set up new devices.",
+        "Another interesting application was using AI to rephrase incoming support tickets. By automatically adjusting the tone of these messages, ambiFOX could improve the overall support experience and reduce the emotional burden on their support team."
+      ],
+      "primary_tags": ["AI", "LLM", "Workshop"],
+      "tags": [
+        "Anthropic AI",
+        "Black Forest Labs",
+        "Claude 3 Haiku",
+        "Claude 3.5 Sonnet",
+        "DALL·E 3",
+        "FLUX.1 [dev]",
+        "FLUX.1 [pro]",
+        "FLUX.1 [schnell]",
+        "FLUX1.1 [pro]",
+        "Gemini 1.5 Flash",
+        "Gemini 1.5 Pro",
+        "Google Generative AI",
+        "GPT-4o",
+        "LangChain",
+        "OpenAI ChatGPT",
         "Python"
       ]
     },
     {
-      "customer": "ChatYourData GmbH",
-      "title": "Dashboard",
+      "customer": "Glückliche Gäste GmbH",
+      "title": "Uninu AI infused foodtracking app",
       "description": [
-        "ChatYourData's dashboard serves as the central hub for managing all AI services and tools offered by the company. This comprehensive platform allows administrators to oversee various AI models, track usage statistics, manage user accounts, and configure different AI playground environments.",
-        "The dashboard provides a clean and intuitive interface for monitoring system performance, analyzing user behavior, and managing resource allocation across different AI services. It includes features for real-time monitoring, automated reporting, and seamless integration with multiple AI providers.",
-        "As the lead developer, I designed and implemented the entire dashboard architecture, ensuring scalability, security, and user-friendly operation. The platform supports multi-tenant functionality and provides detailed analytics for business intelligence purposes."
+        "Glückliche Gäste GmbH, a company focused on developing innovative food tracking solutions, is working on a new app called \"Uninu\". They aim to revolutionize the way people track their food intake by leveraging AI to simplify the process.",
+        "I was one of the early developers on the Uninu project, where I played a key role in building the backend infrastructure and the React Native mobile app. Initially, we employed a traditional approach using AWS API Gateway and RDS to handle API requests and store user data. However, to enhance scalability, performance, and real-time capabilities, we transitioned to a more modern architecture utilizing AWS AppSync and DynamoDB.",
+        "AppSync, a fully managed GraphQL service, enabled us to create a real-time, scalable, and flexible API layer. This allowed us to efficiently fetch and manipulate data across multiple data sources, including the DynamoDB database. DynamoDB, a fully managed NoSQL database service, provided us with fast and predictable performance, making it ideal for handling large amounts of user data, such as food logs, nutritional information, and user preferences.",
+        "By leveraging these powerful AWS services, we were able to build a robust and efficient backend infrastructure that supports the core functionalities of the Uninu app, such as user authentication, food item recognition, nutritional data calculation, and personalized meal plan generation."
       ],
-      "primary_tags": [
-        "Dashboard",
-        "Analytics",
-        "Admin Panel"
-      ],
+      "primary_tags": ["AWS", "React Native", "AI", "LLM"],
       "tags": [
+        "Anthropic AI",
+        "Apollo",
+        "AWS API Gateway",
+        "AWS AppSync",
+        "AWS Cognito",
+        "AWS DynamoDB",
+        "AWS IAM",
+        "AWS Lambda",
+        "AWS RDS",
+        "AWS S3",
+        "AWS Secrets Manager",
+        "AWS VPC",
+        "Expo",
+        "Framer Motion",
+        "Google Generative AI",
+        "GraphQL",
+        "NextAuth",
+        "NextJS",
+        "Nodemailer",
+        "OAuth 2.0",
+        "OpenAI ChatGPT",
+        "Prettier",
+        "Prettier",
+        "Puppeteer",
         "React",
-        "TypeScript",
-        "Material UI",
-        "Next.js",
-        "Supabase",
-        "Postgres",
-        "FastAPI",
-        "Python",
-        "Real-time monitoring",
-        "Business Intelligence",
-        "Multi-tenant",
-        "Analytics",
-        "User Management"
+        "TailwindCSS",
+        "TanStack Query",
+        "tRPC",
+        "Typescript",
+        "Vercel AI",
+        "Zod"
       ]
     },
     {
-      "customer": "DMG Mori",
-      "title": "SharePoint Migration",
+      "customer": "Sikant GmbH",
+      "title": "Sikant Med",
       "description": [
-        "Led a comprehensive SharePoint migration project for DMG Mori, a global leader in machine tool manufacturing. The project involved migrating legacy systems to modern SharePoint Online infrastructure while ensuring minimal downtime and data integrity.",
-        "The migration encompassed multiple business units across different geographical locations, requiring careful planning and coordination. I developed custom migration scripts, implemented data validation processes, and created comprehensive documentation for the new system.",
-        "Successfully migrated over 500GB of business-critical data, including documents, workflows, and user permissions, while maintaining full compliance with enterprise security standards and ensuring seamless user adoption through training and support."
+        "Sikant is a healthcare technology company developing software solutions for small and medium-sized operation centers. I contributed to enhancing their software \"Sikant Med\" by implementing a real-time support chat feature and developing comprehensive end-to-end tests.",
+        "As part of this project, I integrated the chat functionality, designed a user-friendly interface for support agents, and implemented the necessary backend infrastructure for real-time communication. Additionally, I developed and executed end-to-end tests to ensure the quality and reliability of the software, including the newly added chat feature.",
+        "By adding this feature and implementing robust testing practices, Sikant improved its software by providing more efficient and timely support, enhancing user satisfaction, and ensuring a high-quality product."
       ],
-      "primary_tags": [
-        "Migration",
-        "SharePoint",
-        "Enterprise"
-      ],
+      "primary_tags": ["E2E Tests", "NextJS", "Websocket"],
       "tags": [
-        "SharePoint Online",
-        "Microsoft 365",
-        "PowerShell",
-        "Data Migration",
-        "Enterprise Architecture",
-        "Business Process",
-        "Change Management",
-        "Documentation",
-        "Training",
-        "Security Compliance"
+        "Ant Design",
+        "Cypress",
+        "Microsoft Authentication Library",
+        "Google Cloud Vision",
+        "NestJS",
+        "OpenAPI Generator",
+        "Prisma",
+        "tRPC",
+        "Express",
+        "ImapFlow",
+        "Socket.IO",
+        "Narwhal",
+        "Zod"
       ]
     },
     {
-      "customer": "DMG Mori", 
-      "title": "Intranet Modernization",
+      "customer": "Drawag AG",
+      "title": "AI infused WebScrapper for construction tenders",
       "description": [
-        "Modernized DMG Mori's corporate intranet platform to improve employee communication, knowledge sharing, and operational efficiency. The project involved redesigning the information architecture and implementing modern collaboration tools.",
-        "Developed a user-centric design approach, conducting extensive user research and feedback sessions to understand employee needs and pain points. Implemented responsive design principles to ensure optimal user experience across all devices and platforms.",
-        "The new intranet platform resulted in a 40% increase in employee engagement and significantly improved information findability. Integrated advanced search capabilities, social collaboration features, and automated content management workflows."
+        "Drawag AG, a company focused on construction and engineering, was facing a significant challenge: a significant portion of an employee's time was spent manually searching through various portals to identify potential building projects that aligned with their expertise. The goal was to efficiently identify projects that included specific construction trades where Drawag could offer their services as a subcontractor.",
+        "To address this challenge, we proposed leveraging AI to automate the process of searching and filtering through these portals. We began by developing a web scraper to extract relevant data from these portals. This data was then fed into a state-of-the-art language model, such as GPT-4 or a similar model, to identify projects that matched Drawag's specific criteria.",
+        "By automating this process, we aimed to significantly reduce the time spent on manual searches and increase the efficiency of identifying relevant projects. The language model was used to analyze the extracted data and identify relevant information, such as project details, timelines, and contact information. Additionally, we implemented a notification system to alert the relevant team members via email whenever a new project matching their criteria was identified."
       ],
-      "primary_tags": [
-        "Intranet",
-        "UX/UI",
-        "Collaboration"
-      ],
+      "primary_tags": ["AI", "LLM", "Web Scraper"],
       "tags": [
-        "SharePoint",
-        "User Experience",
-        "Information Architecture",
-        "Responsive Design",
-        "Employee Engagement",
-        "Search Optimization",
-        "Social Collaboration",
-        "Content Management",
-        "Workflow Automation",
-        "Change Management"
-      ]
-    },
-    {
-      "customer": "DMG Mori",
-      "title": "Digital Workplace Setup", 
-      "description": [
-        "Implemented a comprehensive digital workplace solution for DMG Mori, focusing on improving remote collaboration capabilities and streamlining business processes. The project included setting up integrated communication tools and productivity platforms.",
-        "Designed and deployed a unified digital workspace that seamlessly connects employees across global offices. Implemented single sign-on (SSO) solutions, automated workflow processes, and integrated communication tools to enhance productivity.",
-        "The digital workplace transformation resulted in improved cross-team collaboration, reduced operational overhead, and enhanced employee satisfaction. Provided extensive training and change management support to ensure successful adoption across the organization."
-      ],
-      "primary_tags": [
-        "Digital Workplace",
-        "Remote Work",
-        "Productivity"
-      ],
-      "tags": [
-        "Microsoft 365",
-        "Teams",
-        "Single Sign-On",
-        "Workflow Automation",
-        "Change Management",
-        "Remote Collaboration",
-        "Employee Training",
-        "Business Process",
-        "Productivity Tools",
-        "Global Deployment"
-      ]
-    },
-    {
-      "customer": "DMG Mori",
-      "title": "Business Process Automation",
-      "description": [
-        "Developed and implemented automated business process solutions for DMG Mori to streamline operations and reduce manual work. The project focused on identifying repetitive tasks and creating intelligent automation workflows.",
-        "Analyzed existing business processes across multiple departments and designed custom automation solutions using Power Platform and other Microsoft technologies. Implemented approval workflows, document management automation, and data integration processes.",
-        "Successfully automated over 50 business processes, resulting in a 60% reduction in manual processing time and significantly improved accuracy. Provided comprehensive documentation and training to ensure sustainable operation and maintenance."
-      ],
-      "primary_tags": [
-        "Automation",
-        "Business Process",
-        "Efficiency"
-      ],
-      "tags": [
-        "Power Platform",
-        "Power Automate",
-        "Power Apps",
-        "SharePoint",
-        "Business Intelligence",
-        "Workflow Design",
-        "Process Optimization",
-        "Documentation",
-        "Training",
-        "Maintenance"
-      ]
-    },
-    {
-      "customer": "Freelance",
-      "title": "E-Learning Platform",
-      "description": [
-        "Developed a comprehensive e-learning platform as a freelance project, designed to deliver interactive online courses and training materials. The platform features modern user interfaces, progress tracking, and multimedia content support.",
-        "Built using modern web technologies with a focus on scalability and user experience. Implemented features including video streaming, interactive quizzes, progress analytics, and certificate generation. The platform supports multiple content formats and learning paths.",
-        "The e-learning platform successfully serves hundreds of students with high satisfaction rates. Implemented responsive design for optimal mobile and desktop experiences, along with comprehensive admin tools for course management and student analytics."
-      ],
-      "primary_tags": [
-        "E-Learning",
-        "Education",
-        "Platform"
-      ],
-      "tags": [
+        "Anthropic AI",
+        "Google Generative AI",
+        "OpenAI ChatGPT",
         "React",
-        "Node.js",
-        "MongoDB",
-        "Video Streaming",
-        "Interactive Content",
-        "Progress Tracking",
-        "Analytics",
-        "Certificate Generation",
-        "Responsive Design",
-        "Admin Tools",
-        "User Management",
-        "Content Management"
+        "NextJS",
+        "TailwindCSS",
+        "LangChain",
+        "Prisma",
+        "Puppeteer",
+        "Prettier",
+        "Typescript",
+        "Sonner",
+        "Sharp",
+        "Nodemailer",
+        "Zod"
       ]
     },
     {
-      "customer": "Freelance",
-      "title": "Real Estate Portal",
+      "customer": "DMG Mori Software Solution",
+      "title": "Concept and implementation of an app store and a demo app",
       "description": [
-        "Created a modern real estate portal featuring property listings, advanced search functionality, and integrated mapping services. The platform serves both property seekers and real estate agents with comprehensive tools for property management.",
-        "Implemented advanced search and filtering capabilities, interactive property maps, virtual tour integration, and automated email notifications. The platform includes separate dashboards for agents and administrators with detailed analytics and lead management tools.",
-        "The portal successfully processes thousands of property listings and user inquiries monthly. Features include mortgage calculator integration, favorite properties system, and comprehensive property comparison tools that enhance the user experience."
+        "The project centered on developing an industry-specific app store for Industrial PCs (IPCs) within machines manufactured by our customer. A significant aspect was the launch of the initial app—Celos Tech Calculator—a specialized tool designed for performing machine-specific calculations, aimed at enhancing operational efficiency and functionality.",
+        "The primary objective was to establish a robust app store framework seamlessly integrated with IPCs, facilitating straightforward installation and management of apps. This framework served as the platform for deploying Celos Tech Calculator and paved the way for future app expansions.",
+        "Technologically, the project leveraged cloud services for app distribution, implemented rigorous security measures for authentication, and utilized Docker for efficient app containerization. Continuous integration and deployment (CI/CD) pipelines ensured smooth updates and maintenance of the app store ecosystem.",
+        "By introducing the Celos Tech Calculator, tailored specifically for machine-specific calculations, the project aimed to optimize industrial operations. It provided a user-friendly interface for managing and utilizing specialized tools directly on machines manufactured by our customer, thereby enhancing productivity and operational effectiveness."
       ],
-      "primary_tags": [
-        "Real Estate",
-        "Portal",
-        "Maps"
+      "primary_tags": ["Custom App Store", "Docker"],
+      "tags": []
+    },
+    {
+      "customer": "DMG Mori Software Solution",
+      "title": "Integrate TULIP no code plattform",
+      "description": [
+        "The project successfully integrated the TULIP no-code platform with the Celos X machine software, creating a seamless, API-based bi-directional data flow. This integration enhanced Celos X by enabling real-time data exchange and improving functionality through TULIP's no-code capabilities.",
+        "Key features implemented included robust APIs for efficient data management, enterprise-level authentication and authorization mechanisms, and a technology stack utilizing TypeScript and Angular for scalability and responsiveness. These elements ensured secure user access and smooth communication between the platforms.",
+        "The development process followed a structured roadmap, including requirement analysis, design, development, testing, and deployment. This approach ensured that the integration met all functional and performance requirements, resulting in a scalable, maintainable, and efficient solution for enterprise environments."
       ],
+      "primary_tags": ["Angular", "Typescript", "Azure API Management"],
       "tags": [
-        "React",
-        "TypeScript",
-        "Google Maps API",
-        "Property Search",
-        "Lead Management",
-        "Virtual Tours",
-        "Analytics Dashboard",
-        "Email Automation",
-        "Mortgage Calculator",
-        "Responsive Design",
-        "SEO Optimization",
-        "Performance"
+        "API-based Integration",
+        "Authentication / Authorization",
+        "Bi-Directional Data Flow",
+        "Enterprise Compliance",
+        "No-Code",
+        "Real-Time Data Exchange",
+        "Scalability"
       ]
     },
     {
-      "customer": "Freelance",
-      "title": "Inventory Management System",
+      "customer": "DMG Mori Software Solution",
+      "title": "Integration of ISTOS production planning system ",
       "description": [
-        "Developed a comprehensive inventory management system for small to medium-sized businesses, featuring real-time stock tracking, automated reordering, and detailed reporting capabilities.",
-        "The system includes barcode scanning integration, supplier management, purchase order automation, and multi-location inventory tracking. Implemented role-based access control and comprehensive audit trails for compliance requirements.",
-        "Successfully deployed across multiple client locations, resulting in improved inventory accuracy and reduced operational costs. The system features intuitive dashboards, customizable reports, and integration capabilities with existing business systems."
+        "The project integrated the ISTOS production planning system by connecting cloud frontends and on-premise machines to a cloud-based platform. This integration facilitated seamless communication and coordination between different components, enhancing production planning efficiency.",
+        "Key elements of the integration included robust user authentication and authorization mechanisms, ensuring secure access in an enterprise context. The project utilized several Azure services and Terraform to build a scalable and resilient system.",
+        "The development process followed a structured approach, encompassing requirement analysis, design, implementation, and testing. This ensured that the integration met all functional and security requirements, resulting in a reliable and efficient production planning solution."
       ],
-      "primary_tags": [
-        "Inventory",
-        "Management",
-        "Business"
-      ],
+      "primary_tags": ["Azure API Management", "Kafka", "Azure CosmosDB"],
       "tags": [
-        "React",
-        "Node.js",
+        "Authentication / Authorization",
+        "Azure Functions",
+        "Cloud-Based Platform",
+        "Microservices",
+        "On-Premise Machines",
+        "Production Planning System",
+        "Terraform"
+      ]
+    },
+    {
+      "customer": "DMG Mori Software Solution",
+      "title": "Implementation of PAYZR Business Model (Data Flow)",
+      "description": [
+        "This project aimed to develop an advanced headless machine for managing cloud data flow, addressing requirements like fraud detection, remote deactivation, enterprise regulation compliance, and billing integration with external systems. The solution emphasized high security standards, including Write Once Read Many (WORM) storage and stream validation, while enabling a pay-per-use model for end users.",
+        "Key features included real-time fraud detection, secure remote deactivation, adherence to regulations like GDPR and HIPAA, and seamless billing integration. The machine incorporated comprehensive security protocols, such as encryption and access control, to ensure robust data protection.",
+        "The development followed a structured roadmap, beginning with requirement analysis, followed by design, development, testing, and deployment. The architecture was cloud-native and microservices-based for high availability, resilience, and scalability.",
+        "In conclusion, this project delivered a secure, compliant, and efficient solution for managing complex cloud data flows. By enabling a pay-per-use model, it offered cost efficiency, scalability, and flexibility, making it an ideal choice for enterprises looking to optimize their data management processes while maintaining stringent security and regulatory standards."
+      ],
+      "primary_tags": ["Azure IoT Edge", "Azure Stream Analytics"],
+      "tags": [
+        "Azure data explorer",
+        "Azure DevOps",
+        "Azure Functions",
+        "Message Routing",
+        "Multi Tenancy",
+        "OPC-UA",
+        "Provisioning",
+        "TPM"
+      ]
+    },
+    {
+      "customer": "DMG Mori Software Solution",
+      "title": "Development and design of the \"Celos X\" digital ecosystem",
+      "comment": "<p>CELOS X is a digital ecosystem created by DMG MORI for the manufacturing industry. It acts as a central hub for data from machines and applications, providing a holistic solution for digital transformation.</p>",
+      "description": [
+        "DMG Mori's award-winning \"Celos X\" project revolutionizes data exchange for high-end tool machines. This innovative platform seamlessly integrates edge computing with the Microsoft Azure cloud, enabling powerful data analysis and machine optimization. Recognized by Microsoft with the 2021 \"Intelligent Manufacturing Award\" in the \"Envision\" category, Celos X paves the way for smarter factories.",
+        "The platform leverages industrial PCs within the machines to connect with shop floor devices and peripherals using industry-standard protocols like OPC UA, MTConnect, MQTT, and IO-Link Master. This robust communication foundation empowers a rich set of operator applications accessible through high-resolution touchscreens. Built with modern web technologies like Angular 16 frontends with microfrontends and REST APIs, these applications offer an intuitive and user-friendly experience. Additionally, containerization facilitates easier update management, ensuring Celos X stays current and optimized.",
+        "From the very beginning, I was fortunate to be part of the Celos X development team. It was an exciting opportunity to contribute to the project's foundation, working alongside other pioneers to define the platform's architecture. We focused on establishing a strong framework that could support future development, and it's rewarding to see how our work has paved the way for subsequent teams to build upon our achievements."
+      ],
+      "primary_tags": ["Angular", "Azure", "Node.js", "Microservices", "IoT"],
+      "tags": [
+        "3D isometric drawing",
+        "Angular Flex Layout",
+        "Angular Material",
+        "Azure API Management",
+        "Azure DevOps",
+        "Azure functions",
+        "Azure IoT",
+        "Confluence",
+        "Cucumber",
+        "Docker Compose",
+        "Docker",
+        "ESLint",
+        "Gherkin",
+        "Git",
+        "GoLang",
+        "IO-Link Master",
+        "Jasmine",
+        "Jenkins",
+        "Jira",
+        "Karma",
+        "Microfrontends",
+        "MQTT",
+        "MTConnect",
+        "NATS",
+        "ngrx",
+        "OPC/UA",
+        "Postman",
+        "Prettier",
+        "RESTful",
+        "rxjs",
+        "Sideloading",
+        "SonarQube",
+        "Swagger",
+        "Terraform",
+        "Testcafe",
+        "TSLint",
+        "Typescript",
+        "Visual Studio Code",
+        "Websocket"
+      ]
+    },
+    {
+      "customer": "Open Tinkering",
+      "title": "Exploring AI Automation",
+      "description": [
+        "Open Tinkering isn't your average tech group. Fueled by a shared passion for exploration, this collective dives headfirst into the ever-evolving world of AI and LLMs (Large Language Models). Their sights are set on harnessing the potential of automation to create user-friendly tools.",
+        "One intriguing project involves crafting custom chatbots. Forget generic AI assistants - these bots specialize in specific topics. Imagine a gardening companion offering personalized tips, or an astronomy bot delving into complex celestial queries. By building these focused AI helpers, Open Tinkering hopes to streamline user experiences and democratize access to specialized knowledge.",
+        "Another fascinating concept they're exploring is Langgraph. Think of it as the \"Avengers Initiative\" for AI - a system that assembles virtual teams of AI experts. Imagine different AI models, each with its unique strengths, working together seamlessly. Langgraph aims to facilitate this collaboration, tackling complex problems with greater efficiency by harnessing the combined power of these AI \"super teams.\"",
+        "Open Tinkering's foray into AI automation exemplifies their dedication to pushing the boundaries of technology. Their commitment to open-source development ensures that their learnings are readily available, empowering the community to explore the exciting future of AI-powered solutions alongside them."
+      ],
+      "primary_tags": ["AI", "GPT4", "LangChain", "LangGraph"],
+      "tags": [
+        "Azure",
+        "ChatBot",
+        "Gemini",
+        "Google",
+        "OpenAI",
+        "Prompt engineering",
+        "Python"
+      ]
+    },
+    {
+      "customer": "Kranz IT-Systemhaus GmbH",
+      "title": "Streamlining Operations: A Tailored Software Solution for Kranz IT",
+      "description": [
+        "Despite readily available software for business process digitization, IT system house Kranz sought a bespoke solution. Their priority: minimalism and user-friendliness to minimize the learning curve.",
+        "A key requirement was replicating the existing processes, painstakingly designed and ingrained within the managing director's workflow. Beyond basic data entry and cloud storage in a proprietary database, the software needed to capture customer signatures directly on smartphones and store them as database images.",
+        "As the developer, my challenge was crafting a ground-up software solution with minimal upkeep. Targeting only the managing director and his team, we implemented a very basic user management system. Cloud resource creation scripts and the initial workflow implementations were also part of the project scope"
+      ],
+      "primary_tags": ["Angular", "Azure", "Terraform", "Node.js"],
+      "tags": ["tslint", "crypto", "nodemailer", "Typescript"]
+    },
+    {
+      "customer": "Open Tinkering",
+      "title": "Unlocking the Potential of DIY IoT",
+      "description": [
+        "A passionate group known as \"Open Tinkering\" is diving into the world of next-generation Internet of Things (IoT) hardware. Their focus is on creating open-source components specifically designed for advanced users. This means complete control - users can customize functionalities, flash custom firmware, and truly explore the potential of their creations.",
+        "Fuelled by a love of technology and a desire to push boundaries, Open Tinkering is a hobbyist project at its core. The team members dedicate their free time to developing tools that empower the advanced user community to experiment and innovate within the ever-expanding field of IoT.",
+        "Whether you're a seasoned developer or simply curious about the future of connected devices, Open Tinkering welcomes collaborators.  Their passion lies in fostering an open-source environment that encourages exploration and pushes the limits of what's possible with IoT hardware.",
+        "Taking center stage in their current project is the development of their first open-source IoT device. I am the group's founder and actively involved in bringing this innovative hardware to life. The entire project will be documented and shared openly, allowing the community to get all details of the projects, contribute ideas and collaborate on building something truly free."
+      ],
+      "primary_tags": ["IoT", "Hardware", "Open Source"],
+      "tags": [
+        "ESP32",
+        "Arduino",
+        "C++",
+        "C",
+        "EasyEDA",
+        "3D Printing",
+        "Fusion 360",
+        "PCB",
+        "TPM",
+        "Angular",
+        "AWS"
+      ]
+    },
+    {
+      "customer": "Siemens AG / Digital Industries / Factory Automation",
+      "title": "Development of the \"User Manual Collection\" mobile frontend",
+      "description": [
+        "The factory automation department of Siemens Digital Industries is providing an online portal, where users can download all kinds of documentation as PDFs. Also they provide a DVD with all the documentation on it, that is being shipped with their products.",
+        "Instead of just holding a list of files, they wanted to provide a more interactive way of browsing the documentation.",
+        "My task was to develop small application, that was supposed to be added to those DVDs. It was required to run without any installation (asuming the user has a modern browser already installed) and as secure as possible for the user. The app should be able to display the documentation in a tree structure, where the user can navigate through the files and their metadata. Additionally, the user should be able to search for text content of the files, so I had to add an offline full text search which also included developing a process to create the full text index, that is being shipped with the app and depends on the PDFs"
+      ],
+      "primary_tags": ["Angular", "Plain Html", "Full text search", "Node.js"],
+      "tags": [
+        "lunr",
+        "rxjs",
+        "jasmine",
+        "jest",
+        "tslint",
+        "axios",
+        "csv",
+        "format transformation",
+        "md5",
+        "pdf text extraction"
+      ]
+    },
+    {
+      "customer": "Finanz Informatik Technologie Service GmbH & Co. KG",
+      "title": "Addition of missing tests for an existing software product",
+      "description": [
+        "The FITS is running an portal, to allow there employees to manage all their internal accounts for all kinds of different system. This Portal is via API connected to the MFA infrastructure, that is using keychain hardware tokens.",
+        "As the development resources in this project were limited, I was instructed to setup the test project and add all test cases for existing features, so the internal developers could keep working on their tasks and only add tests for their new code.",
+        "The most challenging part of the project was to find a way how to mock the MFA token infrastructure for the integration tests."
+      ],
+      "primary_tags": ["C#", "Unit Tests", "Integration Tests", "Mocking"],
+      "tags": ["MFA", "Proxy", "Selenium", "WebDriver", "Mitmproxy", "MSTest"]
+    },
+    {
+      "customer": "Osram GmbH",
+      "title": "Development of the backend for a core service in the lightelligence portal",
+      "description": [
+        "Osram was creating a new cloud portal called \"Lightelligence\". The services that are provided by the portal are split into three groups. The \"Core Services\" are being used by everybody and provide the very basics for every user. Osram had own internal scrum teams, that created the core services. The \"Domain Services\" are the next layer of features, that are useful for every user, but not mandatory for the use of the portal. Users can book the domain services separately as plugins for their lightelligence account. Every domain service contains a set of backend services and a frontend. Osram hired external teams, to develop the domain services.",
+        "I was one of the developers of the \"building central\" domain service team and my job was to provide the backend as RESTful API and a GraphQL middleware. Part of the backend job was to manage database migration with knex.js.",
+        "Due to some fluctuation of our frontend developers, we managed to finish the backend before the frontend was ready. In order to reach our milestones within the given timeline, I supported the frontend team, by fixing some bugs in the React code and writing some e2e tests with Cypress."
+      ],
+      "primary_tags": ["Node.js", "Docker", "Microservices", "Azure"],
+      "tags": [
+        "Apollo",
+        "Azure Blob Storage",
+        "class-validator",
+        "Confluence",
+        "cors",
+        "Cypress",
+        "express",
+        "Git",
+        "GitFlow",
+        "GitLab",
+        "GraphQL",
+        "IoT",
+        "Jest",
+        "Jira",
+        "JSON",
+        "jwt",
+        "knex.js",
+        "Memoizee",
+        "mock-knex",
+        "NestJS",
+        "Nock",
+        "nodemon",
         "PostgreSQL",
-        "Barcode Scanning",
-        "Automated Reordering",
-        "Supplier Management",
-        "Audit Trails",
-        "Role-based Access",
-        "Multi-location",
-        "Reporting",
-        "Dashboard",
-        "Integration"
+        "RabbitMQ",
+        "React",
+        "RESTful",
+        "Supertest",
+        "Swagger",
+        "TSLint",
+        "Typescript",
+        "Webpack",
+        "Websocket"
       ]
     },
     {
-      "customer": "Freelance", 
-      "title": "Restaurant Management App",
+      "customer": "Telent GmbH",
+      "title": "Consulting: modernization of the IoT portal architecture",
       "description": [
-        "Built a complete restaurant management application including point-of-sale (POS) functionality, order management, inventory tracking, and staff scheduling. The system supports both dine-in and takeaway operations.",
-        "Implemented real-time order processing, kitchen display systems, payment integration, and customer management features. The application includes comprehensive reporting for sales analytics, inventory usage, and staff performance metrics.",
-        "Successfully deployed in multiple restaurant locations, improving order accuracy and operational efficiency. Features include table management, split billing, loyalty program integration, and seamless integration with delivery platforms."
+        "Telent GmbH is selling hardware devices like sensors for almost anything arround \"smart buildings\". They are also providing a paid service portal that provides the information of the devices in different \"apps\". As the portal was growing and it got foreseeable that the existing architecture would get some bottlenecks soon, Telent decided to overhaul big parts of their architecture. To get a clean start with some new technologies, they hired some consultants like me to help and teach.",
+        "My job was to help refactor or rewrite some of the services to fit the requirements towards scaleability. As the whole source control concept was changed and the new code was stored in a mono repository, I also helped with the refactoring of the the whole build pipelines aswell.",
+        "Some parts of the services that are being executed very often and that are very isolated were identified to be predestinated to be transfered to serverless execution. As the whole plattform was hosted on Microsoft Azure, we decieded to migrate this code to Azure Functions. I was instructed to create a new Azure Functions Project that would be triggered by a HTTP POST request which also provided the necessary data. Afterwards it was also my job to create a new pipeline that would deploy the Azure Functions project."
       ],
-      "primary_tags": [
-        "Restaurant",
-        "POS",
-        "Management"
-      ],
+      "primary_tags": ["Node.js", "kubernetes", "Microservices", "Azure"],
       "tags": [
-        "React",
-        "Node.js",
-        "Real-time",
-        "Payment Integration",
-        "Kitchen Display",
-        "Order Management",
-        "Staff Scheduling",
-        "Sales Analytics",
-        "Customer Management",
-        "Table Management",
-        "Loyalty Program",
-        "Delivery Integration"
+        "Azure functions",
+        "Chai",
+        "Confluence",
+        "cors",
+        "CosmosDB",
+        "Docker",
+        "express",
+        "Git",
+        "GitFlow",
+        "GitLab",
+        "IoT",
+        "Jira",
+        "JSON",
+        "jwt",
+        "Mocha",
+        "nodemon",
+        "RabbitMQ",
+        "RESTful",
+        "SonarQube",
+        "Swagger",
+        "TSLint",
+        "Typescript"
       ]
     },
     {
-      "customer": "Freelance",
-      "title": "Healthcare Dashboard",
+      "customer": "Saurer AG",
+      "title": "Development of Node.Js microservices for smart factory",
       "description": [
-        "Developed a healthcare analytics dashboard for medical practices, providing insights into patient flow, appointment scheduling, and treatment outcomes. The system ensures full HIPAA compliance and data security.",
-        "Implemented comprehensive patient management features, appointment scheduling with automated reminders, billing integration, and detailed reporting capabilities. The dashboard provides real-time insights into practice performance and patient satisfaction metrics.",
-        "The healthcare dashboard has improved patient care coordination and operational efficiency across multiple medical practices. Features include secure patient portals, telemedicine integration, and comprehensive audit logging for compliance requirements."
+        "I have worked in a team that designed and developed a set of microservices and an Angular 7 frontend called \"smart factory app\", that is now running in the factory in China. My job was to develop a set of Node.js microservices that provide RESTful APIs. The data is being stored in a mongodb and accessed through an additional layer that is like a lightweight version of Eclipse Ditto. I dockerized the services, deployed them to kubernetes and provided a description with swagger. For quality assurance I wrote a set of test cases with Chai and Mocha and I also used Dredd to automatically test the API against the swagger description. In addition to the functional tests we use static code analysis with SonarQube.",
+        "For build automation I wrote a script for GitLab CI/CD that handles tests, building and deployment. The SonarQube quality gates are also part of the test stage and can potentially fail the build.",
+        "Later in that project we decided not to use RESTful APIs anymore but to use GraphQL instead so I additionally created some middleware that provides the data from the RESTful APIs via GraphQL."
       ],
-      "primary_tags": [
-        "Healthcare",
-        "Dashboard",
-        "Analytics"
-      ],
+      "primary_tags": ["Docker", "kubernetes", "Microservices", "Node.js"],
       "tags": [
-        "React",
-        "HIPAA Compliance",
-        "Patient Management",
-        "Appointment Scheduling",
-        "Billing Integration",
-        "Telemedicine",
-        "Patient Portal",
-        "Analytics",
-        "Audit Logging",
-        "Security",
-        "Compliance",
-        "Medical Records"
+        "Angular",
+        "Apollo",
+        "Artifactory",
+        "AWS",
+        "Azure",
+        "Chai",
+        "Confluence",
+        "cors",
+        "Cucumber",
+        "Dredd",
+        "Eclipse",
+        "Ditto",
+        "express",
+        "Git",
+        "GitFlow",
+        "GitLab",
+        "GraphQL",
+        "IoT",
+        "Jira",
+        "JSON",
+        "jwt",
+        "Mocha",
+        "MongoDB",
+        "Mongoose",
+        "MQTT",
+        "NestJS",
+        "nodemon",
+        "NoSQL",
+        "RESTful",
+        "SonarQube",
+        "Swagger",
+        "TSLint",
+        "Typescript"
       ]
     },
     {
-      "customer": "Freelance",
-      "title": "Financial Planning Tool",
+      "customer": "T3 GmbH",
+      "title": "Development of a dotNet based knowledge portal",
       "description": [
-        "Created a comprehensive financial planning and budgeting tool for personal and small business use. The application features expense tracking, budget planning, investment portfolio management, and financial goal setting.",
-        "Implemented bank account integration for automatic transaction import, categorization algorithms, and predictive analytics for financial forecasting. The tool includes comprehensive reporting and visualization capabilities for financial insights.",
-        "Successfully helps users manage their finances more effectively with improved budgeting accuracy and financial awareness. Features include bill reminders, savings goal tracking, and detailed financial reports for better decision-making."
+        "T3 is developing two software products. There is the Knowledge Manager, a smart search engine for modular bits of information. The engine is based on information that are well structured and maintained and contain a lot of meta information. The second product is the Learning Content Manager an AngularJS tool that is used to provide eLearning content to the users.",
+        "My job was to develop new features and improve performance and quality of the existing C# Knowledge Manager code. I also assisted the Knowledge Manager frontend team with the introduction of unit and e2e tests using Jasmine, Karma and Selenium.",
+        "Beside my development tasks, I was also in charge of improving the development processes. I moved the source code from SVN to Git and GitLab, introduced GitFlow and automated the build process."
       ],
-      "primary_tags": [
-        "Finance",
-        "Planning",
-        "Analytics"
-      ],
+      "primary_tags": ["C#", "dotNet", "Process Development"],
       "tags": [
-        "React",
-        "Financial Analytics",
-        "Bank Integration",
-        "Budget Planning",
-        "Investment Tracking",
-        "Expense Categorization",
-        "Predictive Analytics",
-        "Data Visualization",
-        "Financial Reporting",
-        "Goal Setting",
-        "Bill Reminders",
-        "Security"
+        "Angular",
+        "AngularJS",
+        "Chai",
+        "Git",
+        "GitFlow",
+        "GitLab",
+        "Jasmine",
+        "Karma",
+        "Mocha",
+        "ReSharper",
+        "Selenium",
+        "SVN",
+        "TSLint",
+        "Typescript",
+        "WCF"
       ]
     },
     {
-      "customer": "Freelance",
-      "title": "Event Management Platform",
+      "customer": "OMNINET GmbH",
+      "title": "Development of a formular editor and library",
       "description": [
-        "Developed a comprehensive event management platform for organizing conferences, workshops, and corporate events. The platform handles registration, ticketing, scheduling, and attendee management.",
-        "Implemented features including online registration forms, payment processing, email marketing integration, and real-time attendee tracking. The platform supports multiple event types and provides comprehensive analytics for event success measurement.",
-        "Successfully managed hundreds of events with thousands of attendees, improving event organization efficiency and attendee satisfaction. Features include badge printing, check-in systems, and post-event survey integration."
+        "OMNINET GmbH is developing a business process software called OMNITRACKER. The OMNITRACKER is pretty close to an object oriented programming framework that can be used to model business processes. The backend is written in C++ and the frontend is written in C# and WPF.",
+        "For every process step that requires manual input or displays information to the user, the OMNITRACKER requires a formular. A very basic formular can be rendered automatically but it is part of the job of the process designer to provide the required formulars. The formular editor and the formular library that is being used to render the formulars is a central part of the solution. My first task was to develop some features for the new version of the formular editor.",
+        "My next task was to provide a concept and a proof of concept for a new formular library based on WPF. One of the major features of this new library was, that it was supposed to be compatible with the web formulars.",
+        "OMNITRACKER is providing a scripting interface for VBScript but some colleagues from application development were wishing for something more stand of the art, so I wrote a proof of concept that uses IronPython to allow scripting in Python."
       ],
-      "primary_tags": [
-        "Event Management",
-        "Registration",
-        "Platform"
-      ],
+      "primary_tags": ["C#", "dotNet"],
       "tags": [
-        "React",
-        "Event Planning",
-        "Registration Forms",
-        "Payment Processing",
-        "Email Marketing",
-        "Attendee Tracking",
-        "Badge Printing",
-        "Check-in System",
-        "Survey Integration",
-        "Analytics",
-        "Multi-event",
-        "Scheduling"
+        "C++",
+        "IronPython",
+        "MSTest",
+        "Python",
+        "ReSharper",
+        "TFS",
+        "VBScript",
+        "WCF",
+        "WPF"
       ]
     },
     {
-      "customer": "Freelance",
-      "title": "Social Media Analytics",
+      "customer": "Paessler AG",
+      "title": "Sensor development",
       "description": [
-        "Built a social media analytics platform that aggregates data from multiple social networks and provides comprehensive insights into social media performance, audience engagement, and content effectiveness.",
-        "Integrated with major social media APIs including Facebook, Twitter, Instagram, and LinkedIn to collect and analyze social media metrics. Implemented automated reporting, competitor analysis, and content performance tracking.",
-        "The platform helps businesses optimize their social media strategies with data-driven insights and automated reporting. Features include sentiment analysis, hashtag tracking, influencer identification, and ROI measurement for social media campaigns."
+        "The Paessler AG is developing a network monitoring solution called PRTG. It has got a central server and one or more probes that collect data from the target systems. On every probe there is a tree struture that contains folders that contain other folders or devices. Every device can contain a list of sensors that provide the actual meassurements.",
+        "Paessler is selling different licenses for PRTG on premise installations and also providing a hosted version that can be booked as a service.",
+        "My job was to create new sensor types and improve existing ones. A sensor type is responsible for obtaining meassurements either from a hardware device or from a service. There are various ways of obtaining meassurements. The most common ways in PRTG are SNMP, WMI or web APIs. When developing new sensors, the main task is to learn to handle new target systems and to decide what meassurements are even worth saving. In my time with Paessler I have written more than 100 different sensor types. Testing those sensors with the variety of different target systems is not that easy so I developed a simulator that could import scan data of a system and use it to mock this systems SNMP or HTTP interface. We could also use this simulator as a target for our test cases. Often users were asked for scans after reporting bugs. These scans could then be used to improve the tests cases so the customer would not encounter the same problem again."
       ],
-      "primary_tags": [
-        "Social Media",
-        "Analytics",
-        "Marketing"
-      ],
+      "primary_tags": ["C#", "dotNet"],
       "tags": [
-        "React",
-        "Social Media APIs",
-        "Data Analytics",
-        "Sentiment Analysis",
-        "Competitor Analysis",
-        "Content Performance",
-        "Hashtag Tracking",
-        "Influencer Analysis",
-        "ROI Measurement",
-        "Automated Reporting",
-        "Dashboard",
-        "Marketing Intelligence"
-      ]
-    },
-    {
-      "customer": "Freelance",
-      "title": "Project Management Tool",
-      "description": [
-        "Developed a modern project management application with task tracking, team collaboration, time management, and project analytics. The tool supports agile methodologies and provides comprehensive project oversight capabilities.",
-        "Implemented features including Kanban boards, Gantt charts, time tracking, team messaging, file sharing, and milestone management. The application includes role-based permissions and integration capabilities with popular development tools.",
-        "Successfully adopted by multiple teams and organizations, improving project delivery times and team collaboration. Features include automated progress reporting, resource allocation planning, and comprehensive project analytics for better decision-making."
-      ],
-      "primary_tags": [
-        "Project Management",
-        "Collaboration",
-        "Productivity"
-      ],
-      "tags": [
-        "React",
-        "Kanban Boards",
-        "Gantt Charts",
-        "Time Tracking",
-        "Team Collaboration",
-        "File Sharing",
-        "Milestone Management",
-        "Role-based Permissions",
-        "Integration APIs",
-        "Progress Reporting",
-        "Resource Planning",
-        "Analytics"
-      ]
-    },
-    {
-      "customer": "Freelance",
-      "title": "Customer Support Portal",
-      "description": [
-        "Created a comprehensive customer support portal featuring ticket management, knowledge base, live chat integration, and customer self-service capabilities. The platform improves customer service efficiency and satisfaction.",
-        "Implemented intelligent ticket routing, automated responses, escalation workflows, and comprehensive reporting for support metrics. The portal includes multi-channel support integration and customer satisfaction tracking.",
-        "Successfully reduced support response times and improved customer satisfaction across multiple client implementations. Features include FAQ management, video tutorials, community forums, and integration with popular CRM systems."
-      ],
-      "primary_tags": [
-        "Customer Support",
-        "Portal",
-        "Service"
-      ],
-      "tags": [
-        "React",
-        "Ticket Management",
-        "Knowledge Base",
-        "Live Chat",
-        "Self-service",
-        "Automated Responses",
-        "Escalation Workflows",
-        "Support Metrics",
-        "Multi-channel",
-        "Customer Satisfaction",
-        "FAQ Management",
-        "CRM Integration"
+        "C++",
+        "Delphi",
+        "Git",
+        "GitLab",
+        "HTTP",
+        "NetFlow",
+        "OpenSSL",
+        "PerfMon",
+        "Powershell",
+        "Python",
+        "QOS",
+        "RESTful",
+        "SMTP",
+        "SNMP",
+        "SSH",
+        "VOIP",
+        "WMI"
       ]
     }
   ]

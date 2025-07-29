@@ -3,9 +3,11 @@ import { IconCheck, IconCode, IconBrain, IconRocket, IconShield, IconSchool } fr
 import { motion } from 'framer-motion';
 import { Section } from '../Layout';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useTranslation } from '../../hooks/useTranslation';
 
 export const About = () => {
   const { isMobile } = useMediaQuery();
+  const { t } = useTranslation();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -29,23 +31,35 @@ export const About = () => {
 
   const skills = [
     {
-      category: 'AI & LLM',
+      category: t.about.skills.aiLlm.category,
       icon: IconBrain,
-      items: ['LLMs (GPT, Claude, Gemini)', 'LangChain', 'Audio Stream Processing', 'Video Generation', 'Neural Network Training', 'Prompt Engineering'],
+      items: t.about.skills.aiLlm.items,
     },
-    { category: 'Frontend', icon: IconCode, items: ['React', 'TypeScript', 'Next.js', 'Angular', 'Material UI', 'Responsive Design'] },
-    { category: 'Backend', icon: IconRocket, items: ['Node.js', 'Python', 'FastAPI', 'PostgreSQL', 'Prisma', 'REST APIs'] },
-    { category: 'Cloud & DevOps', icon: IconCheck, items: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Kafka & MQTT', 'CI/CD'] },
-    { category: 'Quality Assurance', icon: IconShield, items: ['Unit Tests', 'E2E Tests', 'Integration Tests', 'Quality Gates', 'Clean Code', 'Static Code Analysis'] },
-    { category: 'Training & Workshops', icon: IconSchool, items: ['Workshop-Durchführung', 'Technische Schulungen', 'Team-Mentoring', 'Präsentationen', 'Wissensvermittlung', 'Code Reviews'] },
-  ];
-
-  const highlights = [
-    'Über 17 Jahre Erfahrung in der Softwareentwicklung',
-    'Spezialist für AI/LLM Integration und Prompt Engineering',
-    'Erfolgreich abgeschlossene Projekte für Unternehmen wie DMG Mori',
-    'Expertise in modernen Web-Technologien und Cloud-Architekturen',
-    'Fokus auf benutzerfreundliche und skalierbare Lösungen',
+    { 
+      category: t.about.skills.frontend.category, 
+      icon: IconCode, 
+      items: t.about.skills.frontend.items 
+    },
+    { 
+      category: t.about.skills.backend.category, 
+      icon: IconRocket, 
+      items: t.about.skills.backend.items 
+    },
+    { 
+      category: t.about.skills.cloud.category, 
+      icon: IconCheck, 
+      items: t.about.skills.cloud.items 
+    },
+    { 
+      category: t.about.skills.quality.category, 
+      icon: IconShield, 
+      items: t.about.skills.quality.items 
+    },
+    { 
+      category: t.about.skills.training.category, 
+      icon: IconSchool, 
+      items: t.about.skills.training.items 
+    },
   ];
 
   return (
@@ -69,10 +83,10 @@ export const About = () => {
                   backgroundClip: 'text',
                 }}
               >
-                Über mich
+                {t.about.title}
               </Title>
               <Text size="lg" c="var(--text-secondary)" maw="700px">
-                Tech Freelancer mit Leidenschaft für innovative AI-Lösungen und moderne Webtechnologien.
+                {t.about.subtitle}
               </Text>
             </Stack>
           </motion.div>
@@ -82,22 +96,15 @@ export const About = () => {
             <motion.div variants={itemVariants} style={{ flex: 1 }}>
               <Stack gap="lg">
                 <Text size="md" c="var(--text-secondary)" style={{ lineHeight: 1.7 }}>
-                  Als erfahrener Tech Freelancer mit dem Fokus auf <strong>AI/LLM Entwicklung</strong> und{' '}
-                  <strong> moderne Webtechnologien</strong> unterstütze ich Unternehmen dabei, innovative digitale
-                  Lösungen zu entwickeln und umzusetzen.
+                  {t.about.description1}
                 </Text>
 
                 <Text size="md" c="var(--text-secondary)" style={{ lineHeight: 1.7 }}>
-                  Meine Expertise liegt in der Entwicklung von <strong>AI-basierten Anwendungen</strong>, der
-                  Implementierung von <strong>Cloud-Architekturen</strong> und der Erstellung von{' '}
-                  <strong> skalierbaren Full-Stack-Webanwendungen</strong>. Dabei lege ich besonderen Wert auf
-                  benutzerfreundliche Interfaces und performante Backend-Systeme.
+                  {t.about.description2}
                 </Text>
 
                 <Text size="md" c="var(--text-secondary)" style={{ lineHeight: 1.7 }}>
-                  In meiner Laufbahn habe ich bereits für renommierte Unternehmen wie <strong>DMG Mori</strong>{' '}
-                  gearbeitet und dabei komplexe SharePoint-Migration, Intranet-Modernisierung und Business Process
-                  Automation Projekte erfolgreich umgesetzt.
+                  {t.about.description3}
                 </Text>
               </Stack>
             </motion.div>
@@ -114,7 +121,7 @@ export const About = () => {
               >
                 <Stack gap="md">
                   <Title order={4} c="var(--primary-orange)">
-                    Highlights
+                    {t.about.highlights}
                   </Title>
                   <List
                     spacing="sm"
@@ -125,7 +132,7 @@ export const About = () => {
                       </ThemeIcon>
                     }
                   >
-                    {highlights.map((highlight, index) => (
+                    {t.about.highlightsList.map((highlight, index) => (
                       <List.Item key={index}>
                         <Text size="sm" c="var(--text-secondary)">
                           {highlight}
@@ -142,7 +149,7 @@ export const About = () => {
           <motion.div variants={itemVariants}>
             <Stack gap="lg">
               <Title order={3} ta="center" c="var(--text-primary)">
-                Technische Expertise
+                {t.about.expertise}
               </Title>
 
               <Group gap="lg" justify="center" style={{ flexDirection: isMobile ? 'column' : 'row' }}>

@@ -3,10 +3,12 @@ import { IconMail, IconDownload } from '@tabler/icons-react';
 import { motion, Variants } from 'framer-motion';
 import { Section } from '../Layout';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useTranslation } from '../../hooks/useTranslation';
 import heroPortrait from '../../assets/hero-portrait.webp';
 
 export const AnimatedHero = () => {
   const { isMobile, isTablet } = useMediaQuery();
+  const { t } = useTranslation();
 
   const handleNavClick = (href: string) => {
     const element = document.querySelector(href);
@@ -97,7 +99,7 @@ export const AnimatedHero = () => {
                     backgroundClip: 'text'
                   }}
                 >
-                  Johannes Herrmann
+                  {t.hero.name}
                 </Title>
                 <Text
                   size={isMobile ? 'lg' : 'xl'}
@@ -105,7 +107,7 @@ export const AnimatedHero = () => {
                   c="var(--text-primary)"
                   style={{ fontSize: isMobile ? '1.25rem' : '1.5rem' }}
                 >
-                  Tech Freelancer & AI Specialist
+                  {t.hero.title}
                 </Text>
               </Stack>
             </motion.div>
@@ -119,8 +121,7 @@ export const AnimatedHero = () => {
                   maxWidth: '600px'
                 }}
               >
-                Spezialisiert auf <strong>AI/LLM Entwicklung</strong>, <strong>Cloud Architecture</strong> und <strong>Full-Stack Development</strong>. 
-                Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen.
+                {t.hero.description}
               </Text>
             </motion.div>
 
@@ -143,7 +144,7 @@ export const AnimatedHero = () => {
                     }}
                     onClick={() => handleNavClick('#contact')}
                   >
-                    Kontakt aufnehmen
+                    {t.hero.contactButton}
                   </Button>
                 </motion.div>
                 
@@ -164,7 +165,7 @@ export const AnimatedHero = () => {
                     }}
                     onClick={() => handleNavClick('#projects')}
                   >
-                    Projekte ansehen
+                    {t.hero.projectsButton}
                   </Button>
                 </motion.div>
               </Group>

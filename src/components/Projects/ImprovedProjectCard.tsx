@@ -92,7 +92,8 @@ export const ImprovedProjectCard = ({ project }: ImprovedProjectCardProps) => {
                   display: '-webkit-box',
                   WebkitLineClamp: 3,
                   WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden'
+                  overflow: 'hidden',
+                  textAlign: 'justify'
                 }}
               >
                 {(project.description && project.description[0]) || 'Keine Beschreibung verfügbar'}

@@ -2,7 +2,8 @@ import { Stack, Title, Text } from '@mantine/core';
 import { motion } from 'framer-motion';
 import { Section, Grid } from '../Layout';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
-import { projectsData } from '../../data/projects';
+import { useProjects } from '../../hooks/useProjects';
+import { useTranslation } from '../../hooks/useTranslation';
 import { ImprovedProjectCard } from './ImprovedProjectCard';
 import { useFilterStore } from '../../stores/filterStore';
 import { ActiveTagsFilter } from '../Filter/ActiveTagsFilter';
@@ -10,6 +11,8 @@ import { useMemo } from 'react';
 
 export const SimpleProjectsSection = () => {
   const { isMobile } = useMediaQuery();
+  const { projects } = useProjects();
+  const { t } = useTranslation();
   const { selectedPrimaryTags, selectedSecondaryTags } = useFilterStore();
 
   const containerVariants = {
@@ -34,7 +37,7 @@ export const SimpleProjectsSection = () => {
 
 
   const filteredProjects = useMemo(() => {
-    let filtered = projectsData.projects;
+    let filtered = projects;
 
     // Filter by primary tags
     if (selectedPrimaryTags.length > 0) {
@@ -55,7 +58,7 @@ export const SimpleProjectsSection = () => {
     }
 
     return filtered;
-  }, [selectedPrimaryTags, selectedSecondaryTags]);
+  }, [projects, selectedPrimaryTags, selectedSecondaryTags]);
 
   return (
     <Section id="projects" background="white">
@@ -78,10 +81,10 @@ export const SimpleProjectsSection = () => {
                   backgroundClip: 'text'
                 }}
               >
-                Projekte & Erfahrung
+                {t.projects.title}
               </Title>
               <Text size="lg" c="var(--text-secondary)" maw="700px">
-                Eine Auswahl meiner erfolgreichen Projekte aus verschiedenen Branchen.
+                {t.projects.subtitle}
               </Text>
             </Stack>
           </motion.div>
@@ -105,7 +108,7 @@ export const SimpleProjectsSection = () => {
 
           <motion.div variants={itemVariants}>
             <Text ta="center" size="sm" c="var(--text-secondary)">
-              {filteredProjects.length} von {projectsData.projects.length} Projekten angezeigt
+              {t.projects.showingCount(filteredProjects.length, projects.length)}
             </Text>
           </motion.div>
         </Stack>

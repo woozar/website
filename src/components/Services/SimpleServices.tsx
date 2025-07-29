@@ -3,12 +3,14 @@ import { IconBrain, IconCloud, IconCode } from '@tabler/icons-react';
 import { motion, Variants } from 'framer-motion';
 import { Section, Grid } from '../Layout';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useTranslation } from '../../hooks/useTranslation';
 import aiImage from '../../assets/ai-development.webp';
 import cloudImage from '../../assets/cloud-architecture.webp';
 import fullstackImage from '../../assets/fullstack-development.webp';
 
 export const SimpleServices = () => {
   const { isMobile } = useMediaQuery();
+  const { t } = useTranslation();
 
 
   const itemVariants: Variants = {
@@ -33,22 +35,22 @@ export const SimpleServices = () => {
   const services = [
     {
       icon: IconBrain,
-      title: 'AI & LLM Development',
-      description: 'Entwicklung von AI-basierten Anwendungen mit modernsten Large Language Models wie GPT-4, Claude und Gemini. Von Chatbots bis hin zu komplexen AI-Workflows.',
+      title: t.services.items.ai.title,
+      description: t.services.items.ai.description,
       technologies: ['OpenAI GPT-4', 'Anthropic Claude', 'Google Gemini', 'LangChain', 'Vercel AI'],
       image: aiImage
     },
     {
       icon: IconCloud,
-      title: 'Cloud Architecture',
-      description: 'Design und Implementierung skalierbarer Cloud-Infrastrukturen mit AWS, Azure und modernen DevOps-Praktiken. Microservices, Serverless und Container-Orchestrierung.',
+      title: t.services.items.cloud.title,
+      description: t.services.items.cloud.description,
       technologies: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform'],
       image: cloudImage
     },
     {
       icon: IconCode,
-      title: 'Full-Stack Development',
-      description: 'Entwicklung moderner Web- und Mobile-Anwendungen mit React, Angular, Node.js und TypeScript. Responsive Design und perfekte User Experience.',
+      title: t.services.items.fullstack.title,
+      description: t.services.items.fullstack.description,
       technologies: ['React', 'Angular', 'Node.js', 'TypeScript', 'Next.js'],
       image: fullstackImage
     }
@@ -74,11 +76,10 @@ export const SimpleServices = () => {
                 backgroundClip: 'text'
               }}
             >
-              Meine Services
+              {t.services.title}
             </Title>
             <Text size="lg" c="var(--text-secondary)" maw="600px">
-              Spezialisierte Expertise in den wichtigsten Zukunftstechnologien. 
-              Von AI-Integration bis hin zu skalierbaren Cloud-Architekturen.
+              {t.services.subtitle}
             </Text>
           </Stack>
         </motion.div>
@@ -159,14 +160,14 @@ export const SimpleServices = () => {
                     {service.title}
                   </Title>
                   
-                  <Text c="var(--text-secondary)" style={{ lineHeight: 1.6 }}>
+                  <Text c="var(--text-secondary)" style={{ lineHeight: 1.6, textAlign: 'justify' }}>
                     {service.description}
                   </Text>
                 </Stack>
 
                 <Stack gap="xs" style={{ marginTop: 'auto' }}>
                   <Text size="sm" fw={600} c="var(--text-primary)">
-                    Technologien:
+                    {t.services.technologies}
                   </Text>
                   <Box style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                     {service.technologies.map((tech) => (

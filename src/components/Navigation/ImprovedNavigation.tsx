@@ -1,18 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Group, Burger, Drawer, Stack, Button, Image, Anchor, Box, Text } from '@mantine/core';
 import { IconMail, IconFileText } from '@tabler/icons-react';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { Container } from '../Layout';
+import { LanguageSwitcher } from '../LanguageSwitcher';
+import { useTranslation } from '../../hooks/useTranslation';
 import logoImage from '../../assets/logo.webp';
 
 export const ImprovedNavigation = () => {
   const [drawerOpened, setDrawerOpened] = useState(false);
   const { isMobile } = useMediaQuery();
+  const { t } = useTranslation();
+
+  // Close drawer when screen becomes desktop size
+  useEffect(() => {
+    if (!isMobile && drawerOpened) {
+      setDrawerOpened(false);
+    }
+  }, [isMobile, drawerOpened]);
 
   const navItems = [
-    { label: 'Services', href: '#services' },
-    { label: 'Projekte', href: '#projects' },
-    { label: 'Über mich', href: '#about' }
+    { label: t.navigation.services, href: '#services' },
+    { label: t.navigation.projects, href: '#projects' },
+    { label: t.navigation.about, href: '#about' }
   ];
 
   const handleNavClick = (href: string) => {
@@ -116,6 +126,9 @@ export const ImprovedNavigation = () => {
                   </Anchor>
                 ))}
                 
+                {/* Language Switcher */}
+                <LanguageSwitcher variant="desktop" />
+                
                 {/* CTA Button */}
                 <Button
                   variant="filled"
@@ -140,7 +153,7 @@ export const ImprovedNavigation = () => {
                   }}
                   onClick={() => handleNavClick('#contact')}
                 >
-                  Kontakt
+                  {t.navigation.contact}
                 </Button>
               </Group>
             )}
@@ -160,7 +173,7 @@ export const ImprovedNavigation = () => {
                   }}
                   onClick={() => handleNavClick('#contact')}
                 >
-                  Kontakt
+                  {t.navigation.contact}
                 </Button>
                 
                 <Burger
@@ -229,6 +242,9 @@ export const ImprovedNavigation = () => {
             </Button>
           ))}
           
+          {/* Language Switcher */}
+          <LanguageSwitcher variant="mobile" />
+          
           <Button
             variant="filled"
             fullWidth
@@ -242,7 +258,7 @@ export const ImprovedNavigation = () => {
             }}
             onClick={() => handleNavClick('#contact')}
           >
-            Kontakt aufnehmen
+            {t.navigation.contactAction}
           </Button>
         </Stack>
       </Drawer>
