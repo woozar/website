@@ -109,15 +109,16 @@ export const SimpleServices = () => {
                     height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
-                    borderColor: '#e0e0e0',
+                    borderColor: 'var(--border-color)',
                     transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
-                    cursor: 'default'
+                    cursor: 'default',
+                    backgroundColor: 'var(--background-primary)'
                   }}
                   styles={{
                     root: {
                       '&:hover': {
                         borderColor: 'var(--primary-orange)',
-                        boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
+                        boxShadow: '0 10px 30px var(--shadow-color)'
                       }
                     }
                   }}
@@ -148,7 +149,7 @@ export const SimpleServices = () => {
                       radius="md"
                       style={{ 
                         objectFit: 'cover',
-                        border: '2px solid var(--neutral-light)'
+                        border: '2px solid var(--border-color)'
                       }}
                       fallbackSrc="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='80'%20height='80'%20viewBox='0%200%2080%2080'%3e%3crect%20width='80'%20height='80'%20fill='%23f0f0f0'/%3e%3ctext%20x='50%25'%20y='50%25'%20text-anchor='middle'%20dy='.3em'%20fill='%23999'%20font-size='12'%3eImage%3c/text%3e%3c/svg%3e"
                     />

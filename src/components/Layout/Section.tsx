@@ -20,8 +20,8 @@ export const Section = ({
   containerSize = 'lg'
 }: SectionProps) => {
   const backgrounds = {
-    white: '#ffffff',
-    light: 'var(--neutral-light)',
+    white: 'var(--background-primary)',
+    light: 'var(--background-secondary)',
     primary: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))'
   };
 

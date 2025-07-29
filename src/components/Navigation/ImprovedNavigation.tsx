@@ -4,6 +4,7 @@ import { IconMail, IconFileText } from '@tabler/icons-react';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { Container } from '../Layout';
 import { LanguageSwitcher } from '../LanguageSwitcher';
+import { ThemeSwitcher } from '../ThemeSwitcher';
 import { useTranslation } from '../../hooks/useTranslation';
 import logoImage from '../../assets/logo.webp';
 
@@ -43,15 +44,15 @@ export const ImprovedNavigation = () => {
       <Box
         component="header"
         style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.98)',
+          backgroundColor: 'var(--backdrop-filter)',
           backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(255, 107, 53, 0.1)',
+          borderBottom: '1px solid var(--border-color)',
           position: 'fixed',
           top: 0,
           left: 0,
           right: 0,
           zIndex: 1000,
-          boxShadow: '0 2px 20px rgba(0,0,0,0.08)',
+          boxShadow: '0 2px 20px var(--shadow-color)',
           paddingTop: '1.25rem',
           paddingBottom: '1rem'
         }}
@@ -126,8 +127,11 @@ export const ImprovedNavigation = () => {
                   </Anchor>
                 ))}
                 
-                {/* Language Switcher */}
-                <LanguageSwitcher variant="desktop" />
+                {/* Theme & Language Switchers */}
+                <Group gap="xs">
+                  <ThemeSwitcher variant="desktop" />
+                  <LanguageSwitcher variant="desktop" />
+                </Group>
                 
                 {/* CTA Button */}
                 <Button
@@ -206,11 +210,12 @@ export const ImprovedNavigation = () => {
             fontSize: '1rem'
           },
           header: {
-            borderBottom: '1px solid rgba(255, 107, 53, 0.1)',
-            backgroundColor: 'rgba(255, 107, 53, 0.02)'
+            borderBottom: '1px solid var(--border-color)',
+            backgroundColor: 'var(--background-secondary)'
           },
           body: {
-            padding: '1.5rem'
+            padding: '1.5rem',
+            backgroundColor: 'var(--background-primary)'
           }
         }}
       >
@@ -241,6 +246,9 @@ export const ImprovedNavigation = () => {
               {item.label}
             </Button>
           ))}
+          
+          {/* Theme Switcher */}
+          <ThemeSwitcher variant="mobile" />
           
           {/* Language Switcher */}
           <LanguageSwitcher variant="mobile" />

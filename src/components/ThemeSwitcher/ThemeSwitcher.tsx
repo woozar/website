@@ -1,0 +1,88 @@
+import { Button } from '@mantine/core';
+import { IconSun, IconMoon } from '@tabler/icons-react';
+import { useThemeStore } from '../../stores/themeStore';
+
+interface ThemeSwitcherProps {
+  variant?: 'desktop' | 'mobile';
+}
+
+export const ThemeSwitcher = ({ variant = 'desktop' }: ThemeSwitcherProps) => {
+  const { theme, toggleTheme } = useThemeStore();
+
+  const isDark = theme === 'dark';
+  const Icon = isDark ? IconSun : IconMoon;
+
+  const buttonStyle = {
+    borderColor: 'var(--primary-orange)',
+    color: 'var(--primary-orange)',
+    background: 'transparent',
+    border: '1px solid var(--primary-orange)',
+    borderRadius: '0.5rem',
+    transition: 'all 0.2s ease'
+  };
+
+  const hoverStyle = {
+    '&:hover': {
+      background: 'rgba(255, 107, 53, 0.08)',
+      transform: 'translateY(-1px)'
+    }
+  };
+
+  if (variant === 'mobile') {
+    return (
+      <div style={{ display: 'flex', gap: '0.5rem', width: '100%' }}>
+        <Button
+          variant="outline"
+          size="sm"
+          fullWidth
+          leftSection={<IconSun size={16} />}
+          onClick={() => theme !== 'light' && toggleTheme()}
+          style={{
+            borderColor: 'var(--primary-orange)',
+            color: theme === 'light' ? 'white' : 'var(--primary-orange)',
+            background: theme === 'light' 
+              ? 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))' 
+              : 'transparent'
+          }}
+        >
+          Light
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          fullWidth
+          leftSection={<IconMoon size={16} />}
+          onClick={() => theme !== 'dark' && toggleTheme()}
+          style={{
+            borderColor: 'var(--primary-orange)',
+            color: theme === 'dark' ? 'white' : 'var(--primary-orange)',
+            background: theme === 'dark' 
+              ? 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))' 
+              : 'transparent'
+          }}
+        >
+          Dark
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <Button
+      variant="outline"
+      size="xs"
+      onClick={toggleTheme}
+      style={{
+        ...buttonStyle,
+        minWidth: '40px',
+        height: '28px',
+        fontSize: '1rem',
+        padding: '0 8px'
+      }}
+      styles={{ root: hoverStyle }}
+      title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+    >
+      <Icon size={16} />
+    </Button>
+  );
+};

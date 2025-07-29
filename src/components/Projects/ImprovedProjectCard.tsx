@@ -55,10 +55,11 @@ export const ImprovedProjectCard = ({ project }: ImprovedProjectCardProps) => {
             height: '100%',
             display: 'flex',
             flexDirection: 'column',
-            borderColor: '#e0e0e0',
+            borderColor: 'var(--border-color)',
             transition: 'box-shadow 0.3s ease, border-color 0.3s ease',
             cursor: 'pointer',
-            minHeight: '280px'
+            minHeight: '280px',
+            backgroundColor: 'var(--background-primary)'
           }}
           styles={{
             root: {
