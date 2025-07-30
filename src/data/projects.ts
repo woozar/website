@@ -18,12 +18,17 @@ export const projectsData: ProjectsData = {
       "title": "Modern Portfolio Website with Advanced Features",
       "description": [
         "Development of a modern, responsive portfolio website showcasing software development expertise and project portfolio. The website serves as a professional platform to present services, projects, and technical capabilities to potential clients and collaborators.",
-        "The project emphasizes modern web development practices with React 19 and TypeScript, featuring a component-driven architecture using the Mantine UI framework. The website includes advanced filtering capabilities for projects and technologies, allowing visitors to easily explore relevant work based on their interests.",
-        "Key features include comprehensive internationalization support (German/English), smooth animations powered by Framer Motion, and a sophisticated dark/light theme system. The website automatically generates technology statistics from project data and provides an intuitive user experience across all device types.",
-        "The project demonstrates excellence in frontend development with 100% test coverage using Vitest, comprehensive TypeScript integration, and modern CI/CD practices through GitHub Actions. The entire codebase is openly available on GitHub, showcasing transparent development practices and high code quality standards."
+        "The project emphasizes modern web development practices with **React 19** and **TypeScript**, featuring a component-driven architecture using the **Mantine UI framework**. The website includes advanced filtering capabilities for projects and technologies, allowing visitors to easily explore relevant work based on their interests.",  
+        "Key features include comprehensive internationalization support (German/English), smooth animations powered by **Framer Motion**, and a sophisticated dark/light theme system. The website automatically generates technology statistics from project data and provides an intuitive user experience across all device types.",
+        "The project features comprehensive test coverage using **Vitest**, strict TypeScript integration, and automated **CI/CD practices** through GitHub Actions. As an *open source project*, the entire codebase is publicly available on [GitHub](https://github.com/woozar/website-relaunch), showcasing transparent development practices and high code quality standards.",
+        "This project demonstrates *AI-assisted development workflows*, where all coding and testing tasks were completed using **Claude Code**, while the human developer served as product owner for strategic decisions and manual quality assurance."
       ],
-      "primary_tags": ["React", "TypeScript", "Portfolio Website"],
+      "primary_tags": ["React", "TypeScript", "Mantine", "AI-gestützte Programmierung"],
       "tags": [
+        "Claude Code",
+        "Zustand",
+        "Vitest",
+        "react-markdown",
         "Framer Motion",
         "Responsive Design", 
         "ESLint",
@@ -37,19 +42,21 @@ export const projectsData: ProjectsData = {
         "UI/UX Design",
         "Testing",
         "Code Quality",
-        "Open Source"
+        "Open Source",
+        "Prettier"
       ]
     },
     {
       "customer": "ChatYourData GmbH",
       "title": "AI Playground",
       "description": [
-        "ChatYourData, an innovative technology company, is collaborating with Kreuz & Partner, an AI consulting firm, to develop cutting-edge AI solutions. Together, we're building a demonstration platform called \"Playground\" that showcases the potential of AI and highlights the services we offer.",
-        "As a key developer on the Playground project, I was responsible for the entire development process, from the initial concept to the final deployment. The platform enables users to experiment with various AI applications, such as creating AI experts from uploaded documents, generating images, and defining custom AI scenarios.",
-        "To ensure flexibility and scalability, the Playground platform is designed to support multiple tenants, allowing each customer to have their own dedicated workspace. Furthermore, each tenant can be divided into multiple areas, enabling different departments within an organization to have their own private spaces while still being able to share relevant information."
+        "ChatYourData, an innovative technology company, is collaborating with Kreuz & Partner, an AI consulting firm, to develop cutting-edge AI solutions. Together, we're building a demonstration platform called **\"Playground\"** that showcases the potential of AI and highlights the services we offer.",
+        "As a key developer on the Playground project, I was responsible for the entire development process, from initial concept to final deployment. The platform enables users to experiment with various **AI applications**, such as creating AI experts from uploaded documents, generating images, and defining custom AI scenarios.",
+        "To ensure flexibility and scalability, the Playground platform is designed to support **multi-tenancy**, allowing each customer to have their own dedicated workspace. Furthermore, each tenant can be divided into multiple areas, enabling different departments within an organization to have their own *private spaces* while still being able to share relevant information."
       ],
-      "primary_tags": ["AI", "LLM", "No Code"],
+      "primary_tags": ["AI", "LLM", "No Code", "AI-gestützte Programmierung"],
       "tags": [
+        "Cursor",
         "Anthropic AI",
         "Black Forest Labs",
         "Claude 3 Haiku",
@@ -155,8 +162,9 @@ export const projectsData: ProjectsData = {
         "AppSync, a fully managed GraphQL service, enabled us to create a real-time, scalable, and flexible API layer. This allowed us to efficiently fetch and manipulate data across multiple data sources, including the DynamoDB database. DynamoDB, a fully managed NoSQL database service, provided us with fast and predictable performance, making it ideal for handling large amounts of user data, such as food logs, nutritional information, and user preferences.",
         "By leveraging these powerful AWS services, we were able to build a robust and efficient backend infrastructure that supports the core functionalities of the Uninu app, such as user authentication, food item recognition, nutritional data calculation, and personalized meal plan generation."
       ],
-      "primary_tags": ["AWS", "React Native", "AI", "LLM"],
+      "primary_tags": ["AWS", "React Native", "AI", "LLM", "AI-gestützte Programmierung"],
       "tags": [
+        "Cursor",
         "Anthropic AI",
         "Apollo",
         "AWS API Gateway",
@@ -223,8 +231,9 @@ export const projectsData: ProjectsData = {
         "To address this challenge, we proposed leveraging AI to automate the process of searching and filtering through these portals. We began by developing a web scraper to extract relevant data from these portals. This data was then fed into a state-of-the-art language model, such as GPT-4 or a similar model, to identify projects that matched Drawag's specific criteria.",
         "By automating this process, we aimed to significantly reduce the time spent on manual searches and increase the efficiency of identifying relevant projects. The language model was used to analyze the extracted data and identify relevant information, such as project details, timelines, and contact information. Additionally, we implemented a notification system to alert the relevant team members via email whenever a new project matching their criteria was identified."
       ],
-      "primary_tags": ["AI", "LLM", "Web Scraper"],
+      "primary_tags": ["AI", "LLM", "Web Scraper", "AI-gestützte Programmierung"],
       "tags": [
+        "Cursor",
         "Anthropic AI",
         "Google Generative AI",
         "OpenAI ChatGPT",
@@ -325,9 +334,9 @@ export const projectsData: ProjectsData = {
       "title": "Development and design of the \"Celos X\" digital ecosystem",
       "comment": "<p>CELOS X is a digital ecosystem created by DMG MORI for the manufacturing industry. It acts as a central hub for data from machines and applications, providing a holistic solution for digital transformation.</p>",
       "description": [
-        "DMG Mori's award-winning \"Celos X\" project revolutionizes data exchange for high-end tool machines. This innovative platform seamlessly integrates edge computing with the Microsoft Azure cloud, enabling powerful data analysis and machine optimization. Recognized by Microsoft with the 2021 \"Intelligent Manufacturing Award\" in the \"Envision\" category, Celos X paves the way for smarter factories.",
-        "The platform leverages industrial PCs within the machines to connect with shop floor devices and peripherals using industry-standard protocols like OPC UA, MTConnect, MQTT, and IO-Link Master. This robust communication foundation empowers a rich set of operator applications accessible through high-resolution touchscreens. Built with modern web technologies like Angular 16 frontends with microfrontends and REST APIs, these applications offer an intuitive and user-friendly experience. Additionally, containerization facilitates easier update management, ensuring Celos X stays current and optimized.",
-        "From the very beginning, I was fortunate to be part of the Celos X development team. It was an exciting opportunity to contribute to the project's foundation, working alongside other pioneers to define the platform's architecture. We focused on establishing a strong framework that could support future development, and it's rewarding to see how our work has paved the way for subsequent teams to build upon our achievements."
+        "DMG Mori's award-winning **\"Celos X\"** project revolutionizes data exchange for high-end tool machines. This innovative platform seamlessly integrates edge computing with the **Microsoft Azure cloud**, enabling powerful data analysis and machine optimization. Recognized by Microsoft with the *2021 \"Intelligent Manufacturing Award\"* in the \"Envision\" category, Celos X paves the way for smarter factories.",
+        "The platform leverages industrial PCs within the machines to connect with shop floor devices and peripherals using industry-standard protocols like **OPC UA**, **MTConnect**, **MQTT**, and **IO-Link Master**. This robust communication foundation empowers a rich set of operator applications accessible through high-resolution touchscreens. Built with modern web technologies like **Angular 16** frontends with **microfrontends** and **REST APIs**, these applications offer an intuitive user experience.",
+        "From the very beginning, I was fortunate to be part of the Celos X development team. It was an exciting opportunity to contribute to the project's foundation, working alongside other pioneers to define the platform's architecture. We focused on establishing a strong framework that could support future development."
       ],
       "primary_tags": ["Angular", "Azure", "Node.js", "Microservices", "IoT"],
       "tags": [
