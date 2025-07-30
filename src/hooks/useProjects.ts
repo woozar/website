@@ -4,6 +4,15 @@ import { Project } from '../types';
 
 // German translations for all projects
 const germanTranslations: { [key: string]: Partial<Project> } = {
+  "Modern Portfolio Website with Advanced Features": {
+    title: "Moderne Portfolio-Website mit erweiterten Funktionen",
+    description: [
+      "Entwicklung einer modernen, responsiven Portfolio-Website zur Präsentation von Software-Entwicklungsexpertise und Projektportfolio. Die Website dient als professionelle Plattform zur Darstellung von Services, Projekten und technischen Fähigkeiten für potenzielle Kunden und Kooperationspartner.",
+      "Das Projekt legt Wert auf moderne Web-Entwicklungspraktiken mit React 19 und TypeScript und verfügt über eine komponentenbasierte Architektur mit dem Mantine UI Framework. Die Website bietet erweiterte Filterfunktionen für Projekte und Technologien, die es Besuchern ermöglichen, relevante Arbeiten basierend auf ihren Interessen zu erkunden.",
+      "Zu den Hauptfunktionen gehören umfassende Internationalisierungsunterstützung (Deutsch/Englisch), flüssige Animationen mit Framer Motion und ein ausgeklügeltes Dark/Light-Theme-System. Die Website generiert automatisch Technologie-Statistiken aus Projektdaten und bietet eine intuitive Benutzererfahrung auf allen Gerätetypen.",
+      "Das Projekt demonstriert Exzellenz in der Frontend-Entwicklung mit 100% Testabdeckung durch Vitest, umfassender TypeScript-Integration und modernen CI/CD-Praktiken über GitHub Actions. Die gesamte Codebasis ist offen auf GitHub verfügbar und zeigt transparente Entwicklungspraktiken und hohe Code-Qualitätsstandards."
+    ]
+  },
   "AI Playground": {
     description: [
       "ChatYourData, ein innovatives Technologieunternehmen, arbeitet mit Kreuz & Partner, einer AI-Beratungsfirma, zusammen, um modernste KI-Lösungen zu entwickeln. Gemeinsam entwickeln wir eine Demonstrationsplattform namens \"Playground\", die das Potenzial von KI zeigt und die von uns angebotenen Services hervorhebt.",
@@ -119,8 +128,8 @@ const germanTranslations: { [key: string]: Partial<Project> } = {
       "Im Mittelpunkt ihres aktuellen Projekts steht die Entwicklung ihres ersten Open-Source-IoT-Geräts. Ich bin der Gründer der Gruppe und aktiv an der Umsetzung dieser innovativen Hardware beteiligt. Das gesamte Projekt wird dokumentiert und offen geteilt, sodass die Community alle Details der Projekte erhalten, Ideen beitragen und bei der Entwicklung von etwas wirklich Freiem zusammenarbeiten kann."
     ]
   },
-  "Development of the \"User Manual Collection\" mobile frontend": {
-    title: "Entwicklung des \"User Manual Collection\" mobilen Frontends",
+  "Development of the \"Minerva Micro\" mobile frontend": {
+    title: "Entwicklung des \"Minerva Micro\" mobilen Frontends",
     description: [
       "Die Fabrikautomatisierungsabteilung von Siemens Digital Industries stellt ein Online-Portal bereit, wo Nutzer alle Arten von Dokumentation als PDFs herunterladen können. Sie stellen auch eine DVD mit der gesamten Dokumentation bereit, die mit ihren Produkten mitgeliefert wird.",
       "Anstatt nur eine Liste von Dateien zu haben, wollten sie eine interaktivere Art des Durchsuchens der Dokumentation bieten.",

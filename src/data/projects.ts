@@ -14,6 +14,33 @@ export interface ProjectsData {
 export const projectsData: ProjectsData = {
   "projects": [
     {
+      "customer": "12 of Spades",
+      "title": "Modern Portfolio Website with Advanced Features",
+      "description": [
+        "Development of a modern, responsive portfolio website showcasing software development expertise and project portfolio. The website serves as a professional platform to present services, projects, and technical capabilities to potential clients and collaborators.",
+        "The project emphasizes modern web development practices with React 19 and TypeScript, featuring a component-driven architecture using the Mantine UI framework. The website includes advanced filtering capabilities for projects and technologies, allowing visitors to easily explore relevant work based on their interests.",
+        "Key features include comprehensive internationalization support (German/English), smooth animations powered by Framer Motion, and a sophisticated dark/light theme system. The website automatically generates technology statistics from project data and provides an intuitive user experience across all device types.",
+        "The project demonstrates excellence in frontend development with 100% test coverage using Vitest, comprehensive TypeScript integration, and modern CI/CD practices through GitHub Actions. The entire codebase is openly available on GitHub, showcasing transparent development practices and high code quality standards."
+      ],
+      "primary_tags": ["React", "TypeScript", "Portfolio Website"],
+      "tags": [
+        "Framer Motion",
+        "Responsive Design", 
+        "ESLint",
+        "Git",
+        "Vite",
+        "CI/CD",
+        "GitHub Actions",
+        "State Management",
+        "Multi-language Support",
+        "Component Architecture",
+        "UI/UX Design",
+        "Testing",
+        "Code Quality",
+        "Open Source"
+      ]
+    },
+    {
       "customer": "ChatYourData GmbH",
       "title": "AI Playground",
       "description": [
@@ -225,7 +252,14 @@ export const projectsData: ProjectsData = {
         "By introducing the Celos Tech Calculator, tailored specifically for machine-specific calculations, the project aimed to optimize industrial operations. It provided a user-friendly interface for managing and utilizing specialized tools directly on machines manufactured by our customer, thereby enhancing productivity and operational effectiveness."
       ],
       "primary_tags": ["Custom App Store", "Docker"],
-      "tags": []
+      "tags": [
+        "CI/CD",
+        "Authentication / Authorization",
+        "Cloud-Based Platform",
+        "RESTful",
+        "Security",
+        "API-based Integration"
+      ]
     },
     {
       "customer": "DMG Mori Software Solution",
@@ -395,7 +429,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "Siemens AG / Digital Industries / Factory Automation",
-      "title": "Development of the \"User Manual Collection\" mobile frontend",
+      "title": "Development of the \"Minerva Micro\" mobile frontend",
       "description": [
         "The factory automation department of Siemens Digital Industries is providing an online portal, where users can download all kinds of documentation as PDFs. Also they provide a DVD with all the documentation on it, that is being shipped with their products.",
         "Instead of just holding a list of files, they wanted to provide a more interactive way of browsing the documentation.",
