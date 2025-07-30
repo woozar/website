@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '../../test/test-utils'
 import { AnimatedHero } from './AnimatedHero'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { useTranslation } from '../../hooks/useTranslation'
+import { de } from '../../translations/de'
 
 // Mock dependencies
 vi.mock('../../hooks/useMediaQuery')
@@ -22,15 +23,6 @@ vi.mock('../../assets/hero-portrait.webp', () => ({
 const mockUseMediaQuery = vi.mocked(useMediaQuery)
 const mockUseTranslation = vi.mocked(useTranslation)
 
-const mockTranslations = {
-  hero: {
-    name: 'Johannes Herrmann',
-    title: 'Software Freelancer & AI Specialist',
-    description: 'Specialized in AI/LLM Development, Cloud Architecture and Full-Stack Development.',
-    contactButton: 'Get in Touch',
-    projectsButton: 'View Projects'
-  }
-}
 
 describe('AnimatedHero', () => {
   beforeEach(() => {
@@ -41,8 +33,8 @@ describe('AnimatedHero', () => {
       isDesktop: true
     })
     mockUseTranslation.mockReturnValue({
-      t: mockTranslations,
-      language: 'en'
+      t: de,
+      language: 'de'
     })
 
     // Mock scrollTo
@@ -70,14 +62,14 @@ describe('AnimatedHero', () => {
   it('should render description text', () => {
     render(<AnimatedHero />)
 
-    expect(screen.getByText('Specialized in AI/LLM Development, Cloud Architecture and Full-Stack Development.')).toBeInTheDocument()
+    expect(screen.getByText('Spezialisiert auf AI/LLM Entwicklung, Cloud Architecture und Full-Stack Development. Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen.')).toBeInTheDocument()
   })
 
   it('should render action buttons', () => {
     render(<AnimatedHero />)
 
-    expect(screen.getByText('Get in Touch')).toBeInTheDocument()
-    expect(screen.getByText('View Projects')).toBeInTheDocument()
+    expect(screen.getByText('Kontakt aufnehmen')).toBeInTheDocument()
+    expect(screen.getByText('Projekte ansehen')).toBeInTheDocument()
   })
 
   it('should render hero portrait image', () => {
@@ -85,14 +77,14 @@ describe('AnimatedHero', () => {
 
     const heroImage = screen.getByRole('img')
     expect(heroImage).toBeInTheDocument()
-    expect(heroImage).toHaveAttribute('src', '/mock-hero-portrait.webp')
+    expect(heroImage).toHaveAttribute('src', '/assets/hero-portrait.webp')
     expect(heroImage).toHaveAttribute('alt', 'Johannes Herrmann - Tech Freelancer')
   })
 
   it('should handle contact button click', () => {
     render(<AnimatedHero />)
 
-    const contactButton = screen.getByText('Get in Touch')
+    const contactButton = screen.getByText('Kontakt aufnehmen')
     fireEvent.click(contactButton)
 
     expect(document.querySelector).toHaveBeenCalledWith('#contact')
@@ -105,7 +97,7 @@ describe('AnimatedHero', () => {
   it('should handle projects button click', () => {
     render(<AnimatedHero />)
 
-    const projectsButton = screen.getByText('View Projects')
+    const projectsButton = screen.getByText('Projekte ansehen')
     fireEvent.click(projectsButton)
 
     expect(document.querySelector).toHaveBeenCalledWith('#projects')
@@ -120,7 +112,7 @@ describe('AnimatedHero', () => {
 
     render(<AnimatedHero />)
 
-    const contactButton = screen.getByText('Get in Touch')
+    const contactButton = screen.getByText('Kontakt aufnehmen')
     
     expect(() => fireEvent.click(contactButton)).not.toThrow()
     expect(window.scrollTo).not.toHaveBeenCalled()
@@ -137,7 +129,7 @@ describe('AnimatedHero', () => {
 
     // Should still render all content on mobile
     expect(screen.getByText('Johannes Herrmann')).toBeInTheDocument()
-    expect(screen.getByText('Get in Touch')).toBeInTheDocument()
+    expect(screen.getByText('Kontakt aufnehmen')).toBeInTheDocument()
     expect(screen.getByRole('img')).toBeInTheDocument()
   })
 
@@ -155,25 +147,10 @@ describe('AnimatedHero', () => {
     expect(screen.getByText('Software Freelancer & AI Specialist')).toBeInTheDocument()
   })
 
-  it('should handle different language translations', () => {
-    const germanTranslations = {
-      hero: {
-        name: 'Johannes Herrmann',
-        title: 'Software Freelancer & KI Spezialist',
-        description: 'Spezialisiert auf KI/LLM Entwicklung, Cloud Architektur und Full-Stack Development.',
-        contactButton: 'Kontakt aufnehmen',
-        projectsButton: 'Projekte ansehen'
-      }
-    }
-
-    mockUseTranslation.mockReturnValue({
-      t: germanTranslations,
-      language: 'de'
-    })
-
+  it('should handle German language translations', () => {
     render(<AnimatedHero />)
 
-    expect(screen.getByText('Software Freelancer & KI Spezialist')).toBeInTheDocument()
+    expect(screen.getByText('Software Freelancer & AI Specialist')).toBeInTheDocument()
     expect(screen.getByText('Kontakt aufnehmen')).toBeInTheDocument()
     expect(screen.getByText('Projekte ansehen')).toBeInTheDocument()
   })
@@ -191,8 +168,8 @@ describe('AnimatedHero', () => {
   it('should have proper button attributes', () => {
     render(<AnimatedHero />)
 
-    const contactButton = screen.getByText('Get in Touch')
-    const projectsButton = screen.getByText('View Projects')
+    const contactButton = screen.getByText('Kontakt aufnehmen')
+    const projectsButton = screen.getByText('Projekte ansehen')
 
     // Buttons are rendered as Mantine components and should be in the document
     expect(contactButton).toBeInTheDocument()
@@ -215,7 +192,7 @@ describe('AnimatedHero', () => {
 
     render(<AnimatedHero />)
 
-    const contactButton = screen.getByText('Get in Touch')
+    const contactButton = screen.getByText('Kontakt aufnehmen')
     fireEvent.click(contactButton)
 
     expect(window.scrollTo).toHaveBeenCalledWith({
@@ -227,8 +204,8 @@ describe('AnimatedHero', () => {
   it('should render buttons with proper styling classes', () => {
     render(<AnimatedHero />)
 
-    const contactButton = screen.getByText('Get in Touch')
-    const projectsButton = screen.getByText('View Projects')
+    const contactButton = screen.getByText('Kontakt aufnehmen')
+    const projectsButton = screen.getByText('Projekte ansehen')
 
     // Both buttons should be rendered as button elements
     expect(contactButton).toBeInTheDocument()
@@ -239,12 +216,12 @@ describe('AnimatedHero', () => {
     render(<AnimatedHero />)
 
     // Test contact button navigation
-    const contactButton = screen.getByText('Get in Touch')
+    const contactButton = screen.getByText('Kontakt aufnehmen')
     fireEvent.click(contactButton)
     expect(document.querySelector).toHaveBeenCalledWith('#contact')
 
     // Test projects button navigation
-    const projectsButton = screen.getByText('View Projects')
+    const projectsButton = screen.getByText('Projekte ansehen')
     fireEvent.click(projectsButton)
     expect(document.querySelector).toHaveBeenCalledWith('#projects')
   })
@@ -255,9 +232,9 @@ describe('AnimatedHero', () => {
     // Check all main content is present
     expect(screen.getByText('Johannes Herrmann')).toBeInTheDocument()
     expect(screen.getByText('Software Freelancer & AI Specialist')).toBeInTheDocument()
-    expect(screen.getByText('Specialized in AI/LLM Development, Cloud Architecture and Full-Stack Development.')).toBeInTheDocument()
-    expect(screen.getByText('Get in Touch')).toBeInTheDocument()
-    expect(screen.getByText('View Projects')).toBeInTheDocument()
+    expect(screen.getByText('Spezialisiert auf AI/LLM Entwicklung, Cloud Architecture und Full-Stack Development. Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen.')).toBeInTheDocument()
+    expect(screen.getByText('Kontakt aufnehmen')).toBeInTheDocument()
+    expect(screen.getByText('Projekte ansehen')).toBeInTheDocument()
     expect(screen.getByRole('img')).toBeInTheDocument()
   })
 })

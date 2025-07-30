@@ -76,7 +76,7 @@ describe('translations/index', () => {
           const currentPath = path ? `${path}.${key}` : key
           
           if (typeof value === 'string') {
-            expect(value.trim()).not.toBe('', `Empty translation at ${currentPath}`)
+            expect(value.trim()).not.toBe('')
           } else if (typeof value === 'object' && value !== null) {
             checkTranslationValues(value, currentPath)
           }

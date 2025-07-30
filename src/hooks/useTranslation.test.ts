@@ -17,7 +17,7 @@ describe('useTranslation', () => {
   })
 
   it('should return translation and language for German', () => {
-    const mockTranslations = {
+    const mockTranslations: any = {
       nav: {
         home: 'Startseite',
         about: 'Über mich',
@@ -42,7 +42,7 @@ describe('useTranslation', () => {
   })
 
   it('should return translation and language for English', () => {
-    const mockTranslations = {
+    const mockTranslations: any = {
       nav: {
         home: 'Home',
         about: 'About',
@@ -67,7 +67,7 @@ describe('useTranslation', () => {
   })
 
   it('should update when language changes', () => {
-    const germanTranslations = {
+    const germanTranslations: any = {
       nav: {
         home: 'Startseite',
         about: 'Über mich',
@@ -76,7 +76,7 @@ describe('useTranslation', () => {
       }
     }
 
-    const englishTranslations = {
+    const englishTranslations: any = {
       nav: {
         home: 'Home',
         about: 'About',
@@ -107,20 +107,20 @@ describe('useTranslation', () => {
   it('should call useLanguageStore selector correctly', () => {
     const mockSelector = vi.fn((state) => state.language)
     mockUseLanguageStore.mockImplementation(mockSelector)
-    mockGetTranslation.mockReturnValue({})
+    mockGetTranslation.mockReturnValue({} as any)
 
     renderHook(() => useTranslation())
 
     expect(mockUseLanguageStore).toHaveBeenCalledWith(expect.any(Function))
-    
+
     // Test the selector function
     const selectorFn = mockUseLanguageStore.mock.calls[0][0]
-    const mockState = { language: 'de', setLanguage: vi.fn() }
+    const mockState: any = { language: 'de', setLanguage: vi.fn() }
     expect(selectorFn(mockState)).toBe('de')
   })
 
   it('should handle empty translations gracefully', () => {
-    const emptyTranslations = {}
+    const emptyTranslations: any = {}
 
     mockUseLanguageStore.mockReturnValue('en')
     mockGetTranslation.mockReturnValue(emptyTranslations)

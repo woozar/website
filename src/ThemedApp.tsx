@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { MantineProvider, createTheme, MantineColorScheme } from '@mantine/core'
+import { MantineProvider, createTheme } from '@mantine/core'
 import { useThemeStore } from './stores/themeStore'
 import App from './App'
 
@@ -42,7 +42,7 @@ export function ThemedApp() {
   }, [currentTheme]);
 
   return (
-    <MantineProvider theme={theme} forceColorScheme={currentTheme as MantineColorScheme}>
+    <MantineProvider theme={theme} forceColorScheme={currentTheme}>
       <App />
     </MantineProvider>
   );

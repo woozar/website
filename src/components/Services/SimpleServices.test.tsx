@@ -3,6 +3,7 @@ import { render, screen } from '../../test/test-utils'
 import { SimpleServices } from './SimpleServices'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { useTranslation } from '../../hooks/useTranslation'
+import { de } from '../../translations/de'
 
 // Mock dependencies
 vi.mock('../../hooks/useMediaQuery')
@@ -28,27 +29,6 @@ vi.mock('../../assets/fullstack-development.webp', () => ({
 const mockUseMediaQuery = vi.mocked(useMediaQuery)
 const mockUseTranslation = vi.mocked(useTranslation)
 
-const mockTranslations = {
-  services: {
-    title: 'My Services',
-    subtitle: 'Specialized expertise in the most important future technologies.',
-    technologies: 'Technologies:',
-    items: {
-      ai: {
-        title: 'AI & LLM Development',
-        description: 'Development of AI-based applications with cutting-edge Large Language Models like GPT-4, Claude and Gemini.'
-      },
-      cloud: {
-        title: 'Cloud Architecture',
-        description: 'Design and implementation of scalable cloud infrastructures with AWS, Azure and modern DevOps practices.'
-      },
-      fullstack: {
-        title: 'Full-Stack Development',
-        description: 'Development of modern web and mobile applications with React, Angular, Node.js and TypeScript.'
-      }
-    }
-  }
-}
 
 describe('SimpleServices', () => {
   beforeEach(() => {
@@ -59,16 +39,16 @@ describe('SimpleServices', () => {
       isDesktop: true
     })
     mockUseTranslation.mockReturnValue({
-      t: mockTranslations,
-      language: 'en'
+      t: de,
+      language: 'de'
     })
   })
 
   it('should render services section with title and subtitle', () => {
     render(<SimpleServices />)
 
-    expect(screen.getByText('My Services')).toBeInTheDocument()
-    expect(screen.getByText('Specialized expertise in the most important future technologies.')).toBeInTheDocument()
+    expect(screen.getByText('Meine Services')).toBeInTheDocument()
+    expect(screen.getByText('Spezialisierte Expertise in den wichtigsten Zukunftstechnologien. Von AI-Integration bis hin zu skalierbaren Cloud-Architekturen.')).toBeInTheDocument()
   })
 
   it('should render all three service cards', () => {
@@ -82,9 +62,9 @@ describe('SimpleServices', () => {
   it('should render service descriptions', () => {
     render(<SimpleServices />)
 
-    expect(screen.getByText('Development of AI-based applications with cutting-edge Large Language Models like GPT-4, Claude and Gemini.')).toBeInTheDocument()
-    expect(screen.getByText('Design and implementation of scalable cloud infrastructures with AWS, Azure and modern DevOps practices.')).toBeInTheDocument()
-    expect(screen.getByText('Development of modern web and mobile applications with React, Angular, Node.js and TypeScript.')).toBeInTheDocument()
+    expect(screen.getByText('Entwicklung von AI-basierten Anwendungen mit modernsten Large Language Models wie GPT-4, Claude und Gemini. Von Chatbots bis hin zu komplexen AI-Workflows.')).toBeInTheDocument()
+    expect(screen.getByText('Design und Implementierung skalierbarer Cloud-Infrastrukturen mit AWS, Azure und modernen DevOps-Praktiken. Microservices, Serverless und Container-Orchestrierung.')).toBeInTheDocument()
+    expect(screen.getByText('Entwicklung moderner Web- und Mobile-Anwendungen mit React, Angular, Node.js und TypeScript. Responsive Design und perfekte User Experience.')).toBeInTheDocument()
   })
 
   it('should render service images', () => {
@@ -93,15 +73,15 @@ describe('SimpleServices', () => {
     const images = screen.getAllByRole('img')
     expect(images).toHaveLength(3)
 
-    expect(images[0]).toHaveAttribute('src', '/mock-ai-development.webp')
-    expect(images[1]).toHaveAttribute('src', '/mock-cloud-architecture.webp')
-    expect(images[2]).toHaveAttribute('src', '/mock-fullstack-development.webp')
+    expect(images[0]).toHaveAttribute('src', '/assets/ai-development.webp')
+    expect(images[1]).toHaveAttribute('src', '/assets/cloud-architecture.webp')
+    expect(images[2]).toHaveAttribute('src', '/assets/fullstack-development.webp')
   })
 
   it('should render technologies lists', () => {
     render(<SimpleServices />)
 
-    expect(screen.getAllByText('Technologies:')).toHaveLength(3) // One for each service
+    expect(screen.getAllByText('Technologien:')).toHaveLength(3) // One for each service
 
     // AI technologies
     expect(screen.getByText('OpenAI GPT-4')).toBeInTheDocument()
@@ -135,44 +115,17 @@ describe('SimpleServices', () => {
     render(<SimpleServices />)
 
     // Should still render all content on mobile
-    expect(screen.getByText('My Services')).toBeInTheDocument()
+    expect(screen.getByText('Meine Services')).toBeInTheDocument()
     expect(screen.getByText('AI & LLM Development')).toBeInTheDocument()
     expect(screen.getByText('Cloud Architecture')).toBeInTheDocument()
     expect(screen.getByText('Full-Stack Development')).toBeInTheDocument()
   })
 
-  it('should handle different language translations', () => {
-    const germanTranslations = {
-      services: {
-        title: 'Meine Services',
-        subtitle: 'Spezialisierte Expertise in den wichtigsten Zukunftstechnologien.',
-        technologies: 'Technologien:',
-        items: {
-          ai: {
-            title: 'KI & LLM Entwicklung',
-            description: 'Entwicklung von KI-basierten Anwendungen mit modernsten Large Language Models.'
-          },
-          cloud: {
-            title: 'Cloud Architektur',
-            description: 'Design und Implementierung skalierbarer Cloud-Infrastrukturen.'
-          },
-          fullstack: {
-            title: 'Full-Stack Entwicklung',
-            description: 'Entwicklung moderner Web- und Mobile-Anwendungen.'
-          }
-        }
-      }
-    }
-
-    mockUseTranslation.mockReturnValue({
-      t: germanTranslations,
-      language: 'de'
-    })
-
+  it('should handle German language translations', () => {
     render(<SimpleServices />)
 
     expect(screen.getByText('Meine Services')).toBeInTheDocument()
-    expect(screen.getByText('KI & LLM Entwicklung')).toBeInTheDocument()
+    expect(screen.getByText('AI & LLM Development')).toBeInTheDocument()
     expect(screen.getAllByText('Technologien:')).toHaveLength(3) // One for each service
   })
 
@@ -180,7 +133,7 @@ describe('SimpleServices', () => {
     render(<SimpleServices />)
 
     const mainTitle = screen.getByRole('heading', { level: 2 })
-    expect(mainTitle).toHaveTextContent('My Services')
+    expect(mainTitle).toHaveTextContent('Meine Services')
 
     const serviceHeadings = screen.getAllByRole('heading', { level: 3 })
     expect(serviceHeadings).toHaveLength(3)
@@ -194,7 +147,7 @@ describe('SimpleServices', () => {
 
     // Each service should have an image, title, description, and technologies
     const aiTitle = screen.getByText('AI & LLM Development')
-    const aiDescription = screen.getByText('Development of AI-based applications with cutting-edge Large Language Models like GPT-4, Claude and Gemini.')
+    const aiDescription = screen.getByText('Entwicklung von AI-basierten Anwendungen mit modernsten Large Language Models wie GPT-4, Claude und Gemini. Von Chatbots bis hin zu komplexen AI-Workflows.')
     
     expect(aiTitle).toBeInTheDocument()
     expect(aiDescription).toBeInTheDocument()
@@ -240,7 +193,7 @@ describe('SimpleServices', () => {
     render(<SimpleServices />)
 
     // Check that the main services section is rendered
-    const servicesSection = screen.getByText('My Services').closest('section')
+    const servicesSection = screen.getByText('Meine Services').closest('section')
     expect(servicesSection).toBeInTheDocument()
 
     // All service cards should be present
