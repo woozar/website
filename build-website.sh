@@ -10,7 +10,7 @@ echo "✅ Tests passed! Starting build process..."
 echo "🗑️  Cleaning dist folder..."
 rm -rf dist
 
-rm website.zip
+rm -f website.zip
 
 echo "🏗️  Building application..."
 npm run build

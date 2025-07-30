@@ -1,6 +1,7 @@
 export const de = {
   navigation: {
     services: 'Services',
+    statistics: 'Statistiken',
     projects: 'Projekte',
     about: 'Über mich',
     contact: 'Kontakt',
