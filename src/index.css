@@ -94,6 +94,11 @@ a:hover {
   color: var(--primary-red);
 }
 
+/* Markdown links in modals */
+.markdown-link:hover {
+  text-decoration: underline;
+}
+
 /* Tablet and up */
 @media (min-width: 768px) {
   h1 {
