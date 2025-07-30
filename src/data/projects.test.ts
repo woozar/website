@@ -13,7 +13,7 @@ describe('projects data', () => {
     })
 
     it('should have all required properties for each project', () => {
-      projectsData.projects.forEach((project, index) => {
+      projectsData.projects.forEach((project) => {
         expect(project).toHaveProperty('customer')
         expect(project).toHaveProperty('title')
         expect(project).toHaveProperty('description')
@@ -184,9 +184,6 @@ describe('projects data', () => {
     })
 
     it('should have consistent data structure across all projects', () => {
-      const firstProject = projectsData.projects[0]
-      const keys = Object.keys(firstProject)
-      
       projectsData.projects.forEach((project, index) => {
         const projectKeys = Object.keys(project)
         

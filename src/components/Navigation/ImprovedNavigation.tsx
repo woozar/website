@@ -6,7 +6,7 @@ import { Container } from '../Layout';
 import { LanguageSwitcher } from '../LanguageSwitcher';
 import { ThemeSwitcher } from '../ThemeSwitcher';
 import { useTranslation } from '../../hooks/useTranslation';
-import { useModal } from '../../contexts/ModalContext';
+import { useModal } from '../../hooks/useModal';
 import logoImage from '../../assets/logo.webp';
 
 export const ImprovedNavigation = () => {

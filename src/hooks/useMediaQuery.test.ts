@@ -143,7 +143,7 @@ describe('useMediaQuery', () => {
       writable: true
     })
 
-    const { result, rerender } = renderHook(() => useMediaQuery())
+    const { result } = renderHook(() => useMediaQuery())
 
     expect(result.current.isMobile).toBe(true)
 
