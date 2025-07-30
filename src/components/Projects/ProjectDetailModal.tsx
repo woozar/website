@@ -2,9 +2,11 @@ import { Modal, Stack, Title, Text, Button } from '@mantine/core';
 import { IconX } from '@tabler/icons-react';
 import { motion, AnimatePresence, Variants, useReducedMotion } from 'framer-motion';
 import { useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { Project } from '../../types';
 import { TagList } from './TagList';
 import { useModal } from '../../hooks/useModal';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface ProjectDetailModalProps {
   project: Project | null;
@@ -12,7 +14,9 @@ interface ProjectDetailModalProps {
   onClose: () => void;
 }
 
+
 export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailModalProps) => {
+  const { t } = useTranslation();
   const { openModal, closeModal } = useModal();
   const shouldReduceMotion = useReducedMotion();
 
@@ -237,31 +241,50 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
                 >
                       {/* Description */}
                       <Stack gap="md">
-                        <Text fw={600} size="sm" c="var(--text-primary)">
-                          Projektbeschreibung
-                        </Text>
-                        <Stack gap="md">
-                          {(project.description || []).map((paragraph, idx) => (
-                            <Text
-                              key={idx}
-                              size="md"
-                              c="var(--text-secondary)"
-                              style={{
-                                lineHeight: 1.7,
-                                fontSize: '1rem',
-                              }}
-                            >
-                              {paragraph}
-                            </Text>
-                          ))}
-                        </Stack>
+                        <div style={{
+                          color: 'var(--text-secondary)',
+                          lineHeight: 1.7,
+                          fontSize: '1rem',
+                        }}>
+                          <ReactMarkdown
+                            components={{
+                              // Style links
+                              a: ({ ...props }) => (
+                                <a
+                                  {...props}
+                                  style={{
+                                    color: 'var(--primary-orange)',
+                                    textDecoration: 'none',
+                                  }}
+                                  className="markdown-link"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                />
+                              ),
+                              // Style paragraphs
+                              p: ({ ...props }) => (
+                                <p {...props} style={{ marginBottom: '1rem' }} />
+                              ),
+                              // Style strong/bold text
+                              strong: ({ ...props }) => (
+                                <strong {...props} style={{ color: 'var(--text-primary)' }} />
+                              ),
+                              // Style emphasis/italic text
+                              em: ({ ...props }) => (
+                                <em {...props} style={{ fontStyle: 'italic' }} />
+                              ),
+                            }}
+                          >
+                            {(project.description || []).join('\n\n')}
+                          </ReactMarkdown>
+                        </div>
                       </Stack>
 
                       {/* All Tags */}
                       <div>
                         <Stack gap="sm">
                           <Text fw={600} size="sm" c="var(--text-primary)">
-                            Technologien
+                            {t.project.technologies}
                           </Text>
                           <TagList
                             primaryTags={project.primary_tags || []}

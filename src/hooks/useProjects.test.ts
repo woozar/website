@@ -68,9 +68,9 @@ describe('useProjects', () => {
     const aiPlaygroundProject = result.current.projects.find(p => p.title === 'AI Playground')
     expect(aiPlaygroundProject).toBeDefined()
     expect(aiPlaygroundProject?.description).toEqual([
-      'ChatYourData, ein innovatives Technologieunternehmen, arbeitet mit Kreuz & Partner, einer AI-Beratungsfirma, zusammen, um modernste KI-Lösungen zu entwickeln. Gemeinsam entwickeln wir eine Demonstrationsplattform namens "Playground", die das Potenzial von KI zeigt und die von uns angebotenen Services hervorhebt.',
-      'Als Hauptentwickler des Playground-Projekts war ich für den gesamten Entwicklungsprozess verantwortlich, vom ersten Konzept bis zur finalen Bereitstellung. Die Plattform ermöglicht es Nutzern, mit verschiedenen KI-Anwendungen zu experimentieren, wie z.B. KI-Experten aus hochgeladenen Dokumenten zu erstellen, Bilder zu generieren und benutzerdefinierte KI-Szenarien zu definieren.',
-      'Um Flexibilität und Skalierbarkeit zu gewährleisten, ist die Playground-Plattform für Multi-Tenancy ausgelegt, sodass jeder Kunde seinen eigenen dedizierten Arbeitsbereich haben kann. Darüber hinaus kann jeder Tenant in mehrere Bereiche unterteilt werden, was es verschiedenen Abteilungen innerhalb einer Organisation ermöglicht, ihre eigenen privaten Räume zu haben und gleichzeitig relevante Informationen zu teilen.'
+      'ChatYourData, ein innovatives Technologieunternehmen, arbeitet mit Kreuz & Partner, einer AI-Beratungsfirma, zusammen, um modernste KI-Lösungen zu entwickeln. Gemeinsam entwickeln wir eine Demonstrationsplattform namens **"Playground"**, die das Potenzial von KI zeigt und die von uns angebotenen Services hervorhebt.',
+      'Als Hauptentwickler des Playground-Projekts war ich für den gesamten Entwicklungsprozess verantwortlich, vom ersten Konzept bis zur finalen Bereitstellung. Die Plattform ermöglicht es Nutzern, mit verschiedenen **KI-Anwendungen** zu experimentieren, wie z.B. KI-Experten aus hochgeladenen Dokumenten zu erstellen, Bilder zu generieren und benutzerdefinierte KI-Szenarien zu definieren.',
+      'Um Flexibilität und Skalierbarkeit zu gewährleisten, ist die Playground-Plattform für **Multi-Tenancy** ausgelegt, sodass jeder Kunde seinen eigenen dedizierten Arbeitsbereich haben kann. Darüber hinaus kann jeder Tenant in mehrere Bereiche unterteilt werden, was es verschiedenen Abteilungen innerhalb einer Organisation ermöglicht, ihre eigenen *privaten Räume* zu haben und gleichzeitig relevante Informationen zu teilen.'
     ])
 
     // Test workshop project translation
@@ -157,6 +157,7 @@ describe('useProjects', () => {
 
     const aiPlaygroundProject = result.current.projects.find(p => p.title === 'AI Playground')
     expect(aiPlaygroundProject?.description[0]).toContain('ChatYourData, ein innovatives Technologieunternehmen')
+    expect(aiPlaygroundProject?.description[0]).toContain('**"Playground"**')
   })
 
   it('should handle partial translations correctly', () => {
@@ -177,5 +178,6 @@ describe('useProjects', () => {
     const aiProject = result.current.projects.find(p => p.title === 'AI Playground')
     expect(aiProject?.title).toBe('AI Playground') // Original title
     expect(aiProject?.description[0]).toContain('ChatYourData, ein innovatives Technologieunternehmen') // German description
+    expect(aiProject?.description[0]).toContain('**"Playground"**') // Contains markdown formatting
   })
 })
