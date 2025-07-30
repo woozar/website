@@ -8,6 +8,7 @@ import { SimpleServices } from './components/Services/SimpleServices';
 import { SimpleProjectsSection } from './components/Projects/SimpleProjectsSection';
 import { About } from './components/About/About';
 import { Contact } from './components/Contact/Contact';
+import { SEOHead } from './components/SEO/SEOHead';
 
 function App() {
   const language = useLanguageStore((state) => state.language);
@@ -19,6 +20,7 @@ function App() {
   
   return (
     <ModalProvider>
+      <SEOHead type="profile" />
       <Box style={{ minHeight: '100vh' }}>
         <ImprovedNavigation />
         <main style={{ 

@@ -91,7 +91,7 @@ export const LegalModal = ({ opened, onClose, type }: LegalModalProps) => {
             
             <Stack gap="xs" mt="md">
               <Text><strong>Telefon:</strong> +49 176 8100 1371</Text>
-              <Text><strong>E-Mail:</strong> info[at]12ofspades.com</Text>
+              <Text><strong>E-Mail:</strong> info@12ofspades.com</Text>
             </Stack>
             
             <Text mt="md">
