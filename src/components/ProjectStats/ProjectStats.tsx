@@ -3,7 +3,7 @@ import { IconCode, IconUsers, IconCalendar, IconTrendingUp, IconStack, IconQuest
 import { motion, useReducedMotion } from 'framer-motion';
 import { Section } from '../Layout';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
-// import { useTranslation } from '../../hooks/useTranslation';
+import { useTranslation } from '../../hooks/useTranslation';
 import { useProjects } from '../../hooks/useProjects';
 import { calculateProjectStats } from '../../utils/projectStats';
 import { useMemo } from 'react';
@@ -12,7 +12,7 @@ import { useFilterStore } from '../../stores/filterStore';
 
 export const ProjectStats = () => {
   const { isMobile } = useMediaQuery();
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
   const { projects } = useProjects();
   const shouldReduceMotion = useReducedMotion();
   const theme = useThemeStore((state) => state.theme);
@@ -80,33 +80,33 @@ export const ProjectStats = () => {
   const statCards = [
     {
       icon: IconCode,
-      title: 'Total Projects',
+      title: t.projectStats.cards.totalProjects,
       value: stats.totalProjects.toString(),
-      description: 'Successfully completed projects'
+      description: t.projectStats.cards.totalProjectsDesc
     },
     {
       icon: IconTrendingUp,
-      title: 'Technologies',
+      title: t.projectStats.cards.technologies,
       value: stats.totalTechnologies.toString(),
-      description: 'Different technologies used'
+      description: t.projectStats.cards.technologiesDesc
     },
     {
       icon: IconStack,
-      title: 'Frameworks',
+      title: t.projectStats.cards.frameworks,
       value: stats.totalFrameworks.toString(),
-      description: 'Frameworks & libraries used'
+      description: t.projectStats.cards.frameworksDesc
     },
     {
       icon: IconUsers,
-      title: 'Companies',
+      title: t.projectStats.cards.companies,
       value: stats.companiesWorkedWith.length.toString(),
-      description: 'Companies worked with'
+      description: t.projectStats.cards.companiesDesc
     },
     {
       icon: IconCalendar,
-      title: 'Years Experience',
+      title: t.projectStats.cards.yearsExperience,
       value: '20',
-      description: 'Years of professional experience'
+      description: t.projectStats.cards.yearsExperienceDesc
     }
   ];
 
@@ -131,10 +131,10 @@ export const ProjectStats = () => {
                   backgroundClip: 'text'
                 }}
               >
-                Project Statistics
+                {t.projectStats.title}
               </Title>
               <Text size="lg" c="var(--text-secondary)" maw="600px">
-                Quantified expertise based on real project experience
+                {t.projectStats.subtitle}
               </Text>
             </Stack>
           </motion.div>
@@ -179,7 +179,7 @@ export const ProjectStats = () => {
                                 paddingBottom: '0.5rem'
                               }}
                             >
-                              🛠️ Verwendete Frameworks
+                              {t.projectStats.frameworksTooltip}
                             </Text>
                             <SimpleGrid cols={2} spacing="xs">
                               {usedFrameworks.map((framework) => (
@@ -279,7 +279,7 @@ export const ProjectStats = () => {
           <motion.div variants={itemVariants}>
             <Stack gap="lg">
               <Title order={3} ta="center" c="var(--text-primary)">
-                Core Technology Expertise
+                {t.projectStats.coreExpertise}
               </Title>
               
               <Card
@@ -296,49 +296,49 @@ export const ProjectStats = () => {
                 <SimpleGrid cols={{ base: 2, sm: 4 }} spacing="lg">
                   <Stack gap="xs" align="center">
                     <Text size="lg" fw={700} c="var(--text-primary)">
-                      TypeScript
+                      {t.projectStats.technologies.typescript}
                     </Text>
                     <Badge size="sm" variant="light" color="blue">
-                      8 years
+                      {t.projectStats.experience.years8}
                     </Badge>
                     <Text size="xs" c="var(--text-secondary)" ta="center">
-                      Expert Level
+                      {t.projectStats.expertiseLevel.expert}
                     </Text>
                   </Stack>
                   
                   <Stack gap="xs" align="center">
                     <Text size="lg" fw={700} c="var(--text-primary)">
-                      Node.js
+                      {t.projectStats.technologies.nodejs}
                     </Text>
                     <Badge size="sm" variant="light" color="green">
-                      6 years
+                      {t.projectStats.experience.years6}
                     </Badge>
                     <Text size="xs" c="var(--text-secondary)" ta="center">
-                      Expert Level
+                      {t.projectStats.expertiseLevel.expert}
                     </Text>
                   </Stack>
                   
                   <Stack gap="xs" align="center">
                     <Text size="lg" fw={700} c="var(--text-primary)">
-                      Azure
+                      {t.projectStats.technologies.azure}
                     </Text>
                     <Badge size="sm" variant="light" color="cyan">
-                      5 years
+                      {t.projectStats.experience.years5}
                     </Badge>
                     <Text size="xs" c="var(--text-secondary)" ta="center">
-                      Advanced
+                      {t.projectStats.expertiseLevel.advanced}
                     </Text>
                   </Stack>
                   
                   <Stack gap="xs" align="center">
                     <Text size="lg" fw={700} c="var(--text-primary)">
-                      AI & LLM
+                      {t.projectStats.technologies.aiLlm}
                     </Text>
                     <Badge size="sm" variant="light" color="orange">
-                      5 years
+                      {t.projectStats.experience.years5}
                     </Badge>
                     <Text size="xs" c="var(--text-secondary)" ta="center">
-                      Specialist
+                      {t.projectStats.expertiseLevel.specialist}
                     </Text>
                   </Stack>
                 </SimpleGrid>
@@ -350,7 +350,7 @@ export const ProjectStats = () => {
           <motion.div variants={itemVariants}>
             <Stack gap="lg" align="center">
               <Title order={4} c="var(--text-primary)">
-                Trusted by Leading Companies & Technologies
+                {t.projectStats.trustedBy}
               </Title>
               
               <Box

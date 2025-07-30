@@ -4,6 +4,7 @@ import { motion, Variants, useReducedMotion } from 'framer-motion';
 import { Project } from '../../types';
 import { TagList } from './TagList';
 import { ProjectDetailModal } from './ProjectDetailModal';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface ImprovedProjectCardProps {
   project: Project;
@@ -11,6 +12,7 @@ interface ImprovedProjectCardProps {
 }
 
 export const ImprovedProjectCard = ({ project }: ImprovedProjectCardProps) => {
+  const { t } = useTranslation();
   const [modalOpened, setModalOpened] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
@@ -98,7 +100,7 @@ export const ImprovedProjectCard = ({ project }: ImprovedProjectCardProps) => {
                   textAlign: 'justify'
                 }}
               >
-                {(project.description && project.description[0]) || 'Keine Beschreibung verfügbar'}
+                {(project.description && project.description[0]) || t.project.noDescription}
               </Text>
             </Box>
 

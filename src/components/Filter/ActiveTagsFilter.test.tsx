@@ -41,8 +41,8 @@ describe('ActiveTagsFilter', () => {
     render(<ActiveTagsFilter />);
     
     // Component should return null when no filters are active
-    expect(screen.queryByText('Aktive Filter:')).not.toBeInTheDocument();
-    expect(screen.queryByText('Alle Filter löschen')).not.toBeInTheDocument();
+    expect(screen.queryByText('Active Filters:')).not.toBeInTheDocument();
+    expect(screen.queryByText('Clear all filters')).not.toBeInTheDocument();
   });
 
   it('should render with tags', () => {
@@ -53,10 +53,10 @@ describe('ActiveTagsFilter', () => {
 
     render(<ActiveTagsFilter />);
     
-    expect(screen.getByText('Aktive Filter:')).toBeInTheDocument();
+    expect(screen.getByText('Active Filters:')).toBeInTheDocument();
     expect(screen.getByText('React')).toBeInTheDocument();
     expect(screen.getByText('TypeScript')).toBeInTheDocument();
-    expect(screen.getByText('Alle Filter löschen')).toBeInTheDocument();
+    expect(screen.getByText('Clear all filters')).toBeInTheDocument();
   });
 
   it('should render with multiple tags', () => {
@@ -67,10 +67,10 @@ describe('ActiveTagsFilter', () => {
 
     render(<ActiveTagsFilter />);
     
-    expect(screen.getByText('Aktive Filter:')).toBeInTheDocument();
+    expect(screen.getByText('Active Filters:')).toBeInTheDocument();
     expect(screen.getByText('Node.js')).toBeInTheDocument();
     expect(screen.getByText('Express')).toBeInTheDocument();
-    expect(screen.getByText('Alle Filter löschen')).toBeInTheDocument();
+    expect(screen.getByText('Clear all filters')).toBeInTheDocument();
   });
 
   it('should render with mixed tags', () => {
@@ -133,7 +133,7 @@ describe('ActiveTagsFilter', () => {
 
     render(<ActiveTagsFilter />);
     
-    const clearAllButton = screen.getByText('Alle Filter löschen');
+    const clearAllButton = screen.getByText('Clear all filters');
     fireEvent.click(clearAllButton);
     
     expect(mockClearAllFilters).toHaveBeenCalled();
@@ -210,9 +210,9 @@ describe('ActiveTagsFilter', () => {
 
     render(<ActiveTagsFilter />);
     
-    expect(screen.getByText('Aktive Filter:')).toBeInTheDocument();
+    expect(screen.getByText('Active Filters:')).toBeInTheDocument();
     expect(screen.getByText('DMG')).toBeInTheDocument(); // Shows first word
-    expect(screen.getByText('Alle Filter löschen')).toBeInTheDocument();
+    expect(screen.getByText('Clear all filters')).toBeInTheDocument();
   });
 
   it('should call setCustomerFilter when removing customer filter', () => {

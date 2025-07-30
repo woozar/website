@@ -1,5 +1,6 @@
 import { Button, Menu } from '@mantine/core';
 import { useLanguageStore, Language } from '../../stores/languageStore';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface LanguageSwitcherProps {
   variant?: 'desktop' | 'mobile';
@@ -7,10 +8,11 @@ interface LanguageSwitcherProps {
 
 export const LanguageSwitcher = ({ variant = 'desktop' }: LanguageSwitcherProps) => {
   const { language, setLanguage } = useLanguageStore();
+  const { t } = useTranslation();
 
   const languages: { code: Language; label: string; flag: string }[] = [
-    { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
-    { code: 'en', label: 'English', flag: '🇺🇸' },
+    { code: 'de', label: t.language.german, flag: '🇩🇪' },
+    { code: 'en', label: t.language.english, flag: '🇺🇸' },
   ];
 
   const currentLanguage = languages.find(lang => lang.code === language) || languages[0];
