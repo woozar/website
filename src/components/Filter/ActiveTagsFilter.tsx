@@ -2,8 +2,10 @@ import { Group, Badge, Text, ActionIcon } from '@mantine/core';
 import { IconX, IconBuilding, IconTag, IconRefresh } from '@tabler/icons-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useFilterStore } from '../../stores/filterStore';
+import { useTranslation } from '../../hooks/useTranslation';
 
 export const ActiveTagsFilter = () => {
+  const { t } = useTranslation();
   const { 
     selectedTags,
     selectedCustomer,
@@ -35,7 +37,7 @@ export const ActiveTagsFilter = () => {
       >
         <Group gap="md" align="center">
           <Text size="sm" fw={600} c="var(--text-primary)">
-            Aktive Filter:
+            {t.filters.activeFilters}
           </Text>
           
           <Group gap="xs">
@@ -145,7 +147,7 @@ export const ActiveTagsFilter = () => {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', whiteSpace: 'nowrap' }}>
               <IconRefresh size={14} />
-              Alle Filter löschen
+              {t.filters.clearAllFilters}
             </div>
           </Badge>
         </Group>

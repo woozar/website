@@ -109,7 +109,7 @@ describe('TagList', () => {
       />
     );
     
-    expect(screen.getByText('+2 mehr')).toBeInTheDocument();
+    expect(screen.getByText('+2 more')).toBeInTheDocument();
   });
 
   it('should not show "more" badge when showMoreBadge is false', () => {
@@ -122,7 +122,7 @@ describe('TagList', () => {
       />
     );
     
-    expect(screen.queryByText('+2 mehr')).not.toBeInTheDocument();
+    expect(screen.queryByText('+2 more')).not.toBeInTheDocument();
   });
 
   it('should not show "more" badge when all tags fit', () => {
@@ -135,7 +135,7 @@ describe('TagList', () => {
       />
     );
     
-    expect(screen.queryByText(/mehr/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/more/)).not.toBeInTheDocument();
   });
 
   it('should call toggleTag when clicking a primary tag', () => {

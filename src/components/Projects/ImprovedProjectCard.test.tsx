@@ -69,7 +69,7 @@ describe('ImprovedProjectCard', () => {
     const projectWithoutDescription = { ...mockProject, description: [] };
     render(<ImprovedProjectCard project={projectWithoutDescription} index={0} />);
     
-    expect(screen.getByText('Keine Beschreibung verfügbar')).toBeInTheDocument();
+    expect(screen.getByText('No description available')).toBeInTheDocument();
   });
 
   it('should render default description when description is undefined', () => {
@@ -78,7 +78,7 @@ describe('ImprovedProjectCard', () => {
     projectWithoutDescription.description = undefined;
     render(<ImprovedProjectCard project={projectWithoutDescription} index={0} />);
     
-    expect(screen.getByText('Keine Beschreibung verfügbar')).toBeInTheDocument();
+    expect(screen.getByText('No description available')).toBeInTheDocument();
   });
 
   it('should render TagList with primary and secondary tags', () => {

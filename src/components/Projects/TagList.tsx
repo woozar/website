@@ -1,6 +1,7 @@
 import { Group, Badge } from '@mantine/core';
 import { motion } from 'framer-motion';
 import { TagChip } from '../Filter/TagChip';
+import { useTranslation } from '../../hooks/useTranslation';
 import { useFilterStore } from '../../stores/filterStore';
 
 interface TagListProps {
@@ -20,6 +21,7 @@ export const TagList = ({
   showMoreBadge = true,
   selectable = true
 }: TagListProps) => {
+  const { t } = useTranslation();
   const { toggleTag, selectedTags } = useFilterStore();
 
   // Combine and sort tags: primary first, then secondary, both alphabetically sorted
@@ -61,7 +63,7 @@ export const TagList = ({
       ))}
       {hasMoreTags && showMoreBadge && (
         <Badge size="sm" color="orange" variant="outline">
-          +{allTags.length - maxTags} mehr
+          +{allTags.length - maxTags} {t.filters.showMore}
         </Badge>
       )}
     </Group>

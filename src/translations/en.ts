@@ -95,4 +95,58 @@ export const en = {
     subtitle: 'A selection of my successful projects from various industries.',
     showingCount: (filtered: number, total: number) => `Showing ${filtered} of ${total} projects`,
   },
+  projectStats: {
+    title: 'Project Statistics',
+    subtitle: 'Quantified expertise based on real project experience',
+    coreExpertise: 'Core Technology Expertise',
+    trustedBy: 'Trusted by Leading Companies & Technologies',
+    frameworksTooltip: '🛠️ Used Frameworks',
+    cards: {
+      totalProjects: 'Total Projects',
+      totalProjectsDesc: 'Successfully completed projects',
+      technologies: 'Technologies',
+      technologiesDesc: 'Different technologies used',
+      frameworks: 'Frameworks',
+      frameworksDesc: 'Frameworks & libraries used',
+      companies: 'Companies',
+      companiesDesc: 'Companies worked with',
+      yearsExperience: 'Years Experience',
+      yearsExperienceDesc: 'Years of professional experience'
+    },
+    expertiseLevel: {
+      expert: 'Expert Level',
+      advanced: 'Advanced',
+      specialist: 'Specialist'
+    },
+    technologies: {
+      typescript: 'TypeScript',
+      nodejs: 'Node.js',
+      azure: 'Azure',
+      aiLlm: 'AI & LLM'
+    },
+    experience: {
+      years8: '8 years',
+      years6: '6 years',
+      years5: '5 years'
+    }
+  },
+  filters: {
+    activeFilters: 'Active Filters:',
+    clearAllFilters: 'Clear all filters',
+    showMore: 'more'
+  },
+  theme: {
+    light: 'Light',
+    dark: 'Dark',
+    switchToLight: 'Switch to light mode',
+    switchToDark: 'Switch to dark mode'
+  },
+  language: {
+    german: 'Deutsch',
+    english: 'English'
+  },
+  project: {
+    technologies: 'Technologies',
+    noDescription: 'No description available'
+  }
 };

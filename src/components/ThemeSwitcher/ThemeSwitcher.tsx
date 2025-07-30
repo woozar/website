@@ -1,12 +1,14 @@
 import { Button } from '@mantine/core';
 import { IconSun, IconMoon } from '@tabler/icons-react';
 import { useThemeStore } from '../../stores/themeStore';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface ThemeSwitcherProps {
   variant?: 'desktop' | 'mobile';
 }
 
 export const ThemeSwitcher = ({ variant = 'desktop' }: ThemeSwitcherProps) => {
+  const { t } = useTranslation();
   const { theme, toggleTheme } = useThemeStore();
 
   const isDark = theme === 'dark';
@@ -51,7 +53,7 @@ export const ThemeSwitcher = ({ variant = 'desktop' }: ThemeSwitcherProps) => {
               : 'transparent'
           }}
         >
-          Light
+          {t.theme.light}
         </Button>
         <Button
           variant="outline"
@@ -67,7 +69,7 @@ export const ThemeSwitcher = ({ variant = 'desktop' }: ThemeSwitcherProps) => {
               : 'transparent'
           }}
         >
-          Dark
+          {t.theme.dark}
         </Button>
       </div>
     );
@@ -87,7 +89,7 @@ export const ThemeSwitcher = ({ variant = 'desktop' }: ThemeSwitcherProps) => {
         padding: '0 8px'
       }}
       styles={{ root: { ...hoverStyle, ...transitionStyle } }}
-      title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      title={isDark ? t.theme.switchToLight : t.theme.switchToDark}
     >
       <Icon size={16} />
     </Button>

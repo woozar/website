@@ -11,5 +11,5 @@ export type TranslationKey = keyof typeof de;
 export type Translations = typeof de;
 
 export const getTranslation = (language: Language): Translations => {
-  return translations[language];
+  return translations[language] || translations.en;
 };
