@@ -4,7 +4,7 @@ import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useEffect } from 'react';
 import { Project } from '../../types';
 import { TagList } from './TagList';
-import { useModal } from '../../contexts/ModalContext';
+import { useModal } from '../../hooks/useModal';
 
 interface ProjectDetailModalProps {
   project: Project | null;
