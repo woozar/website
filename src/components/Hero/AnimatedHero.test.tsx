@@ -79,7 +79,7 @@ describe('AnimatedHero', () => {
     const heroImage = screen.getByRole('img')
     expect(heroImage).toBeInTheDocument()
     expect(heroImage).toHaveAttribute('src', '/assets/hero-portrait.webp')
-    expect(heroImage).toHaveAttribute('alt', 'Johannes Herrmann - Tech Freelancer')
+    expect(heroImage).toHaveAttribute('alt', 'Johannes Herrmann - Software Freelancer')
   })
 
   it('should handle contact button click', () => {
@@ -181,7 +181,7 @@ describe('AnimatedHero', () => {
     render(<AnimatedHero />)
 
     const heroImage = screen.getByRole('img')
-    expect(heroImage).toHaveAttribute('alt', 'Johannes Herrmann - Tech Freelancer')
+    expect(heroImage).toHaveAttribute('alt', 'Johannes Herrmann - Software Freelancer')
   })
 
   it('should handle scroll navigation correctly', () => {

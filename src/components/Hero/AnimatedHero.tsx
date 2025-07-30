@@ -188,7 +188,7 @@ export const AnimatedHero = () => {
               >
                 <Image
                   src={heroPortrait}
-                  alt="Johannes Herrmann - Tech Freelancer"
+                  alt="Johannes Herrmann - Software Freelancer"
                   style={{
                     width: isMobile ? '200px' : isTablet ? '250px' : '300px',
                     height: isMobile ? '200px' : isTablet ? '250px' : '300px',

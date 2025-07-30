@@ -12,9 +12,10 @@ const logoImage = '/assets/logo.webp';
 
 export const ImprovedNavigation = () => {
   const [drawerOpened, setDrawerOpened] = useState(false);
-  const { isMobile } = useMediaQuery();
+  const { isMobile, isTablet } = useMediaQuery();
   const { t } = useTranslation();
   const { isModalOpen } = useModal();
+
 
   // Close drawer when screen becomes desktop size or when modal opens
   useEffect(() => {
@@ -90,13 +91,20 @@ export const ImprovedNavigation = () => {
                     transition: 'transform 0.2s ease'
                   }}
                 />
-                {!isMobile && (
+                {!isMobile && !isTablet && (
                   <Box>
                     <Text size="lg" fw={700} c="var(--text-primary)" style={{ lineHeight: 1.2 }}>
                       Johannes Herrmann
                     </Text>
                     <Text size="xs" c="var(--primary-orange)" fw={500} style={{ lineHeight: 1.2 }}>
-                      Tech Freelancer & AI Specialist
+                      Software Freelancer & AI Specialist
+                    </Text>
+                  </Box>
+                )}
+                {!isMobile && isTablet && (
+                  <Box>
+                    <Text size="md" fw={700} c="var(--text-primary)" style={{ lineHeight: 1.1 }}>
+                      J. Herrmann
                     </Text>
                   </Box>
                 )}
@@ -105,7 +113,7 @@ export const ImprovedNavigation = () => {
 
             {/* Desktop Navigation */}
             {!isMobile && (
-              <Group gap="xl" align="center">
+              <Group gap={isTablet ? "sm" : "md"} align="center">
                 {navItems.map((item) => (
                   <Anchor
                     key={item.label}
@@ -117,9 +125,9 @@ export const ImprovedNavigation = () => {
                     style={{
                       textDecoration: 'none',
                       fontWeight: 600,
-                      fontSize: '1rem',
+                      fontSize: isTablet ? '0.85rem' : '0.9rem',
                       color: 'var(--text-primary)',
-                      padding: '0.5rem 1rem',
+                      padding: isTablet ? '0.3rem 0.6rem' : '0.4rem 0.8rem',
                       borderRadius: '0.5rem',
                       transition: 'all 0.2s ease',
                       position: 'relative'
@@ -139,10 +147,12 @@ export const ImprovedNavigation = () => {
                 ))}
                 
                 {/* Theme & Language Switchers */}
-                <Group gap="xs">
-                  <ThemeSwitcher variant="desktop" />
-                  <LanguageSwitcher variant="desktop" />
-                </Group>
+                {!isTablet && (
+                  <Group gap="xs">
+                    <ThemeSwitcher variant="desktop" />
+                    <LanguageSwitcher variant="desktop" />
+                  </Group>
+                )}
                 
                 {/* CTA Button */}
                 <Button
@@ -151,9 +161,9 @@ export const ImprovedNavigation = () => {
                   style={{
                     background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
                     border: 'none',
-                    fontSize: '0.95rem',
+                    fontSize: isTablet ? '0.85rem' : '0.9rem',
                     fontWeight: 600,
-                    padding: '0.7rem 1.5rem',
+                    padding: isTablet ? '0.5rem 1rem' : '0.6rem 1.2rem',
                     borderRadius: '2rem',
                     boxShadow: '0 4px 15px rgba(255, 107, 53, 0.3)',
                     transition: 'all 0.2s ease'
