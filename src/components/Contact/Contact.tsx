@@ -1,6 +1,6 @@
 import { Stack, Title, Text, Group, Button, Anchor, Divider, Box } from '@mantine/core';
 import { IconMail, IconPhone, IconBrandLinkedin, IconBrandGithub, IconMapPin } from '@tabler/icons-react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useState } from 'react';
 import { Section } from '../Layout';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
@@ -10,14 +10,15 @@ import { LegalModal } from '../Legal/LegalModal';
 export const Contact = () => {
   const { isMobile } = useMediaQuery();
   const { t } = useTranslation();
+  const shouldReduceMotion = useReducedMotion();
   const [impressumOpened, setImpressumOpened] = useState(false);
   const [datenschutzOpened, setDatenschutzOpened] = useState(false);
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
     visible: {
       opacity: 1,
-      transition: {
+      transition: shouldReduceMotion ? {} : {
         staggerChildren: 0.2,
         delayChildren: 0.1
       }
@@ -25,11 +26,11 @@ export const Contact = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 }
+      transition: shouldReduceMotion ? {} : { duration: 0.6 }
     }
   };
 

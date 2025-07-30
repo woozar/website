@@ -1,6 +1,6 @@
 import { Stack, Title, Text, Group, Box, List, ThemeIcon } from '@mantine/core';
 import { IconCheck, IconCode, IconBrain, IconRocket, IconShield, IconSchool } from '@tabler/icons-react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Section } from '../Layout';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useTranslation } from '../../hooks/useTranslation';
@@ -8,12 +8,13 @@ import { useTranslation } from '../../hooks/useTranslation';
 export const About = () => {
   const { isMobile } = useMediaQuery();
   const { t } = useTranslation();
+  const shouldReduceMotion = useReducedMotion();
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
     visible: {
       opacity: 1,
-      transition: {
+      transition: shouldReduceMotion ? {} : {
         staggerChildren: 0.2,
         delayChildren: 0.1,
       },
@@ -21,11 +22,11 @@ export const About = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 },
+      transition: shouldReduceMotion ? {} : { duration: 0.6 },
     },
   };
 

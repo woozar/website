@@ -8,7 +8,8 @@ import { Project } from '../../types';
 vi.mock('framer-motion', () => ({
   motion: {
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>
-  }
+  },
+  useReducedMotion: () => false,
 }));
 
 // Mock TagList component

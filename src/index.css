@@ -36,17 +36,7 @@
   box-sizing: border-box;
 }
 
-/* Optimized theme transitions only for specific elements that need them */
-body,
-[data-theme] {
-  transition: background-color 0.2s ease, 
-              color 0.2s ease;
-}
-
-/* Only animate backdrop filters on navigation elements */
-.navigation-backdrop {
-  transition: backdrop-filter 0.2s ease;
-}
+/* No theme transitions - instant switching for better performance and UX */
 
 body {
   margin: 0;
@@ -91,6 +81,13 @@ a {
   color: var(--primary-orange);
   text-decoration: none;
   transition: color 0.2s ease;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  a {
+    transition: none;
+  }
 }
 
 a:hover {
@@ -143,6 +140,12 @@ a:hover {
   transition: background 0.3s ease;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  ::-webkit-scrollbar-thumb {
+    transition: none;
+  }
+}
+
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, var(--primary-red), var(--primary-orange));
 }
@@ -161,4 +164,31 @@ html {
 .skill-box:hover {
   border-color: var(--primary-orange) !important;
   box-shadow: 0 8px 25px rgba(255, 107, 53, 0.1) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-box {
+    transition: none;
+  }
+}
+
+/* Navigation and UI component transitions */
+.nav-transition {
+  transition: all 0.2s ease;
+}
+
+.logo-transition {
+  transition: transform 0.2s ease;
+}
+
+.opacity-transition {
+  transition: opacity 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-transition,
+  .logo-transition,
+  .opacity-transition {
+    transition: none;
+  }
 }

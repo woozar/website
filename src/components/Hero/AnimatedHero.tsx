@@ -1,6 +1,6 @@
 import { Stack, Title, Text, Group, Button, Image, Box } from '@mantine/core';
 import { IconMail, IconDownload } from '@tabler/icons-react';
-import { motion, Variants } from 'framer-motion';
+import { motion, Variants, useReducedMotion } from 'framer-motion';
 import { Section } from '../Layout';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useTranslation } from '../../hooks/useTranslation';
@@ -10,6 +10,7 @@ const heroPortrait = '/assets/hero-portrait.webp';
 export const AnimatedHero = () => {
   const { isMobile, isTablet } = useMediaQuery();
   const { t } = useTranslation();
+  const shouldReduceMotion = useReducedMotion();
 
   const handleNavClick = (href: string) => {
     const element = document.querySelector(href);
@@ -24,10 +25,10 @@ export const AnimatedHero = () => {
   };
 
   const containerVariants: Variants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
     visible: {
       opacity: 1,
-      transition: {
+      transition: shouldReduceMotion ? {} : {
         staggerChildren: 0.2,
         delayChildren: 0.3
       }
@@ -35,11 +36,11 @@ export const AnimatedHero = () => {
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
+      transition: shouldReduceMotion ? {} : {
         duration: 0.8,
         ease: "easeOut"
       }
@@ -47,12 +48,12 @@ export const AnimatedHero = () => {
   };
 
   const logoVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.8, rotate: -5 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, scale: shouldReduceMotion ? 1 : 0.8, rotate: shouldReduceMotion ? 0 : -5 },
     visible: {
       opacity: 1,
       scale: 1,
       rotate: 0,
-      transition: {
+      transition: shouldReduceMotion ? {} : {
         duration: 1,
         ease: "easeOut"
       }
@@ -62,10 +63,10 @@ export const AnimatedHero = () => {
   const buttonVariants = {
     rest: { scale: 1 },
     hover: { 
-      scale: 1.05,
-      transition: { duration: 0.2 }
+      scale: shouldReduceMotion ? 1 : 1.05,
+      transition: shouldReduceMotion ? {} : { duration: 0.2 }
     },
-    tap: { scale: 0.95 }
+    tap: { scale: shouldReduceMotion ? 1 : 0.95 }
   };
 
   return (
@@ -180,7 +181,7 @@ export const AnimatedHero = () => {
           >
             <Box style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
               <motion.div
-                whileHover={{ 
+                whileHover={shouldReduceMotion ? {} : { 
                   scale: 1.05,
                   transition: { duration: 0.3 }
                 }}
@@ -213,11 +214,11 @@ export const AnimatedHero = () => {
                   opacity: 0.3,
                   filter: 'blur(1px)'
                 }}
-                animate={{
+                animate={shouldReduceMotion ? {} : {
                   y: [0, -10, 0],
                   scale: [1, 1.1, 1]
                 }}
-                transition={{
+                transition={shouldReduceMotion ? {} : {
                   duration: 3,
                   repeat: Infinity,
                   ease: "easeInOut"
@@ -235,11 +236,11 @@ export const AnimatedHero = () => {
                   borderRadius: '50%',
                   opacity: 0.4
                 }}
-                animate={{
+                animate={shouldReduceMotion ? {} : {
                   y: [0, 15, 0],
                   x: [0, 5, 0]
                 }}
-                transition={{
+                transition={shouldReduceMotion ? {} : {
                   duration: 4,
                   repeat: Infinity,
                   ease: "easeInOut",

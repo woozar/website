@@ -1,6 +1,6 @@
 import { Modal, Stack, Title, Text, Button } from '@mantine/core';
 import { IconX } from '@tabler/icons-react';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { motion, AnimatePresence, Variants, useReducedMotion } from 'framer-motion';
 import { useEffect } from 'react';
 import { Project } from '../../types';
 import { TagList } from './TagList';
@@ -14,6 +14,7 @@ interface ProjectDetailModalProps {
 
 export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailModalProps) => {
   const { openModal, closeModal } = useModal();
+  const shouldReduceMotion = useReducedMotion();
 
   // Hide scrollbars during modal animation and update global modal state
   useEffect(() => {
@@ -35,15 +36,15 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
 
   const modalVariants: Variants = {
     hidden: {
-      opacity: 0,
-      scale: 0.8,
-      y: 50,
+      opacity: shouldReduceMotion ? 1 : 0,
+      scale: shouldReduceMotion ? 1 : 0.8,
+      y: shouldReduceMotion ? 0 : 50,
     },
     visible: {
       opacity: 1,
       scale: 1,
       y: 0,
-      transition: {
+      transition: shouldReduceMotion ? {} : {
         type: 'spring',
         damping: 25,
         stiffness: 300,
@@ -51,10 +52,10 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
       },
     },
     exit: {
-      opacity: 0,
-      scale: 0.8,
-      y: 50,
-      transition: {
+      opacity: shouldReduceMotion ? 1 : 0,
+      scale: shouldReduceMotion ? 1 : 0.8,
+      y: shouldReduceMotion ? 0 : 50,
+      transition: shouldReduceMotion ? {} : {
         duration: 0.3,
         ease: 'easeInOut',
       },
@@ -62,22 +63,22 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
   };
 
   const backdropVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
     visible: {
       opacity: 1,
-      transition: { duration: 0.3 },
+      transition: shouldReduceMotion ? {} : { duration: 0.3 },
     },
     exit: {
-      opacity: 0,
-      transition: { duration: 0.2 },
+      opacity: shouldReduceMotion ? 1 : 0,
+      transition: shouldReduceMotion ? {} : { duration: 0.2 },
     },
   };
 
   const contentVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
     visible: {
       opacity: 1,
-      transition: {
+      transition: shouldReduceMotion ? {} : {
         staggerChildren: 0.1,
         delayChildren: 0.2,
       },
@@ -85,11 +86,11 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4 },
+      transition: shouldReduceMotion ? {} : { duration: 0.4 },
     },
   };
 
@@ -162,8 +163,8 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
                 right: '1rem',
                 zIndex: 10,
               }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={shouldReduceMotion ? {} : { scale: 1.1 }}
+              whileTap={shouldReduceMotion ? {} : { scale: 0.9 }}
             >
               <Button
                 variant="subtle"
