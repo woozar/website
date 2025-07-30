@@ -10,6 +10,7 @@
       "Bash(git checkout:*)",
       "Bash(git reset:*)",
       "Bash(git restore:*)",
+      "Bash(grep:*)",
       "Bash(ls:*)",
       "Bash(mkdir:*)",
       "Bash(npm install:*)",
