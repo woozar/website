@@ -13,7 +13,7 @@ export const SimpleProjectsSection = () => {
   const { isMobile } = useMediaQuery();
   const { projects } = useProjects();
   const { t } = useTranslation();
-  const { selectedPrimaryTags, selectedSecondaryTags } = useFilterStore();
+  const { selectedTags, selectedCustomer } = useFilterStore();
   const shouldReduceMotion = useReducedMotion();
 
   const containerVariants = {
@@ -40,26 +40,25 @@ export const SimpleProjectsSection = () => {
   const filteredProjects = useMemo(() => {
     let filtered = projects;
 
-    // Filter by primary tags
-    if (selectedPrimaryTags.length > 0) {
+    // Filter by any tag (primary or secondary)
+    if (selectedTags.length > 0) {
       filtered = filtered.filter(project => 
-        selectedPrimaryTags.some(tag => 
-          (project.primary_tags || []).includes(tag)
-        )
-      );
-    }
-
-    // Filter by secondary tags
-    if (selectedSecondaryTags.length > 0) {
-      filtered = filtered.filter(project => 
-        selectedSecondaryTags.some(tag => 
+        selectedTags.some(tag => 
+          (project.primary_tags || []).includes(tag) || 
           (project.tags || []).includes(tag)
         )
       );
     }
 
+    // Filter by customer
+    if (selectedCustomer) {
+      filtered = filtered.filter(project => 
+        project.customer === selectedCustomer
+      );
+    }
+
     return filtered;
-  }, [projects, selectedPrimaryTags, selectedSecondaryTags]);
+  }, [projects, selectedTags, selectedCustomer]);
 
   return (
     <Section id="projects" background="white">
