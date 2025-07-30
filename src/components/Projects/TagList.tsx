@@ -23,11 +23,15 @@ export const TagList = ({
   const { togglePrimaryTag, toggleSecondaryTag, selectedPrimaryTags, selectedSecondaryTags } = useFilterStore();
 
   // Combine and sort tags: primary first, then secondary, both alphabetically sorted
-  const sortedPrimaryTags = (primaryTags || []).sort();
-  const sortedSecondaryTags = (secondaryTags || []).sort();
+  // Remove duplicates - if a tag exists in both arrays, prioritize primary
+  // Also deduplicate within each array
+  const uniquePrimaryTags = [...new Set(primaryTags || [])].sort();
+  const uniqueSecondaryTags = [...new Set(secondaryTags || [])].sort();
+  const filteredSecondaryTags = uniqueSecondaryTags.filter(tag => !uniquePrimaryTags.includes(tag));
+  
   const allTags = [
-    ...sortedPrimaryTags.map(tag => ({ tag, isPrimary: true })),
-    ...sortedSecondaryTags.map(tag => ({ tag, isPrimary: false }))
+    ...uniquePrimaryTags.map(tag => ({ tag, isPrimary: true })),
+    ...filteredSecondaryTags.map(tag => ({ tag, isPrimary: false }))
   ];
 
   const displayedTags = allTags.slice(0, maxTags);
