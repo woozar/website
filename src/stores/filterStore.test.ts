@@ -298,7 +298,6 @@ describe('filterStore', () => {
         togglePrimaryTag, 
         toggleSecondaryTag, 
         setSearchQuery,
-        clearPrimaryTags,
         clearSecondaryTags,
         clearAllFilters
       } = useFilterStore.getState()

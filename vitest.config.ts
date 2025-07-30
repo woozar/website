@@ -18,6 +18,7 @@ export default defineConfig({
         '**/*.d.ts',
         '**/*.config.*',
         '**/coverage/**',
+        'dist/**',
         'src/main.tsx',
         'src/vite-env.d.ts'
       ],
