@@ -41,7 +41,7 @@ export const de = {
     highlights: 'Highlights',
     expertise: 'Technische Expertise',
     highlightsList: [
-      '20 Jahre Erfahrung in Softwareentwicklung',
+      '~20 Jahre Erfahrung in Softwareentwicklung',
       'Spezialist für AI/LLM Integration und Prompt Engineering',
       'Erfolgreich abgeschlossene Projekte für Unternehmen wie DMG Mori',
       'Expertise in modernen Web-Technologien und Cloud-Architekturen',
