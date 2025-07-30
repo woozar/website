@@ -377,7 +377,7 @@ export const ProjectStats = () => {
                       padding: '10px',
                       cursor: 'pointer'
                     }}
-                    onClick={() => handleCompanyClick('Siemens AG / Digital Industries / Factory Automation')}
+                    onClick={() => handleCompanyClick('Siemens AG')}
                   >
                     <img
                       src="/assets/logos/siemens-logo.svg"
