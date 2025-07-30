@@ -182,7 +182,7 @@ export const ProjectStats = () => {
                               🛠️ Verwendete Frameworks
                             </Text>
                             <SimpleGrid cols={2} spacing="xs">
-                              {usedFrameworks.map((framework, index) => (
+                              {usedFrameworks.map((framework) => (
                                 <Box key={framework} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                   <Box
                                     style={{
