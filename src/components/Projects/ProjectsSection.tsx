@@ -9,7 +9,7 @@ import { useFilterStore } from '../../stores/filterStore';
 import { ActiveTagsFilter } from '../Filter/ActiveTagsFilter';
 import { useMemo } from 'react';
 
-export const SimpleProjectsSection = () => {
+export const ProjectsSection = () => {
   const { isMobile } = useMediaQuery();
   const { projects } = useProjects();
   const { t } = useTranslation();
@@ -53,7 +53,8 @@ export const SimpleProjectsSection = () => {
     // Filter by customer
     if (selectedCustomer) {
       filtered = filtered.filter(project => 
-        project.customer === selectedCustomer
+
+        project.customer.toLowerCase().includes(selectedCustomer.toLowerCase())
       );
     }
 
