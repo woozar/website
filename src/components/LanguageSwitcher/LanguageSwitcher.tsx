@@ -20,14 +20,20 @@ export const LanguageSwitcher = ({ variant = 'desktop' }: LanguageSwitcherProps)
     color: 'var(--primary-orange)',
     background: 'transparent',
     border: '1px solid var(--primary-orange)',
-    borderRadius: '0.5rem',
-    transition: 'all 0.2s ease'
+    borderRadius: '0.5rem'
   };
 
   const hoverStyle = {
     '&:hover': {
       background: 'rgba(255, 107, 53, 0.08)',
       transform: 'translateY(-1px)'
+    }
+  };
+
+  const transitionStyle = {
+    transition: 'all 0.2s ease',
+    '@media (prefers-reduced-motion: reduce)': {
+      transition: 'none'
     }
   };
 
@@ -65,12 +71,13 @@ export const LanguageSwitcher = ({ variant = 'desktop' }: LanguageSwitcherProps)
           size="xs"
           style={{
             ...buttonStyle,
+            ...transitionStyle,
             minWidth: '40px',
             height: '28px',
             fontSize: '1rem',
             padding: '0 8px'
           }}
-          styles={{ root: hoverStyle }}
+          styles={{ root: { ...hoverStyle, ...transitionStyle } }}
         >
           {currentLanguage.flag}
         </Button>

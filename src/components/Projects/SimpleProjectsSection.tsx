@@ -1,5 +1,5 @@
 import { Stack, Title, Text } from '@mantine/core';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Section, Grid } from '../Layout';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useProjects } from '../../hooks/useProjects';
@@ -14,12 +14,13 @@ export const SimpleProjectsSection = () => {
   const { projects } = useProjects();
   const { t } = useTranslation();
   const { selectedPrimaryTags, selectedSecondaryTags } = useFilterStore();
+  const shouldReduceMotion = useReducedMotion();
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
     visible: {
       opacity: 1,
-      transition: {
+      transition: shouldReduceMotion ? {} : {
         staggerChildren: 0.15,
         delayChildren: 0.2
       }
@@ -27,11 +28,11 @@ export const SimpleProjectsSection = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 }
+      transition: shouldReduceMotion ? {} : { duration: 0.6 }
     }
   };
 

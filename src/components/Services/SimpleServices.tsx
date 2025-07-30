@@ -1,6 +1,6 @@
 import { Stack, Title, Text, Card, Image, Box } from '@mantine/core';
 import { IconBrain, IconCloud, IconCode } from '@tabler/icons-react';
-import { motion, Variants } from 'framer-motion';
+import { motion, Variants, useReducedMotion } from 'framer-motion';
 import { Section, Grid } from '../Layout';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useTranslation } from '../../hooks/useTranslation';
@@ -14,24 +14,25 @@ const fullstackImage = '/assets/fullstack-development.webp';
 export const SimpleServices = () => {
   const { isMobile } = useMediaQuery();
   const { t } = useTranslation();
+  const shouldReduceMotion = useReducedMotion();
 
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: shouldReduceMotion ? {} : { duration: 0.6, ease: "easeOut" }
     }
   };
 
   const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 40, scale: 0.95 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 40, scale: shouldReduceMotion ? 1 : 0.95 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: shouldReduceMotion ? {} : { duration: 0.6, ease: "easeOut" }
     }
   };
 
@@ -98,7 +99,7 @@ export const SimpleServices = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.01 }}
-              whileHover={{ 
+              whileHover={shouldReduceMotion ? {} : { 
                 y: -8, 
                 transition: { duration: 0.3 } 
               }}

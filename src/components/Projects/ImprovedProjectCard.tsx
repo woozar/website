@@ -1,6 +1,6 @@
 import { Card, Text, Stack, Box } from '@mantine/core';
 import { useState } from 'react';
-import { motion, Variants } from 'framer-motion';
+import { motion, Variants, useReducedMotion } from 'framer-motion';
 import { Project } from '../../types';
 import { TagList } from './TagList';
 import { ProjectDetailModal } from './ProjectDetailModal';
@@ -12,14 +12,15 @@ interface ImprovedProjectCardProps {
 
 export const ImprovedProjectCard = ({ project }: ImprovedProjectCardProps) => {
   const [modalOpened, setModalOpened] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 30, scale: shouldReduceMotion ? 1 : 0.95 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: {
+      transition: shouldReduceMotion ? {} : {
         duration: 0.5
       }
     }
@@ -28,9 +29,9 @@ export const ImprovedProjectCard = ({ project }: ImprovedProjectCardProps) => {
   const hoverVariants: Variants = {
     rest: { scale: 1, y: 0 },
     hover: { 
-      scale: 1.02, 
-      y: -8,
-      transition: {
+      scale: shouldReduceMotion ? 1 : 1.02, 
+      y: shouldReduceMotion ? 0 : -8,
+      transition: shouldReduceMotion ? {} : {
         duration: 0.3
       }
     }
@@ -41,7 +42,7 @@ export const ImprovedProjectCard = ({ project }: ImprovedProjectCardProps) => {
       variants={cardVariants}
       initial="hidden"
       whileInView="visible"
-      whileHover="hover"
+      whileHover={shouldReduceMotion ? "rest" : "hover"}
       viewport={{ once: true, amount: 0.3 }}
       style={{ height: '100%' }}
     >

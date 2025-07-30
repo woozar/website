@@ -1,6 +1,6 @@
 import { Modal, Stack, Title, Text, Button } from '@mantine/core';
 import { IconX } from '@tabler/icons-react';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { motion, AnimatePresence, Variants, useReducedMotion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useModal } from '../../hooks/useModal';
 
@@ -12,6 +12,7 @@ interface LegalModalProps {
 
 export const LegalModal = ({ opened, onClose, type }: LegalModalProps) => {
   const { openModal, closeModal } = useModal();
+  const shouldReduceMotion = useReducedMotion();
 
   // Hide scrollbars during modal animation and update global modal state
   useEffect(() => {
@@ -31,15 +32,15 @@ export const LegalModal = ({ opened, onClose, type }: LegalModalProps) => {
 
   const modalVariants: Variants = {
     hidden: {
-      opacity: 0,
+      opacity: shouldReduceMotion ? 1 : 0,
       scale: 1,
-      y: 30
+      y: shouldReduceMotion ? 0 : 30
     },
     visible: {
       opacity: 1,
       scale: 1,
       y: 0,
-      transition: {
+      transition: shouldReduceMotion ? {} : {
         type: "spring",
         damping: 25,
         stiffness: 300,
@@ -47,10 +48,10 @@ export const LegalModal = ({ opened, onClose, type }: LegalModalProps) => {
       }
     },
     exit: {
-      opacity: 0,
-      scale: 0.9,
-      y: 30,
-      transition: {
+      opacity: shouldReduceMotion ? 1 : 0,
+      scale: shouldReduceMotion ? 1 : 0.9,
+      y: shouldReduceMotion ? 0 : 30,
+      transition: shouldReduceMotion ? {} : {
         duration: 0.2,
         ease: "easeInOut" 
       }
@@ -58,10 +59,10 @@ export const LegalModal = ({ opened, onClose, type }: LegalModalProps) => {
   };
 
   const contentVariants: Variants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
     visible: {
       opacity: 1,
-      transition: {
+      transition: shouldReduceMotion ? {} : {
         staggerChildren: 0.05,
         delayChildren: 0.1
       }
@@ -69,11 +70,11 @@ export const LegalModal = ({ opened, onClose, type }: LegalModalProps) => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 10 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.3 }
+      transition: shouldReduceMotion ? {} : { duration: 0.3 }
     }
   };
 
@@ -239,8 +240,8 @@ export const LegalModal = ({ opened, onClose, type }: LegalModalProps) => {
                 right: '1rem',
                 zIndex: 10
               }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={shouldReduceMotion ? {} : { scale: 1.1 }}
+              whileTap={shouldReduceMotion ? {} : { scale: 0.9 }}
             >
               <Button
                 variant="subtle"
