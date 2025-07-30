@@ -4,6 +4,7 @@ import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useEffect } from 'react';
 import { Project } from '../../types';
 import { TagList } from './TagList';
+import { useModal } from '../../contexts/ModalContext';
 
 interface ProjectDetailModalProps {
   project: Project | null;
@@ -12,19 +13,23 @@ interface ProjectDetailModalProps {
 }
 
 export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailModalProps) => {
-  // Hide scrollbars during modal animation
+  const { openModal, closeModal } = useModal();
+
+  // Hide scrollbars during modal animation and update global modal state
   useEffect(() => {
     if (opened) {
       document.body.style.overflow = 'hidden';
+      openModal();
     } else {
       document.body.style.overflow = '';
+      closeModal();
     }
 
     // Cleanup when component unmounts
     return () => {
       document.body.style.overflow = '';
     };
-  }, [opened]);
+  }, [opened, openModal, closeModal]);
 
   if (!project) return null;
 
@@ -103,6 +108,7 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
             backgroundOpacity: 0.6,
             blur: 8,
           }}
+          zIndex={1100}
           styles={{
             body: {
               background: 'transparent',

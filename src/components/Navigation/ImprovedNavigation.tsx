@@ -6,19 +6,28 @@ import { Container } from '../Layout';
 import { LanguageSwitcher } from '../LanguageSwitcher';
 import { ThemeSwitcher } from '../ThemeSwitcher';
 import { useTranslation } from '../../hooks/useTranslation';
+import { useModal } from '../../contexts/ModalContext';
 import logoImage from '../../assets/logo.webp';
 
 export const ImprovedNavigation = () => {
   const [drawerOpened, setDrawerOpened] = useState(false);
   const { isMobile } = useMediaQuery();
   const { t } = useTranslation();
+  const { isModalOpen } = useModal();
 
-  // Close drawer when screen becomes desktop size
+  // Close drawer when screen becomes desktop size or when modal opens
   useEffect(() => {
     if (!isMobile && drawerOpened) {
       setDrawerOpened(false);
     }
   }, [isMobile, drawerOpened]);
+
+  // Close drawer when modal opens
+  useEffect(() => {
+    if (isModalOpen && drawerOpened) {
+      setDrawerOpened(false);
+    }
+  }, [isModalOpen, drawerOpened]);
 
   const navItems = [
     { label: t.navigation.services, href: '#services' },
@@ -182,9 +191,19 @@ export const ImprovedNavigation = () => {
                 
                 <Burger
                   opened={drawerOpened}
-                  onClick={() => setDrawerOpened(!drawerOpened)}
+                  onClick={() => {
+                    // Prevent opening drawer when modal is open
+                    if (!isModalOpen) {
+                      setDrawerOpened(!drawerOpened);
+                    }
+                  }}
                   size="sm"
                   color="var(--primary-orange)"
+                  style={{
+                    opacity: isModalOpen ? 0.5 : 1,
+                    pointerEvents: isModalOpen ? 'none' : 'auto',
+                    transition: 'opacity 0.2s ease'
+                  }}
                 />
               </Group>
             )}

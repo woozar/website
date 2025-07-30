@@ -1,6 +1,7 @@
 import { Box } from '@mantine/core';
 import { useLanguageStore } from './stores/languageStore';
 import { useEffect } from 'react';
+import { ModalProvider } from './contexts/ModalContext';
 import { ImprovedNavigation } from './components/Navigation/ImprovedNavigation';
 import { AnimatedHero } from './components/Hero/AnimatedHero';
 import { SimpleServices } from './components/Services/SimpleServices';
@@ -17,22 +18,24 @@ function App() {
   }, [language]);
   
   return (
-    <Box style={{ minHeight: '100vh' }}>
-      <ImprovedNavigation />
-      <main style={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        gap: '4rem',
-        paddingTop: '2rem',
-        paddingBottom: '1rem'
-      }}>
-        <AnimatedHero />
-        <SimpleServices />
-        <SimpleProjectsSection />
-        <About />
-        <Contact />
-      </main>
-    </Box>
+    <ModalProvider>
+      <Box style={{ minHeight: '100vh' }}>
+        <ImprovedNavigation />
+        <main style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          gap: '4rem',
+          paddingTop: '2rem',
+          paddingBottom: '1rem'
+        }}>
+          <AnimatedHero />
+          <SimpleServices />
+          <SimpleProjectsSection />
+          <About />
+          <Contact />
+        </main>
+      </Box>
+    </ModalProvider>
   );
 }
 

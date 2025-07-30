@@ -2,6 +2,7 @@ import { Modal, Stack, Title, Text, Button } from '@mantine/core';
 import { IconX } from '@tabler/icons-react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useEffect } from 'react';
+import { useModal } from '../../contexts/ModalContext';
 
 interface LegalModalProps {
   opened: boolean;
@@ -10,19 +11,23 @@ interface LegalModalProps {
 }
 
 export const LegalModal = ({ opened, onClose, type }: LegalModalProps) => {
-  // Hide scrollbars during modal animation
+  const { openModal, closeModal } = useModal();
+
+  // Hide scrollbars during modal animation and update global modal state
   useEffect(() => {
     if (opened) {
       document.body.style.overflow = 'hidden';
+      openModal();
     } else {
       document.body.style.overflow = '';
+      closeModal();
     }
     
     // Cleanup when component unmounts
     return () => {
       document.body.style.overflow = '';
     };
-  }, [opened]);
+  }, [opened, openModal, closeModal]);
 
   const modalVariants: Variants = {
     hidden: {
@@ -194,6 +199,7 @@ export const LegalModal = ({ opened, onClose, type }: LegalModalProps) => {
             backgroundOpacity: 0.6,
             blur: 8
           }}
+          zIndex={1100}
           styles={{
             body: {
               background: 'transparent',
