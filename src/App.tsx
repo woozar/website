@@ -6,6 +6,7 @@ import { ImprovedNavigation } from './components/Navigation/ImprovedNavigation';
 import { AnimatedHero } from './components/Hero/AnimatedHero';
 import { SimpleServices } from './components/Services/SimpleServices';
 import { SimpleProjectsSection } from './components/Projects/SimpleProjectsSection';
+import { ProjectStats } from './components/ProjectStats';
 import { About } from './components/About/About';
 import { Contact } from './components/Contact/Contact';
 import { SEOHead } from './components/SEO/SEOHead';
@@ -32,6 +33,7 @@ function App() {
         }}>
           <AnimatedHero />
           <SimpleServices />
+          <ProjectStats />
           <SimpleProjectsSection />
           <About />
           <Contact />

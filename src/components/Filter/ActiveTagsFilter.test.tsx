@@ -19,7 +19,9 @@ vi.mock('../../stores/filterStore', () => ({
 
 const mockFilterStore = {
   selectedTags: [],
+  selectedCustomer: '',
   toggleTag: vi.fn(),
+  setCustomerFilter: vi.fn(),
   clearAllFilters: vi.fn()
 };
 
@@ -32,7 +34,8 @@ describe('ActiveTagsFilter', () => {
   it('should not render when no filters are active', () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedTags: []
+      selectedTags: [],
+      selectedCustomer: ''
     });
 
     render(<ActiveTagsFilter />);
@@ -196,5 +199,39 @@ describe('ActiveTagsFilter', () => {
     expect(screen.getByText('Node.js')).toBeInTheDocument();
     expect(screen.getByText('Express')).toBeInTheDocument();
     expect(screen.getByText('MongoDB')).toBeInTheDocument();
+  });
+
+  it('should render with customer filter only', () => {
+    (useFilterStore as any).mockReturnValue({
+      ...mockFilterStore,
+      selectedTags: [],
+      selectedCustomer: 'DMG Mori Software Solution'
+    });
+
+    render(<ActiveTagsFilter />);
+    
+    expect(screen.getByText('Aktive Filter:')).toBeInTheDocument();
+    expect(screen.getByText('DMG')).toBeInTheDocument(); // Shows first word
+    expect(screen.getByText('Alle Filter löschen')).toBeInTheDocument();
+  });
+
+  it('should call setCustomerFilter when removing customer filter', () => {
+    const mockSetCustomerFilter = vi.fn();
+    (useFilterStore as any).mockReturnValue({
+      ...mockFilterStore,
+      selectedTags: [],
+      selectedCustomer: 'TestCompany GmbH',
+      setCustomerFilter: mockSetCustomerFilter
+    });
+
+    render(<ActiveTagsFilter />);
+    
+    // Find the remove button inside the customer badge
+    const customerBadge = screen.getByText('TestCompany').closest('.mantine-Badge-root');
+    const removeButton = customerBadge?.querySelector('button');
+    
+    expect(removeButton).toBeInTheDocument();
+    fireEvent.click(removeButton!);
+    expect(mockSetCustomerFilter).toHaveBeenCalledWith('');
   });
 });

@@ -32,6 +32,7 @@ export const ImprovedNavigation = () => {
 
   const navItems = [
     { label: t.navigation.services, href: '#services' },
+    { label: t.navigation.statistics, href: '#statistics' },
     { label: t.navigation.projects, href: '#projects' },
     { label: t.navigation.about, href: '#about' }
   ];

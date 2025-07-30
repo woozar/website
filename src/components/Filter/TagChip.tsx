@@ -43,27 +43,6 @@ export const TagChip = ({
         color={isPrimary ? 'red' : 'orange'}
         style={{
           cursor: onClick ? 'pointer' : 'default',
-          // backgroundColor: isSelected 
-          //   ? isPrimary 
-          //     ? 'var(--primary-orange)' 
-          //     : 'var(--primary-red)'
-          //   : isPrimary
-          //     ? 'rgba(255, 107, 53, 0.15)'
-          //     : 'transparent',
-          // borderColor: isPrimary ? 'var(--primary-orange)' : '#e0e0e0',
-          // color: isSelected 
-          //   ? 'white' 
-          //   : isPrimary 
-          //     ? 'var(--primary-orange)' 
-          //     : 'var(--text-secondary)',
-          // fontWeight: isPrimary ? 600 : 500,
-          // display: 'inline-flex',
-          // alignItems: 'center',
-          // gap: '0.5rem',
-          // minWidth: '60px',
-          // justifyContent: 'center',
-          // textAlign: 'center',
-          // borderWidth: '2px',
           ...props.style
         }}
         onClick={handleClick}
