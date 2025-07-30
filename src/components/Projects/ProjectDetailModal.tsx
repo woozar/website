@@ -1,4 +1,4 @@
-import { Modal, Stack, Title, Text, Button, ScrollArea } from '@mantine/core';
+import { Modal, Stack, Title, Text, Button } from '@mantine/core';
 import { IconX } from '@tabler/icons-react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useEffect } from 'react';
@@ -19,7 +19,7 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
     } else {
       document.body.style.overflow = '';
     }
-    
+
     // Cleanup when component unmounts
     return () => {
       document.body.style.overflow = '';
@@ -32,18 +32,18 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
     hidden: {
       opacity: 0,
       scale: 0.8,
-      y: 50
+      y: 50,
     },
     visible: {
       opacity: 1,
       scale: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: 'spring',
         damping: 25,
         stiffness: 300,
-        duration: 0.4
-      }
+        duration: 0.4,
+      },
     },
     exit: {
       opacity: 0,
@@ -51,21 +51,21 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
       y: 50,
       transition: {
         duration: 0.3,
-        ease: "easeInOut"
-      }
-    }
+        ease: 'easeInOut',
+      },
+    },
   };
 
   const backdropVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
-      transition: { duration: 0.3 }
+      transition: { duration: 0.3 },
     },
-    exit: { 
+    exit: {
       opacity: 0,
-      transition: { duration: 0.2 }
-    }
+      transition: { duration: 0.2 },
+    },
   };
 
   const contentVariants = {
@@ -74,9 +74,9 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
+        delayChildren: 0.2,
+      },
+    },
   };
 
   const itemVariants = {
@@ -84,8 +84,8 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4 }
-    }
+      transition: { duration: 0.4 },
+    },
   };
 
   return (
@@ -101,20 +101,20 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
           withCloseButton={false}
           overlayProps={{
             backgroundOpacity: 0.6,
-            blur: 8
+            blur: 8,
           }}
           styles={{
             body: {
               background: 'transparent',
               boxShadow: 'none',
               padding: 0,
-              overflow: 'hidden'
+              overflow: 'hidden',
             },
             content: {
               background: 'transparent',
               boxShadow: 'none',
-              overflow: 'hidden'
-            }
+              overflow: 'hidden',
+            },
           }}
         >
           <motion.div
@@ -127,25 +127,25 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
               inset: 0,
               background: 'rgba(0, 0, 0, 0.4)',
               backdropFilter: 'blur(8px)',
-              zIndex: -1
+              zIndex: -1,
             }}
           />
-          
+
           <motion.div
             variants={modalVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
             style={{
-              background: 'white',
+              background: 'var(--background-primary)',
               borderRadius: '1rem',
               padding: '2rem',
               maxHeight: '80vh',
               position: 'relative',
-              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.2)',
+              boxShadow: '0 20px 60px var(--shadow-color)',
               overflow: 'hidden',
               display: 'flex',
-              flexDirection: 'column'
+              flexDirection: 'column',
             }}
           >
             {/* Close Button */}
@@ -154,7 +154,7 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
                 position: 'absolute',
                 top: '1rem',
                 right: '1rem',
-                zIndex: 10
+                zIndex: 10,
               }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -168,82 +168,88 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
                   width: '40px',
                   height: '40px',
                   padding: 0,
-                  color: 'var(--text-secondary)'
+                  color: 'var(--text-secondary)',
                 }}
               >
                 <IconX size={20} />
               </Button>
             </motion.div>
 
-            <motion.div
-              variants={contentVariants}
-              initial="hidden"
-              animate="visible"
+            <motion.div 
+              variants={contentVariants} 
+              initial="hidden" 
+              animate="visible" 
+              style={{ 
+                flex: 1, 
+                minHeight: 0, // WICHTIG: Ermöglicht Flex-Shrinking
+                display: 'flex',
+                flexDirection: 'column'
+              }}
             >
-              <Stack gap="xl" style={{ height: '100%' }}>
-                {/* Header */}
-                <motion.div variants={itemVariants} style={{ flexShrink: 0 }}>
-                  <Stack gap="md">
-                    <Title
-                      order={2}
-                      style={{
-                        fontSize: '1.8rem',
-                        fontWeight: 700,
-                        color: 'var(--text-primary)',
-                        lineHeight: 1.3,
-                        paddingRight: '3rem'
-                      }}
-                    >
-                      {project.title}
-                    </Title>
-                    <Text
-                      size="lg"
-                      fw={600}
-                      style={{
-                        color: 'var(--primary-orange)',
-                        fontSize: '1.1rem'
-                      }}
-                    >
-                      {project.customer}
-                    </Text>
-                  </Stack>
-                </motion.div>
-
-                {/* Content with ScrollArea */}
-                <motion.div variants={itemVariants} style={{ flex: 1, overflow: 'hidden' }}>
-                  <ScrollArea 
-                    h="100%"
-                    styles={{
-                      scrollbar: {
-                        display: 'none'
-                      }
+              {/* Header - Fixed height */}
+              <motion.div variants={itemVariants} style={{ flexShrink: 0 }}>
+                <Stack gap="md" style={{ marginBottom: '1.5rem' }}>
+                  <Title
+                    order={2}
+                    style={{
+                      fontSize: '1.8rem',
+                      fontWeight: 700,
+                      color: 'var(--text-primary)',
+                      lineHeight: 1.3,
+                      paddingRight: '3rem',
                     }}
                   >
-                    <Stack gap="xl">
+                    {project.title}
+                  </Title>
+                  <Text
+                    size="lg"
+                    fw={600}
+                    style={{
+                      color: 'var(--primary-orange)',
+                      fontSize: '1.1rem',
+                    }}
+                  >
+                    {project.customer}
+                  </Text>
+                </Stack>
+              </motion.div>
+
+              {/* Scrollable Content - Takes remaining height */}
+              <motion.div 
+                variants={itemVariants} 
+                style={{ 
+                  flex: 1, 
+                  minHeight: 0, // WICHTIG: Ermöglicht Flex-Shrinking
+                  overflow: 'auto', // Natives CSS Scrolling
+                  padding: '0 2px' // Platz für Scrollbar
+                }}
+              >
+                <Stack
+                  id="content"
+                  gap="xl"
+                >
                       {/* Description */}
-                      <div>
+                      <Stack gap="md">
+                        <Text fw={600} size="sm" c="var(--text-primary)">
+                          Projektbeschreibung
+                        </Text>
                         <Stack gap="md">
-                          <Text fw={600} size="sm" c="var(--text-primary)">
-                            Projektbeschreibung
-                          </Text>
-                          <Stack gap="md">
-                            {(project.description || []).map((paragraph, idx) => (
-                              <Text
-                                key={idx}
-                                size="md"
-                                c="var(--text-secondary)"
-                                style={{ 
-                                  lineHeight: 1.7,
-                                  fontSize: '1rem'
-                                }}
-                              >
-                                {paragraph}
-                              </Text>
-                            ))}
-                          </Stack>
+                          {(project.description || []).map((paragraph, idx) => (
+                            <Text
+                              key={idx}
+                              size="md"
+                              c="var(--text-secondary)"
+                              style={{
+                                lineHeight: 1.7,
+                                fontSize: '1rem',
+                              }}
+                            >
+                              {paragraph}
+                            </Text>
+                          ))}
                         </Stack>
-                      </div>
-                      
+                      </Stack>
+
                       {/* All Tags */}
                       <div>
                         <Stack gap="sm">
@@ -259,11 +265,8 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
                           />
                         </Stack>
                       </div>
-                    </Stack>
-                  </ScrollArea>
-                </motion.div>
-
-              </Stack>
+                </Stack>
+              </motion.div>
             </motion.div>
           </motion.div>
         </Modal>

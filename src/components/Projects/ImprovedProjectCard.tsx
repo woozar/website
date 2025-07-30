@@ -56,10 +56,10 @@ export const ImprovedProjectCard = ({ project }: ImprovedProjectCardProps) => {
             display: 'flex',
             flexDirection: 'column',
             borderColor: 'var(--border-color)',
-            transition: 'box-shadow 0.3s ease, border-color 0.3s ease',
             cursor: 'pointer',
             minHeight: '280px',
-            backgroundColor: 'var(--background-primary)'
+            backgroundColor: 'var(--background-primary)',
+            transition: 'border-color 0.3s ease, box-shadow 0.3s ease'
           }}
           styles={{
             root: {

@@ -110,9 +110,9 @@ export const SimpleServices = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     borderColor: 'var(--border-color)',
-                    transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
                     cursor: 'default',
-                    backgroundColor: 'var(--background-primary)'
+                    backgroundColor: 'var(--background-primary)',
+                    transition: 'border-color 0.3s ease, box-shadow 0.3s ease'
                   }}
                   styles={{
                     root: {

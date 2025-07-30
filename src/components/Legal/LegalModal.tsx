@@ -1,4 +1,4 @@
-import { Modal, Stack, Title, Text, Button, ScrollArea } from '@mantine/core';
+import { Modal, Stack, Title, Text, Button } from '@mantine/core';
 import { IconX } from '@tabler/icons-react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useEffect } from 'react';
@@ -48,18 +48,6 @@ export const LegalModal = ({ opened, onClose, type }: LegalModalProps) => {
       transition: {
         duration: 0.2,
         ease: "easeInOut" 
-      }
-    }
-  };
-
-  const scrollAreaVariants: Variants = {
-    hidden: {
-      opacity: 1
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        delay: 0
       }
     }
   };
@@ -226,12 +214,12 @@ export const LegalModal = ({ opened, onClose, type }: LegalModalProps) => {
             animate="visible"
             exit="exit"
             style={{
-              background: 'white',
+              background: 'var(--background-primary)',
               borderRadius: '1rem',
               padding: '2rem',
               maxHeight: '80vh',
               position: 'relative',
-              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.2)',
+              boxShadow: '0 20px 60px var(--shadow-color)',
               overflow: 'hidden',
               display: 'flex',
               flexDirection: 'column'
@@ -268,67 +256,45 @@ export const LegalModal = ({ opened, onClose, type }: LegalModalProps) => {
               variants={contentVariants}
               initial="hidden"
               animate="visible"
+              style={{ 
+                flex: 1, 
+                minHeight: 0,
+                display: 'flex',
+                flexDirection: 'column'
+              }}
             >
-              <Stack gap="xl" style={{ height: '100%' }}>
-                {/* Header */}
-                <motion.div variants={itemVariants} style={{ flexShrink: 0 }}>
-                  <Title
-                    order={2}
-                    style={{
-                      fontSize: '1.8rem',
-                      fontWeight: 700,
-                      background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                      paddingRight: '3rem'
-                    }}
-                  >
-                    {title}
-                  </Title>
-                </motion.div>
+              {/* Header */}
+              <motion.div variants={itemVariants} style={{ flexShrink: 0 }}>
+                <Title
+                  order={2}
+                  style={{
+                    fontSize: '1.8rem',
+                    fontWeight: 700,
+                    background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    paddingRight: '3rem',
+                    marginBottom: '1.5rem'
+                  }}
+                >
+                  {title}
+                </Title>
+              </motion.div>
 
-                {/* Content */}
-                <motion.div variants={itemVariants} style={{ flex: 1, overflow: 'hidden' }}>
-                  <motion.div
-                    variants={scrollAreaVariants}
-                    initial="hidden"
-                    animate="visible"
-                    style={{ height: '100%' }}
-                  >
-                    <ScrollArea 
-                      h="100%"
-                      styles={{
-                        scrollbar: {
-                          display: 'none'
-                        }
-                      }}
-                    >
-                      {content}
-                    </ScrollArea>
-                  </motion.div>
-                </motion.div>
+              {/* Scrollable Content */}
+              <motion.div 
+                variants={itemVariants} 
+                style={{ 
+                  flex: 1, 
+                  minHeight: 0,
+                  overflow: 'auto',
+                  padding: '0 2px'
+                }}
+              >
+                {content}
+              </motion.div>
 
-                {/* Footer Button */}
-                <motion.div variants={itemVariants} style={{ flexShrink: 0 }}>
-                  <Stack align="center">
-                    <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <Button
-                        variant="filled"
-                        style={{
-                          background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))'
-                        }}
-                        onClick={onClose}
-                      >
-                        Schließen
-                      </Button>
-                    </motion.div>
-                  </Stack>
-                </motion.div>
-              </Stack>
             </motion.div>
           </motion.div>
         </Modal>

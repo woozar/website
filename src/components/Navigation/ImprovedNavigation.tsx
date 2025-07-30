@@ -211,7 +211,7 @@ export const ImprovedNavigation = () => {
           },
           header: {
             borderBottom: '1px solid var(--border-color)',
-            backgroundColor: 'var(--background-secondary)'
+            backgroundColor: 'var(--background-primary)'
           },
           body: {
             padding: '1.5rem',
