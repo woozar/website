@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '../../test/test-utils'
 import { ImprovedNavigation } from './ImprovedNavigation'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { useTranslation } from '../../hooks/useTranslation'
+import { de } from '../../translations/de'
 
 // Mock dependencies
 vi.mock('../../hooks/useMediaQuery')
@@ -30,15 +31,6 @@ vi.mock('../../assets/logo.webp', () => ({
 const mockUseMediaQuery = vi.mocked(useMediaQuery)
 const mockUseTranslation = vi.mocked(useTranslation)
 
-const mockTranslations = {
-  navigation: {
-    services: 'Services',
-    projects: 'Projekte',
-    about: 'Über mich',
-    contact: 'Kontakt',
-    contactAction: 'Kontakt aufnehmen'
-  }
-}
 
 describe('ImprovedNavigation', () => {
   beforeEach(() => {
@@ -49,8 +41,8 @@ describe('ImprovedNavigation', () => {
       isDesktop: true
     })
     mockUseTranslation.mockReturnValue({
-      t: mockTranslations,
-      language: 'en'
+      t: de,
+      language: 'de'
     })
 
     // Mock scrollTo
@@ -82,7 +74,7 @@ describe('ImprovedNavigation', () => {
       render(<ImprovedNavigation />)
 
       const logo = screen.getByRole('img')
-      expect(logo).toHaveAttribute('src', '/mock-logo.webp')
+      expect(logo).toHaveAttribute('src', '/assets/logo.webp')
       expect(logo).toHaveAttribute('alt', '12 of Spades')
     })
 
@@ -227,22 +219,7 @@ describe('ImprovedNavigation', () => {
   })
 
   describe('Language Support', () => {
-    it('should handle different language translations', () => {
-      const germanTranslations = {
-        navigation: {
-          services: 'Services',
-          projects: 'Projekte',
-          about: 'Über mich',
-          contact: 'Kontakt',
-          contactAction: 'Kontakt aufnehmen'
-        }
-      }
-
-      mockUseTranslation.mockReturnValue({
-        t: germanTranslations,
-        language: 'de'
-      })
-
+    it('should handle German language translations', () => {
       render(<ImprovedNavigation />)
 
       expect(screen.getByText('Projekte')).toBeInTheDocument()

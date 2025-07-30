@@ -4,7 +4,8 @@ import { motion, Variants } from 'framer-motion';
 import { Section } from '../Layout';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useTranslation } from '../../hooks/useTranslation';
-import heroPortrait from '../../assets/hero-portrait.webp';
+// import heroPortrait from '../../assets/hero-portrait.webp';
+const heroPortrait = '/assets/hero-portrait.webp';
 
 export const AnimatedHero = () => {
   const { isMobile, isTablet } = useMediaQuery();

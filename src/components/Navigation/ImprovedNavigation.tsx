@@ -7,7 +7,8 @@ import { LanguageSwitcher } from '../LanguageSwitcher';
 import { ThemeSwitcher } from '../ThemeSwitcher';
 import { useTranslation } from '../../hooks/useTranslation';
 import { useModal } from '../../hooks/useModal';
-import logoImage from '../../assets/logo.webp';
+// import logoImage from '../../assets/logo.webp';
+const logoImage = '/assets/logo.webp';
 
 export const ImprovedNavigation = () => {
   const [drawerOpened, setDrawerOpened] = useState(false);

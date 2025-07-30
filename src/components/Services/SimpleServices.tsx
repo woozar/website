@@ -4,9 +4,12 @@ import { motion, Variants } from 'framer-motion';
 import { Section, Grid } from '../Layout';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useTranslation } from '../../hooks/useTranslation';
-import aiImage from '../../assets/ai-development.webp';
-import cloudImage from '../../assets/cloud-architecture.webp';
-import fullstackImage from '../../assets/fullstack-development.webp';
+// import aiImage from '../../assets/ai-development.webp';
+// import cloudImage from '../../assets/cloud-architecture.webp';
+// import fullstackImage from '../../assets/fullstack-development.webp';
+const aiImage = '/assets/ai-development.webp';
+const cloudImage = '/assets/cloud-architecture.webp';
+const fullstackImage = '/assets/fullstack-development.webp';
 
 export const SimpleServices = () => {
   const { isMobile } = useMediaQuery();

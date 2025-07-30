@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen } from './test/test-utils'
 import App from './App'
-import { useLanguageStore } from './stores/languageStore'
+import { useLanguageStore, Language } from './stores/languageStore'
 
 // Mock all child components
 vi.mock('./components/Navigation/ImprovedNavigation', () => ({
@@ -101,7 +101,7 @@ describe('App', () => {
     
     // Test the selector function
     const selectorFn = mockUseLanguageStore.mock.calls[0][0]
-    const mockState = { language: 'de', setLanguage: vi.fn() }
+    const mockState = { language: 'de' as Language, setLanguage: vi.fn() }
     expect(selectorFn(mockState)).toBe('de')
   })
 

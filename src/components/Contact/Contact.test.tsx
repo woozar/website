@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '../../test/test-utils'
 import { Contact } from './Contact'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { useTranslation } from '../../hooks/useTranslation'
+import { de } from '../../translations/de'
 
 // Mock dependencies
 vi.mock('../../hooks/useMediaQuery')
@@ -21,24 +22,6 @@ vi.mock('framer-motion', () => ({
 const mockUseMediaQuery = vi.mocked(useMediaQuery)
 const mockUseTranslation = vi.mocked(useTranslation)
 
-const mockTranslations = {
-  contact: {
-    title: 'Kontakt',
-    subtitle: 'Bereit für Ihr nächstes Projekt? Lassen Sie uns über Ihre Anforderungen sprechen und gemeinsam innovative Lösungen entwickeln.',
-    followMe: 'Folgen Sie mir',
-    contactItems: {
-      email: 'E-Mail',
-      phone: 'Telefon',
-      location: 'Standort',
-      locationValue: 'Weisendorf, Deutschland'
-    },
-    legal: {
-      impressum: 'Impressum',
-      datenschutz: 'Datenschutz'
-    }
-  }
-}
-
 describe('Contact', () => {
   beforeEach(() => {
     vi.clearAllMocks()
@@ -48,8 +31,8 @@ describe('Contact', () => {
       isDesktop: true
     })
     mockUseTranslation.mockReturnValue({
-      t: mockTranslations,
-      language: 'en'
+      t: de,
+      language: 'de'
     })
   })
 
@@ -177,33 +160,7 @@ describe('Contact', () => {
     expect(screen.getByText('LinkedIn')).toBeInTheDocument()
   })
 
-  it('should handle different language translations', () => {
-    const germanTranslations = {
-      contact: {
-        title: 'Kontakt',
-        subtitle: 'Bereit für Ihr nächstes Projekt?',
-        description: 'Lassen Sie uns besprechen, wie ich Ihnen helfen kann.',
-        contactItems: {
-          email: 'E-Mail',
-          phone: 'Telefon',
-          location: 'Standort'
-        },
-        socialItems: {
-          linkedin: 'LinkedIn',
-          github: 'GitHub'
-        },
-        legal: {
-          impressum: 'Impressum',
-          datenschutz: 'Datenschutz'
-        }
-      }
-    }
-
-    mockUseTranslation.mockReturnValue({
-      t: germanTranslations,
-      language: 'de'
-    })
-
+  it('should handle German language translations', () => {
     render(<Contact />)
 
     expect(screen.getByText('Kontakt')).toBeInTheDocument()

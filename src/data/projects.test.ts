@@ -29,47 +29,47 @@ describe('projects data', () => {
     })
 
     it('should have non-empty strings for customer and title', () => {
-      projectsData.projects.forEach((project, index) => {
-        expect(project.customer.trim()).not.toBe('', `Project ${index} has empty customer`)
-        expect(project.title.trim()).not.toBe('', `Project ${index} has empty title`)
+      projectsData.projects.forEach((project) => {
+        expect(project.customer.trim()).not.toBe('')
+        expect(project.title.trim()).not.toBe('')
       })
     })
 
     it('should have non-empty description arrays', () => {
-      projectsData.projects.forEach((project, index) => {
-        expect(project.description.length).toBeGreaterThan(0, `Project ${index} has empty description`)
+      projectsData.projects.forEach((project) => {
+        expect(project.description.length).toBeGreaterThan(0)
         
-        project.description.forEach((desc, descIndex) => {
-          expect(typeof desc).toBe('string', `Project ${index} description ${descIndex} is not a string`)
-          expect(desc.trim()).not.toBe('', `Project ${index} description ${descIndex} is empty`)
+        project.description.forEach((desc) => {
+          expect(typeof desc).toBe('string')
+          expect(desc.trim()).not.toBe('')
         })
       })
     })
 
     it('should have at least one primary tag for each project', () => {
-      projectsData.projects.forEach((project, index) => {
-        expect(project.primary_tags.length).toBeGreaterThan(0, `Project ${index} has no primary tags`)
+      projectsData.projects.forEach((project) => {
+        expect(project.primary_tags.length).toBeGreaterThan(0)
         
-        project.primary_tags.forEach((tag, tagIndex) => {
-          expect(typeof tag).toBe('string', `Project ${index} primary tag ${tagIndex} is not a string`)
-          expect(tag.trim()).not.toBe('', `Project ${index} primary tag ${tagIndex} is empty`)
+        project.primary_tags.forEach((tag) => {
+          expect(typeof tag).toBe('string')
+          expect(tag.trim()).not.toBe('')
         })
       })
     })
 
     it('should have valid tags arrays', () => {
-      projectsData.projects.forEach((project, index) => {
-        project.tags.forEach((tag, tagIndex) => {
-          expect(typeof tag).toBe('string', `Project ${index} tag ${tagIndex} is not a string`)
-          expect(tag.trim()).not.toBe('', `Project ${index} tag ${tagIndex} is empty`)
+      projectsData.projects.forEach((project) => {
+        project.tags.forEach((tag) => {
+          expect(typeof tag).toBe('string')
+          expect(tag.trim()).not.toBe('')
         })
       })
     })
 
     it('should have optional comment field as string when present', () => {
-      projectsData.projects.forEach((project, index) => {
+      projectsData.projects.forEach((project) => {
         if (project.comment !== undefined) {
-          expect(typeof project.comment).toBe('string', `Project ${index} comment is not a string`)
+          expect(typeof project.comment).toBe('string')
         }
       })
     })
@@ -83,32 +83,32 @@ describe('projects data', () => {
     })
 
     it('should have reasonable description lengths', () => {
-      projectsData.projects.forEach((project, index) => {
-        project.description.forEach((desc, descIndex) => {
-          expect(desc.length).toBeGreaterThan(10, `Project ${index} description ${descIndex} is too short`)
-          expect(desc.length).toBeLessThan(2000, `Project ${index} description ${descIndex} is too long`)
+      projectsData.projects.forEach((project) => {
+        project.description.forEach((desc) => {
+          expect(desc.length).toBeGreaterThan(10)
+          expect(desc.length).toBeLessThan(2000)
         })
       })
     })
 
     it('should have reasonable number of tags', () => {
-      projectsData.projects.forEach((project, index) => {
-        expect(project.primary_tags.length).toBeLessThanOrEqual(10, `Project ${index} has too many primary tags`)
-        expect(project.tags.length).toBeLessThanOrEqual(100, `Project ${index} has too many tags`)
+      projectsData.projects.forEach((project) => {
+        expect(project.primary_tags.length).toBeLessThanOrEqual(10)
+        expect(project.tags.length).toBeLessThanOrEqual(100)
       })
     })
 
     it('should have valid customer names', () => {
-      projectsData.projects.forEach((project, index) => {
-        expect(project.customer.length).toBeGreaterThan(2, `Project ${index} customer name too short`)
-        expect(project.customer.length).toBeLessThan(200, `Project ${index} customer name too long`)
+      projectsData.projects.forEach((project) => {
+        expect(project.customer.length).toBeGreaterThan(2)
+        expect(project.customer.length).toBeLessThan(200)
       })
     })
 
     it('should have valid project titles', () => {
-      projectsData.projects.forEach((project, index) => {
-        expect(project.title.length).toBeGreaterThan(5, `Project ${index} title too short`)
-        expect(project.title.length).toBeLessThan(300, `Project ${index} title too long`)
+      projectsData.projects.forEach((project) => {
+        expect(project.title.length).toBeGreaterThan(5)
+        expect(project.title.length).toBeLessThan(300)
       })
     })
   })
@@ -122,7 +122,7 @@ describe('projects data', () => {
       const expectedTags = ['React', 'TypeScript', 'Node.js', 'AWS', 'Azure']
       const foundTags = expectedTags.filter(tag => tagSet.has(tag))
       
-      expect(foundTags.length).toBeGreaterThan(0, 'Should contain some common technologies')
+      expect(foundTags.length).toBeGreaterThan(0)
     })
 
     it('should have AI-related projects', () => {
@@ -132,7 +132,7 @@ describe('projects data', () => {
         p.title.toLowerCase().includes('ai')
       )
       
-      expect(aiProjects.length).toBeGreaterThan(0, 'Should have AI-related projects')
+      expect(aiProjects.length).toBeGreaterThan(0)
     })
 
     it('should have cloud-related projects', () => {
@@ -141,7 +141,7 @@ describe('projects data', () => {
         p.tags.some(tag => ['AWS', 'Azure'].includes(tag))
       )
       
-      expect(cloudProjects.length).toBeGreaterThan(0, 'Should have cloud-related projects')
+      expect(cloudProjects.length).toBeGreaterThan(0)
     })
 
     it('should have web development projects', () => {
@@ -149,7 +149,7 @@ describe('projects data', () => {
         p.tags.some(tag => ['React', 'Angular', 'TypeScript', 'JavaScript'].includes(tag))
       )
       
-      expect(webProjects.length).toBeGreaterThan(0, 'Should have web development projects')
+      expect(webProjects.length).toBeGreaterThan(0)
     })
   })
 
@@ -179,18 +179,18 @@ describe('projects data', () => {
       const hasAIProjects = projectTitles.some(title => title.toLowerCase().includes('ai'))
       const hasDMGProjects = projectsData.projects.some(p => p.customer.includes('DMG'))
       
-      expect(hasAIProjects).toBe(true, 'Should have AI projects')
-      expect(hasDMGProjects).toBe(true, 'Should have DMG Mori projects')
+      expect(hasAIProjects).toBe(true)
+      expect(hasDMGProjects).toBe(true)
     })
 
     it('should have consistent data structure across all projects', () => {
-      projectsData.projects.forEach((project, index) => {
+      projectsData.projects.forEach((project) => {
         const projectKeys = Object.keys(project)
         
         // Check that all projects have at least the required keys
         const requiredKeys = ['customer', 'title', 'description', 'primary_tags', 'tags']
         requiredKeys.forEach(key => {
-          expect(projectKeys.includes(key)).toBe(true, `Project ${index} missing required key: ${key}`)
+          expect(projectKeys.includes(key)).toBe(true)
         })
       })
     })
@@ -201,17 +201,17 @@ describe('projects data', () => {
       const signatures = projectsData.projects.map(p => `${p.customer}-${p.title}`)
       const uniqueSignatures = new Set(signatures)
       
-      expect(uniqueSignatures.size).toBe(signatures.length, 'Projects should be unique by customer-title combination')
+      expect(uniqueSignatures.size).toBe(signatures.length)
     })
 
     it('should have proper text encoding', () => {
-      projectsData.projects.forEach((project, index) => {
+      projectsData.projects.forEach((project) => {
         // Check that text doesn't contain common encoding issues
         const textFields = [project.customer, project.title, ...project.description]
         
         textFields.forEach(text => {
-          expect(text).not.toMatch(/â€™/g, `Project ${index} has encoding issues with apostrophes`)
-          expect(text).not.toMatch(/â€œ|â€/g, `Project ${index} has encoding issues with quotes`)
+          expect(text).not.toMatch(/â€™/g)
+          expect(text).not.toMatch(/â€œ|â€/g)
         })
       })
     })
@@ -221,13 +221,13 @@ describe('projects data', () => {
       
       allTags.forEach(tag => {
         // Tags should not start or end with whitespace
-        expect(tag).toBe(tag.trim(), `Tag "${tag}" has leading/trailing whitespace`)
+        expect(tag).toBe(tag.trim())
         
         // Tags should not be empty
-        expect(tag.length).toBeGreaterThan(0, 'Tag should not be empty')
+        expect(tag.length).toBeGreaterThan(0)
         
         // Tags should have reasonable length
-        expect(tag.length).toBeLessThan(50, `Tag "${tag}" is too long`)
+        expect(tag.length).toBeLessThan(50)
       })
     })
   })

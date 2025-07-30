@@ -3,6 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { useProjects } from './useProjects'
 import { useTranslation } from './useTranslation'
 import { projectsData } from '../data/projects'
+import { de } from '../translations/de'
 
 // Mock the dependencies
 vi.mock('./useTranslation')
@@ -45,7 +46,7 @@ describe('useProjects', () => {
   it('should return original English projects when language is English', () => {
     mockUseTranslation.mockReturnValue({
       language: 'en',
-      t: {}
+      t: de
     })
 
     const { result } = renderHook(() => useProjects())
@@ -58,7 +59,7 @@ describe('useProjects', () => {
   it('should return translated German projects when language is German', () => {
     mockUseTranslation.mockReturnValue({
       language: 'de',
-      t: {}
+      t: de
     })
 
     const { result } = renderHook(() => useProjects())
@@ -86,7 +87,7 @@ describe('useProjects', () => {
   it('should preserve all project properties when translating', () => {
     mockUseTranslation.mockReturnValue({
       language: 'de',
-      t: {}
+      t: de
     })
 
     const { result } = renderHook(() => useProjects())
@@ -102,7 +103,7 @@ describe('useProjects', () => {
   it('should handle projects without German translations correctly', () => {
     mockUseTranslation.mockReturnValue({
       language: 'de',
-      t: {}
+      t: de
     })
 
     const { result } = renderHook(() => useProjects())
@@ -118,7 +119,7 @@ describe('useProjects', () => {
     // Test English
     mockUseTranslation.mockReturnValue({
       language: 'en',
-      t: {}
+      t: de
     })
 
     const { result: englishResult } = renderHook(() => useProjects())
@@ -126,7 +127,7 @@ describe('useProjects', () => {
     // Test German
     mockUseTranslation.mockReturnValue({
       language: 'de',
-      t: {}
+      t: de
     })
 
     const { result: germanResult } = renderHook(() => useProjects())
@@ -139,7 +140,7 @@ describe('useProjects', () => {
     // Start with English
     mockUseTranslation.mockReturnValueOnce({
       language: 'en',
-      t: {}
+      t: de
     })
 
     const { result, rerender } = renderHook(() => useProjects())
@@ -149,7 +150,7 @@ describe('useProjects', () => {
     // Change to German
     mockUseTranslation.mockReturnValueOnce({
       language: 'de',
-      t: {}
+      t: de
     })
 
     rerender()
@@ -161,7 +162,7 @@ describe('useProjects', () => {
   it('should handle partial translations correctly', () => {
     mockUseTranslation.mockReturnValue({
       language: 'de',
-      t: {}
+      t: de
     })
 
     const { result } = renderHook(() => useProjects())
