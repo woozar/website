@@ -428,7 +428,7 @@ export const projectsData: ProjectsData = {
       ]
     },
     {
-      "customer": "Siemens AG / Digital Industries / Factory Automation",
+      "customer": "T3 GmbH / Siemens AG - Digital Industries - Factory Automation",
       "title": "Development of the \"Minerva Micro\" mobile frontend",
       "description": [
         "The factory automation department of Siemens Digital Industries is providing an online portal, where users can download all kinds of documentation as PDFs. Also they provide a DVD with all the documentation on it, that is being shipped with their products.",
@@ -584,7 +584,7 @@ export const projectsData: ProjectsData = {
       ]
     },
     {
-      "customer": "T3 GmbH",
+      "customer": "T3 GmbH / KUKA AG",
       "title": "Development of a dotNet based knowledge portal",
       "description": [
         "T3 is developing two software products. There is the Knowledge Manager, a smart search engine for modular bits of information. The engine is based on information that are well structured and maintained and contain a lot of meta information. The second product is the Learning Content Manager an AngularJS tool that is used to provide eLearning content to the users.",

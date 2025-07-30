@@ -5,7 +5,7 @@ import { ModalProvider } from './contexts/ModalContext';
 import { ImprovedNavigation } from './components/Navigation/ImprovedNavigation';
 import { AnimatedHero } from './components/Hero/AnimatedHero';
 import { SimpleServices } from './components/Services/SimpleServices';
-import { SimpleProjectsSection } from './components/Projects/SimpleProjectsSection';
+import { ProjectsSection } from './components/Projects/ProjectsSection';
 import { ProjectStats } from './components/ProjectStats';
 import { About } from './components/About/About';
 import { Contact } from './components/Contact/Contact';
@@ -34,7 +34,7 @@ function App() {
           <AnimatedHero />
           <SimpleServices />
           <ProjectStats />
-          <SimpleProjectsSection />
+          <ProjectsSection />
           <About />
           <Contact />
         </main>
