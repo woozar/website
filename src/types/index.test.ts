@@ -121,42 +121,42 @@ describe('TypeScript type definitions', () => {
   describe('FilterState interface', () => {
     it('should allow valid filter state objects', () => {
       const validFilterState: FilterState = {
-        selectedPrimaryTags: ['AI', 'React'],
-        selectedSecondaryTags: ['TypeScript', 'Node.js'],
-        searchQuery: 'test query'
+        selectedTags: ['AI', 'React', 'TypeScript', 'Node.js'],
+        searchQuery: 'test query',
+        selectedCustomer: 'Test Customer'
       }
 
-      expect(validFilterState.selectedPrimaryTags).toEqual(['AI', 'React'])
-      expect(validFilterState.selectedSecondaryTags).toEqual(['TypeScript', 'Node.js'])
+      expect(validFilterState.selectedTags).toEqual(['AI', 'React', 'TypeScript', 'Node.js'])
       expect(validFilterState.searchQuery).toBe('test query')
+      expect(validFilterState.selectedCustomer).toBe('Test Customer')
     })
 
     it('should allow empty arrays and strings', () => {
       const emptyFilterState: FilterState = {
-        selectedPrimaryTags: [],
-        selectedSecondaryTags: [],
-        searchQuery: ''
+        selectedTags: [],
+        searchQuery: '',
+        selectedCustomer: ''
       }
 
-      expect(emptyFilterState.selectedPrimaryTags).toHaveLength(0)
-      expect(emptyFilterState.selectedSecondaryTags).toHaveLength(0)
+      expect(emptyFilterState.selectedTags).toHaveLength(0)
       expect(emptyFilterState.searchQuery).toBe('')
+      expect(emptyFilterState.selectedCustomer).toBe('')
     })
 
     it('should handle array operations', () => {
       const filterState: FilterState = {
-        selectedPrimaryTags: ['React'],
-        selectedSecondaryTags: ['TypeScript'],
-        searchQuery: 'test'
+        selectedTags: ['React', 'TypeScript'],
+        searchQuery: 'test',
+        selectedCustomer: ''
       }
 
       // Should support array methods
-      expect(filterState.selectedPrimaryTags.includes('React')).toBe(true)
-      expect(filterState.selectedSecondaryTags.length).toBe(1)
+      expect(filterState.selectedTags.includes('React')).toBe(true)
+      expect(filterState.selectedTags.length).toBe(2)
       
       // Should allow array modifications
-      filterState.selectedPrimaryTags.push('Vue')
-      expect(filterState.selectedPrimaryTags).toContain('Vue')
+      filterState.selectedTags.push('Vue')
+      expect(filterState.selectedTags).toContain('Vue')
     })
   })
 
@@ -226,14 +226,14 @@ describe('TypeScript type definitions', () => {
       }
 
       const filterState: FilterState = {
-        selectedPrimaryTags: project.primary_tags,
-        selectedSecondaryTags: project.tags,
-        searchQuery: project.title
+        selectedTags: [...project.primary_tags, ...project.tags],
+        searchQuery: project.title,
+        selectedCustomer: project.customer
       }
 
       // Should work together without type conflicts
       expect(projectsData.projects[0]).toBe(project)
-      expect(filterState.selectedPrimaryTags).toEqual(project.primary_tags)
+      expect(filterState.selectedTags).toContain(project.primary_tags[0])
       expect(filterState.searchQuery).toBe(project.title)
     })
 

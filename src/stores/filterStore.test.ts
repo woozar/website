@@ -11,122 +11,77 @@ describe('filterStore', () => {
     it('should have correct initial state', () => {
       const state = useFilterStore.getState()
       
-      expect(state.selectedPrimaryTags).toEqual([])
-      expect(state.selectedSecondaryTags).toEqual([])
+      expect(state.selectedTags).toEqual([])
       expect(state.searchQuery).toBe('')
     })
 
     it('should have all required methods', () => {
       const state = useFilterStore.getState()
       
-      expect(typeof state.togglePrimaryTag).toBe('function')
-      expect(typeof state.toggleSecondaryTag).toBe('function')
+      expect(typeof state.toggleTag).toBe('function')
       expect(typeof state.setSearchQuery).toBe('function')
       expect(typeof state.clearAllFilters).toBe('function')
-      expect(typeof state.clearPrimaryTags).toBe('function')
-      expect(typeof state.clearSecondaryTags).toBe('function')
+      expect(typeof state.clearTags).toBe('function')
     })
   })
 
-  describe('togglePrimaryTag', () => {
-    it('should add a primary tag when not present', () => {
-      const { togglePrimaryTag } = useFilterStore.getState()
+  describe('toggleTag', () => {
+    it('should add a tag when not present', () => {
+      const { toggleTag } = useFilterStore.getState()
       
-      togglePrimaryTag('React')
+      toggleTag('React')
       
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual(['React'])
+      expect(useFilterStore.getState().selectedTags).toEqual(['React'])
     })
 
-    it('should remove a primary tag when already present', () => {
-      const { togglePrimaryTag } = useFilterStore.getState()
+    it('should remove a tag when already present', () => {
+      const { toggleTag } = useFilterStore.getState()
       
-      togglePrimaryTag('React')
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual(['React'])
+      toggleTag('React')
+      expect(useFilterStore.getState().selectedTags).toEqual(['React'])
       
-      togglePrimaryTag('React')
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual([])
+      toggleTag('React')
+      expect(useFilterStore.getState().selectedTags).toEqual([])
     })
 
-    it('should handle multiple primary tags', () => {
-      const { togglePrimaryTag } = useFilterStore.getState()
+    it('should handle multiple tags', () => {
+      const { toggleTag } = useFilterStore.getState()
       
-      togglePrimaryTag('React')
-      togglePrimaryTag('Vue')
-      togglePrimaryTag('Angular')
+      toggleTag('React')
+      toggleTag('Vue')
+      toggleTag('Angular')
       
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual(['React', 'Vue', 'Angular'])
+      expect(useFilterStore.getState().selectedTags).toEqual(['React', 'Vue', 'Angular'])
     })
 
     it('should toggle specific tag without affecting others', () => {
-      const { togglePrimaryTag } = useFilterStore.getState()
+      const { toggleTag } = useFilterStore.getState()
       
-      togglePrimaryTag('React')
-      togglePrimaryTag('Vue')
-      togglePrimaryTag('Angular')
+      toggleTag('React')
+      toggleTag('Vue')
+      toggleTag('Angular')
       
-      togglePrimaryTag('Vue')
+      toggleTag('Vue')
       
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual(['React', 'Angular'])
+      expect(useFilterStore.getState().selectedTags).toEqual(['React', 'Angular'])
     })
 
     it('should handle empty string tags', () => {
-      const { togglePrimaryTag } = useFilterStore.getState()
+      const { toggleTag } = useFilterStore.getState()
       
-      togglePrimaryTag('')
+      toggleTag('')
       
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual([''])
+      expect(useFilterStore.getState().selectedTags).toEqual([''])
     })
 
     it('should handle duplicate toggles correctly', () => {
-      const { togglePrimaryTag } = useFilterStore.getState()
+      const { toggleTag } = useFilterStore.getState()
       
-      togglePrimaryTag('React')
-      togglePrimaryTag('React')
-      togglePrimaryTag('React')
+      toggleTag('React')
+      toggleTag('React')
+      toggleTag('React')
       
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual(['React'])
-    })
-  })
-
-  describe('toggleSecondaryTag', () => {
-    it('should add a secondary tag when not present', () => {
-      const { toggleSecondaryTag } = useFilterStore.getState()
-      
-      toggleSecondaryTag('TypeScript')
-      
-      expect(useFilterStore.getState().selectedSecondaryTags).toEqual(['TypeScript'])
-    })
-
-    it('should remove a secondary tag when already present', () => {
-      const { toggleSecondaryTag } = useFilterStore.getState()
-      
-      toggleSecondaryTag('TypeScript')
-      expect(useFilterStore.getState().selectedSecondaryTags).toEqual(['TypeScript'])
-      
-      toggleSecondaryTag('TypeScript')
-      expect(useFilterStore.getState().selectedSecondaryTags).toEqual([])
-    })
-
-    it('should handle multiple secondary tags', () => {
-      const { toggleSecondaryTag } = useFilterStore.getState()
-      
-      toggleSecondaryTag('JavaScript')
-      toggleSecondaryTag('TypeScript')
-      toggleSecondaryTag('Python')
-      
-      expect(useFilterStore.getState().selectedSecondaryTags).toEqual(['JavaScript', 'TypeScript', 'Python'])
-    })
-
-    it('should toggle specific tag without affecting others', () => {
-      const { toggleSecondaryTag } = useFilterStore.getState()
-      
-      toggleSecondaryTag('JavaScript')
-      toggleSecondaryTag('TypeScript')
-      toggleSecondaryTag('Python')
-      
-      toggleSecondaryTag('TypeScript')
-      
-      expect(useFilterStore.getState().selectedSecondaryTags).toEqual(['JavaScript', 'Python'])
+      expect(useFilterStore.getState().selectedTags).toEqual(['React'])
     })
   })
 
@@ -170,26 +125,24 @@ describe('filterStore', () => {
 
   describe('clearAllFilters', () => {
     it('should clear all filters when called', () => {
-      const { togglePrimaryTag, toggleSecondaryTag, setSearchQuery, clearAllFilters } = useFilterStore.getState()
+      const { toggleTag, setSearchQuery, clearAllFilters } = useFilterStore.getState()
       
       // Set some filters
-      togglePrimaryTag('React')
-      togglePrimaryTag('Vue')
-      toggleSecondaryTag('TypeScript')
-      toggleSecondaryTag('JavaScript')
+      toggleTag('React')
+      toggleTag('Vue')
+      toggleTag('TypeScript')
+      toggleTag('JavaScript')
       setSearchQuery('test query')
       
       // Verify filters are set
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual(['React', 'Vue'])
-      expect(useFilterStore.getState().selectedSecondaryTags).toEqual(['TypeScript', 'JavaScript'])
+      expect(useFilterStore.getState().selectedTags).toEqual(['React', 'Vue', 'TypeScript', 'JavaScript'])
       expect(useFilterStore.getState().searchQuery).toBe('test query')
       
       // Clear all filters
       clearAllFilters()
       
       // Verify all filters are cleared
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual([])
-      expect(useFilterStore.getState().selectedSecondaryTags).toEqual([])
+      expect(useFilterStore.getState().selectedTags).toEqual([])
       expect(useFilterStore.getState().searchQuery).toBe('')
     })
 
@@ -198,84 +151,50 @@ describe('filterStore', () => {
       
       clearAllFilters()
       
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual([])
-      expect(useFilterStore.getState().selectedSecondaryTags).toEqual([])
+      expect(useFilterStore.getState().selectedTags).toEqual([])
       expect(useFilterStore.getState().searchQuery).toBe('')
     })
   })
 
-  describe('clearPrimaryTags', () => {
-    it('should clear only primary tags', () => {
-      const { togglePrimaryTag, toggleSecondaryTag, setSearchQuery, clearPrimaryTags } = useFilterStore.getState()
+  describe('clearTags', () => {
+    it('should clear only tags', () => {
+      const { toggleTag, setSearchQuery, clearTags } = useFilterStore.getState()
       
-      togglePrimaryTag('React')
-      togglePrimaryTag('Vue')
-      toggleSecondaryTag('TypeScript')
+      toggleTag('React')
+      toggleTag('Vue')
+      toggleTag('TypeScript')
       setSearchQuery('test query')
       
-      clearPrimaryTags()
+      clearTags()
       
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual([])
-      expect(useFilterStore.getState().selectedSecondaryTags).toEqual(['TypeScript'])
+      expect(useFilterStore.getState().selectedTags).toEqual([])
       expect(useFilterStore.getState().searchQuery).toBe('test query')
     })
 
-    it('should work when primary tags are already empty', () => {
-      const { toggleSecondaryTag, setSearchQuery, clearPrimaryTags } = useFilterStore.getState()
+    it('should work when tags are already empty', () => {
+      const { setSearchQuery, clearTags } = useFilterStore.getState()
       
-      toggleSecondaryTag('TypeScript')
       setSearchQuery('test query')
       
-      clearPrimaryTags()
+      clearTags()
       
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual([])
-      expect(useFilterStore.getState().selectedSecondaryTags).toEqual(['TypeScript'])
-      expect(useFilterStore.getState().searchQuery).toBe('test query')
-    })
-  })
-
-  describe('clearSecondaryTags', () => {
-    it('should clear only secondary tags', () => {
-      const { togglePrimaryTag, toggleSecondaryTag, setSearchQuery, clearSecondaryTags } = useFilterStore.getState()
-      
-      togglePrimaryTag('React')
-      toggleSecondaryTag('TypeScript')
-      toggleSecondaryTag('JavaScript')
-      setSearchQuery('test query')
-      
-      clearSecondaryTags()
-      
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual(['React'])
-      expect(useFilterStore.getState().selectedSecondaryTags).toEqual([])
-      expect(useFilterStore.getState().searchQuery).toBe('test query')
-    })
-
-    it('should work when secondary tags are already empty', () => {
-      const { togglePrimaryTag, setSearchQuery, clearSecondaryTags } = useFilterStore.getState()
-      
-      togglePrimaryTag('React')
-      setSearchQuery('test query')
-      
-      clearSecondaryTags()
-      
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual(['React'])
-      expect(useFilterStore.getState().selectedSecondaryTags).toEqual([])
+      expect(useFilterStore.getState().selectedTags).toEqual([])
       expect(useFilterStore.getState().searchQuery).toBe('test query')
     })
   })
 
   describe('store integration', () => {
-    it('should maintain independent primary and secondary tag arrays', () => {
-      const { togglePrimaryTag, toggleSecondaryTag } = useFilterStore.getState()
+    it('should handle unified tag system correctly', () => {
+      const { toggleTag } = useFilterStore.getState()
       
-      togglePrimaryTag('React')
-      toggleSecondaryTag('React')
+      toggleTag('React')
+      toggleTag('TypeScript')
       
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual(['React'])
-      expect(useFilterStore.getState().selectedSecondaryTags).toEqual(['React'])
+      expect(useFilterStore.getState().selectedTags).toEqual(['React', 'TypeScript'])
       
-      // They should be independent arrays
-      expect(useFilterStore.getState().selectedPrimaryTags).not.toBe(useFilterStore.getState().selectedSecondaryTags)
+      // Toggle same tag should remove it
+      toggleTag('React')
+      expect(useFilterStore.getState().selectedTags).toEqual(['TypeScript'])
     })
 
     it('should notify subscribers on state changes', () => {
@@ -283,11 +202,11 @@ describe('filterStore', () => {
       
       const unsubscribe = useFilterStore.subscribe(subscriber)
       
-      useFilterStore.getState().togglePrimaryTag('React')
+      useFilterStore.getState().toggleTag('React')
       
       expect(subscriber).toHaveBeenCalledWith(
-        expect.objectContaining({ selectedPrimaryTags: ['React'] }),
-        expect.objectContaining({ selectedPrimaryTags: [] })
+        expect.objectContaining({ selectedTags: ['React'] }),
+        expect.objectContaining({ selectedTags: [] })
       )
       
       unsubscribe()
@@ -295,36 +214,32 @@ describe('filterStore', () => {
 
     it('should handle complex filtering scenarios', () => {
       const { 
-        togglePrimaryTag, 
-        toggleSecondaryTag, 
+        toggleTag, 
         setSearchQuery,
-        clearSecondaryTags,
+        clearTags,
         clearAllFilters
       } = useFilterStore.getState()
       
       // Complex scenario
-      togglePrimaryTag('AI')
-      togglePrimaryTag('Web Development')
-      toggleSecondaryTag('React')
-      toggleSecondaryTag('TypeScript')
-      toggleSecondaryTag('Node.js')
+      toggleTag('AI')
+      toggleTag('Web Development')
+      toggleTag('React')
+      toggleTag('TypeScript')
+      toggleTag('Node.js')
       setSearchQuery('modern web app')
       
       const fullState = useFilterStore.getState()
-      expect(fullState.selectedPrimaryTags).toEqual(['AI', 'Web Development'])
-      expect(fullState.selectedSecondaryTags).toEqual(['React', 'TypeScript', 'Node.js'])
+      expect(fullState.selectedTags).toEqual(['AI', 'Web Development', 'React', 'TypeScript', 'Node.js'])
       expect(fullState.searchQuery).toBe('modern web app')
       
       // Partial clear
-      clearSecondaryTags()
-      expect(useFilterStore.getState().selectedSecondaryTags).toEqual([])
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual(['AI', 'Web Development'])
+      clearTags()
+      expect(useFilterStore.getState().selectedTags).toEqual([])
       expect(useFilterStore.getState().searchQuery).toBe('modern web app')
       
       // Complete clear
       clearAllFilters()
-      expect(useFilterStore.getState().selectedPrimaryTags).toEqual([])
-      expect(useFilterStore.getState().selectedSecondaryTags).toEqual([])
+      expect(useFilterStore.getState().selectedTags).toEqual([])
       expect(useFilterStore.getState().searchQuery).toBe('')
     })
   })

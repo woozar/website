@@ -20,7 +20,7 @@ export const TagList = ({
   showMoreBadge = true,
   selectable = true
 }: TagListProps) => {
-  const { togglePrimaryTag, toggleSecondaryTag, selectedPrimaryTags, selectedSecondaryTags } = useFilterStore();
+  const { toggleTag, selectedTags } = useFilterStore();
 
   // Combine and sort tags: primary first, then secondary, both alphabetically sorted
   // Remove duplicates - if a tag exists in both arrays, prioritize primary
@@ -37,14 +37,9 @@ export const TagList = ({
   const displayedTags = allTags.slice(0, maxTags);
   const hasMoreTags = allTags.length > maxTags;
 
-  const handleTagClick = (tag: string, isPrimary: boolean) => {
+  const handleTagClick = (tag: string) => {
     if (!selectable) return;
-    
-    if (isPrimary) {
-      togglePrimaryTag(tag);
-    } else {
-      toggleSecondaryTag(tag);
-    }
+    toggleTag(tag);
   };
 
   return (
@@ -58,8 +53,8 @@ export const TagList = ({
           <TagChip
             tag={tag}
             isPrimary={isPrimary}
-            isSelected={selectable ? (isPrimary ? selectedPrimaryTags.includes(tag) : selectedSecondaryTags.includes(tag)) : false}
-            onClick={selectable ? () => handleTagClick(tag, isPrimary) : undefined}
+            isSelected={selectable ? selectedTags.includes(tag) : false}
+            onClick={selectable ? () => handleTagClick(tag) : undefined}
             style={{ cursor: selectable ? 'pointer' : 'default', fontSize }}
           />
         </motion.div>

@@ -2,46 +2,38 @@ import { create } from 'zustand';
 import { FilterState } from '../types';
 
 interface FilterStore extends FilterState {
-  togglePrimaryTag: (tag: string) => void;
-  toggleSecondaryTag: (tag: string) => void;
+  toggleTag: (tag: string) => void;
   setSearchQuery: (query: string) => void;
+  setCustomerFilter: (customer: string) => void;
   clearAllFilters: () => void;
-  clearPrimaryTags: () => void;
-  clearSecondaryTags: () => void;
+  clearTags: () => void;
 }
 
 export const useFilterStore = create<FilterStore>((set) => ({
-  selectedPrimaryTags: [],
-  selectedSecondaryTags: [],
+  selectedTags: [],
   searchQuery: '',
+  selectedCustomer: '',
   
-  togglePrimaryTag: (tag) =>
+  toggleTag: (tag) =>
     set((state) => ({
-      selectedPrimaryTags: state.selectedPrimaryTags.includes(tag)
-        ? state.selectedPrimaryTags.filter((t) => t !== tag)
-        : [...state.selectedPrimaryTags, tag],
-    })),
-  
-  toggleSecondaryTag: (tag) =>
-    set((state) => ({
-      selectedSecondaryTags: state.selectedSecondaryTags.includes(tag)
-        ? state.selectedSecondaryTags.filter((t) => t !== tag)
-        : [...state.selectedSecondaryTags, tag],
+      selectedTags: state.selectedTags.includes(tag)
+        ? state.selectedTags.filter((t) => t !== tag)
+        : [...state.selectedTags, tag],
     })),
   
   setSearchQuery: (query) =>
     set({ searchQuery: query }),
   
+  setCustomerFilter: (customer) =>
+    set({ selectedCustomer: customer }),
+  
   clearAllFilters: () =>
     set({
-      selectedPrimaryTags: [],
-      selectedSecondaryTags: [],
+      selectedTags: [],
       searchQuery: '',
+      selectedCustomer: '',
     }),
   
-  clearPrimaryTags: () =>
-    set({ selectedPrimaryTags: [] }),
-  
-  clearSecondaryTags: () =>
-    set({ selectedSecondaryTags: [] }),
+  clearTags: () =>
+    set({ selectedTags: [] }),
 }));

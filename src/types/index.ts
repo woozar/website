@@ -12,9 +12,9 @@ export interface ProjectsData {
 }
 
 export interface FilterState {
-  selectedPrimaryTags: string[];
-  selectedSecondaryTags: string[];
+  selectedTags: string[];
   searchQuery: string;
+  selectedCustomer: string;
 }
 
 export interface MediaQueries {

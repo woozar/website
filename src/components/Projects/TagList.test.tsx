@@ -32,10 +32,8 @@ vi.mock('../../stores/filterStore', () => ({
 }));
 
 const mockFilterStore = {
-  togglePrimaryTag: vi.fn(),
-  toggleSecondaryTag: vi.fn(),
-  selectedPrimaryTags: [],
-  selectedSecondaryTags: []
+  toggleTag: vi.fn(),
+  selectedTags: []
 };
 
 describe('TagList', () => {
@@ -140,11 +138,11 @@ describe('TagList', () => {
     expect(screen.queryByText(/mehr/)).not.toBeInTheDocument();
   });
 
-  it('should call togglePrimaryTag when clicking a primary tag', () => {
-    const mockTogglePrimaryTag = vi.fn();
+  it('should call toggleTag when clicking a primary tag', () => {
+    const mockToggleTag = vi.fn();
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      togglePrimaryTag: mockTogglePrimaryTag
+      toggleTag: mockToggleTag
     });
 
     render(<TagList primaryTags={['React']} secondaryTags={[]} />);
@@ -152,14 +150,14 @@ describe('TagList', () => {
     const reactTag = screen.getByTestId('tag-React');
     fireEvent.click(reactTag);
     
-    expect(mockTogglePrimaryTag).toHaveBeenCalledWith('React');
+    expect(mockToggleTag).toHaveBeenCalledWith('React');
   });
 
-  it('should call toggleSecondaryTag when clicking a secondary tag', () => {
-    const mockToggleSecondaryTag = vi.fn();
+  it('should call toggleTag when clicking a secondary tag', () => {
+    const mockToggleTag = vi.fn();
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      toggleSecondaryTag: mockToggleSecondaryTag
+      toggleTag: mockToggleTag
     });
 
     render(<TagList primaryTags={[]} secondaryTags={['Node.js']} />);
@@ -167,16 +165,14 @@ describe('TagList', () => {
     const nodeTag = screen.getByTestId('tag-Node.js');
     fireEvent.click(nodeTag);
     
-    expect(mockToggleSecondaryTag).toHaveBeenCalledWith('Node.js');
+    expect(mockToggleTag).toHaveBeenCalledWith('Node.js');
   });
 
   it('should not call toggle functions when selectable is false', () => {
-    const mockTogglePrimaryTag = vi.fn();
-    const mockToggleSecondaryTag = vi.fn();
+    const mockToggleTag = vi.fn();
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      togglePrimaryTag: mockTogglePrimaryTag,
-      toggleSecondaryTag: mockToggleSecondaryTag
+      toggleTag: mockToggleTag
     });
 
     render(
@@ -193,14 +189,13 @@ describe('TagList', () => {
     fireEvent.click(reactTag);
     fireEvent.click(nodeTag);
     
-    expect(mockTogglePrimaryTag).not.toHaveBeenCalled();
-    expect(mockToggleSecondaryTag).not.toHaveBeenCalled();
+    expect(mockToggleTag).not.toHaveBeenCalled();
   });
 
   it('should show selected state for primary tags', () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedPrimaryTags: ['React']
+      selectedTags: ['React']
     });
 
     render(<TagList primaryTags={['React', 'Vue']} secondaryTags={[]} />);
@@ -215,7 +210,7 @@ describe('TagList', () => {
   it('should show selected state for secondary tags', () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedSecondaryTags: ['Node.js']
+      selectedTags: ['Node.js']
     });
 
     render(<TagList primaryTags={[]} secondaryTags={['Node.js', 'Express']} />);
@@ -228,6 +223,11 @@ describe('TagList', () => {
   });
 
   it('should correctly identify primary tags', () => {
+    (useFilterStore as any).mockReturnValue({
+      ...mockFilterStore,
+      selectedTags: []
+    });
+
     render(<TagList primaryTags={['React']} secondaryTags={['Node.js']} />);
     
     const reactTag = screen.getByTestId('tag-React');
@@ -238,6 +238,11 @@ describe('TagList', () => {
   });
 
   it('should apply custom font size', () => {
+    (useFilterStore as any).mockReturnValue({
+      ...mockFilterStore,
+      selectedTags: []
+    });
+
     render(<TagList primaryTags={['React']} secondaryTags={[]} fontSize="1.2rem" />);
     
     const reactTag = screen.getByTestId('tag-React');
@@ -245,6 +250,11 @@ describe('TagList', () => {
   });
 
   it('should use default maxTags when not specified', () => {
+    (useFilterStore as any).mockReturnValue({
+      ...mockFilterStore,
+      selectedTags: []
+    });
+
     const manyTags = Array.from({ length: 150 }, (_, i) => `Tag${i}`);
     render(<TagList primaryTags={manyTags} secondaryTags={[]} />);
     
@@ -260,6 +270,11 @@ describe('TagList', () => {
     });
 
     it('should deduplicate tags (primary takes precedence)', () => {
+      (useFilterStore as any).mockReturnValue({
+        ...mockFilterStore,
+        selectedTags: []
+      });
+
       render(<TagList primaryTags={['React', 'React']} secondaryTags={['React', 'Node.js']} />);
       
       // Should deduplicate React and show it as primary only
@@ -272,6 +287,11 @@ describe('TagList', () => {
     });
 
     it('should handle very long tag names', () => {
+      (useFilterStore as any).mockReturnValue({
+        ...mockFilterStore,
+        selectedTags: []
+      });
+
       const longTag = 'Very'.repeat(20);
       render(<TagList primaryTags={[longTag]} secondaryTags={[]} />);
       
