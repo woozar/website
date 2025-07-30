@@ -18,10 +18,8 @@ vi.mock('../../stores/filterStore', () => ({
 }));
 
 const mockFilterStore = {
-  selectedPrimaryTags: [],
-  selectedSecondaryTags: [],
-  togglePrimaryTag: vi.fn(),
-  toggleSecondaryTag: vi.fn(),
+  selectedTags: [],
+  toggleTag: vi.fn(),
   clearAllFilters: vi.fn()
 };
 
@@ -34,8 +32,7 @@ describe('ActiveTagsFilter', () => {
   it('should not render when no filters are active', () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedPrimaryTags: [],
-      selectedSecondaryTags: []
+      selectedTags: []
     });
 
     render(<ActiveTagsFilter />);
@@ -45,11 +42,10 @@ describe('ActiveTagsFilter', () => {
     expect(screen.queryByText('Alle Filter löschen')).not.toBeInTheDocument();
   });
 
-  it('should render with primary tags', () => {
+  it('should render with tags', () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedPrimaryTags: ['React', 'TypeScript'],
-      selectedSecondaryTags: []
+      selectedTags: ['React', 'TypeScript']
     });
 
     render(<ActiveTagsFilter />);
@@ -60,11 +56,10 @@ describe('ActiveTagsFilter', () => {
     expect(screen.getByText('Alle Filter löschen')).toBeInTheDocument();
   });
 
-  it('should render with secondary tags', () => {
+  it('should render with multiple tags', () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedPrimaryTags: [],
-      selectedSecondaryTags: ['Node.js', 'Express']
+      selectedTags: ['Node.js', 'Express']
     });
 
     render(<ActiveTagsFilter />);
@@ -75,11 +70,10 @@ describe('ActiveTagsFilter', () => {
     expect(screen.getByText('Alle Filter löschen')).toBeInTheDocument();
   });
 
-  it('should render with both primary and secondary tags', () => {
+  it('should render with mixed tags', () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedPrimaryTags: ['React'],
-      selectedSecondaryTags: ['Node.js']
+      selectedTags: ['React', 'Node.js']
     });
 
     render(<ActiveTagsFilter />);
@@ -88,13 +82,12 @@ describe('ActiveTagsFilter', () => {
     expect(screen.getByText('Node.js')).toBeInTheDocument();
   });
 
-  it('should call togglePrimaryTag when removing a primary tag', () => {
-    const mockTogglePrimaryTag = vi.fn();
+  it('should call toggleTag when removing a tag', () => {
+    const mockToggleTag = vi.fn();
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedPrimaryTags: ['React'],
-      selectedSecondaryTags: [],
-      togglePrimaryTag: mockTogglePrimaryTag
+      selectedTags: ['React'],
+      toggleTag: mockToggleTag
     });
 
     render(<ActiveTagsFilter />);
@@ -105,16 +98,15 @@ describe('ActiveTagsFilter', () => {
     
     expect(removeButton).toBeInTheDocument();
     fireEvent.click(removeButton!);
-    expect(mockTogglePrimaryTag).toHaveBeenCalledWith('React');
+    expect(mockToggleTag).toHaveBeenCalledWith('React');
   });
 
-  it('should call toggleSecondaryTag when removing a secondary tag', () => {
-    const mockToggleSecondaryTag = vi.fn();
+  it('should call toggleTag when removing another tag', () => {
+    const mockToggleTag = vi.fn();
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedPrimaryTags: [],
-      selectedSecondaryTags: ['Node.js'],
-      toggleSecondaryTag: mockToggleSecondaryTag
+      selectedTags: ['Node.js'],
+      toggleTag: mockToggleTag
     });
 
     render(<ActiveTagsFilter />);
@@ -125,15 +117,14 @@ describe('ActiveTagsFilter', () => {
     
     expect(removeButton).toBeInTheDocument();
     fireEvent.click(removeButton!);
-    expect(mockToggleSecondaryTag).toHaveBeenCalledWith('Node.js');
+    expect(mockToggleTag).toHaveBeenCalledWith('Node.js');
   });
 
   it('should call clearAllFilters when clicking clear all button', () => {
     const mockClearAllFilters = vi.fn();
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedPrimaryTags: ['React'],
-      selectedSecondaryTags: ['Node.js'],
+      selectedTags: ['React', 'Node.js'],
       clearAllFilters: mockClearAllFilters
     });
 
@@ -145,11 +136,10 @@ describe('ActiveTagsFilter', () => {
     expect(mockClearAllFilters).toHaveBeenCalled();
   });
 
-  it('should have correct styling for primary tags', () => {
+  it('should have correct styling for tags', () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedPrimaryTags: ['React'],
-      selectedSecondaryTags: []
+      selectedTags: ['React']
     });
 
     render(<ActiveTagsFilter />);
@@ -162,11 +152,10 @@ describe('ActiveTagsFilter', () => {
     });
   });
 
-  it('should have correct styling for secondary tags', () => {
+  it('should have consistent styling for all tags', () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedPrimaryTags: [],
-      selectedSecondaryTags: ['Node.js']
+      selectedTags: ['Node.js']
     });
 
     render(<ActiveTagsFilter />);
@@ -179,13 +168,12 @@ describe('ActiveTagsFilter', () => {
     });
   });
 
-  it('should handle multiple primary tags removal', () => {
-    const mockTogglePrimaryTag = vi.fn();
+  it('should handle multiple tags display', () => {
+    const mockToggleTag = vi.fn();
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedPrimaryTags: ['React', 'TypeScript', 'JavaScript'],
-      selectedSecondaryTags: [],
-      togglePrimaryTag: mockTogglePrimaryTag
+      selectedTags: ['React', 'TypeScript', 'JavaScript'],
+      toggleTag: mockToggleTag
     });
 
     render(<ActiveTagsFilter />);
@@ -195,13 +183,12 @@ describe('ActiveTagsFilter', () => {
     expect(screen.getByText('JavaScript')).toBeInTheDocument();
   });
 
-  it('should handle multiple secondary tags removal', () => {
-    const mockToggleSecondaryTag = vi.fn();
+  it('should handle large number of tags', () => {
+    const mockToggleTag = vi.fn();
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedPrimaryTags: [],
-      selectedSecondaryTags: ['Node.js', 'Express', 'MongoDB'],
-      toggleSecondaryTag: mockToggleSecondaryTag
+      selectedTags: ['Node.js', 'Express', 'MongoDB'],
+      toggleTag: mockToggleTag
     });
 
     render(<ActiveTagsFilter />);

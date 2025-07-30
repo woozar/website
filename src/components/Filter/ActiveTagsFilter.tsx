@@ -5,23 +5,17 @@ import { useFilterStore } from '../../stores/filterStore';
 
 export const ActiveTagsFilter = () => {
   const { 
-    selectedPrimaryTags, 
-    selectedSecondaryTags, 
-    togglePrimaryTag, 
-    toggleSecondaryTag,
+    selectedTags, 
+    toggleTag,
     clearAllFilters 
   } = useFilterStore();
 
-  const hasActiveFilters = selectedPrimaryTags.length > 0 || selectedSecondaryTags.length > 0;
+  const hasActiveFilters = selectedTags.length > 0;
 
   if (!hasActiveFilters) return null;
 
-  const removeTag = (tag: string, isPrimary: boolean) => {
-    if (isPrimary) {
-      togglePrimaryTag(tag);
-    } else {
-      toggleSecondaryTag(tag);
-    }
+  const removeTag = (tag: string) => {
+    toggleTag(tag);
   };
 
   return (
@@ -39,49 +33,9 @@ export const ActiveTagsFilter = () => {
           </Text>
           
           <Group gap="xs">
-            {selectedPrimaryTags.map((tag) => (
+            {selectedTags.map((tag: string) => (
               <motion.div
-                key={`primary-${tag}`}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Badge
-                  size="md"
-                  radius="xl"
-                  variant="filled"
-                  color="orange"
-                  style={{
-                    backgroundColor: 'var(--primary-orange)',
-                    color: 'white',
-                    paddingRight: '0.25rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem'
-                  }}
-                >
-                  {tag}
-                  <ActionIcon
-                    size="xs"
-                    variant="transparent"
-                    color="white"
-                    onClick={() => removeTag(tag, true)}
-                    style={{ 
-                      minWidth: '16px', 
-                      minHeight: '16px',
-                      color: 'white'
-                    }}
-                  >
-                    <IconX size={12} />
-                  </ActionIcon>
-                </Badge>
-              </motion.div>
-            ))}
-            
-            {selectedSecondaryTags.map((tag) => (
-              <motion.div
-                key={`secondary-${tag}`}
+                key={`tag-${tag}`}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
@@ -106,7 +60,7 @@ export const ActiveTagsFilter = () => {
                     size="xs"
                     variant="transparent"
                     color="white"
-                    onClick={() => removeTag(tag, false)}
+                    onClick={() => removeTag(tag)}
                     style={{ 
                       minWidth: '16px', 
                       minHeight: '16px',
