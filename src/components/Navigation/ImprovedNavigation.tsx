@@ -247,7 +247,10 @@ export const ImprovedNavigation = () => {
           body: {
             padding: '1.5rem',
             backgroundColor: 'var(--background-primary)'
-          }
+          },
+          content: {
+            backgroundColor: 'var(--background-primary)'
+          },
         }}
       >
         <Stack gap="lg">
