@@ -15,7 +15,7 @@ export const projectsData: ProjectsData = {
   "projects": [
     {
       "customer": "12 of Spades",
-      "title": "Modern Portfolio Website with Advanced Features",
+      "title": "Modern Portfolio Website",
       "description": [
         "Development of a modern, responsive portfolio website showcasing software development expertise and project portfolio. The website serves as a professional platform to present services, projects, and technical capabilities to potential clients and collaborators.",
         "The project emphasizes modern web development practices with **React 19** and **TypeScript**, featuring a component-driven architecture using the **Mantine UI framework**. The website includes advanced filtering capabilities for projects and technologies, allowing visitors to easily explore relevant work based on their interests.",  
@@ -87,7 +87,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "WIADOK GmbH & Co. KG",
-      "title": "Workshop for 'Using AI in software for tax advisors'",
+      "title": "AI Workshop for Tax Software",
       "description": [
         "WIADOK, a company that specializes in providing innovative solutions for businesses, particularly tax advisors, is constantly exploring new ways to improve efficiency and productivity through the use of technology.",
         "I led an AI workshop for WIADOK, where we discussed potential applications of AI within their business. One of the key ideas that emerged was the development of a mobile app that could use AI to process receipts and invoices. End-users could simply take photos of these documents, and the app would use an LLM to extract key information such as date, vendor, and itemized costs. This information could then be automatically uploaded to the tax advisor's office, streamlining the process for both the client and the advisor.",
@@ -127,7 +127,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "ambiFOX GmbH",
-      "title": "Workshop for 'Using AI in ambiFOX daily business'",
+      "title": "AI Business Workshop",
       "description": [
         "ambiFOX is a technology company specializing in network operations. They offer a range of services, including network design, implementation, and maintenance. Their goal is to streamline network operations and improve overall IT efficiency.",
         "I led a workshop for ambiFOX, where we explored the potential applications of AI within their business. One idea that emerged was to use AI to automate the generation of network device configurations. This could significantly reduce the time and effort required to set up new devices.",
@@ -155,7 +155,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "Glückliche Gäste GmbH",
-      "title": "Uninu AI infused foodtracking app",
+      "title": "AI Food Tracking App",
       "description": [
         "Glückliche Gäste GmbH, a company focused on developing innovative food tracking solutions, is working on a new app called \"Uninu\". They aim to revolutionize the way people track their food intake by leveraging AI to simplify the process.",
         "I was one of the early developers on the Uninu project, where I played a key role in building the backend infrastructure and the React Native mobile app. Initially, we employed a traditional approach using AWS API Gateway and RDS to handle API requests and store user data. However, to enhance scalability, performance, and real-time capabilities, we transitioned to a more modern architecture utilizing AWS AppSync and DynamoDB.",
@@ -225,7 +225,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "Drawag AG",
-      "title": "AI infused WebScrapper for construction tenders",
+      "title": "AI Construction Tender Scraper",
       "description": [
         "Drawag AG, a company focused on construction and engineering, was facing a significant challenge: a significant portion of an employee's time was spent manually searching through various portals to identify potential building projects that aligned with their expertise. The goal was to efficiently identify projects that included specific construction trades where Drawag could offer their services as a subcontractor.",
         "To address this challenge, we proposed leveraging AI to automate the process of searching and filtering through these portals. We began by developing a web scraper to extract relevant data from these portals. This data was then fed into a state-of-the-art language model, such as GPT-4 or a similar model, to identify projects that matched Drawag's specific criteria.",
@@ -253,7 +253,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "DMG Mori Software Solution",
-      "title": "Concept and implementation of an app store and a demo app",
+      "title": "Smart Factory App Store",
       "description": [
         "The project centered on developing an industry-specific app store for Industrial PCs (IPCs) within machines manufactured by our customer. A significant aspect was the launch of the initial app—Celos Tech Calculator—a specialized tool designed for performing machine-specific calculations, aimed at enhancing operational efficiency and functionality.",
         "The primary objective was to establish a robust app store framework seamlessly integrated with IPCs, facilitating straightforward installation and management of apps. This framework served as the platform for deploying Celos Tech Calculator and paved the way for future app expansions.",
@@ -272,7 +272,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "DMG Mori Software Solution",
-      "title": "Integrate TULIP no code plattform",
+      "title": "TULIP No-Code Integration",
       "description": [
         "The project successfully integrated the TULIP no-code platform with the Celos X machine software, creating a seamless, API-based bi-directional data flow. This integration enhanced Celos X by enabling real-time data exchange and improving functionality through TULIP's no-code capabilities.",
         "Key features implemented included robust APIs for efficient data management, enterprise-level authentication and authorization mechanisms, and a technology stack utilizing TypeScript and Angular for scalability and responsiveness. These elements ensured secure user access and smooth communication between the platforms.",
@@ -291,7 +291,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "DMG Mori Software Solution",
-      "title": "Integration of ISTOS production planning system ",
+      "title": "ISTOS Integration Platform",
       "description": [
         "The project integrated the ISTOS production planning system by connecting cloud frontends and on-premise machines to a cloud-based platform. This integration facilitated seamless communication and coordination between different components, enhancing production planning efficiency.",
         "Key elements of the integration included robust user authentication and authorization mechanisms, ensuring secure access in an enterprise context. The project utilized several Azure services and Terraform to build a scalable and resilient system.",
@@ -310,7 +310,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "DMG Mori Software Solution",
-      "title": "Implementation of PAYZR Business Model (Data Flow)",
+      "title": "PAYZR - Pay-per-Use Billing System",
       "description": [
         "This project aimed to develop an advanced headless machine for managing cloud data flow, addressing requirements like fraud detection, remote deactivation, enterprise regulation compliance, and billing integration with external systems. The solution emphasized high security standards, including Write Once Read Many (WORM) storage and stream validation, while enabling a pay-per-use model for end users.",
         "Key features included real-time fraud detection, secure remote deactivation, adherence to regulations like GDPR and HIPAA, and seamless billing integration. The machine incorporated comprehensive security protocols, such as encryption and access control, to ensure robust data protection.",
@@ -331,7 +331,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "DMG Mori Software Solution",
-      "title": "Development and design of the \"Celos X\" digital ecosystem",
+      "title": "Celos X Digital Ecosystem",
       "comment": "<p>CELOS X is a digital ecosystem created by DMG MORI for the manufacturing industry. It acts as a central hub for data from machines and applications, providing a holistic solution for digital transformation.</p>",
       "description": [
         "DMG Mori's award-winning **\"Celos X\"** project revolutionizes data exchange for high-end tool machines. This innovative platform seamlessly integrates edge computing with the **Microsoft Azure cloud**, enabling powerful data analysis and machine optimization. Recognized by Microsoft with the *2021 \"Intelligent Manufacturing Award\"* in the \"Envision\" category, Celos X paves the way for smarter factories.",
@@ -403,7 +403,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "Kranz IT-Systemhaus GmbH",
-      "title": "Streamlining Operations: A Tailored Software Solution for Kranz IT",
+      "title": "Prozessdigitalisierung",
       "description": [
         "Despite readily available software for business process digitization, IT system house Kranz sought a bespoke solution. Their priority: minimalism and user-friendliness to minimize the learning curve.",
         "A key requirement was replicating the existing processes, painstakingly designed and ingrained within the managing director's workflow. Beyond basic data entry and cloud storage in a proprietary database, the software needed to capture customer signatures directly on smartphones and store them as database images.",
@@ -414,7 +414,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "Open Tinkering",
-      "title": "Unlocking the Potential of DIY IoT",
+      "title": "DIY IoT Hardware Project",
       "description": [
         "A passionate group known as \"Open Tinkering\" is diving into the world of next-generation Internet of Things (IoT) hardware. Their focus is on creating open-source components specifically designed for advanced users. This means complete control - users can customize functionalities, flash custom firmware, and truly explore the potential of their creations.",
         "Fuelled by a love of technology and a desire to push boundaries, Open Tinkering is a hobbyist project at its core. The team members dedicate their free time to developing tools that empower the advanced user community to experiment and innovate within the ever-expanding field of IoT.",
@@ -438,7 +438,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "T3 GmbH / Siemens AG - Digital Industries - Factory Automation",
-      "title": "Development of the \"Minerva Micro\" mobile frontend",
+      "title": "Minerva Micro Mobile App",
       "description": [
         "The factory automation department of Siemens Digital Industries is providing an online portal, where users can download all kinds of documentation as PDFs. Also they provide a DVD with all the documentation on it, that is being shipped with their products.",
         "Instead of just holding a list of files, they wanted to provide a more interactive way of browsing the documentation.",
@@ -460,7 +460,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "Finanz Informatik Technologie Service GmbH & Co. KG",
-      "title": "Addition of missing tests for an existing software product",
+      "title": "Test Coverage Enhancement",
       "description": [
         "The FITS is running an portal, to allow there employees to manage all their internal accounts for all kinds of different system. This Portal is via API connected to the MFA infrastructure, that is using keychain hardware tokens.",
         "As the development resources in this project were limited, I was instructed to setup the test project and add all test cases for existing features, so the internal developers could keep working on their tasks and only add tests for their new code.",
@@ -471,7 +471,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "Osram GmbH",
-      "title": "Development of the backend for a core service in the lightelligence portal",
+      "title": "OSRAM Lightelligence App",
       "description": [
         "Osram was creating a new cloud portal called \"Lightelligence\". The services that are provided by the portal are split into three groups. The \"Core Services\" are being used by everybody and provide the very basics for every user. Osram had own internal scrum teams, that created the core services. The \"Domain Services\" are the next layer of features, that are useful for every user, but not mandatory for the use of the portal. Users can book the domain services separately as plugins for their lightelligence account. Every domain service contains a set of backend services and a frontend. Osram hired external teams, to develop the domain services.",
         "I was one of the developers of the \"building central\" domain service team and my job was to provide the backend as RESTful API and a GraphQL middleware. Part of the backend job was to manage database migration with knex.js.",
@@ -515,7 +515,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "Telent GmbH",
-      "title": "Consulting: modernization of the IoT portal architecture",
+      "title": "Telent IoT Portal Modernization",
       "description": [
         "Telent GmbH is selling hardware devices like sensors for almost anything arround \"smart buildings\". They are also providing a paid service portal that provides the information of the devices in different \"apps\". As the portal was growing and it got foreseeable that the existing architecture would get some bottlenecks soon, Telent decided to overhaul big parts of their architecture. To get a clean start with some new technologies, they hired some consultants like me to help and teach.",
         "My job was to help refactor or rewrite some of the services to fit the requirements towards scaleability. As the whole source control concept was changed and the new code was stored in a mono repository, I also helped with the refactoring of the the whole build pipelines aswell.",
@@ -549,7 +549,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "Saurer AG",
-      "title": "Development of Node.Js microservices for smart factory",
+      "title": "Smart Factory Microservices",
       "description": [
         "I have worked in a team that designed and developed a set of microservices and an Angular 7 frontend called \"smart factory app\", that is now running in the factory in China. My job was to develop a set of Node.js microservices that provide RESTful APIs. The data is being stored in a mongodb and accessed through an additional layer that is like a lightweight version of Eclipse Ditto. I dockerized the services, deployed them to kubernetes and provided a description with swagger. For quality assurance I wrote a set of test cases with Chai and Mocha and I also used Dredd to automatically test the API against the swagger description. In addition to the functional tests we use static code analysis with SonarQube.",
         "For build automation I wrote a script for GitLab CI/CD that handles tests, building and deployment. The SonarQube quality gates are also part of the test stage and can potentially fail the build.",
@@ -594,7 +594,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "T3 GmbH / KUKA AG",
-      "title": "Development of a dotNet based knowledge portal",
+      "title": ".NET Knowledge Portal",
       "description": [
         "T3 is developing two software products. There is the Knowledge Manager, a smart search engine for modular bits of information. The engine is based on information that are well structured and maintained and contain a lot of meta information. The second product is the Learning Content Manager an AngularJS tool that is used to provide eLearning content to the users.",
         "My job was to develop new features and improve performance and quality of the existing C# Knowledge Manager code. I also assisted the Knowledge Manager frontend team with the introduction of unit and e2e tests using Jasmine, Karma and Selenium.",
@@ -621,7 +621,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "OMNINET GmbH",
-      "title": "Development of a formular editor and library",
+      "title": "Formula Editor & Library",
       "description": [
         "OMNINET GmbH is developing a business process software called OMNITRACKER. The OMNITRACKER is pretty close to an object oriented programming framework that can be used to model business processes. The backend is written in C++ and the frontend is written in C# and WPF.",
         "For every process step that requires manual input or displays information to the user, the OMNITRACKER requires a formular. A very basic formular can be rendered automatically but it is part of the job of the process designer to provide the required formulars. The formular editor and the formular library that is being used to render the formulars is a central part of the solution. My first task was to develop some features for the new version of the formular editor.",
@@ -643,7 +643,7 @@ export const projectsData: ProjectsData = {
     },
     {
       "customer": "Paessler AG",
-      "title": "Sensor development",
+      "title": "Custom Sensor Development",
       "description": [
         "The Paessler AG is developing a network monitoring solution called PRTG. It has got a central server and one or more probes that collect data from the target systems. On every probe there is a tree struture that contains folders that contain other folders or devices. Every device can contain a list of sensors that provide the actual meassurements.",
         "Paessler is selling different licenses for PRTG on premise installations and also providing a hosted version that can be booked as a service.",

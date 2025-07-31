@@ -20,7 +20,7 @@ vi.mock('../data/projects', () => ({
       },
       {
         customer: 'Another Customer',
-        title: 'Workshop for \'Using AI in software for tax advisors\'',
+        title: 'AI Workshop for Tax Software',
         description: ['Another English description'],
         primary_tags: ['AI', 'Workshop'],
         tags: ['Python', 'OpenAI']
@@ -74,9 +74,9 @@ describe('useProjects', () => {
     ])
 
     // Test workshop project translation
-    const workshopProject = result.current.projects.find(p => p.title.includes('Workshop'))
+    const workshopProject = result.current.projects.find(p => p.title.includes('KI-Workshop'))
     expect(workshopProject).toBeDefined()
-    expect(workshopProject?.title).toBe('Workshop \'KI-Einsatz in Software für Steuerberater\'')
+    expect(workshopProject?.title).toBe('KI-Workshop für Steuersoftware')
 
     // Test project without translation stays original
     const regularProject = result.current.projects.find(p => p.title === 'Regular Project')
@@ -169,9 +169,9 @@ describe('useProjects', () => {
     const { result } = renderHook(() => useProjects())
 
     // Workshop project has both title and description translated
-    const workshopProject = result.current.projects.find(p => p.title.includes('KI-Einsatz'))
+    const workshopProject = result.current.projects.find(p => p.title.includes('KI-Workshop'))
     expect(workshopProject).toBeDefined()
-    expect(workshopProject?.title).toBe('Workshop \'KI-Einsatz in Software für Steuerberater\'')
+    expect(workshopProject?.title).toBe('KI-Workshop für Steuersoftware')
     expect(workshopProject?.description[0]).toContain('WIADOK, ein Unternehmen, das sich auf innovative Lösungen für Unternehmen, insbesondere Steuerberater, spezialisiert hat')
 
     // AI Playground has only description translated, title stays the same
