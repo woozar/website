@@ -45,7 +45,7 @@ export const TagList = ({
   };
 
   return (
-    <Group gap="xs">
+    <Group gap={8} style={{ rowGap: 0 }}>
       {displayedTags.map(({ tag, isPrimary }) => (
         <motion.div
           key={`${isPrimary ? 'primary' : 'secondary'}-${tag}`}
@@ -57,7 +57,11 @@ export const TagList = ({
             isPrimary={isPrimary}
             isSelected={selectable ? selectedTags.includes(tag) : false}
             onClick={() => handleTagClick(tag)}
-            style={{ cursor: selectable ? 'pointer' : 'default', fontSize }}
+            style={{ 
+              cursor: selectable ? 'pointer' : 'default', 
+              fontSize,
+              lineHeight: 1
+            }}
           />
         </motion.div>
       ))}

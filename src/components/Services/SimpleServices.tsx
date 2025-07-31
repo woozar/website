@@ -4,6 +4,7 @@ import { motion, Variants, useReducedMotion } from 'framer-motion';
 import { Section, Grid } from '../Layout';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useTranslation } from '../../hooks/useTranslation';
+import { TagList } from '../Projects/TagList';
 // import aiImage from '../../assets/ai-development.webp';
 // import cloudImage from '../../assets/cloud-architecture.webp';
 // import fullstackImage from '../../assets/fullstack-development.webp';
@@ -174,24 +175,13 @@ export const SimpleServices = () => {
                   <Text size="sm" fw={600} c="var(--text-primary)">
                     {t.services.technologies}
                   </Text>
-                  <Box style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                    {service.technologies.map((tech) => (
-                      <Text
-                        key={tech}
-                        size="xs"
-                        px="xs"
-                        py={4}
-                        style={{
-                          backgroundColor: 'var(--neutral-light)',
-                          borderRadius: '12px',
-                          color: 'var(--text-secondary)',
-                          fontWeight: 500
-                        }}
-                      >
-                        {tech}
-                      </Text>
-                    ))}
-                  </Box>
+                  <TagList
+                    primaryTags={service.technologies}
+                    secondaryTags={[]}
+                    showMoreBadge={false}
+                    selectable={false}
+                    fontSize="0.75rem"
+                  />
                   </Stack>
                 </Stack>
                 </Card>
