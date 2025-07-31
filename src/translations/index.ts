@@ -2,10 +2,7 @@ import { de } from './de';
 import { en } from './en';
 import { Language } from '../stores/languageStore';
 
-export const translations = {
-  de,
-  en,
-};
+export const translations = { de, en };
 
 export type TranslationKey = keyof typeof de;
 export type Translations = typeof de;

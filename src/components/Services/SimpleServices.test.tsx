@@ -13,8 +13,11 @@ vi.mock('framer-motion', () => ({
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
     section: ({ children, ...props }: any) => <section {...props}>{children}</section>,
   },
-  useReducedMotion: () => false,
+  useReducedMotion: vi.fn(),
 }))
+
+// Import after mocking
+import { useReducedMotion } from 'framer-motion'
 
 // Mock the image imports
 vi.mock('../../assets/ai-development.webp', () => ({
@@ -43,6 +46,8 @@ describe('SimpleServices', () => {
       t: de,
       language: 'de'
     })
+    // Set default reduced motion to false
+    vi.mocked(useReducedMotion).mockReturnValue(false)
   })
 
   it('should render services section with title and subtitle', () => {
@@ -55,7 +60,7 @@ describe('SimpleServices', () => {
   it('should render all three service cards', () => {
     render(<SimpleServices />)
 
-    expect(screen.getByText('AI & LLM Development')).toBeInTheDocument()
+    expect(screen.getByText('AI Development')).toBeInTheDocument()
     expect(screen.getByText('Cloud Architecture')).toBeInTheDocument()
     expect(screen.getByText('Full-Stack Development')).toBeInTheDocument()
   })
@@ -63,9 +68,21 @@ describe('SimpleServices', () => {
   it('should render service descriptions', () => {
     render(<SimpleServices />)
 
-    expect(screen.getByText('Entwicklung von AI-basierten Anwendungen mit modernsten Large Language Models wie GPT-4, Claude und Gemini. Von Chatbots bis hin zu komplexen AI-Workflows.')).toBeInTheDocument()
-    expect(screen.getByText('Design und Implementierung skalierbarer Cloud-Infrastrukturen mit AWS, Azure und modernen DevOps-Praktiken. Microservices, Serverless und Container-Orchestrierung.')).toBeInTheDocument()
-    expect(screen.getByText('Entwicklung moderner Web- und Mobile-Anwendungen mit React, Angular, Node.js und TypeScript. Responsive Design und perfekte User Experience.')).toBeInTheDocument()
+    // Check for key parts of descriptions using partial text matching
+    expect(screen.getByText((content) => 
+      content.includes('Entwicklung von AI-basierten Anwendungen') && 
+      content.includes('Large Language Models')
+    )).toBeInTheDocument()
+    
+    expect(screen.getByText((content) => 
+      content.includes('Design und Implementierung skalierbarer Cloud-Infrastrukturen') && 
+      content.includes('AWS, Azure')
+    )).toBeInTheDocument()
+    
+    expect(screen.getByText((content) => 
+      content.includes('Entwicklung moderner Web- und Mobile-Anwendungen') && 
+      content.includes('React, Angular')
+    )).toBeInTheDocument()
   })
 
   it('should render service images', () => {
@@ -117,7 +134,7 @@ describe('SimpleServices', () => {
 
     // Should still render all content on mobile
     expect(screen.getByText('Meine Services')).toBeInTheDocument()
-    expect(screen.getByText('AI & LLM Development')).toBeInTheDocument()
+    expect(screen.getByText('AI Development')).toBeInTheDocument()
     expect(screen.getByText('Cloud Architecture')).toBeInTheDocument()
     expect(screen.getByText('Full-Stack Development')).toBeInTheDocument()
   })
@@ -126,7 +143,7 @@ describe('SimpleServices', () => {
     render(<SimpleServices />)
 
     expect(screen.getByText('Meine Services')).toBeInTheDocument()
-    expect(screen.getByText('AI & LLM Development')).toBeInTheDocument()
+    expect(screen.getByText('AI Development')).toBeInTheDocument()
     expect(screen.getAllByText('Technologien:')).toHaveLength(3) // One for each service
   })
 
@@ -138,7 +155,7 @@ describe('SimpleServices', () => {
 
     const serviceHeadings = screen.getAllByRole('heading', { level: 3 })
     expect(serviceHeadings).toHaveLength(3)
-    expect(serviceHeadings[0]).toHaveTextContent('AI & LLM Development')
+    expect(serviceHeadings[0]).toHaveTextContent('AI Development')
     expect(serviceHeadings[1]).toHaveTextContent('Cloud Architecture')
     expect(serviceHeadings[2]).toHaveTextContent('Full-Stack Development')
   })
@@ -146,11 +163,15 @@ describe('SimpleServices', () => {
   it('should render service cards with proper structure', () => {
     render(<SimpleServices />)
 
-    // Each service should have an image, title, description, and technologies
-    const aiTitle = screen.getByText('AI & LLM Development')
-    const aiDescription = screen.getByText('Entwicklung von AI-basierten Anwendungen mit modernsten Large Language Models wie GPT-4, Claude und Gemini. Von Chatbots bis hin zu komplexen AI-Workflows.')
-    
+    // Check that service titles are present
+    const aiTitle = screen.getByText('AI Development')
     expect(aiTitle).toBeInTheDocument()
+    
+    // Check that service descriptions are present using flexible matching
+    const aiDescription = screen.getByText((content) => 
+      content.includes('Entwicklung von AI-basierten Anwendungen') && 
+      content.includes('Large Language Models')
+    )
     expect(aiDescription).toBeInTheDocument()
   })
 
@@ -185,7 +206,7 @@ describe('SimpleServices', () => {
 
     const serviceHeadings = screen.getAllByRole('heading', { level: 3 })
     
-    expect(serviceHeadings[0]).toHaveTextContent('AI & LLM Development')
+    expect(serviceHeadings[0]).toHaveTextContent('AI Development')
     expect(serviceHeadings[1]).toHaveTextContent('Cloud Architecture')
     expect(serviceHeadings[2]).toHaveTextContent('Full-Stack Development')
   })
@@ -198,8 +219,43 @@ describe('SimpleServices', () => {
     expect(servicesSection).toBeInTheDocument()
 
     // All service cards should be present
-    expect(screen.getByText('AI & LLM Development')).toBeInTheDocument()
+    expect(screen.getByText('AI Development')).toBeInTheDocument()
     expect(screen.getByText('Cloud Architecture')).toBeInTheDocument()
     expect(screen.getByText('Full-Stack Development')).toBeInTheDocument()
+  })
+
+  describe('Animation and Reduced Motion', () => {
+    it('should render with normal animations when reduced motion is false', () => {
+      vi.mocked(useReducedMotion).mockReturnValue(false)
+
+      render(<SimpleServices />)
+
+      // Component should render successfully with animations enabled
+      expect(screen.getByText('Meine Services')).toBeInTheDocument()
+      expect(screen.getByText('AI Development')).toBeInTheDocument()
+      expect(screen.getByText('Cloud Architecture')).toBeInTheDocument()
+    })
+
+    it('should render with reduced motion animations when reduced motion is true', () => {
+      vi.mocked(useReducedMotion).mockReturnValue(true)
+
+      render(<SimpleServices />)
+
+      // Component should render successfully with reduced animations
+      expect(screen.getByText('Meine Services')).toBeInTheDocument()
+      expect(screen.getByText('AI Development')).toBeInTheDocument()
+      expect(screen.getByText('Full-Stack Development')).toBeInTheDocument()
+    })
+
+    it('should render all service cards with reduced motion enabled', () => {
+      vi.mocked(useReducedMotion).mockReturnValue(true)
+
+      render(<SimpleServices />)
+
+      // All service cards should still render with reduced motion
+      expect(screen.getByText('AI Development')).toBeInTheDocument()
+      expect(screen.getByText('Cloud Architecture')).toBeInTheDocument()
+      expect(screen.getByText('Full-Stack Development')).toBeInTheDocument()
+    })
   })
 })

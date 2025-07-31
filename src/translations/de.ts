@@ -20,8 +20,8 @@ export const de = {
     technologies: 'Technologien:',
     items: {
       ai: {
-        title: 'AI & LLM Development',
-        description: 'Entwicklung von AI-basierten Anwendungen mit modernsten Large Language Models wie GPT-4, Claude und Gemini. Von Chatbots bis hin zu komplexen AI-Workflows.',
+        title: 'AI Development',
+        description: 'Entwicklung von AI-basierten Anwendungen z.B. mit modernsten Large Language Models wie GPT-4, Claude und Gemini. Von Chatbots bis hin zu komplexen AI-Workflows.',
       },
       cloud: {
         title: 'Cloud Architecture',

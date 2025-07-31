@@ -20,7 +20,7 @@ export const en = {
     technologies: 'Technologies:',
     items: {
       ai: {
-        title: 'AI & LLM Development',
+        title: 'AI Development',
         description: 'Development of AI-based applications with state-of-the-art Large Language Models like GPT-4, Claude, and Gemini. From chatbots to complex AI workflows.',
       },
       cloud: {
@@ -99,7 +99,7 @@ export const en = {
     title: 'Project Statistics',
     subtitle: 'Quantified expertise based on real project experience',
     coreExpertise: 'Core Technology Expertise',
-    trustedBy: 'Trusted by Leading Companies & Technologies',
+    trustedBy: 'Trusted by Leading Companies',
     frameworksTooltip: '🛠️ Used Frameworks',
     cards: {
       totalProjects: 'Total Projects',

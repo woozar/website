@@ -17,8 +17,10 @@ vi.mock('framer-motion', () => ({
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>
   },
   AnimatePresence: ({ children }: any) => <div>{children}</div>,
-  useReducedMotion: () => false
+  useReducedMotion: vi.fn()
 }));
+
+import { useReducedMotion } from 'framer-motion'
 
 const mockProject: Project = {
   customer: 'Test Customer',
@@ -39,6 +41,11 @@ describe('ProjectDetailModal', () => {
     opened: true,
     onClose: vi.fn()
   };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(useReducedMotion).mockReturnValue(false);
+  });
 
   it('should not render when project is null', () => {
     render(<ProjectDetailModal {...defaultProps} project={null} />);
@@ -146,4 +153,33 @@ describe('ProjectDetailModal', () => {
     expect(links).toHaveLength(1);
     expect(links[0]).toHaveAttribute('href', 'https://test.com');
   });
+
+  describe('Animation and Reduced Motion', () => {
+    it('should render with normal animations when reduced motion is false', () => {
+      vi.mocked(useReducedMotion).mockReturnValue(false)
+
+      render(<ProjectDetailModal {...defaultProps} />)
+
+      // Component should render successfully with animations enabled
+      expect(screen.getByText('Test Project with Markdown')).toBeInTheDocument()
+    })
+
+    it('should render with reduced motion animations when reduced motion is true', () => {
+      vi.mocked(useReducedMotion).mockReturnValue(true)
+
+      render(<ProjectDetailModal {...defaultProps} />)
+
+      // Component should render successfully with reduced animations
+      expect(screen.getByText('Test Project with Markdown')).toBeInTheDocument()
+    })
+
+    it('should handle functionality with reduced motion enabled', () => {
+      vi.mocked(useReducedMotion).mockReturnValue(true)
+
+      render(<ProjectDetailModal {...defaultProps} />)
+
+      // Component functionality should still work with reduced motion
+      expect(screen.getByText('Test Customer')).toBeInTheDocument()
+    })
+  })
 });

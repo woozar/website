@@ -64,7 +64,7 @@ export const About = () => {
   ];
 
   return (
-    <Section id="about" background="white">
+    <Section id="about">
       <motion.div
         variants={containerVariants}
         initial="hidden"

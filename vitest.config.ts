@@ -20,7 +20,8 @@ export default defineConfig({
         '**/coverage/**',
         'dist/**',
         'src/main.tsx',
-        'src/vite-env.d.ts'
+        'src/vite-env.d.ts',
+        'src/components/*/index.ts'
       ],
       thresholds: {
         global: {

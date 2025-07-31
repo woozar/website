@@ -69,7 +69,7 @@ export const Contact = () => {
   ];
 
   return (
-    <Section id="contact" background="white">
+    <Section id="contact">
       <motion.div
         variants={containerVariants}
         initial="hidden"

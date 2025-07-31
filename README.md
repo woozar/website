@@ -81,7 +81,7 @@ Diese Portfolio-Website präsentiert die umfangreiche Expertise und Projekterfah
 ## 📞 Kontakt & Services
 
 ### **Spezialisierte Services**
-1. **AI & LLM Development** - Integration modernster Language Models (GPT-4, Claude, Gemini)
+1. **AI Development** - Integration modernster Language Models (GPT-4, Claude, Gemini)
 2. **Cloud Architecture** - Skalierbare Infrastrukturen mit AWS/Azure und DevOps
 3. **Full-Stack Development** - Moderne Web- und Mobile-Anwendungen
 

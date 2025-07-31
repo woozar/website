@@ -61,7 +61,7 @@ export const SimpleServices = () => {
   ];
 
   return (
-    <Section id="services" background="white">
+    <Section id="services">
       <Stack gap="xl">
         <motion.div
           variants={itemVariants}

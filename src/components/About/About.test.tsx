@@ -13,8 +13,11 @@ vi.mock('framer-motion', () => ({
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
     section: ({ children, ...props }: any) => <section {...props}>{children}</section>,
   },
-  useReducedMotion: () => false,
+  useReducedMotion: vi.fn(),
 }))
+
+// Import after mocking
+import { useReducedMotion } from 'framer-motion'
 
 const mockUseMediaQuery = vi.mocked(useMediaQuery)
 const mockUseTranslation = vi.mocked(useTranslation)
@@ -32,6 +35,8 @@ describe('About', () => {
       t: de,
       language: 'de'
     })
+    // Set default reduced motion to false
+    vi.mocked(useReducedMotion).mockReturnValue(false)
   })
 
   it('should render about section with title and subtitle', () => {
@@ -136,7 +141,7 @@ describe('About', () => {
         skills: {
           ...de.about.skills,
           aiLlm: {
-            category: 'AI & LLM Development',
+            category: 'AI Development',
             items: []
           },
           frontend: {
@@ -169,7 +174,7 @@ describe('About', () => {
     })
 
     expect(() => render(<About />)).not.toThrow()
-    expect(screen.getByText('AI & LLM Development')).toBeInTheDocument()
+    expect(screen.getByText('AI Development')).toBeInTheDocument()
   })
 
   it('should handle empty highlights list', () => {
@@ -206,5 +211,41 @@ describe('About', () => {
     // Should render main container
     const aboutSection = screen.getByText(de.about.title).closest('section')
     expect(aboutSection).toBeInTheDocument()
+  })
+
+  describe('Animation and Reduced Motion', () => {
+    it('should render with normal animations when reduced motion is false', () => {
+      vi.mocked(useReducedMotion).mockReturnValue(false)
+
+      render(<About />)
+
+      // Component should render successfully with animations enabled
+      expect(screen.getByText(de.about.title)).toBeInTheDocument()
+      expect(screen.getByText(de.about.subtitle)).toBeInTheDocument()
+      expect(screen.getByText(de.about.expertise)).toBeInTheDocument()
+    })
+
+    it('should render with reduced motion animations when reduced motion is true', () => {
+      vi.mocked(useReducedMotion).mockReturnValue(true)
+
+      render(<About />)
+
+      // Component should render successfully with reduced animations
+      expect(screen.getByText(de.about.title)).toBeInTheDocument()
+      expect(screen.getByText(de.about.subtitle)).toBeInTheDocument()
+      expect(screen.getByText(de.about.expertise)).toBeInTheDocument()
+    })
+
+    it('should render all skills categories with reduced motion enabled', () => {
+      vi.mocked(useReducedMotion).mockReturnValue(true)
+
+      render(<About />)
+
+      // All skill categories should still render with reduced motion
+      expect(screen.getByText(de.about.skills.aiLlm.category)).toBeInTheDocument()
+      expect(screen.getByText(de.about.skills.frontend.category)).toBeInTheDocument()
+      expect(screen.getByText(de.about.skills.backend.category)).toBeInTheDocument()
+      expect(screen.getByText(de.about.skills.cloud.category)).toBeInTheDocument()
+    })
   })
 })

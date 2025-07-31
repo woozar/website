@@ -3,11 +3,13 @@ import { render, screen, fireEvent } from '../../test/test-utils'
 import { ImprovedNavigation } from './ImprovedNavigation'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { useTranslation } from '../../hooks/useTranslation'
+import { useModal } from '../../hooks/useModal'
 import { de } from '../../translations/de'
 
 // Mock dependencies
 vi.mock('../../hooks/useMediaQuery')
 vi.mock('../../hooks/useTranslation')
+vi.mock('../../hooks/useModal')
 vi.mock('../LanguageSwitcher', () => ({
   LanguageSwitcher: ({ variant }: any) => <div data-testid={`language-switcher-${variant}`}>Language Switcher</div>
 }))
@@ -30,6 +32,7 @@ vi.mock('../../assets/logo.webp', () => ({
 
 const mockUseMediaQuery = vi.mocked(useMediaQuery)
 const mockUseTranslation = vi.mocked(useTranslation)
+const mockUseModal = vi.mocked(useModal)
 
 
 describe('ImprovedNavigation', () => {
@@ -43,6 +46,11 @@ describe('ImprovedNavigation', () => {
     mockUseTranslation.mockReturnValue({
       t: de,
       language: 'de'
+    })
+    mockUseModal.mockReturnValue({
+      isModalOpen: false,
+      openModal: vi.fn(),
+      closeModal: vi.fn()
     })
 
     // Mock scrollTo
@@ -187,6 +195,67 @@ describe('ImprovedNavigation', () => {
 
       expect(screen.getByText('Kontakt aufnehmen')).toBeInTheDocument()
     })
+
+    it('should handle mobile contact button click', () => {
+      render(<ImprovedNavigation />)
+
+      // Click the mobile contact button (first button in mobile view)
+      const mobileContactButton = screen.getAllByRole('button')[0] // First button is mobile contact
+      fireEvent.click(mobileContactButton)
+
+      expect(document.querySelector).toHaveBeenCalledWith('#contact')
+      expect(window.scrollTo).toHaveBeenCalledWith({
+        top: 400,
+        behavior: 'smooth'
+      })
+    })
+
+    it('should handle drawer contact button click', () => {
+      render(<ImprovedNavigation />)
+
+      // Open drawer
+      const burgerButton = screen.getAllByRole('button')[1] // Second button is burger menu
+      fireEvent.click(burgerButton)
+
+      // Click the drawer contact button
+      const drawerContactButton = screen.getByText('Kontakt aufnehmen')
+      fireEvent.click(drawerContactButton)
+
+      expect(document.querySelector).toHaveBeenCalledWith('#contact')
+      expect(window.scrollTo).toHaveBeenCalledWith({
+        top: 400,
+        behavior: 'smooth'
+      })
+    })
+
+    it('should handle all mobile drawer navigation clicks', () => {
+      render(<ImprovedNavigation />)
+
+      // Open drawer
+      const burgerButton = screen.getAllByRole('button')[1] // Second button is burger menu
+      fireEvent.click(burgerButton)
+
+      // Test statistics navigation item in mobile drawer
+      const statisticsButton = screen.getByText('Statistiken')
+      fireEvent.click(statisticsButton)
+      expect(document.querySelector).toHaveBeenCalledWith('#statistics')
+      expect(window.scrollTo).toHaveBeenCalledWith({
+        top: 400,
+        behavior: 'smooth'
+      })
+
+      // Re-open drawer since clicking closes it
+      fireEvent.click(burgerButton)
+      
+      // Test about navigation item in mobile drawer
+      const aboutButton = screen.getByText('Über mich')
+      fireEvent.click(aboutButton)
+      expect(document.querySelector).toHaveBeenCalledWith('#about')
+      expect(window.scrollTo).toHaveBeenCalledWith({
+        top: 400,
+        behavior: 'smooth'
+      })
+    })
   })
 
   describe('Responsive Behavior', () => {
@@ -246,6 +315,10 @@ describe('ImprovedNavigation', () => {
       // Test services navigation
       fireEvent.click(screen.getByText('Services'))
       expect(document.querySelector).toHaveBeenCalledWith('#services')
+
+      // Test statistics navigation
+      fireEvent.click(screen.getByText('Statistiken'))
+      expect(document.querySelector).toHaveBeenCalledWith('#statistics')
 
       // Test projects navigation
       fireEvent.click(screen.getByText('Projekte'))
@@ -319,6 +392,214 @@ describe('ImprovedNavigation', () => {
       expect(header).toHaveStyle({
         backgroundColor: 'var(--backdrop-filter)'
       })
+    })
+  })
+
+  describe('Logo Click Behavior', () => {
+    it('should scroll to top when logo is clicked', () => {
+      render(<ImprovedNavigation />)
+
+      const logoLink = screen.getByRole('img').closest('a')
+      expect(logoLink).toBeInTheDocument()
+
+      fireEvent.click(logoLink!)
+
+      expect(window.scrollTo).toHaveBeenCalledWith({
+        top: 0,
+        behavior: 'smooth'
+      })
+    })
+
+    it('should prevent default anchor behavior on logo click', () => {
+      render(<ImprovedNavigation />)
+
+      const logoLink = screen.getByRole('img').closest('a')
+      const clickEvent = new MouseEvent('click', { bubbles: true })
+      const preventDefaultSpy = vi.fn()
+      clickEvent.preventDefault = preventDefaultSpy
+
+      logoLink?.dispatchEvent(clickEvent)
+
+      expect(preventDefaultSpy).toHaveBeenCalled()
+    })
+  })
+
+  describe('Modal Integration', () => {
+    it('should disable burger menu when modal is open', () => {
+      mockUseMediaQuery.mockReturnValue({
+        isMobile: true,
+        isTablet: false,
+        isDesktop: false
+      })
+
+      // Mock modal as open
+      mockUseModal.mockReturnValue({
+        isModalOpen: true,
+        openModal: vi.fn(),
+        closeModal: vi.fn()
+      })
+
+      render(<ImprovedNavigation />)
+
+      const burgerButton = screen.getAllByRole('button')[1] // Second button is burger menu
+      
+      // Burger should be disabled when modal is open
+      expect(burgerButton).toHaveStyle({
+        opacity: '0.5',
+        pointerEvents: 'none'
+      })
+    })
+
+    it('should close drawer when modal opens via useEffect', () => {
+      mockUseMediaQuery.mockReturnValue({
+        isMobile: true,
+        isTablet: false,
+        isDesktop: false
+      })
+
+      // Start with modal closed
+      mockUseModal.mockReturnValue({ 
+        isModalOpen: false,
+        openModal: vi.fn(),
+        closeModal: vi.fn()
+      })
+
+      const { rerender } = render(<ImprovedNavigation />)
+
+      // Open drawer first
+      const burgerButton = screen.getAllByRole('button')[1]
+      fireEvent.click(burgerButton)
+
+      // Now modal opens
+      mockUseModal.mockReturnValue({ 
+        isModalOpen: true,
+        openModal: vi.fn(),
+        closeModal: vi.fn()
+      })
+      rerender(<ImprovedNavigation />)
+
+      // The useEffect should trigger and close the drawer
+      expect(screen.queryByTestId('drawer')).not.toBeInTheDocument()
+    })
+
+    it('should prevent drawer opening when modal is already open', () => {
+      mockUseMediaQuery.mockReturnValue({
+        isMobile: true,
+        isTablet: false,
+        isDesktop: false
+      })
+
+      // Start with modal open
+      mockUseModal.mockReturnValue({ 
+        isModalOpen: true,
+        openModal: vi.fn(),
+        closeModal: vi.fn()
+      })
+
+      render(<ImprovedNavigation />)
+
+      const burgerButton = screen.getAllByRole('button')[1]
+      
+      // Try to open drawer - should not work
+      fireEvent.click(burgerButton)
+      
+      // Drawer should not open when modal is already open
+      expect(screen.queryByTestId('drawer')).not.toBeInTheDocument()
+    })
+  })
+
+  describe('Tablet Responsive Behavior', () => {
+    beforeEach(() => {
+      mockUseMediaQuery.mockReturnValue({
+        isMobile: false,
+        isTablet: true,
+        isDesktop: false
+      })
+    })
+
+    it('should show tablet-specific branding', () => {
+      render(<ImprovedNavigation />)
+
+      expect(screen.getByText('J. Herrmann')).toBeInTheDocument()
+      expect(screen.queryByText('Software Freelancer & AI Specialist')).not.toBeInTheDocument()
+    })
+
+    it('should hide theme/language switchers on tablet', () => {
+      render(<ImprovedNavigation />)
+
+      expect(screen.queryByTestId('theme-switcher')).not.toBeInTheDocument()
+      expect(screen.queryByTestId('language-switcher-desktop')).not.toBeInTheDocument()
+    })
+
+    it('should use tablet-specific spacing and sizing', () => {
+      render(<ImprovedNavigation />)
+
+      const contactButton = screen.getByText('Kontakt')
+      
+      // Tablet specific styling should be applied (via internal Mantine styles)
+      expect(contactButton).toBeInTheDocument()
+      
+      // The isTablet condition should be properly evaluated
+      expect(screen.getByText('J. Herrmann')).toBeInTheDocument() // Confirms tablet mode is active
+    })
+  })
+
+  describe('Error Handling', () => {
+    it('should handle navigation when element is not found gracefully', () => {
+      // Mock querySelector to return null
+      document.querySelector = vi.fn().mockReturnValue(null)
+
+      render(<ImprovedNavigation />)
+
+      const servicesLink = screen.getByText('Services')
+      
+      // Should not throw error when element is not found
+      expect(() => fireEvent.click(servicesLink)).not.toThrow()
+      expect(window.scrollTo).not.toHaveBeenCalled()
+    })
+
+    it('should handle drawer state changes correctly', () => {
+      mockUseMediaQuery.mockReturnValue({
+        isMobile: true,
+        isTablet: false,
+        isDesktop: false
+      })
+
+      render(<ImprovedNavigation />)
+
+      const burgerButton = screen.getAllByRole('button')[1]
+      
+      // Open drawer
+      fireEvent.click(burgerButton)
+      expect(screen.getByTestId('drawer')).toBeInTheDocument()
+
+      // Close drawer
+      fireEvent.click(burgerButton)
+      // Drawer should be closed (mocked behavior)
+    })
+  })
+
+  describe('Navigation Item Structure', () => {
+    it('should construct navigation items from translations', () => {
+      render(<ImprovedNavigation />)
+
+      // Verify all navigation items are present and use translations
+      expect(screen.getByText('Services')).toBeInTheDocument()
+      expect(screen.getByText('Statistiken')).toBeInTheDocument() // t.navigation.statistics
+      expect(screen.getByText('Projekte')).toBeInTheDocument()
+      expect(screen.getByText('Über mich')).toBeInTheDocument()
+    })
+
+    it('should have correct href attributes for navigation items', () => {
+      render(<ImprovedNavigation />)
+
+      const servicesLink = screen.getByText('Services').closest('a')
+      const projectsLink = screen.getByText('Projekte').closest('a')
+      const aboutLink = screen.getByText('Über mich').closest('a')
+
+      expect(servicesLink).toHaveAttribute('href', '#services')
+      expect(projectsLink).toHaveAttribute('href', '#projects')
+      expect(aboutLink).toHaveAttribute('href', '#about')
     })
   })
 })

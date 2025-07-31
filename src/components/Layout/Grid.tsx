@@ -11,22 +11,14 @@ interface GridProps extends Omit<SimpleGridProps, 'cols'> {
   spacing?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
-export const Grid = ({ 
-  children, 
+export const Grid = ({
+  children,
   cols = { mobile: 1, tablet: 2, desktop: 3 },
   spacing = 'md',
-  ...props 
+  ...props
 }: GridProps) => {
   return (
-    <SimpleGrid
-      cols={{
-        base: cols.mobile || 1,
-        sm: cols.tablet || 2,
-        lg: cols.desktop || 3,
-      }}
-      spacing={spacing}
-      {...props}
-    >
+    <SimpleGrid cols={{ base: cols.mobile, sm: cols.tablet, lg: cols.desktop }} spacing={spacing} {...props}>
       {children}
     </SimpleGrid>
   );

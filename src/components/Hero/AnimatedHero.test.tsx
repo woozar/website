@@ -13,13 +13,15 @@ vi.mock('framer-motion', () => ({
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
     section: ({ children, ...props }: any) => <section {...props}>{children}</section>,
   },
-  useReducedMotion: () => false,
+  useReducedMotion: vi.fn(),
 }))
 
 // Mock the image import
 vi.mock('../../assets/hero-portrait.webp', () => ({
   default: '/mock-hero-portrait.webp'
 }))
+
+import { useReducedMotion } from 'framer-motion'
 
 const mockUseMediaQuery = vi.mocked(useMediaQuery)
 const mockUseTranslation = vi.mocked(useTranslation)
@@ -28,6 +30,7 @@ const mockUseTranslation = vi.mocked(useTranslation)
 describe('AnimatedHero', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    vi.mocked(useReducedMotion).mockReturnValue(false)
     mockUseMediaQuery.mockReturnValue({
       isMobile: false,
       isTablet: false,
@@ -237,5 +240,34 @@ describe('AnimatedHero', () => {
     expect(screen.getByText('Kontakt aufnehmen')).toBeInTheDocument()
     expect(screen.getByText('Projekte ansehen')).toBeInTheDocument()
     expect(screen.getByRole('img')).toBeInTheDocument()
+  })
+
+  describe('Animation and Reduced Motion', () => {
+    it('should render with normal animations when reduced motion is false', () => {
+      vi.mocked(useReducedMotion).mockReturnValue(false)
+
+      render(<AnimatedHero />)
+
+      // Component should render successfully with animations enabled
+      expect(screen.getByText('Johannes Herrmann')).toBeInTheDocument()
+    })
+
+    it('should render with reduced motion animations when reduced motion is true', () => {
+      vi.mocked(useReducedMotion).mockReturnValue(true)
+
+      render(<AnimatedHero />)
+
+      // Component should render successfully with reduced animations
+      expect(screen.getByText('Johannes Herrmann')).toBeInTheDocument()
+    })
+
+    it('should handle functionality with reduced motion enabled', () => {
+      vi.mocked(useReducedMotion).mockReturnValue(true)
+
+      render(<AnimatedHero />)
+
+      // Component functionality should still work with reduced motion
+      expect(screen.getByText('Kontakt aufnehmen')).toBeInTheDocument()
+    })
   })
 })

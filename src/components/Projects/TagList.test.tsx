@@ -192,6 +192,41 @@ describe('TagList', () => {
     expect(mockToggleTag).not.toHaveBeenCalled();
   });
 
+  it('should do nothing when clicking non-clickable tags', () => {
+    const mockToggleTag = vi.fn();
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    
+    (useFilterStore as any).mockReturnValue({
+      ...mockFilterStore,
+      toggleTag: mockToggleTag,
+      selectedTags: []
+    });
+
+    render(
+      <TagList 
+        primaryTags={['React']} 
+        secondaryTags={['Node.js']} 
+        selectable={false}
+      />
+    );
+    
+    const reactTag = screen.getByTestId('tag-React');
+    
+    // Clicking on non-clickable tag should not cause any side effects
+    expect(() => fireEvent.click(reactTag)).not.toThrow();
+    
+    // No toggle function should be called
+    expect(mockToggleTag).not.toHaveBeenCalled();
+    
+    // No console errors should be generated
+    expect(consoleSpy).not.toHaveBeenCalled();
+    
+    // Tag should remain in its original state
+    expect(reactTag).toHaveAttribute('data-selected', 'false');
+    
+    consoleSpy.mockRestore();
+  });
+
   it('should show selected state for primary tags', () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
