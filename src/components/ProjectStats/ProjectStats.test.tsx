@@ -80,6 +80,10 @@ vi.mock('../../hooks/useTranslation', () => ({
           subtitle: 'Zusammenarbeit mit führenden Unternehmen verschiedener Branchen'
         },
         frameworksTooltip: 'Used Frameworks',
+        accessibility: {
+          cardFlipShow: 'Click to show details',
+          cardFlipHide: 'Click to hide details'
+        },
         coreExpertise: 'Core Expertise',
         trustedBy: 'Trusted by Leading Companies'
       }

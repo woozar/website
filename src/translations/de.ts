@@ -100,7 +100,11 @@ export const de = {
     subtitle: 'Quantifizierte Expertise basierend auf realer Projekterfahrung',
     coreExpertise: 'Kern-Technologie-Expertise',
     trustedBy: 'Erfolgreich zusammengearbeitet mit',
-    frameworksTooltip: '🛠️ Verwendete Frameworks',
+    frameworksTooltip: 'Verwendete Frameworks',
+    accessibility: {
+      cardFlipShow: 'Klicken um Details anzuzeigen',
+      cardFlipHide: 'Klicken um Details zu verstecken'
+    },
     cards: {
       totalProjects: 'Gesamt-Projekte',
       totalProjectsDesc: 'Erfolgreich abgeschlossene Projekte',

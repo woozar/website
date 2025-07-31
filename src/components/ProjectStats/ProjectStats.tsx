@@ -1,5 +1,5 @@
-import { Stack, Title, Text, Card, Badge, SimpleGrid, Box, Tooltip, ActionIcon } from '@mantine/core';
-import { IconCode, IconUsers, IconCalendar, IconTrendingUp, IconStack, IconQuestionMark } from '@tabler/icons-react';
+import { Stack, Title, Text, Card, Badge, SimpleGrid, Box } from '@mantine/core';
+import { IconCode, IconUsers, IconCalendar, IconTrendingUp, IconStack } from '@tabler/icons-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Section } from '../Layout';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
@@ -9,6 +9,7 @@ import { calculateProjectStats } from '../../utils/projectStats';
 import { useMemo } from 'react';
 import { CompanyLogos } from './CompanyLogos';
 import { useFilterStore } from '../../stores/filterStore';
+import { FlippableStatCard } from './FlippableStatCard';
 
 export const ProjectStats = () => {
   const { isMobile } = useMediaQuery();
@@ -169,137 +170,88 @@ export const ProjectStats = () => {
           {/* Overview Cards */}
           <motion.div variants={itemVariants}>
             <SimpleGrid cols={{ base: 2, sm: 3, md: 5 }} spacing={isMobile ? 'md' : 'lg'}>
-              {statCards.map((card) => (
-                <motion.div
-                  key={card.title}
-                  whileHover={
-                    shouldReduceMotion
-                      ? {}
-                      : {
-                          y: -5,
-                          transition: { duration: 0.2 },
-                        }
-                  }
-                >
-                  <Card
-                    padding="lg"
-                    radius="lg"
-                    withBorder
-                    style={{
-                      height: '100%',
-                      textAlign: 'center',
-                      borderColor: 'var(--border-color)',
-                      backgroundColor: 'var(--background-primary)',
-                      position: 'relative',
-                    }}
+              {statCards.map((card) => {
+                // Use FlippableStatCard for frameworks card
+                if (card.title === t.projectStats.cards.frameworks) {
+                  return (
+                    <FlippableStatCard
+                      key={card.title}
+                      icon={card.icon}
+                      title={card.title}
+                      value={card.value}
+                      description={card.description}
+                      backContent={{
+                        title: t.projectStats.frameworksTooltip,
+                        items: usedFrameworks
+                      }}
+                      isMobile={isMobile}
+                      accessibility={t.projectStats.accessibility}
+                    />
+                  );
+                }
+
+                // Regular card for all other cards
+                return (
+                  <motion.div
+                    key={card.title}
+                    whileHover={
+                      shouldReduceMotion
+                        ? {}
+                        : {
+                            y: -5,
+                            transition: { duration: 0.2 },
+                          }
+                    }
                   >
-                    {card.title === 'Frameworks' && (
-                      <Tooltip
-                        label={
-                          <Box p="md">
-                            <Text
-                              size="sm"
-                              fw={700}
-                              mb="sm"
-                              c="var(--primary-orange)"
-                              style={{
-                                borderBottom: '1px solid rgba(255, 107, 53, 0.2)',
-                                paddingBottom: '0.5rem',
-                              }}
-                            >
-                              {t.projectStats.frameworksTooltip}
-                            </Text>
-                            <SimpleGrid cols={2} spacing="xs">
-                              {usedFrameworks.map((framework) => (
-                                <Box key={framework} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                  <Box
-                                    style={{
-                                      width: '6px',
-                                      height: '6px',
-                                      borderRadius: '50%',
-                                      background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
-                                      flexShrink: 0,
-                                    }}
-                                  />
-                                  <Text size="sm" c="var(--text-primary)" fw={500}>
-                                    {framework}
-                                  </Text>
-                                </Box>
-                              ))}
-                            </SimpleGrid>
-                          </Box>
-                        }
-                        multiline
-                        w={280}
-                        withArrow
-                        position="bottom"
-                        radius="lg"
-                        styles={{
-                          tooltip: {
-                            backgroundColor: 'var(--background-primary)',
-                            border: '1px solid var(--border-color)',
-                            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)',
-                            backdropFilter: 'blur(10px)',
-                            padding: 0,
-                          },
-                          arrow: {
-                            borderColor: 'var(--border-color)',
-                          },
-                        }}
-                      >
-                        <ActionIcon
-                          variant="subtle"
-                          size="xs"
+                    <Card
+                      padding="lg"
+                      radius="lg"
+                      withBorder
+                      style={{
+                        height: '100%',
+                        textAlign: 'center',
+                        borderColor: 'var(--border-color)',
+                        backgroundColor: 'var(--background-primary)',
+                        position: 'relative',
+                      }}
+                    >
+                      <Stack gap="sm" style={{ height: '100%' }}>
+                        <Box
                           style={{
-                            position: 'absolute',
-                            top: '8px',
-                            right: '8px',
-                            color: 'var(--text-secondary)',
-                            minWidth: '16px',
-                            minHeight: '16px',
-                            zIndex: 1,
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '50%',
+                            background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: 'white',
+                            margin: '0 auto',
                           }}
                         >
-                          <IconQuestionMark size={12} />
-                        </ActionIcon>
-                      </Tooltip>
-                    )}
-                    <Stack gap="sm" style={{ height: '100%' }}>
-                      <Box
-                        style={{
-                          width: '40px',
-                          height: '40px',
-                          borderRadius: '50%',
-                          background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          color: 'white',
-                          margin: '0 auto',
-                        }}
-                      >
-                        <card.icon size={20} />
-                      </Box>
-                      <Stack gap="xs" style={{ flex: 1 }}>
-                        <Text
-                          size="xl"
-                          fw={700}
-                          c="var(--text-primary)"
-                          style={{ fontSize: isMobile ? '1.5rem' : '2rem' }}
-                        >
-                          {card.value}
-                        </Text>
-                        <Text size="sm" fw={600} c="var(--text-primary)">
-                          {card.title}
-                        </Text>
-                        <Text size="xs" c="var(--text-secondary)">
-                          {card.description}
-                        </Text>
+                          <card.icon size={20} />
+                        </Box>
+                        <Stack gap="xs" style={{ flex: 1 }}>
+                          <Text
+                            size="xl"
+                            fw={700}
+                            c="var(--text-primary)"
+                            style={{ fontSize: isMobile ? '1.5rem' : '2rem' }}
+                          >
+                            {card.value}
+                          </Text>
+                          <Text size="sm" fw={600} c="var(--text-primary)">
+                            {card.title}
+                          </Text>
+                          <Text size="xs" c="var(--text-secondary)">
+                            {card.description}
+                          </Text>
+                        </Stack>
                       </Stack>
-                    </Stack>
-                  </Card>
-                </motion.div>
-              ))}
+                    </Card>
+                  </motion.div>
+                );
+              })}
             </SimpleGrid>
           </motion.div>
 
