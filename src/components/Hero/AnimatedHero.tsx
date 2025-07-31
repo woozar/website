@@ -70,7 +70,7 @@ export const AnimatedHero = () => {
   };
 
   return (
-    <Section background="white">
+    <Section>
       <motion.div
         variants={containerVariants}
         initial="hidden"

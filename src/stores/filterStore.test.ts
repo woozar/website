@@ -13,6 +13,7 @@ describe('filterStore', () => {
       
       expect(state.selectedTags).toEqual([])
       expect(state.searchQuery).toBe('')
+      expect(state.selectedCustomer).toBe('')
     })
 
     it('should have all required methods', () => {
@@ -20,6 +21,7 @@ describe('filterStore', () => {
       
       expect(typeof state.toggleTag).toBe('function')
       expect(typeof state.setSearchQuery).toBe('function')
+      expect(typeof state.setCustomerFilter).toBe('function')
       expect(typeof state.clearAllFilters).toBe('function')
       expect(typeof state.clearTags).toBe('function')
     })
@@ -123,9 +125,60 @@ describe('filterStore', () => {
     })
   })
 
+  describe('setCustomerFilter', () => {
+    it('should set customer filter', () => {
+      const { setCustomerFilter } = useFilterStore.getState()
+      
+      setCustomerFilter('Siemens AG')
+      
+      expect(useFilterStore.getState().selectedCustomer).toBe('Siemens AG')
+    })
+
+    it('should update customer filter', () => {
+      const { setCustomerFilter } = useFilterStore.getState()
+      
+      setCustomerFilter('Siemens AG')
+      expect(useFilterStore.getState().selectedCustomer).toBe('Siemens AG')
+      
+      setCustomerFilter('KUKA')
+      expect(useFilterStore.getState().selectedCustomer).toBe('KUKA')
+    })
+
+    it('should handle empty customer filter', () => {
+      const { setCustomerFilter } = useFilterStore.getState()
+      
+      setCustomerFilter('Siemens AG')
+      setCustomerFilter('')
+      
+      expect(useFilterStore.getState().selectedCustomer).toBe('')
+    })
+
+    it('should handle special characters in customer name', () => {
+      const { setCustomerFilter } = useFilterStore.getState()
+      
+      const customerName = 'DMG Mori Software Solution GmbH & Co. KG'
+      setCustomerFilter(customerName)
+      
+      expect(useFilterStore.getState().selectedCustomer).toBe(customerName)
+    })
+
+    it('should not affect other filters when setting customer', () => {
+      const { toggleTag, setSearchQuery, setCustomerFilter } = useFilterStore.getState()
+      
+      toggleTag('React')
+      setSearchQuery('test query')
+      setCustomerFilter('Siemens AG')
+      
+      const state = useFilterStore.getState()
+      expect(state.selectedTags).toEqual(['React'])
+      expect(state.searchQuery).toBe('test query')
+      expect(state.selectedCustomer).toBe('Siemens AG')
+    })
+  })
+
   describe('clearAllFilters', () => {
     it('should clear all filters when called', () => {
-      const { toggleTag, setSearchQuery, clearAllFilters } = useFilterStore.getState()
+      const { toggleTag, setSearchQuery, setCustomerFilter, clearAllFilters } = useFilterStore.getState()
       
       // Set some filters
       toggleTag('React')
@@ -133,10 +186,12 @@ describe('filterStore', () => {
       toggleTag('TypeScript')
       toggleTag('JavaScript')
       setSearchQuery('test query')
+      setCustomerFilter('Siemens AG')
       
       // Verify filters are set
       expect(useFilterStore.getState().selectedTags).toEqual(['React', 'Vue', 'TypeScript', 'JavaScript'])
       expect(useFilterStore.getState().searchQuery).toBe('test query')
+      expect(useFilterStore.getState().selectedCustomer).toBe('Siemens AG')
       
       // Clear all filters
       clearAllFilters()
@@ -144,6 +199,7 @@ describe('filterStore', () => {
       // Verify all filters are cleared
       expect(useFilterStore.getState().selectedTags).toEqual([])
       expect(useFilterStore.getState().searchQuery).toBe('')
+      expect(useFilterStore.getState().selectedCustomer).toBe('')
     })
 
     it('should work when filters are already empty', () => {
@@ -153,33 +209,63 @@ describe('filterStore', () => {
       
       expect(useFilterStore.getState().selectedTags).toEqual([])
       expect(useFilterStore.getState().searchQuery).toBe('')
+      expect(useFilterStore.getState().selectedCustomer).toBe('')
+    })
+
+    it('should clear customer filter along with other filters', () => {
+      const { setCustomerFilter, clearAllFilters } = useFilterStore.getState()
+      
+      setCustomerFilter('KUKA')
+      expect(useFilterStore.getState().selectedCustomer).toBe('KUKA')
+      
+      clearAllFilters()
+      expect(useFilterStore.getState().selectedCustomer).toBe('')
     })
   })
 
   describe('clearTags', () => {
     it('should clear only tags', () => {
-      const { toggleTag, setSearchQuery, clearTags } = useFilterStore.getState()
+      const { toggleTag, setSearchQuery, setCustomerFilter, clearTags } = useFilterStore.getState()
       
       toggleTag('React')
       toggleTag('Vue')
       toggleTag('TypeScript')
       setSearchQuery('test query')
+      setCustomerFilter('Siemens AG')
       
       clearTags()
       
       expect(useFilterStore.getState().selectedTags).toEqual([])
       expect(useFilterStore.getState().searchQuery).toBe('test query')
+      expect(useFilterStore.getState().selectedCustomer).toBe('Siemens AG')
     })
 
     it('should work when tags are already empty', () => {
-      const { setSearchQuery, clearTags } = useFilterStore.getState()
+      const { setSearchQuery, setCustomerFilter, clearTags } = useFilterStore.getState()
       
       setSearchQuery('test query')
+      setCustomerFilter('KUKA')
       
       clearTags()
       
       expect(useFilterStore.getState().selectedTags).toEqual([])
       expect(useFilterStore.getState().searchQuery).toBe('test query')
+      expect(useFilterStore.getState().selectedCustomer).toBe('KUKA')
+    })
+
+    it('should not affect customer filter when clearing only tags', () => {
+      const { toggleTag, setCustomerFilter, clearTags } = useFilterStore.getState()
+      
+      toggleTag('React')
+      setCustomerFilter('DMG MORI')
+      
+      expect(useFilterStore.getState().selectedTags).toEqual(['React'])
+      expect(useFilterStore.getState().selectedCustomer).toBe('DMG MORI')
+      
+      clearTags()
+      
+      expect(useFilterStore.getState().selectedTags).toEqual([])
+      expect(useFilterStore.getState().selectedCustomer).toBe('DMG MORI')
     })
   })
 
@@ -216,6 +302,7 @@ describe('filterStore', () => {
       const { 
         toggleTag, 
         setSearchQuery,
+        setCustomerFilter,
         clearTags,
         clearAllFilters
       } = useFilterStore.getState()
@@ -227,20 +314,24 @@ describe('filterStore', () => {
       toggleTag('TypeScript')
       toggleTag('Node.js')
       setSearchQuery('modern web app')
+      setCustomerFilter('Siemens AG')
       
       const fullState = useFilterStore.getState()
       expect(fullState.selectedTags).toEqual(['AI', 'Web Development', 'React', 'TypeScript', 'Node.js'])
       expect(fullState.searchQuery).toBe('modern web app')
+      expect(fullState.selectedCustomer).toBe('Siemens AG')
       
       // Partial clear
       clearTags()
       expect(useFilterStore.getState().selectedTags).toEqual([])
       expect(useFilterStore.getState().searchQuery).toBe('modern web app')
+      expect(useFilterStore.getState().selectedCustomer).toBe('Siemens AG')
       
       // Complete clear
       clearAllFilters()
       expect(useFilterStore.getState().selectedTags).toEqual([])
       expect(useFilterStore.getState().searchQuery).toBe('')
+      expect(useFilterStore.getState().selectedCustomer).toBe('')
     })
   })
 })

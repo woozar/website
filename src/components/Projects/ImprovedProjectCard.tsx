@@ -106,8 +106,8 @@ export const ImprovedProjectCard = ({ project }: ImprovedProjectCardProps) => {
 
             {/* All Tags */}
             <TagList
-              primaryTags={project.primary_tags || []}
-              secondaryTags={project.tags || []}
+              primaryTags={project.primary_tags}
+              secondaryTags={project.tags}
               maxTags={10}
               fontSize="0.8rem"
               showMoreBadge={true}

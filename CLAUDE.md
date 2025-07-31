@@ -3,3 +3,6 @@
 
 ## Internationalization
 - Alle strings in der UI müssen übersetzungen für deutsch und englisch haben.
+
+## Testing
+- Keine Tests für index.ts files in Komponenten-Ordnern.

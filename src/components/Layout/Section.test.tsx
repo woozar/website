@@ -59,6 +59,19 @@ describe('Section', () => {
     })
   })
 
+  it('should always have transparent background', () => {
+    render(
+      <Section>
+        <div>Content</div>
+      </Section>
+    )
+
+    const section = screen.getByText('Content').closest('section')
+    expect(section).toHaveStyle({
+      background: 'transparent'
+    })
+  })
+
   it('should apply small padding when specified', () => {
     render(
       <Section paddingY="sm">

@@ -6,7 +6,6 @@ interface SectionProps {
   children: ReactNode;
   id?: string;
   className?: string;
-  background?: 'white' | 'light' | 'primary';
   paddingY?: 'sm' | 'md' | 'lg' | 'xl';
   containerSize?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
 }
@@ -15,16 +14,9 @@ export const Section = ({
   children, 
   id, 
   className,
-  background = 'white',
   paddingY,
   containerSize = 'lg'
 }: SectionProps) => {
-  const backgrounds = {
-    white: 'var(--background-primary)',
-    light: 'var(--background-secondary)',
-    primary: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))'
-  };
-
   const paddings = {
     sm: '2rem 0',
     md: '3rem 0',
@@ -38,9 +30,9 @@ export const Section = ({
       className={className}
       component="section"
       style={{
-        background: backgrounds[background],
+        background: 'transparent',
         padding: paddingY ? paddings[paddingY] : '0',
-        color: background === 'primary' ? 'white' : 'var(--text-primary)'
+        color: 'var(--text-primary)'
       }}
     >
       <Container size={containerSize}>

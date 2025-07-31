@@ -9,7 +9,7 @@ vi.mock('framer-motion', () => ({
   motion: {
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>
   },
-  useReducedMotion: () => false,
+  useReducedMotion: vi.fn(),
 }));
 
 // Mock TagList component
@@ -34,6 +34,8 @@ vi.mock('./ProjectDetailModal', () => ({
   )
 }));
 
+import { useReducedMotion } from 'framer-motion'
+
 const mockProject: Project = {
   title: 'Test Project',
   customer: 'Test Customer',
@@ -45,6 +47,7 @@ const mockProject: Project = {
 describe('ImprovedProjectCard', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.mocked(useReducedMotion).mockReturnValue(false);
   });
 
   it('should render project title', () => {
@@ -247,4 +250,33 @@ describe('ImprovedProjectCard', () => {
       expect(card).toHaveStyle({ cursor: 'pointer' });
     });
   });
+
+  describe('Animation and Reduced Motion', () => {
+    it('should render with normal animations when reduced motion is false', () => {
+      vi.mocked(useReducedMotion).mockReturnValue(false)
+
+      render(<ImprovedProjectCard project={mockProject} index={0} />)
+
+      // Component should render successfully with animations enabled
+      expect(screen.getByText('Test Project')).toBeInTheDocument()
+    })
+
+    it('should render with reduced motion animations when reduced motion is true', () => {
+      vi.mocked(useReducedMotion).mockReturnValue(true)
+
+      render(<ImprovedProjectCard project={mockProject} index={0} />)
+
+      // Component should render successfully with reduced animations
+      expect(screen.getByText('Test Project')).toBeInTheDocument()
+    })
+
+    it('should handle functionality with reduced motion enabled', () => {
+      vi.mocked(useReducedMotion).mockReturnValue(true)
+
+      render(<ImprovedProjectCard project={mockProject} index={0} />)
+
+      // Component functionality should still work with reduced motion
+      expect(screen.getByText('Test Customer')).toBeInTheDocument()
+    })
+  })
 });

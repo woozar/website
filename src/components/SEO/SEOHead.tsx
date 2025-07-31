@@ -20,7 +20,7 @@ export const SEOHead = ({
   
   const siteTitle = '12 of Spades - Johannes Herrmann';
   const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
-  const siteDescription = description || (t?.hero?.description || 'Software Freelancer & AI Specialist - Spezialisiert auf AI/LLM Entwicklung, Cloud Architecture und Full-Stack Development.');
+  const siteDescription = description || t.hero.description;
   const imageUrl = image.startsWith('http') ? image : `${url}${image}`;
 
   useEffect(() => {

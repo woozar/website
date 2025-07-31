@@ -14,7 +14,6 @@ interface ProjectDetailModalProps {
   onClose: () => void;
 }
 
-
 export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailModalProps) => {
   const { t } = useTranslation();
   const { openModal, closeModal } = useModal();
@@ -48,21 +47,25 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
       opacity: 1,
       scale: 1,
       y: 0,
-      transition: shouldReduceMotion ? {} : {
-        type: 'spring',
-        damping: 25,
-        stiffness: 300,
-        duration: 0.4,
-      },
+      transition: shouldReduceMotion
+        ? {}
+        : {
+            type: 'spring',
+            damping: 25,
+            stiffness: 300,
+            duration: 0.4,
+          },
     },
     exit: {
       opacity: shouldReduceMotion ? 1 : 0,
       scale: shouldReduceMotion ? 1 : 0.8,
       y: shouldReduceMotion ? 0 : 50,
-      transition: shouldReduceMotion ? {} : {
-        duration: 0.3,
-        ease: 'easeInOut',
-      },
+      transition: shouldReduceMotion
+        ? {}
+        : {
+            duration: 0.3,
+            ease: 'easeInOut',
+          },
     },
   };
 
@@ -82,10 +85,12 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
     hidden: { opacity: shouldReduceMotion ? 1 : 0 },
     visible: {
       opacity: 1,
-      transition: shouldReduceMotion ? {} : {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
+      transition: shouldReduceMotion
+        ? {}
+        : {
+            staggerChildren: 0.1,
+            delayChildren: 0.2,
+          },
     },
   };
 
@@ -186,15 +191,15 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
               </Button>
             </motion.div>
 
-            <motion.div 
-              variants={contentVariants} 
-              initial="hidden" 
-              animate="visible" 
-              style={{ 
-                flex: 1, 
+            <motion.div
+              variants={contentVariants}
+              initial="hidden"
+              animate="visible"
+              style={{
+                flex: 1,
                 minHeight: 0, // WICHTIG: Ermöglicht Flex-Shrinking
                 display: 'flex',
-                flexDirection: 'column'
+                flexDirection: 'column',
               }}
             >
               {/* Header - Fixed height */}
@@ -226,75 +231,68 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
               </motion.div>
 
               {/* Scrollable Content - Takes remaining height */}
-              <motion.div 
-                variants={itemVariants} 
-                style={{ 
-                  flex: 1, 
+              <motion.div
+                variants={itemVariants}
+                style={{
+                  flex: 1,
                   minHeight: 0, // WICHTIG: Ermöglicht Flex-Shrinking
                   overflow: 'auto', // Natives CSS Scrolling
-                  padding: '0 2px' // Platz für Scrollbar
+                  padding: '0 2px', // Platz für Scrollbar
                 }}
               >
-                <Stack
-                  id="content"
-                  gap="xl"
-                >
-                      {/* Description */}
-                      <Stack gap="md">
-                        <div style={{
-                          color: 'var(--text-secondary)',
-                          lineHeight: 1.7,
-                          fontSize: '1rem',
-                        }}>
-                          <ReactMarkdown
-                            components={{
-                              // Style links
-                              a: ({ ...props }) => (
-                                <a
-                                  {...props}
-                                  style={{
-                                    color: 'var(--primary-orange)',
-                                    textDecoration: 'none',
-                                  }}
-                                  className="markdown-link"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                />
-                              ),
-                              // Style paragraphs
-                              p: ({ ...props }) => (
-                                <p {...props} style={{ marginBottom: '1rem' }} />
-                              ),
-                              // Style strong/bold text
-                              strong: ({ ...props }) => (
-                                <strong {...props} style={{ color: 'var(--text-primary)' }} />
-                              ),
-                              // Style emphasis/italic text
-                              em: ({ ...props }) => (
-                                <em {...props} style={{ fontStyle: 'italic' }} />
-                              ),
-                            }}
-                          >
-                            {(project.description || []).join('\n\n')}
-                          </ReactMarkdown>
-                        </div>
-                      </Stack>
+                <Stack id="content" gap="xl">
+                  {/* Description */}
+                  <Stack gap="md">
+                    <div
+                      style={{
+                        color: 'var(--text-secondary)',
+                        lineHeight: 1.7,
+                        fontSize: '1rem',
+                      }}
+                    >
+                      <ReactMarkdown
+                        components={{
+                          // Style links
+                          a: ({ ...props }) => (
+                            <a
+                              {...props}
+                              style={{
+                                color: 'var(--primary-orange)',
+                                textDecoration: 'none',
+                              }}
+                              className="markdown-link"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            />
+                          ),
+                          // Style paragraphs
+                          p: ({ ...props }) => <p {...props} style={{ marginBottom: '1rem' }} />,
+                          // Style strong/bold text
+                          strong: ({ ...props }) => <strong {...props} style={{ color: 'var(--text-primary)' }} />,
+                          // Style emphasis/italic text
+                          em: ({ ...props }) => <em {...props} style={{ fontStyle: 'italic' }} />,
+                        }}
+                      >
+                        {project.description.join('\n\n')}
+                      </ReactMarkdown>
+                    </div>
+                  </Stack>
 
-                      {/* All Tags */}
-                      <div>
-                        <Stack gap="sm">
-                          <Text fw={600} size="sm" c="var(--text-primary)">
-                            {t.project.technologies}
-                          </Text>
-                          <TagList
-                            primaryTags={project.primary_tags || []}
-                            secondaryTags={project.tags || []}
-                            fontSize="0.85rem"
-                            showMoreBadge={false}
-                            selectable={false}
-                          />
-                        </Stack>
-                      </div>
+                  {/* All Tags */}
+                  <div>
+                    <Stack gap="sm">
+                      <Text fw={600} size="sm" c="var(--text-primary)">
+                        {t.project.technologies}
+                      </Text>
+                      <TagList
+                        primaryTags={project.primary_tags}
+                        secondaryTags={project.tags}
+                        fontSize="0.85rem"
+                        showMoreBadge={false}
+                        selectable={false}
+                      />
+                    </Stack>
+                  </div>
                 </Stack>
               </motion.div>
             </motion.div>

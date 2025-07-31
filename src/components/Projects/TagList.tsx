@@ -56,7 +56,7 @@ export const TagList = ({
             tag={tag}
             isPrimary={isPrimary}
             isSelected={selectable ? selectedTags.includes(tag) : false}
-            onClick={selectable ? () => handleTagClick(tag) : undefined}
+            onClick={() => handleTagClick(tag)}
             style={{ cursor: selectable ? 'pointer' : 'default', fontSize }}
           />
         </motion.div>

@@ -44,8 +44,8 @@ export const ProjectsSection = () => {
     if (selectedTags.length > 0) {
       filtered = filtered.filter(project => 
         selectedTags.some(tag => 
-          (project.primary_tags || []).includes(tag) || 
-          (project.tags || []).includes(tag)
+          (project.primary_tags).includes(tag) || 
+          (project.tags).includes(tag)
         )
       );
     }
@@ -62,7 +62,7 @@ export const ProjectsSection = () => {
   }, [projects, selectedTags, selectedCustomer]);
 
   return (
-    <Section id="projects" background="white">
+    <Section id="projects">
       <motion.div
         variants={containerVariants}
         initial="hidden"
