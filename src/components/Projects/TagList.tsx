@@ -9,7 +9,6 @@ interface TagListProps {
   secondaryTags: string[];
   maxTags?: number;
   fontSize?: string;
-  lineHeight?: number;
   showMoreBadge?: boolean;
   selectable?: boolean;
 }
@@ -19,7 +18,6 @@ export const TagList = ({
   secondaryTags, 
   maxTags = 100, 
   fontSize = '0.8rem',
-  lineHeight,
   showMoreBadge = true,
   selectable = true
 }: TagListProps) => {
