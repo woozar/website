@@ -1,5 +1,6 @@
 import { Badge, type BadgeProps } from '@mantine/core';
 import { motion, Variants } from 'framer-motion';
+import styles from './TagChip.module.css';
 
 interface TagChipProps extends Omit<BadgeProps, 'onClick'> {
   tag: string;
@@ -41,6 +42,7 @@ export const TagChip = ({
         radius="xl"
         variant={isSelected ? 'filled' : 'outline'}
         color={isPrimary ? 'red' : 'orange'}
+        className={styles.tagChip}
         style={{
           cursor: onClick ? 'pointer' : 'default',
           ...props.style
