@@ -114,40 +114,42 @@ export const FlippableStatCard = ({
                 transition: { duration: 0.6 }
               }}
             >
-              <IconRefresh size={12} />
+              <IconRefresh size={12} data-testid="refresh-icon" />
             </motion.div>
           </ActionIcon>
 
-          <Stack gap="sm" align="center">
+          <Stack gap="sm" style={{ height: '100%' }}>
             <Box
               style={{
-                background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
+                width: '40px',
+                height: '40px',
                 borderRadius: '50%',
-                padding: '12px',
+                background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                color: 'white',
+                margin: '0 auto',
               }}
             >
-              <Icon size={24} color="white" />
+              <Icon size={20} />
             </Box>
-            
-            <Text 
-              size="xl" 
-              fw={700} 
-              c="var(--text-primary)"
-              style={{ fontSize: isMobile ? '1.5rem' : '2rem' }}
-            >
-              {value}
-            </Text>
-            
-            <Text size="sm" fw={600} c="var(--text-primary)" ta="center">
-              {title}
-            </Text>
-            
-            <Text size="xs" c="var(--text-secondary)" ta="center" style={{ lineHeight: 1.4 }}>
-              {description}
-            </Text>
+            <Stack gap="xs" style={{ flex: 1 }}>
+              <Text
+                size="xl"
+                fw={700}
+                c="var(--text-primary)"
+                style={{ fontSize: isMobile ? '1.5rem' : '2rem' }}
+              >
+                {value}
+              </Text>
+              <Text size="sm" fw={600} c="var(--text-primary)">
+                {title}
+              </Text>
+              <Text size="xs" c="var(--text-secondary)">
+                {description}
+              </Text>
+            </Stack>
           </Stack>
         </Card>
 
@@ -191,11 +193,11 @@ export const FlippableStatCard = ({
                 transition: { duration: 0.6 }
               }}
             >
-              <IconRefresh size={12} />
+              <IconRefresh size={12} data-testid="refresh-icon" />
             </motion.div>
           </ActionIcon>
 
-          <Stack gap="sm" style={{ height: '100%', justifyContent: 'center' }}>
+          <Stack gap="sm" style={{ height: '100%' }}>
             <Text
               size="xs"
               fw={700}
@@ -203,35 +205,38 @@ export const FlippableStatCard = ({
               style={{
                 borderBottom: '1px solid rgba(255, 107, 53, 0.2)',
                 paddingBottom: '0.5rem',
-                marginBottom: '0.5rem'
+                marginBottom: '0.5rem',
+                flexShrink: 0
               }}
             >
               {backContent.title}
             </Text>
             
-            <SimpleGrid cols={2} spacing="xs" style={{ flex: 1 }}>
-              {backContent.items.map((item) => (
-                <Box key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Box
-                    style={{
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
-                      flexShrink: 0,
-                    }}
-                  />
-                  <Text 
-                    size="xs" 
-                    c="var(--text-primary)" 
-                    fw={500}
-                    style={{ whiteSpace: 'nowrap' }}
-                  >
-                    {item}
-                  </Text>
-                </Box>
-              ))}
-            </SimpleGrid>
+            <Box style={{ flex: 1, overflow: 'auto', maxHeight: '100%' }}>
+              <SimpleGrid cols={isMobile ? 2 : 1} spacing="xs">
+                {backContent.items.map((item) => (
+                  <Box key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <Box
+                      style={{
+                        width: '6px',
+                        height: '6px',
+                        borderRadius: '50%',
+                        background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
+                        flexShrink: 0,
+                      }}
+                    />
+                    <Text 
+                      size="xs" 
+                      c="var(--text-primary)" 
+                      fw={500}
+                      style={{ whiteSpace: 'nowrap' }}
+                    >
+                      {item}
+                    </Text>
+                  </Box>
+                ))}
+              </SimpleGrid>
+            </Box>
           </Stack>
         </Card>
       </motion.div>

@@ -26,15 +26,21 @@ export const ProjectStats = () => {
     projects.forEach((project) => {
       [...project.primary_tags, ...project.tags].forEach((tag) => {
         const FRAMEWORKS = [
+          // Frontend Frameworks
           'React',
           'Angular',
+          'AngularJS',
           'Vue',
           'Vue.js',
           'Svelte',
           'Next.js',
+          'NextJS',
           'Nuxt.js',
+          'React Native',
+          // Backend Frameworks
           'Express',
           'Express.js',
+          'express',
           'Fastify',
           'Koa',
           'NestJS',
@@ -46,26 +52,52 @@ export const ProjectStats = () => {
           'Laravel',
           'Symfony',
           'CodeIgniter',
+          // UI/CSS Frameworks
           'Bootstrap',
           'Tailwind',
           'Tailwind CSS',
+          'TailwindCSS',
           'Material UI',
+          'Angular Material',
           'Ant Design',
           'Chakra UI',
+          'Mantine',
+          // Testing Frameworks
           'Jest',
           'Cypress',
           'Playwright',
           'Vitest',
           'Mocha',
           'Jasmine',
+          'Karma',
+          'Testcafe',
+          'MSTest',
+          // Mobile Frameworks
+          'Expo',
+          // Build Tools & Meta-Frameworks
+          'Vite',
           'create-t3-app',
+          // Animation & Motion
+          'Framer Motion',
+          // Data Management
+          'Apollo',
+          'Prisma',
+          'Zustand',
+          'ngrx',
+          'TanStack Query',
+          'tRPC',
+          'Mongoose',
+          'knex.js',
+          // Specialized Frameworks
+          'LangChain',
+          'Socket.IO',
         ];
         if (FRAMEWORKS.includes(tag)) {
           frameworks.add(tag);
         }
       });
     });
-    return Array.from(frameworks).sort();
+    return Array.from(frameworks).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
   }, [projects]);
 
   // Function to handle company logo clicks
@@ -178,7 +210,7 @@ export const ProjectStats = () => {
                       key={card.title}
                       icon={card.icon}
                       title={card.title}
-                      value={card.value}
+                      value={usedFrameworks.length.toString()}
                       description={card.description}
                       backContent={{
                         title: t.projectStats.frameworksTooltip,
