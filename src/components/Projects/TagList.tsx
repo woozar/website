@@ -1,8 +1,8 @@
 import { Group, Badge } from '@mantine/core';
 import { motion } from 'framer-motion';
 import { TagChip } from '../Filter/TagChip';
-import { useTranslation } from '../../hooks/useTranslation';
-import { useFilterStore } from '../../stores/filterStore';
+import { useTranslation } from '@/hooks/useTranslation';
+import { useFilterStore } from '@/stores/filterStore';
 
 interface TagListProps {
   primaryTags: string[];

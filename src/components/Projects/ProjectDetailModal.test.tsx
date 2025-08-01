@@ -1,11 +1,11 @@
 import { screen, fireEvent } from '@testing-library/react';
-import { customRender as render } from '../../test/render';
+import { customRender as render } from '@/test/render';
 import { describe, it, expect, vi } from 'vitest';
 import { ProjectDetailModal } from './ProjectDetailModal';
-import { Project } from '../../types';
+import { Project } from '@/types';
 
 // Mock dependencies
-vi.mock('../../hooks/useModal', () => ({
+vi.mock('@/hooks/useModal', () => ({
   useModal: () => ({
     openModal: vi.fn(),
     closeModal: vi.fn()

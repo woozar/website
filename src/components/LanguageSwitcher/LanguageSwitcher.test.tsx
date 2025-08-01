@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent } from '../../test/test-utils'
+import { render, screen, fireEvent } from '@/test/test-utils'
 import { LanguageSwitcher } from './LanguageSwitcher'
-import { useLanguageStore } from '../../stores/languageStore'
+import { useLanguageStore } from '@/stores/languageStore'
 
 // Mock the language store
-vi.mock('../../stores/languageStore')
+vi.mock('@/stores/languageStore')
 
 // Mock Mantine Menu component to test interactions
 vi.mock('@mantine/core', async () => {

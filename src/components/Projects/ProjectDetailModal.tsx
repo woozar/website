@@ -3,10 +3,10 @@ import { IconX } from '@tabler/icons-react';
 import { motion, AnimatePresence, Variants, useReducedMotion } from 'framer-motion';
 import { useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Project } from '../../types';
+import { Project } from '@/types';
 import { TagList } from './TagList';
-import { useModal } from '../../hooks/useModal';
-import { useTranslation } from '../../hooks/useTranslation';
+import { useModal } from '@/hooks/useModal';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface ProjectDetailModalProps {
   project: Project | null;

@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { screen, fireEvent } from '@testing-library/react';
-import { customRender as render } from '../../test/render';
+import { customRender as render } from '@/test/render';
 import { ActiveTagsFilter } from './ActiveTagsFilter';
-import { useFilterStore } from '../../stores/filterStore';
+import { useFilterStore } from '@/stores/filterStore';
 
 // Mock framer-motion
 vi.mock('framer-motion', () => ({

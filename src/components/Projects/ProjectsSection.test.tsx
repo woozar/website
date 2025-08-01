@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { MantineProvider } from '@mantine/core';
 import { ProjectsSection } from './ProjectsSection';
-import { ModalProvider } from '../../contexts/ModalContext';
+import { ModalProvider } from '@/contexts/ModalContext';
 
 // Mock framer-motion
 vi.mock('framer-motion', () => ({
@@ -14,7 +14,7 @@ vi.mock('framer-motion', () => ({
 
 // Import after mocking
 import { useReducedMotion } from 'framer-motion';
-import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 // Mock hooks
 const mockProjects = [

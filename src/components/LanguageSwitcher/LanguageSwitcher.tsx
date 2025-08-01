@@ -1,6 +1,6 @@
 import { Button, Menu } from '@mantine/core';
-import { useLanguageStore, Language } from '../../stores/languageStore';
-import { useTranslation } from '../../hooks/useTranslation';
+import { useLanguageStore, Language } from '@/stores/languageStore';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface LanguageSwitcherProps {
   variant?: 'desktop' | 'mobile';

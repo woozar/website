@@ -1,8 +1,8 @@
 import { Group, Badge, Text, ActionIcon } from '@mantine/core';
 import { IconX, IconBuilding, IconTag, IconRefresh } from '@tabler/icons-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useFilterStore } from '../../stores/filterStore';
-import { useTranslation } from '../../hooks/useTranslation';
+import { useFilterStore } from '@/stores/filterStore';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export const ActiveTagsFilter = () => {
   const { t } = useTranslation();

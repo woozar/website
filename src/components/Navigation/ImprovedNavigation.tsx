@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Group, Burger, Drawer, Stack, Button, Image, Anchor, Box, Text } from '@mantine/core';
 import { IconMail, IconFileText } from '@tabler/icons-react';
-import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { Container } from '../Layout';
 import { LanguageSwitcher } from '../LanguageSwitcher';
 import { ThemeSwitcher } from '../ThemeSwitcher';
-import { useTranslation } from '../../hooks/useTranslation';
-import { useModal } from '../../hooks/useModal';
+import { useTranslation } from '@/hooks/useTranslation';
+import { useModal } from '@/hooks/useModal';
 // import logoImage from '../../assets/logo.webp';
 const logoImage = '/assets/logo.webp';
 

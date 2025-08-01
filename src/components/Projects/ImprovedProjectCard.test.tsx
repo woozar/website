@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { screen, fireEvent } from '@testing-library/react';
-import { customRender as render } from '../../test/render';
+import { customRender as render } from '@/test/render';
 import { ImprovedProjectCard } from './ImprovedProjectCard';
-import { Project } from '../../types';
+import { Project } from '@/types';
 
 // Mock framer-motion
 vi.mock('framer-motion', () => ({

@@ -2,7 +2,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { MantineProvider } from '@mantine/core';
 import { LegalModal } from './LegalModal';
-import { ModalProvider } from '../../contexts/ModalContext';
+import { ModalProvider } from '@/contexts/ModalContext';
 
 // Mock framer-motion
 vi.mock('framer-motion', () => ({

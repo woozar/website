@@ -4,12 +4,12 @@ import { MantineProvider } from '@mantine/core';
 import { CompanyLogos } from './CompanyLogos';
 
 // Mock theme store
-vi.mock('../../stores/themeStore', () => ({
+vi.mock('@/stores/themeStore', () => ({
   useThemeStore: vi.fn()
 }));
 
 // Import after mocking
-import { useThemeStore } from '../../stores/themeStore';
+import { useThemeStore } from '@/stores/themeStore';
 
 const renderComponent = (props = {}) => {
   const defaultProps = {

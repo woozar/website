@@ -2,8 +2,8 @@ import { Stack, Title, Text, Group, Box, List, ThemeIcon } from '@mantine/core';
 import { IconCheck, IconCode, IconBrain, IconRocket, IconShield, IconSchool } from '@tabler/icons-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Section } from '../Layout';
-import { useMediaQuery } from '../../hooks/useMediaQuery';
-import { useTranslation } from '../../hooks/useTranslation';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export const About = () => {
   const { isMobile } = useMediaQuery();

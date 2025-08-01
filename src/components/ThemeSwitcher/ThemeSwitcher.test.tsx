@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { screen, fireEvent } from '@testing-library/react';
-import { customRender as render } from '../../test/render';
+import { customRender as render } from '@/test/render';
 import { ThemeSwitcher } from './ThemeSwitcher';
-import { useThemeStore } from '../../stores/themeStore';
+import { useThemeStore } from '@/stores/themeStore';
 
 // Mock the theme store
-vi.mock('../../stores/themeStore', () => ({
+vi.mock('@/stores/themeStore', () => ({
   useThemeStore: vi.fn()
 }));
 
