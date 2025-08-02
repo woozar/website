@@ -1,5 +1,5 @@
 import { Stack, Title, Text, Group, Button, Anchor, Divider, Box } from '@mantine/core';
-import { IconMail, IconPhone, IconBrandLinkedin, IconBrandGithub, IconMapPin } from '@tabler/icons-react';
+import { IconMail, IconPhone, IconBrandLinkedin, IconBrandGithub, IconBrandStackoverflow, IconMapPin } from '@tabler/icons-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useState } from 'react';
 import { Section } from '../Layout';
@@ -65,6 +65,11 @@ export const Contact = () => {
       icon: IconBrandGithub,
       label: 'GitHub',
       href: 'https://github.com/woozar'
+    },
+    {
+      icon: IconBrandStackoverflow,
+      label: 'StackOverflow',
+      href: 'https://stackoverflow.com/users/3914932/woozar'
     }
   ];
 

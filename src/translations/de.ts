@@ -78,7 +78,7 @@ export const de = {
   contact: {
     title: 'Kontakt',
     subtitle: 'Bereit für Ihr nächstes Projekt? Lassen Sie uns über Ihre Anforderungen sprechen und gemeinsam innovative Lösungen entwickeln.',
-    followMe: 'Folgen Sie mir',
+    followMe: 'Finden Sie mich auch hier',
     contactItems: {
       email: 'E-Mail',
       phone: 'Telefon',
