@@ -78,7 +78,7 @@ export const en = {
   contact: {
     title: 'Contact',
     subtitle: 'Ready for your next project? Let\'s discuss your requirements and develop innovative solutions together.',
-    followMe: 'Follow Me',
+    followMe: 'Find me also on',
     contactItems: {
       email: 'Email',
       phone: 'Phone',
