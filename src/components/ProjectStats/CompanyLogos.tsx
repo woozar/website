@@ -1,5 +1,5 @@
 import { Box, SimpleGrid } from '@mantine/core';
-import { useThemeStore } from '../../stores/themeStore';
+import { useThemeStore } from '@/stores/themeStore';
 
 interface CompanyLogosProps {
   onCompanyClick: (companyName: string) => void;

@@ -2,13 +2,13 @@ import { Stack, Title, Text, Card, Badge, SimpleGrid, Box } from '@mantine/core'
 import { IconCode, IconUsers, IconCalendar, IconTrendingUp, IconStack } from '@tabler/icons-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Section } from '../Layout';
-import { useMediaQuery } from '../../hooks/useMediaQuery';
-import { useTranslation } from '../../hooks/useTranslation';
-import { useProjects } from '../../hooks/useProjects';
-import { calculateProjectStats } from '../../utils/projectStats';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useTranslation } from '@/hooks/useTranslation';
+import { useProjects } from '@/hooks/useProjects';
+import { calculateProjectStats } from '@/utils/projectStats';
 import { useMemo } from 'react';
 import { CompanyLogos } from './CompanyLogos';
-import { useFilterStore } from '../../stores/filterStore';
+import { useFilterStore } from '@/stores/filterStore';
 import { FlippableStatCard } from './FlippableStatCard';
 
 export const ProjectStats = () => {

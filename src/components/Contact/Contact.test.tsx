@@ -1,13 +1,13 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent } from '../../test/test-utils'
+import { render, screen, fireEvent } from '@/test/test-utils'
 import { Contact } from './Contact'
-import { useMediaQuery } from '../../hooks/useMediaQuery'
-import { useTranslation } from '../../hooks/useTranslation'
-import { de } from '../../translations/de'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useTranslation } from '@/hooks/useTranslation'
+import { de } from '@/translations/de'
 
 // Mock dependencies
-vi.mock('../../hooks/useMediaQuery')
-vi.mock('../../hooks/useTranslation')
+vi.mock('@/hooks/useMediaQuery')
+vi.mock('@/hooks/useTranslation')
 vi.mock('../Legal/LegalModal', () => ({
   LegalModal: ({ opened, onClose, type }: any) => 
     opened ? <div data-testid={`legal-modal-${type}`} onClick={onClose}>Legal Modal {type}</div> : null

@@ -1,3 +1,4 @@
+/// <reference types="../../css-modules" />
 import { Badge, type BadgeProps } from '@mantine/core';
 import { motion, Variants } from 'framer-motion';
 import styles from './TagChip.module.css';

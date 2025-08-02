@@ -1,15 +1,15 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent } from '../../test/test-utils'
+import { render, screen, fireEvent } from '@/test/test-utils'
 import { ImprovedNavigation } from './ImprovedNavigation'
-import { useMediaQuery } from '../../hooks/useMediaQuery'
-import { useTranslation } from '../../hooks/useTranslation'
-import { useModal } from '../../hooks/useModal'
-import { de } from '../../translations/de'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useTranslation } from '@/hooks/useTranslation'
+import { useModal } from '@/hooks/useModal'
+import { de } from '@/translations/de'
 
 // Mock dependencies
-vi.mock('../../hooks/useMediaQuery')
-vi.mock('../../hooks/useTranslation')
-vi.mock('../../hooks/useModal')
+vi.mock('@/hooks/useMediaQuery')
+vi.mock('@/hooks/useTranslation')
+vi.mock('@/hooks/useModal')
 vi.mock('../LanguageSwitcher', () => ({
   LanguageSwitcher: ({ variant }: any) => <div data-testid={`language-switcher-${variant}`}>Language Switcher</div>
 }))

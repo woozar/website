@@ -1,7 +1,7 @@
 import { Button } from '@mantine/core';
 import { IconSun, IconMoon } from '@tabler/icons-react';
-import { useThemeStore } from '../../stores/themeStore';
-import { useTranslation } from '../../hooks/useTranslation';
+import { useThemeStore } from '@/stores/themeStore';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface ThemeSwitcherProps {
   variant?: 'desktop' | 'mobile';

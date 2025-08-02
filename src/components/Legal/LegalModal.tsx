@@ -2,7 +2,7 @@ import { Modal, Stack, Title, Text, Button } from '@mantine/core';
 import { IconX } from '@tabler/icons-react';
 import { motion, AnimatePresence, Variants, useReducedMotion } from 'framer-motion';
 import { useEffect } from 'react';
-import { useModal } from '../../hooks/useModal';
+import { useModal } from '@/hooks/useModal';
 
 interface LegalModalProps {
   opened: boolean;

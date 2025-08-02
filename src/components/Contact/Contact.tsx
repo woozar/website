@@ -3,8 +3,8 @@ import { IconMail, IconPhone, IconBrandLinkedin, IconBrandGithub, IconMapPin } f
 import { motion, useReducedMotion } from 'framer-motion';
 import { useState } from 'react';
 import { Section } from '../Layout';
-import { useMediaQuery } from '../../hooks/useMediaQuery';
-import { useTranslation } from '../../hooks/useTranslation';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useTranslation } from '@/hooks/useTranslation';
 import { LegalModal } from '../Legal/LegalModal';
 
 export const Contact = () => {

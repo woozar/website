@@ -1,5 +1,5 @@
 import { screen, fireEvent } from '@testing-library/react';
-import { customRender as render } from '../../test/render';
+import { customRender as render } from '@/test/render';
 import { ProjectStats } from './ProjectStats';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 
@@ -17,15 +17,15 @@ vi.mock('framer-motion', () => ({
 import { useReducedMotion } from 'framer-motion';
 
 // Mock all dependencies properly
-vi.mock('../../hooks/useProjects', () => ({
+vi.mock('@/hooks/useProjects', () => ({
   useProjects: vi.fn()
 }));
 
 // Import after mocking
-import { useProjects } from '../../hooks/useProjects';
-import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useProjects } from '@/hooks/useProjects';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
-vi.mock('../../hooks/useMediaQuery', () => ({
+vi.mock('@/hooks/useMediaQuery', () => ({
   useMediaQuery: vi.fn()
 }));
 

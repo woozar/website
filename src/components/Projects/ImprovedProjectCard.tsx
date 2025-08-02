@@ -1,10 +1,10 @@
 import { Card, Text, Stack, Box } from '@mantine/core';
 import { useState } from 'react';
 import { motion, Variants, useReducedMotion } from 'framer-motion';
-import { Project } from '../../types';
+import { Project } from '@/types';
 import { TagList } from './TagList';
 import { ProjectDetailModal } from './ProjectDetailModal';
-import { useTranslation } from '../../hooks/useTranslation';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface ImprovedProjectCardProps {
   project: Project;

@@ -2,8 +2,8 @@ import { Stack, Title, Text, Group, Button, Image, Box } from '@mantine/core';
 import { IconMail, IconDownload } from '@tabler/icons-react';
 import { motion, Variants, useReducedMotion } from 'framer-motion';
 import { Section } from '../Layout';
-import { useMediaQuery } from '../../hooks/useMediaQuery';
-import { useTranslation } from '../../hooks/useTranslation';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useTranslation } from '@/hooks/useTranslation';
 // import heroPortrait from '../../assets/hero-portrait.webp';
 const heroPortrait = '/assets/hero-portrait.webp';
 

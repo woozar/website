@@ -1,11 +1,11 @@
 import { Stack, Title, Text } from '@mantine/core';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Section, Grid } from '../Layout';
-import { useMediaQuery } from '../../hooks/useMediaQuery';
-import { useProjects } from '../../hooks/useProjects';
-import { useTranslation } from '../../hooks/useTranslation';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useProjects } from '@/hooks/useProjects';
+import { useTranslation } from '@/hooks/useTranslation';
 import { ImprovedProjectCard } from './ImprovedProjectCard';
-import { useFilterStore } from '../../stores/filterStore';
+import { useFilterStore } from '@/stores/filterStore';
 import { ActiveTagsFilter } from '../Filter/ActiveTagsFilter';
 import { useMemo } from 'react';
 

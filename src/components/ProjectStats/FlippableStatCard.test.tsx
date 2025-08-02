@@ -1,5 +1,5 @@
 import { screen, fireEvent } from '@testing-library/react';
-import { customRender as render } from '../../test/render';
+import { customRender as render } from '@/test/render';
 import { FlippableStatCard } from './FlippableStatCard';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { IconCode } from '@tabler/icons-react';
