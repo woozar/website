@@ -7,7 +7,7 @@ interface ContainerProps {
   className?: string;
 }
 
-export const Container = ({ children, size = 'lg', className }: ContainerProps) => {
+export const Container = ({ children, size = 'xl', className }: ContainerProps) => {
   const maxWidths = {
     sm: '640px',
     md: '768px',
