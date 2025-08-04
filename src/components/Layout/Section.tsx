@@ -15,7 +15,7 @@ export const Section = ({
   id, 
   className,
   paddingY,
-  containerSize = 'lg'
+  containerSize = 'xl'
 }: SectionProps) => {
   const paddings = {
     sm: '2rem 0',

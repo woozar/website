@@ -134,7 +134,7 @@ describe('Section', () => {
     // The content should be wrapped in a container with centered styling
     const container = screen.getByText('Content').parentElement
     expect(container).toHaveStyle({
-      maxWidth: '1024px',
+      maxWidth: '1280px',
       margin: '0 auto'
     })
   })
