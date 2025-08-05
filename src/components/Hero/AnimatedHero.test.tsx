@@ -1,273 +1,300 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent } from '@/test/test-utils'
-import { AnimatedHero } from './AnimatedHero'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { useTranslation } from '@/hooks/useTranslation'
-import { de } from '@/translations/de'
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import { useReducedMotion } from "framer-motion";
+
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useTranslation } from "@/hooks/useTranslation";
+import { fireEvent, render, screen } from "@/test/test-utils";
+import { de } from "@/translations/de";
+
+import { AnimatedHero } from "./AnimatedHero";
 
 // Mock dependencies
-vi.mock('@/hooks/useMediaQuery')
-vi.mock('@/hooks/useTranslation')
-vi.mock('framer-motion', () => ({
+vi.mock("@/hooks/useMediaQuery");
+vi.mock("@/hooks/useTranslation");
+vi.mock("framer-motion", () => ({
   motion: {
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    section: ({ children, ...props }: any) => <section {...props}>{children}</section>,
+    section: ({ children, ...props }: any) => (
+      <section {...props}>{children}</section>
+    ),
   },
   useReducedMotion: vi.fn(),
-}))
+}));
 
 // Mock the image import
-vi.mock('../../assets/hero-portrait.webp', () => ({
-  default: '/mock-hero-portrait.webp'
-}))
+vi.mock("../../assets/hero-portrait.webp", () => ({
+  default: "/mock-hero-portrait.webp",
+}));
 
-import { useReducedMotion } from 'framer-motion'
+const mockUseMediaQuery = vi.mocked(useMediaQuery);
+const mockUseTranslation = vi.mocked(useTranslation);
 
-const mockUseMediaQuery = vi.mocked(useMediaQuery)
-const mockUseTranslation = vi.mocked(useTranslation)
-
-
-describe('AnimatedHero', () => {
+describe("AnimatedHero", () => {
   beforeEach(() => {
-    vi.clearAllMocks()
-    vi.mocked(useReducedMotion).mockReturnValue(false)
+    vi.clearAllMocks();
+    vi.mocked(useReducedMotion).mockReturnValue(false);
     mockUseMediaQuery.mockReturnValue({
       isMobile: false,
       isTablet: false,
-      isDesktop: true
-    })
+      isDesktop: true,
+    });
     mockUseTranslation.mockReturnValue({
       t: de,
-      language: 'de'
-    })
+      language: "de",
+    });
 
     // Mock scrollTo
-    Object.defineProperty(window, 'scrollTo', {
+    Object.defineProperty(window, "scrollTo", {
       value: vi.fn(),
-      writable: true
-    })
+      writable: true,
+    });
 
     // Mock querySelector
-    Object.defineProperty(document, 'querySelector', {
+    Object.defineProperty(document, "querySelector", {
       value: vi.fn().mockReturnValue({
-        offsetTop: 500
+        offsetTop: 500,
       } as HTMLElement),
-      writable: true
-    })
-  })
+      writable: true,
+    });
+  });
 
-  it('should render hero section with name and title', () => {
-    render(<AnimatedHero />)
+  it("should render hero section with name and title", () => {
+    render(<AnimatedHero />);
 
-    expect(screen.getByText('Johannes Herrmann')).toBeInTheDocument()
-    expect(screen.getByText('Software Freelancer & AI Specialist')).toBeInTheDocument()
-  })
+    expect(screen.getByText("Johannes Herrmann")).toBeInTheDocument();
+    expect(
+      screen.getByText("Software Freelancer & AI Specialist")
+    ).toBeInTheDocument();
+  });
 
-  it('should render description text', () => {
-    render(<AnimatedHero />)
+  it("should render description text", () => {
+    render(<AnimatedHero />);
 
-    expect(screen.getByText('Spezialisiert auf AI/LLM Entwicklung, Cloud Architecture und Full-Stack Development. Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen.')).toBeInTheDocument()
-  })
+    expect(
+      screen.getByText(
+        "Spezialisiert auf AI/LLM Entwicklung, Cloud Architecture und Full-Stack Development. Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen."
+      )
+    ).toBeInTheDocument();
+  });
 
-  it('should render action buttons', () => {
-    render(<AnimatedHero />)
+  it("should render action buttons", () => {
+    render(<AnimatedHero />);
 
-    expect(screen.getByText('Kontakt aufnehmen')).toBeInTheDocument()
-    expect(screen.getByText('Projekte ansehen')).toBeInTheDocument()
-  })
+    expect(screen.getByText("Kontakt aufnehmen")).toBeInTheDocument();
+    expect(screen.getByText("Projekte ansehen")).toBeInTheDocument();
+  });
 
-  it('should render hero portrait image', () => {
-    render(<AnimatedHero />)
+  it("should render hero portrait image", () => {
+    render(<AnimatedHero />);
 
-    const heroImage = screen.getByRole('img')
-    expect(heroImage).toBeInTheDocument()
-    expect(heroImage).toHaveAttribute('src', '/assets/hero-portrait.webp')
-    expect(heroImage).toHaveAttribute('alt', 'Johannes Herrmann - Software Freelancer')
-  })
+    const heroImage = screen.getByRole("img");
+    expect(heroImage).toBeInTheDocument();
+    expect(heroImage).toHaveAttribute("src", "/assets/hero-portrait.webp");
+    expect(heroImage).toHaveAttribute(
+      "alt",
+      "Johannes Herrmann - Software Freelancer"
+    );
+  });
 
-  it('should handle contact button click', () => {
-    render(<AnimatedHero />)
+  it("should handle contact button click", () => {
+    render(<AnimatedHero />);
 
-    const contactButton = screen.getByText('Kontakt aufnehmen')
-    fireEvent.click(contactButton)
+    const contactButton = screen.getByText("Kontakt aufnehmen");
+    fireEvent.click(contactButton);
 
-    expect(document.querySelector).toHaveBeenCalledWith('#contact')
+    expect(document.querySelector).toHaveBeenCalledWith("#contact");
     expect(window.scrollTo).toHaveBeenCalledWith({
       top: 400, // 500 - 100 (header height)
-      behavior: 'smooth'
-    })
-  })
+      behavior: "smooth",
+    });
+  });
 
-  it('should handle projects button click', () => {
-    render(<AnimatedHero />)
+  it("should handle projects button click", () => {
+    render(<AnimatedHero />);
 
-    const projectsButton = screen.getByText('Projekte ansehen')
-    fireEvent.click(projectsButton)
+    const projectsButton = screen.getByText("Projekte ansehen");
+    fireEvent.click(projectsButton);
 
-    expect(document.querySelector).toHaveBeenCalledWith('#projects')
+    expect(document.querySelector).toHaveBeenCalledWith("#projects");
     expect(window.scrollTo).toHaveBeenCalledWith({
       top: 400, // 500 - 100 (header height)
-      behavior: 'smooth'
-    })
-  })
+      behavior: "smooth",
+    });
+  });
 
-  it('should handle missing target element gracefully', () => {
-    document.querySelector = vi.fn().mockReturnValue(null)
+  it("should handle missing target element gracefully", () => {
+    document.querySelector = vi.fn().mockReturnValue(null);
 
-    render(<AnimatedHero />)
+    render(<AnimatedHero />);
 
-    const contactButton = screen.getByText('Kontakt aufnehmen')
-    
-    expect(() => fireEvent.click(contactButton)).not.toThrow()
-    expect(window.scrollTo).not.toHaveBeenCalled()
-  })
+    const contactButton = screen.getByText("Kontakt aufnehmen");
 
-  it('should adapt layout for mobile devices', () => {
+    expect(() => fireEvent.click(contactButton)).not.toThrow();
+    expect(window.scrollTo).not.toHaveBeenCalled();
+  });
+
+  it("should adapt layout for mobile devices", () => {
     mockUseMediaQuery.mockReturnValue({
       isMobile: true,
       isTablet: false,
-      isDesktop: false
-    })
+      isDesktop: false,
+    });
 
-    render(<AnimatedHero />)
+    render(<AnimatedHero />);
 
     // Should still render all content on mobile
-    expect(screen.getByText('Johannes Herrmann')).toBeInTheDocument()
-    expect(screen.getByText('Kontakt aufnehmen')).toBeInTheDocument()
-    expect(screen.getByRole('img')).toBeInTheDocument()
-  })
+    expect(screen.getByText("Johannes Herrmann")).toBeInTheDocument();
+    expect(screen.getByText("Kontakt aufnehmen")).toBeInTheDocument();
+    expect(screen.getByRole("img")).toBeInTheDocument();
+  });
 
-  it('should adapt layout for tablet devices', () => {
+  it("should adapt layout for tablet devices", () => {
     mockUseMediaQuery.mockReturnValue({
       isMobile: false,
       isTablet: true,
-      isDesktop: false
-    })
+      isDesktop: false,
+    });
 
-    render(<AnimatedHero />)
+    render(<AnimatedHero />);
 
     // Should still render all content on tablet
-    expect(screen.getByText('Johannes Herrmann')).toBeInTheDocument()
-    expect(screen.getByText('Software Freelancer & AI Specialist')).toBeInTheDocument()
-  })
+    expect(screen.getByText("Johannes Herrmann")).toBeInTheDocument();
+    expect(
+      screen.getByText("Software Freelancer & AI Specialist")
+    ).toBeInTheDocument();
+  });
 
-  it('should handle German language translations', () => {
-    render(<AnimatedHero />)
+  it("should handle German language translations", () => {
+    render(<AnimatedHero />);
 
-    expect(screen.getByText('Software Freelancer & AI Specialist')).toBeInTheDocument()
-    expect(screen.getByText('Kontakt aufnehmen')).toBeInTheDocument()
-    expect(screen.getByText('Projekte ansehen')).toBeInTheDocument()
-  })
+    expect(
+      screen.getByText("Software Freelancer & AI Specialist")
+    ).toBeInTheDocument();
+    expect(screen.getByText("Kontakt aufnehmen")).toBeInTheDocument();
+    expect(screen.getByText("Projekte ansehen")).toBeInTheDocument();
+  });
 
-  it('should render with proper semantic structure', () => {
-    render(<AnimatedHero />)
+  it("should render with proper semantic structure", () => {
+    render(<AnimatedHero />);
 
-    const mainTitle = screen.getByRole('heading', { level: 1 })
-    expect(mainTitle).toHaveTextContent('Johannes Herrmann')
+    const mainTitle = screen.getByRole("heading", { level: 1 });
+    expect(mainTitle).toHaveTextContent("Johannes Herrmann");
 
     // The title is rendered as regular text, not an h2
-    expect(screen.getByText('Software Freelancer & AI Specialist')).toBeInTheDocument()
-  })
+    expect(
+      screen.getByText("Software Freelancer & AI Specialist")
+    ).toBeInTheDocument();
+  });
 
-  it('should have proper button attributes', () => {
-    render(<AnimatedHero />)
+  it("should have proper button attributes", () => {
+    render(<AnimatedHero />);
 
-    const contactButton = screen.getByText('Kontakt aufnehmen')
-    const projectsButton = screen.getByText('Projekte ansehen')
+    const contactButton = screen.getByText("Kontakt aufnehmen");
+    const projectsButton = screen.getByText("Projekte ansehen");
 
     // Buttons are rendered as Mantine components and should be in the document
-    expect(contactButton).toBeInTheDocument()
-    expect(projectsButton).toBeInTheDocument()
-  })
+    expect(contactButton).toBeInTheDocument();
+    expect(projectsButton).toBeInTheDocument();
+  });
 
-  it('should render image with proper accessibility attributes', () => {
-    render(<AnimatedHero />)
+  it("should render image with proper accessibility attributes", () => {
+    render(<AnimatedHero />);
 
-    const heroImage = screen.getByRole('img')
-    expect(heroImage).toHaveAttribute('alt', 'Johannes Herrmann - Software Freelancer')
-  })
+    const heroImage = screen.getByRole("img");
+    expect(heroImage).toHaveAttribute(
+      "alt",
+      "Johannes Herrmann - Software Freelancer"
+    );
+  });
 
-  it('should handle scroll navigation correctly', () => {
+  it("should handle scroll navigation correctly", () => {
     const mockElement = {
-      offsetTop: 800
-    } as HTMLElement
+      offsetTop: 800,
+    } as HTMLElement;
 
-    document.querySelector = vi.fn().mockReturnValue(mockElement)
+    document.querySelector = vi.fn().mockReturnValue(mockElement);
 
-    render(<AnimatedHero />)
+    render(<AnimatedHero />);
 
-    const contactButton = screen.getByText('Kontakt aufnehmen')
-    fireEvent.click(contactButton)
+    const contactButton = screen.getByText("Kontakt aufnehmen");
+    fireEvent.click(contactButton);
 
     expect(window.scrollTo).toHaveBeenCalledWith({
       top: 700, // 800 - 100 (header height)
-      behavior: 'smooth'
-    })
-  })
+      behavior: "smooth",
+    });
+  });
 
-  it('should render buttons with proper styling classes', () => {
-    render(<AnimatedHero />)
+  it("should render buttons with proper styling classes", () => {
+    render(<AnimatedHero />);
 
-    const contactButton = screen.getByText('Kontakt aufnehmen')
-    const projectsButton = screen.getByText('Projekte ansehen')
+    const contactButton = screen.getByText("Kontakt aufnehmen");
+    const projectsButton = screen.getByText("Projekte ansehen");
 
     // Both buttons should be rendered as button elements
-    expect(contactButton).toBeInTheDocument()
-    expect(projectsButton).toBeInTheDocument()
-  })
+    expect(contactButton).toBeInTheDocument();
+    expect(projectsButton).toBeInTheDocument();
+  });
 
-  it('should handle navigation to different sections', () => {
-    render(<AnimatedHero />)
+  it("should handle navigation to different sections", () => {
+    render(<AnimatedHero />);
 
     // Test contact button navigation
-    const contactButton = screen.getByText('Kontakt aufnehmen')
-    fireEvent.click(contactButton)
-    expect(document.querySelector).toHaveBeenCalledWith('#contact')
+    const contactButton = screen.getByText("Kontakt aufnehmen");
+    fireEvent.click(contactButton);
+    expect(document.querySelector).toHaveBeenCalledWith("#contact");
 
     // Test projects button navigation
-    const projectsButton = screen.getByText('Projekte ansehen')
-    fireEvent.click(projectsButton)
-    expect(document.querySelector).toHaveBeenCalledWith('#projects')
-  })
+    const projectsButton = screen.getByText("Projekte ansehen");
+    fireEvent.click(projectsButton);
+    expect(document.querySelector).toHaveBeenCalledWith("#projects");
+  });
 
-  it('should render all required content elements', () => {
-    render(<AnimatedHero />)
+  it("should render all required content elements", () => {
+    render(<AnimatedHero />);
 
     // Check all main content is present
-    expect(screen.getByText('Johannes Herrmann')).toBeInTheDocument()
-    expect(screen.getByText('Software Freelancer & AI Specialist')).toBeInTheDocument()
-    expect(screen.getByText('Spezialisiert auf AI/LLM Entwicklung, Cloud Architecture und Full-Stack Development. Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen.')).toBeInTheDocument()
-    expect(screen.getByText('Kontakt aufnehmen')).toBeInTheDocument()
-    expect(screen.getByText('Projekte ansehen')).toBeInTheDocument()
-    expect(screen.getByRole('img')).toBeInTheDocument()
-  })
+    expect(screen.getByText("Johannes Herrmann")).toBeInTheDocument();
+    expect(
+      screen.getByText("Software Freelancer & AI Specialist")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Spezialisiert auf AI/LLM Entwicklung, Cloud Architecture und Full-Stack Development. Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen."
+      )
+    ).toBeInTheDocument();
+    expect(screen.getByText("Kontakt aufnehmen")).toBeInTheDocument();
+    expect(screen.getByText("Projekte ansehen")).toBeInTheDocument();
+    expect(screen.getByRole("img")).toBeInTheDocument();
+  });
 
-  describe('Animation and Reduced Motion', () => {
-    it('should render with normal animations when reduced motion is false', () => {
-      vi.mocked(useReducedMotion).mockReturnValue(false)
+  describe("Animation and Reduced Motion", () => {
+    it("should render with normal animations when reduced motion is false", () => {
+      vi.mocked(useReducedMotion).mockReturnValue(false);
 
-      render(<AnimatedHero />)
+      render(<AnimatedHero />);
 
       // Component should render successfully with animations enabled
-      expect(screen.getByText('Johannes Herrmann')).toBeInTheDocument()
-    })
+      expect(screen.getByText("Johannes Herrmann")).toBeInTheDocument();
+    });
 
-    it('should render with reduced motion animations when reduced motion is true', () => {
-      vi.mocked(useReducedMotion).mockReturnValue(true)
+    it("should render with reduced motion animations when reduced motion is true", () => {
+      vi.mocked(useReducedMotion).mockReturnValue(true);
 
-      render(<AnimatedHero />)
+      render(<AnimatedHero />);
 
       // Component should render successfully with reduced animations
-      expect(screen.getByText('Johannes Herrmann')).toBeInTheDocument()
-    })
+      expect(screen.getByText("Johannes Herrmann")).toBeInTheDocument();
+    });
 
-    it('should handle functionality with reduced motion enabled', () => {
-      vi.mocked(useReducedMotion).mockReturnValue(true)
+    it("should handle functionality with reduced motion enabled", () => {
+      vi.mocked(useReducedMotion).mockReturnValue(true);
 
-      render(<AnimatedHero />)
+      render(<AnimatedHero />);
 
       // Component functionality should still work with reduced motion
-      expect(screen.getByText('Kontakt aufnehmen')).toBeInTheDocument()
-    })
-  })
-})
+      expect(screen.getByText("Kontakt aufnehmen")).toBeInTheDocument();
+    });
+  });
+});

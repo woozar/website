@@ -5,6 +5,7 @@ This document explains how the internationalization (i18n) system works in this 
 ## Overview
 
 The website supports German (DE) and English (EN) with a hybrid translation approach:
+
 - **UI Elements**: Translated via centralized translation files
 - **Project Data**: Translated via a custom hook system
 
@@ -13,19 +14,22 @@ The website supports German (DE) and English (EN) with a hybrid translation appr
 ### 1. UI Translations
 
 **Location:** `src/translations/`
+
 - `en.ts` - English translations
 - `de.ts` - German translations
 - `index.ts` - Export and type definitions
 
 **Usage:**
+
 ```typescript
-import { useTranslation } from '../hooks/useTranslation';
+import { useTranslation } from "../hooks/useTranslation";
 
 const { t, language } = useTranslation();
 // Access translations: t.navigation.services, t.hero.title, etc.
 ```
 
 **Structure:**
+
 ```typescript
 export const en = {
   navigation: { services: 'Services', projects: 'Projects', ... },
@@ -44,29 +48,32 @@ export const en = {
 Project data is stored in English in `src/data/projects.ts` but translated dynamically via the `useProjects` hook.
 
 **Translation Object:**
+
 ```typescript
 const germanTranslations: { [key: string]: Partial<Project> } = {
   "Project Title in English": {
     title: "German Title (optional)",
     description: [
       "German paragraph 1",
-      "German paragraph 2", 
+      "German paragraph 2",
       // ... more paragraphs
-    ]
+    ],
   },
   // ... more project translations
 };
 ```
 
 **How it works:**
+
 1. `useProjects()` hook checks current language
 2. If German: merges English project data with German translations
 3. If English: returns original project data
 4. Projects without German translations fall back to English
 
 **Usage:**
+
 ```typescript
-import { useProjects } from '../hooks/useProjects';
+import { useProjects } from "../hooks/useProjects";
 
 const { projects } = useProjects();
 // Automatically returns translated projects based on current language
@@ -77,28 +84,31 @@ const { projects } = useProjects();
 ### Adding UI Translations
 
 1. **Add to English file** (`src/translations/en.ts`):
+
 ```typescript
 export const en = {
   // ... existing translations
   newSection: {
-    title: 'New Section',
-    subtitle: 'Description'
-  }
+    title: "New Section",
+    subtitle: "Description",
+  },
 };
 ```
 
 2. **Add to German file** (`src/translations/de.ts`):
+
 ```typescript
 export const de = {
-  // ... existing translations  
+  // ... existing translations
   newSection: {
-    title: 'Neue Sektion',
-    subtitle: 'Beschreibung'
-  }
+    title: "Neue Sektion",
+    subtitle: "Beschreibung",
+  },
 };
 ```
 
 3. **Use in components**:
+
 ```typescript
 const { t } = useTranslation();
 return <h1>{t.newSection.title}</h1>;
@@ -107,6 +117,7 @@ return <h1>{t.newSection.title}</h1>;
 ### Adding Project Translations
 
 1. **Add project to English data** (`src/data/projects.ts`):
+
 ```typescript
 {
   "customer": "Customer Name",
@@ -121,6 +132,7 @@ return <h1>{t.newSection.title}</h1>;
 ```
 
 2. **Add German translation** (`src/hooks/useProjects.ts`):
+
 ```typescript
 const germanTranslations: { [key: string]: Partial<Project> } = {
   // ... existing translations
@@ -128,13 +140,14 @@ const germanTranslations: { [key: string]: Partial<Project> } = {
     title: "German Project Title", // Optional - omit to keep English title
     description: [
       "German description paragraph 1",
-      "German description paragraph 2"
-    ]
-  }
+      "German description paragraph 2",
+    ],
+  },
 };
 ```
 
 **Important Notes:**
+
 - The key in `germanTranslations` must **exactly match** the English `title` in `projects.ts`
 - You can translate `title` and/or `description` - other fields (customer, tags) stay in English
 - If no German translation exists, the project displays in English
@@ -149,10 +162,12 @@ The language switcher updates a Zustand store that triggers re-renders of all tr
 ## Testing Translations
 
 **Test files:**
+
 - `src/hooks/useProjects.test.ts` - Tests project translation logic
 - `src/hooks/useTranslation.test.ts` - Tests UI translation logic
 
 **Key test scenarios:**
+
 - Language switching works correctly
 - Projects without translations fall back to English
 - Partial translations (title only, description only) work
@@ -161,6 +176,7 @@ The language switcher updates a Zustand store that triggers re-renders of all tr
 ## Common Patterns
 
 ### Conditional Content Based on Language
+
 ```typescript
 const { language } = useTranslation();
 
@@ -172,9 +188,10 @@ return (
 ```
 
 ### Pluralization/Dynamic Content
+
 ```typescript
 // In translation files
-showingCount: (filtered: number, total: number) => 
+showingCount: (filtered: number, total: number) =>
   `Showing ${filtered} of ${total} projects`,
 
 // Usage
@@ -182,6 +199,7 @@ const message = t.projects.showingCount(5, 20);
 ```
 
 ## File Structure
+
 ```
 src/
 ├── translations/

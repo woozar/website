@@ -1,9 +1,20 @@
-import { Stack, Title, Text, Group, Box, List, ThemeIcon } from '@mantine/core';
-import { IconCheck, IconCode, IconBrain, IconRocket, IconShield, IconSchool } from '@tabler/icons-react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { Section } from '../Layout';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { useTranslation } from '@/hooks/useTranslation';
+import { Box, Group, List, Stack, Text, ThemeIcon, Title } from "@mantine/core";
+
+import {
+  IconBrain,
+  IconCheck,
+  IconCode,
+  IconRocket,
+  IconSchool,
+  IconShield,
+} from "@tabler/icons-react";
+
+import { motion, useReducedMotion } from "framer-motion";
+
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useTranslation } from "@/hooks/useTranslation";
+
+import { Section } from "../Layout";
 
 export const About = () => {
   const { isMobile } = useMediaQuery();
@@ -14,15 +25,20 @@ export const About = () => {
     hidden: { opacity: shouldReduceMotion ? 1 : 0 },
     visible: {
       opacity: 1,
-      transition: shouldReduceMotion ? {} : {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
+      transition: shouldReduceMotion
+        ? {}
+        : {
+            staggerChildren: 0.2,
+            delayChildren: 0.1,
+          },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 30 },
+    hidden: {
+      opacity: shouldReduceMotion ? 1 : 0,
+      y: shouldReduceMotion ? 0 : 30,
+    },
     visible: {
       opacity: 1,
       y: 0,
@@ -36,30 +52,30 @@ export const About = () => {
       icon: IconBrain,
       items: t.about.skills.aiLlm.items,
     },
-    { 
-      category: t.about.skills.frontend.category, 
-      icon: IconCode, 
-      items: t.about.skills.frontend.items 
+    {
+      category: t.about.skills.frontend.category,
+      icon: IconCode,
+      items: t.about.skills.frontend.items,
     },
-    { 
-      category: t.about.skills.backend.category, 
-      icon: IconRocket, 
-      items: t.about.skills.backend.items 
+    {
+      category: t.about.skills.backend.category,
+      icon: IconRocket,
+      items: t.about.skills.backend.items,
     },
-    { 
-      category: t.about.skills.cloud.category, 
-      icon: IconCheck, 
-      items: t.about.skills.cloud.items 
+    {
+      category: t.about.skills.cloud.category,
+      icon: IconCheck,
+      items: t.about.skills.cloud.items,
     },
-    { 
-      category: t.about.skills.quality.category, 
-      icon: IconShield, 
-      items: t.about.skills.quality.items 
+    {
+      category: t.about.skills.quality.category,
+      icon: IconShield,
+      items: t.about.skills.quality.items,
     },
-    { 
-      category: t.about.skills.training.category, 
-      icon: IconSchool, 
-      items: t.about.skills.training.items 
+    {
+      category: t.about.skills.training.category,
+      icon: IconSchool,
+      items: t.about.skills.training.items,
     },
   ];
 
@@ -77,11 +93,12 @@ export const About = () => {
               <Title
                 order={2}
                 style={{
-                  fontSize: isMobile ? '2rem' : '2.5rem',
-                  background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
+                  fontSize: isMobile ? "2rem" : "2.5rem",
+                  background:
+                    "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
                 }}
               >
                 {t.about.title}
@@ -92,32 +109,52 @@ export const About = () => {
             </Stack>
           </motion.div>
 
-          <Group align="flex-start" gap="xl" style={{ flexDirection: isMobile ? 'column' : 'row' }}>
+          <Group
+            align="flex-start"
+            gap="xl"
+            style={{ flexDirection: isMobile ? "column" : "row" }}
+          >
             {/* Text Content */}
             <motion.div variants={itemVariants} style={{ flex: 1 }}>
               <Stack gap="lg">
-                <Text size="md" c="var(--text-secondary)" style={{ lineHeight: 1.7 }}>
+                <Text
+                  size="md"
+                  c="var(--text-secondary)"
+                  style={{ lineHeight: 1.7 }}
+                >
                   {t.about.description1}
                 </Text>
 
-                <Text size="md" c="var(--text-secondary)" style={{ lineHeight: 1.7 }}>
+                <Text
+                  size="md"
+                  c="var(--text-secondary)"
+                  style={{ lineHeight: 1.7 }}
+                >
                   {t.about.description2}
                 </Text>
 
-                <Text size="md" c="var(--text-secondary)" style={{ lineHeight: 1.7 }}>
+                <Text
+                  size="md"
+                  c="var(--text-secondary)"
+                  style={{ lineHeight: 1.7 }}
+                >
                   {t.about.description3}
                 </Text>
               </Stack>
             </motion.div>
 
             {/* Highlights */}
-            <motion.div variants={itemVariants} style={{ flex: isMobile ? 1 : 0.8 }}>
+            <motion.div
+              variants={itemVariants}
+              style={{ flex: isMobile ? 1 : 0.8 }}
+            >
               <Box
                 style={{
-                  background: 'linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(211, 47, 47, 0.05))',
-                  padding: '2rem',
-                  borderRadius: '1rem',
-                  border: '1px solid rgba(255, 107, 53, 0.1)',
+                  background:
+                    "linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(211, 47, 47, 0.05))",
+                  padding: "2rem",
+                  borderRadius: "1rem",
+                  border: "1px solid rgba(255, 107, 53, 0.1)",
                 }}
               >
                 <Stack gap="md">
@@ -153,20 +190,24 @@ export const About = () => {
                 {t.about.expertise}
               </Title>
 
-              <Group gap="lg" justify="center" style={{ flexDirection: isMobile ? 'column' : 'row' }}>
+              <Group
+                gap="lg"
+                justify="center"
+                style={{ flexDirection: isMobile ? "column" : "row" }}
+              >
                 {skills.map((skillGroup) => (
                   <motion.div
                     key={skillGroup.category}
                     variants={itemVariants}
-                    style={{ flex: 1, minWidth: isMobile ? '100%' : '250px' }}
+                    style={{ flex: 1, minWidth: isMobile ? "100%" : "250px" }}
                   >
                     <Box
                       className="skill-box"
                       style={{
-                        padding: '1.5rem',
-                        border: '1px solid #e0e0e0',
-                        borderRadius: '0.75rem',
-                        height: '100%',
+                        padding: "1.5rem",
+                        border: "1px solid #e0e0e0",
+                        borderRadius: "0.75rem",
+                        height: "100%",
                       }}
                     >
                       <Stack gap="md">
@@ -176,8 +217,9 @@ export const About = () => {
                             color="orange"
                             size={30}
                             style={{
-                              background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
-                              color: 'white',
+                              background:
+                                "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
+                              color: "white",
                             }}
                           >
                             <skillGroup.icon size={16} />
@@ -189,7 +231,11 @@ export const About = () => {
 
                         <Stack gap="xs">
                           {skillGroup.items.map((skill) => (
-                            <Text key={skill} size="sm" c="var(--text-secondary)">
+                            <Text
+                              key={skill}
+                              size="sm"
+                              c="var(--text-secondary)"
+                            >
                               • {skill}
                             </Text>
                           ))}

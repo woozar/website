@@ -1,21 +1,35 @@
-import { useState, useEffect } from 'react';
-import { Group, Burger, Drawer, Stack, Button, Image, Anchor, Box, Text } from '@mantine/core';
-import { IconMail, IconFileText } from '@tabler/icons-react';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { Container } from '../Layout';
-import { LanguageSwitcher } from '../LanguageSwitcher';
-import { ThemeSwitcher } from '../ThemeSwitcher';
-import { useTranslation } from '@/hooks/useTranslation';
-import { useModal } from '@/hooks/useModal';
+import { useEffect, useState } from "react";
+
+import {
+  Anchor,
+  Box,
+  Burger,
+  Button,
+  Drawer,
+  Group,
+  Image,
+  Stack,
+  Text,
+} from "@mantine/core";
+
+import { IconFileText, IconMail } from "@tabler/icons-react";
+
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useModal } from "@/hooks/useModal";
+import { useTranslation } from "@/hooks/useTranslation";
+
+import { LanguageSwitcher } from "../LanguageSwitcher";
+import { Container } from "../Layout";
+import { ThemeSwitcher } from "../ThemeSwitcher";
+
 // import logoImage from '../../assets/logo.webp';
-const logoImage = '/assets/logo.webp';
+const logoImage = "/assets/logo.webp";
 
 export const ImprovedNavigation = () => {
   const [drawerOpened, setDrawerOpened] = useState(false);
   const { isMobile, isTablet } = useMediaQuery();
   const { t } = useTranslation();
   const { isModalOpen } = useModal();
-
 
   // Close drawer when screen becomes desktop size or when modal opens
   useEffect(() => {
@@ -32,10 +46,10 @@ export const ImprovedNavigation = () => {
   }, [isModalOpen, drawerOpened]);
 
   const navItems = [
-    { label: t.navigation.services, href: '#services' },
-    { label: t.navigation.statistics, href: '#statistics' },
-    { label: t.navigation.projects, href: '#projects' },
-    { label: t.navigation.about, href: '#about' }
+    { label: t.navigation.services, href: "#services" },
+    { label: t.navigation.statistics, href: "#statistics" },
+    { label: t.navigation.projects, href: "#projects" },
+    { label: t.navigation.about, href: "#about" },
   ];
 
   const handleNavClick = (href: string) => {
@@ -46,7 +60,7 @@ export const ImprovedNavigation = () => {
       const elementPosition = (element as HTMLElement).offsetTop - headerHeight;
       window.scrollTo({
         top: elementPosition,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   };
@@ -56,17 +70,17 @@ export const ImprovedNavigation = () => {
       <Box
         component="header"
         style={{
-          backgroundColor: 'var(--backdrop-filter)',
-          backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid var(--border-color)',
-          position: 'fixed',
+          backgroundColor: "var(--backdrop-filter)",
+          backdropFilter: "blur(20px)",
+          borderBottom: "1px solid var(--border-color)",
+          position: "fixed",
           top: 0,
           left: 0,
           right: 0,
           zIndex: 1000,
-          boxShadow: '0 2px 20px var(--shadow-color)',
-          paddingTop: '1.25rem',
-          paddingBottom: '1rem'
+          boxShadow: "0 2px 20px var(--shadow-color)",
+          paddingTop: "1.25rem",
+          paddingBottom: "1rem",
         }}
       >
         <Container>
@@ -76,9 +90,9 @@ export const ImprovedNavigation = () => {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              style={{ textDecoration: 'none' }}
+              style={{ textDecoration: "none" }}
             >
               <Group gap="md" align="center">
                 <Image
@@ -87,23 +101,38 @@ export const ImprovedNavigation = () => {
                   h={50}
                   w="auto"
                   style={{
-                    filter: 'drop-shadow(0 2px 8px rgba(255, 107, 53, 0.2))',
-                    transition: 'transform 0.2s ease'
+                    filter: "drop-shadow(0 2px 8px rgba(255, 107, 53, 0.2))",
+                    transition: "transform 0.2s ease",
                   }}
                 />
                 {!isMobile && !isTablet && (
                   <Box>
-                    <Text size="lg" fw={700} c="var(--text-primary)" style={{ lineHeight: 1.2 }}>
+                    <Text
+                      size="lg"
+                      fw={700}
+                      c="var(--text-primary)"
+                      style={{ lineHeight: 1.2 }}
+                    >
                       Johannes Herrmann
                     </Text>
-                    <Text size="xs" c="var(--primary-orange)" fw={500} style={{ lineHeight: 1.2 }}>
+                    <Text
+                      size="xs"
+                      c="var(--primary-orange)"
+                      fw={500}
+                      style={{ lineHeight: 1.2 }}
+                    >
                       Software Freelancer & AI Specialist
                     </Text>
                   </Box>
                 )}
                 {!isMobile && isTablet && (
                   <Box>
-                    <Text size="md" fw={700} c="var(--text-primary)" style={{ lineHeight: 1.1 }}>
+                    <Text
+                      size="md"
+                      fw={700}
+                      c="var(--text-primary)"
+                      style={{ lineHeight: 1.1 }}
+                    >
                       J. Herrmann
                     </Text>
                   </Box>
@@ -123,29 +152,29 @@ export const ImprovedNavigation = () => {
                       handleNavClick(item.href);
                     }}
                     style={{
-                      textDecoration: 'none',
+                      textDecoration: "none",
                       fontWeight: 600,
-                      fontSize: isTablet ? '0.85rem' : '0.9rem',
-                      color: 'var(--text-primary)',
-                      padding: isTablet ? '0.3rem 0.6rem' : '0.4rem 0.8rem',
-                      borderRadius: '0.5rem',
-                      transition: 'all 0.2s ease',
-                      position: 'relative'
+                      fontSize: isTablet ? "0.85rem" : "0.9rem",
+                      color: "var(--text-primary)",
+                      padding: isTablet ? "0.3rem 0.6rem" : "0.4rem 0.8rem",
+                      borderRadius: "0.5rem",
+                      transition: "all 0.2s ease",
+                      position: "relative",
                     }}
                     styles={{
                       root: {
-                        '&:hover': {
-                          color: 'var(--primary-orange)',
-                          backgroundColor: 'rgba(255, 107, 53, 0.08)',
-                          transform: 'translateY(-1px)'
-                        }
-                      }
+                        "&:hover": {
+                          color: "var(--primary-orange)",
+                          backgroundColor: "rgba(255, 107, 53, 0.08)",
+                          transform: "translateY(-1px)",
+                        },
+                      },
                     }}
                   >
                     {item.label}
                   </Anchor>
                 ))}
-                
+
                 {/* Theme & Language Switchers */}
                 {!isTablet && (
                   <Group gap="xs">
@@ -153,30 +182,31 @@ export const ImprovedNavigation = () => {
                     <LanguageSwitcher variant="desktop" />
                   </Group>
                 )}
-                
+
                 {/* CTA Button */}
                 <Button
                   variant="filled"
                   leftSection={<IconMail size={18} />}
                   style={{
-                    background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
-                    border: 'none',
-                    fontSize: isTablet ? '0.85rem' : '0.9rem',
+                    background:
+                      "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
+                    border: "none",
+                    fontSize: isTablet ? "0.85rem" : "0.9rem",
                     fontWeight: 600,
-                    padding: isTablet ? '0.5rem 1rem' : '0.6rem 1.2rem',
-                    borderRadius: '2rem',
-                    boxShadow: '0 4px 15px rgba(255, 107, 53, 0.3)',
-                    transition: 'all 0.2s ease'
+                    padding: isTablet ? "0.5rem 1rem" : "0.6rem 1.2rem",
+                    borderRadius: "2rem",
+                    boxShadow: "0 4px 15px rgba(255, 107, 53, 0.3)",
+                    transition: "all 0.2s ease",
                   }}
                   styles={{
                     root: {
-                      '&:hover': {
-                        transform: 'translateY(-2px)',
-                        boxShadow: '0 6px 20px rgba(255, 107, 53, 0.4)'
-                      }
-                    }
+                      "&:hover": {
+                        transform: "translateY(-2px)",
+                        boxShadow: "0 6px 20px rgba(255, 107, 53, 0.4)",
+                      },
+                    },
                   }}
-                  onClick={() => handleNavClick('#contact')}
+                  onClick={() => handleNavClick("#contact")}
                 >
                   {t.navigation.contact}
                 </Button>
@@ -192,15 +222,16 @@ export const ImprovedNavigation = () => {
                   size="sm"
                   leftSection={<IconMail size={16} />}
                   style={{
-                    background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
-                    border: 'none',
-                    borderRadius: '1.5rem'
+                    background:
+                      "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
+                    border: "none",
+                    borderRadius: "1.5rem",
                   }}
-                  onClick={() => handleNavClick('#contact')}
+                  onClick={() => handleNavClick("#contact")}
                 >
                   {t.navigation.contact}
                 </Button>
-                
+
                 <Burger
                   opened={drawerOpened}
                   onClick={() => {
@@ -213,8 +244,8 @@ export const ImprovedNavigation = () => {
                   color="var(--primary-orange)"
                   style={{
                     opacity: isModalOpen ? 0.5 : 1,
-                    pointerEvents: isModalOpen ? 'none' : 'auto',
-                    transition: 'opacity 0.2s ease'
+                    pointerEvents: isModalOpen ? "none" : "auto",
+                    transition: "opacity 0.2s ease",
                   }}
                 />
               </Group>
@@ -232,24 +263,26 @@ export const ImprovedNavigation = () => {
         title={
           <Group gap="sm" align="center">
             <Image src={logoImage} alt="12 of Spades" h={30} w="auto" />
-            <Text fw={600} size="sm">Navigation</Text>
+            <Text fw={600} size="sm">
+              Navigation
+            </Text>
           </Group>
         }
         styles={{
-          title: { 
-            color: 'var(--text-primary)',
-            fontSize: '1rem'
+          title: {
+            color: "var(--text-primary)",
+            fontSize: "1rem",
           },
           header: {
-            borderBottom: '1px solid var(--border-color)',
-            backgroundColor: 'var(--background-primary)'
+            borderBottom: "1px solid var(--border-color)",
+            backgroundColor: "var(--background-primary)",
           },
           body: {
-            padding: '1.5rem',
-            backgroundColor: 'var(--background-primary)'
+            padding: "1.5rem",
+            backgroundColor: "var(--background-primary)",
           },
           content: {
-            backgroundColor: 'var(--background-primary)'
+            backgroundColor: "var(--background-primary)",
           },
         }}
       >
@@ -262,43 +295,44 @@ export const ImprovedNavigation = () => {
               fullWidth
               onClick={() => handleNavClick(item.href)}
               style={{
-                height: '50px',
-                fontSize: '1.1rem',
+                height: "50px",
+                fontSize: "1.1rem",
                 fontWeight: 500,
-                color: 'var(--text-primary)',
-                borderRadius: '0.75rem'
+                color: "var(--text-primary)",
+                borderRadius: "0.75rem",
               }}
               styles={{
                 root: {
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 107, 53, 0.08)',
-                    color: 'var(--primary-orange)'
-                  }
-                }
+                  "&:hover": {
+                    backgroundColor: "rgba(255, 107, 53, 0.08)",
+                    color: "var(--primary-orange)",
+                  },
+                },
               }}
             >
               {item.label}
             </Button>
           ))}
-          
+
           {/* Theme Switcher */}
           <ThemeSwitcher variant="mobile" />
-          
+
           {/* Language Switcher */}
           <LanguageSwitcher variant="mobile" />
-          
+
           <Button
             variant="filled"
             fullWidth
             leftSection={<IconFileText size={18} />}
             style={{
-              background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
-              height: '50px',
-              fontSize: '1rem',
+              background:
+                "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
+              height: "50px",
+              fontSize: "1rem",
               fontWeight: 600,
-              marginTop: '1rem'
+              marginTop: "1rem",
             }}
-            onClick={() => handleNavClick('#contact')}
+            onClick={() => handleNavClick("#contact")}
           >
             {t.navigation.contactAction}
           </Button>

@@ -1,5 +1,6 @@
-import { create } from 'zustand';
-import { FilterState } from '../types';
+import { create } from "zustand";
+
+import { FilterState } from "../types";
 
 interface FilterStore extends FilterState {
   toggleTag: (tag: string) => void;
@@ -11,29 +12,26 @@ interface FilterStore extends FilterState {
 
 export const useFilterStore = create<FilterStore>((set) => ({
   selectedTags: [],
-  searchQuery: '',
-  selectedCustomer: '',
-  
+  searchQuery: "",
+  selectedCustomer: "",
+
   toggleTag: (tag) =>
     set((state) => ({
       selectedTags: state.selectedTags.includes(tag)
         ? state.selectedTags.filter((t) => t !== tag)
         : [...state.selectedTags, tag],
     })),
-  
-  setSearchQuery: (query) =>
-    set({ searchQuery: query }),
-  
-  setCustomerFilter: (customer) =>
-    set({ selectedCustomer: customer }),
-  
+
+  setSearchQuery: (query) => set({ searchQuery: query }),
+
+  setCustomerFilter: (customer) => set({ selectedCustomer: customer }),
+
   clearAllFilters: () =>
     set({
       selectedTags: [],
-      searchQuery: '',
-      selectedCustomer: '',
+      searchQuery: "",
+      selectedCustomer: "",
     }),
-  
-  clearTags: () =>
-    set({ selectedTags: [] }),
+
+  clearTags: () => set({ selectedTags: [] }),
 }));
