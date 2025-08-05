@@ -1,42 +1,42 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import { resolve } from 'path'
+import react from "@vitejs/plugin-react";
+import { resolve } from "path";
+import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src'),
+      "@": resolve(__dirname, "./src"),
     },
   },
   test: {
     globals: true,
-    environment: 'jsdom',
-    setupFiles: ['./src/test/setup.ts'],
+    environment: "jsdom",
+    setupFiles: ["./src/test/setup.ts"],
     css: true,
     coverage: {
-      provider: 'v8',
-      reporter: ['text', 'json', 'html'],
+      provider: "v8",
+      reporter: ["text", "json", "html"],
       exclude: [
-        'node_modules/**',
-        'src/test/**',
-        '**/*.d.ts',
-        '**/*.config.*',
-        '**/coverage/**',
-        'dist/**',
-        'src/main.tsx',
-        'src/vite-env.d.ts',
-        'src/components/*/index.ts'
+        "node_modules/**",
+        "src/test/**",
+        "**/*.d.ts",
+        "**/*.config.*",
+        "**/coverage/**",
+        "dist/**",
+        "src/main.tsx",
+        "src/vite-env.d.ts",
+        "src/components/*/index.ts",
       ],
       thresholds: {
         global: {
           branches: 100,
           functions: 100,
           lines: 100,
-          statements: 100
-        }
-      }
-    }
-  }
-})
+          statements: 100,
+        },
+      },
+    },
+  },
+});

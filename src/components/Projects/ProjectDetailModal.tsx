@@ -1,12 +1,23 @@
-import { Modal, Stack, Title, Text, Button } from '@mantine/core';
-import { IconX } from '@tabler/icons-react';
-import { motion, AnimatePresence, Variants, useReducedMotion } from 'framer-motion';
-import { useEffect } from 'react';
-import ReactMarkdown from 'react-markdown';
-import { Project } from '@/types';
-import { TagList } from './TagList';
-import { useModal } from '@/hooks/useModal';
-import { useTranslation } from '@/hooks/useTranslation';
+import { useEffect } from "react";
+
+import { Button, Modal, Stack, Text, Title } from "@mantine/core";
+
+import { IconX } from "@tabler/icons-react";
+
+import {
+  AnimatePresence,
+  Variants,
+  motion,
+  useReducedMotion,
+} from "framer-motion";
+
+import ReactMarkdown from "react-markdown";
+
+import { useModal } from "@/hooks/useModal";
+import { useTranslation } from "@/hooks/useTranslation";
+import { Project } from "@/types";
+
+import { TagList } from "./TagList";
 
 interface ProjectDetailModalProps {
   project: Project | null;
@@ -14,7 +25,11 @@ interface ProjectDetailModalProps {
   onClose: () => void;
 }
 
-export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailModalProps) => {
+export const ProjectDetailModal = ({
+  project,
+  opened,
+  onClose,
+}: ProjectDetailModalProps) => {
   const { t } = useTranslation();
   const { openModal, closeModal } = useModal();
   const shouldReduceMotion = useReducedMotion();
@@ -22,16 +37,16 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
   // Hide scrollbars during modal animation and update global modal state
   useEffect(() => {
     if (opened) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
       openModal();
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
       closeModal();
     }
 
     // Cleanup when component unmounts
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [opened, openModal, closeModal]);
 
@@ -50,7 +65,7 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
       transition: shouldReduceMotion
         ? {}
         : {
-            type: 'spring',
+            type: "spring",
             damping: 25,
             stiffness: 300,
             duration: 0.4,
@@ -64,7 +79,7 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
         ? {}
         : {
             duration: 0.3,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           },
     },
   };
@@ -95,7 +110,10 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
   };
 
   const itemVariants = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 20 },
+    hidden: {
+      opacity: shouldReduceMotion ? 1 : 0,
+      y: shouldReduceMotion ? 0 : 20,
+    },
     visible: {
       opacity: 1,
       y: 0,
@@ -121,15 +139,15 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
           zIndex={1100}
           styles={{
             body: {
-              background: 'transparent',
-              boxShadow: 'none',
+              background: "transparent",
+              boxShadow: "none",
               padding: 0,
-              overflow: 'hidden',
+              overflow: "hidden",
             },
             content: {
-              background: 'transparent',
-              boxShadow: 'none',
-              overflow: 'hidden',
+              background: "transparent",
+              boxShadow: "none",
+              overflow: "hidden",
             },
           }}
         >
@@ -139,10 +157,10 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
             animate="visible"
             exit="exit"
             style={{
-              position: 'absolute',
+              position: "absolute",
               inset: 0,
-              background: 'rgba(0, 0, 0, 0.4)',
-              backdropFilter: 'blur(8px)',
+              background: "rgba(0, 0, 0, 0.4)",
+              backdropFilter: "blur(8px)",
               zIndex: -1,
             }}
           />
@@ -153,23 +171,23 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
             animate="visible"
             exit="exit"
             style={{
-              background: 'var(--background-primary)',
-              borderRadius: '1rem',
-              padding: '2rem',
-              maxHeight: '80vh',
-              position: 'relative',
-              boxShadow: '0 20px 60px var(--shadow-color)',
-              overflow: 'hidden',
-              display: 'flex',
-              flexDirection: 'column',
+              background: "var(--background-primary)",
+              borderRadius: "1rem",
+              padding: "2rem",
+              maxHeight: "80vh",
+              position: "relative",
+              boxShadow: "0 20px 60px var(--shadow-color)",
+              overflow: "hidden",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
             {/* Close Button */}
             <motion.div
               style={{
-                position: 'absolute',
-                top: '1rem',
-                right: '1rem',
+                position: "absolute",
+                top: "1rem",
+                right: "1rem",
                 zIndex: 10,
               }}
               whileHover={shouldReduceMotion ? {} : { scale: 1.1 }}
@@ -180,11 +198,11 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
                 size="sm"
                 onClick={onClose}
                 style={{
-                  borderRadius: '50%',
-                  width: '40px',
-                  height: '40px',
+                  borderRadius: "50%",
+                  width: "40px",
+                  height: "40px",
                   padding: 0,
-                  color: 'var(--text-secondary)',
+                  color: "var(--text-secondary)",
                 }}
               >
                 <IconX size={20} />
@@ -198,21 +216,21 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
               style={{
                 flex: 1,
                 minHeight: 0, // WICHTIG: Ermöglicht Flex-Shrinking
-                display: 'flex',
-                flexDirection: 'column',
+                display: "flex",
+                flexDirection: "column",
               }}
             >
               {/* Header - Fixed height */}
               <motion.div variants={itemVariants} style={{ flexShrink: 0 }}>
-                <Stack gap="md" style={{ marginBottom: '1.5rem' }}>
+                <Stack gap="md" style={{ marginBottom: "1.5rem" }}>
                   <Title
                     order={2}
                     style={{
-                      fontSize: '1.8rem',
+                      fontSize: "1.8rem",
                       fontWeight: 700,
-                      color: 'var(--text-primary)',
+                      color: "var(--text-primary)",
                       lineHeight: 1.3,
-                      paddingRight: '3rem',
+                      paddingRight: "3rem",
                     }}
                   >
                     {project.title}
@@ -221,8 +239,8 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
                     size="lg"
                     fw={600}
                     style={{
-                      color: 'var(--primary-orange)',
-                      fontSize: '1.1rem',
+                      color: "var(--primary-orange)",
+                      fontSize: "1.1rem",
                     }}
                   >
                     {project.customer}
@@ -236,8 +254,8 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
                 style={{
                   flex: 1,
                   minHeight: 0, // WICHTIG: Ermöglicht Flex-Shrinking
-                  overflow: 'auto', // Natives CSS Scrolling
-                  padding: '0 2px', // Platz für Scrollbar
+                  overflow: "auto", // Natives CSS Scrolling
+                  padding: "0 2px", // Platz für Scrollbar
                 }}
               >
                 <Stack id="content" gap="xl">
@@ -245,9 +263,9 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
                   <Stack gap="md">
                     <div
                       style={{
-                        color: 'var(--text-secondary)',
+                        color: "var(--text-secondary)",
                         lineHeight: 1.7,
-                        fontSize: '1rem',
+                        fontSize: "1rem",
                       }}
                     >
                       <ReactMarkdown
@@ -257,8 +275,8 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
                             <a
                               {...props}
                               style={{
-                                color: 'var(--primary-orange)',
-                                textDecoration: 'none',
+                                color: "var(--primary-orange)",
+                                textDecoration: "none",
                               }}
                               className="markdown-link"
                               target="_blank"
@@ -266,14 +284,23 @@ export const ProjectDetailModal = ({ project, opened, onClose }: ProjectDetailMo
                             />
                           ),
                           // Style paragraphs
-                          p: ({ ...props }) => <p {...props} style={{ marginBottom: '1rem' }} />,
+                          p: ({ ...props }) => (
+                            <p {...props} style={{ marginBottom: "1rem" }} />
+                          ),
                           // Style strong/bold text
-                          strong: ({ ...props }) => <strong {...props} style={{ color: 'var(--text-primary)' }} />,
+                          strong: ({ ...props }) => (
+                            <strong
+                              {...props}
+                              style={{ color: "var(--text-primary)" }}
+                            />
+                          ),
                           // Style emphasis/italic text
-                          em: ({ ...props }) => <em {...props} style={{ fontStyle: 'italic' }} />,
+                          em: ({ ...props }) => (
+                            <em {...props} style={{ fontStyle: "italic" }} />
+                          ),
                         }}
                       >
-                        {project.description.join('\n\n')}
+                        {project.description.join("\n\n")}
                       </ReactMarkdown>
                     </div>
                   </Stack>

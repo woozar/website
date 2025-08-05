@@ -1,7 +1,7 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-export type Language = 'de' | 'en';
+export type Language = "de" | "en";
 
 interface LanguageStore {
   language: Language;
@@ -10,15 +10,16 @@ interface LanguageStore {
 
 // Function to detect browser language
 const detectBrowserLanguage = (): Language => {
-  const browserLanguage = navigator.language || navigator.languages?.[0] || 'de';
-  
+  const browserLanguage =
+    navigator.language || navigator.languages?.[0] || "de";
+
   // Check if browser language is English
-  if (browserLanguage.toLowerCase().startsWith('en')) {
-    return 'en';
+  if (browserLanguage.toLowerCase().startsWith("en")) {
+    return "en";
   }
-  
+
   // Default to German for all other languages
-  return 'de';
+  return "de";
 };
 
 export const useLanguageStore = create<LanguageStore>()(
@@ -28,7 +29,7 @@ export const useLanguageStore = create<LanguageStore>()(
       setLanguage: (language) => set({ language }),
     }),
     {
-      name: 'language-storage',
+      name: "language-storage",
     }
   )
 );

@@ -1,133 +1,134 @@
-import { renderHook } from '@testing-library/react'
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { useTranslation } from './useTranslation'
-import { useLanguageStore } from '../stores/languageStore'
-import { getTranslation } from '../translations'
+import { renderHook } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import { useLanguageStore } from "../stores/languageStore";
+import { getTranslation } from "../translations";
+import { useTranslation } from "./useTranslation";
 
 // Mock the dependencies
-vi.mock('../stores/languageStore')
-vi.mock('../translations')
+vi.mock("../stores/languageStore");
+vi.mock("../translations");
 
-const mockUseLanguageStore = vi.mocked(useLanguageStore)
-const mockGetTranslation = vi.mocked(getTranslation)
+const mockUseLanguageStore = vi.mocked(useLanguageStore);
+const mockGetTranslation = vi.mocked(getTranslation);
 
-describe('useTranslation', () => {
+describe("useTranslation", () => {
   beforeEach(() => {
-    vi.clearAllMocks()
-  })
+    vi.clearAllMocks();
+  });
 
-  it('should return translation and language for German', () => {
+  it("should return translation and language for German", () => {
     const mockTranslations: any = {
       nav: {
-        home: 'Startseite',
-        about: 'Über mich',
-        projects: 'Projekte',
-        contact: 'Kontakt'
+        home: "Startseite",
+        about: "Über mich",
+        projects: "Projekte",
+        contact: "Kontakt",
       },
       hero: {
-        title: 'Hallo, ich bin',
-        subtitle: 'Software Entwickler',
-        description: 'Ich erstelle moderne Webanwendungen'
-      }
-    }
+        title: "Hallo, ich bin",
+        subtitle: "Software Entwickler",
+        description: "Ich erstelle moderne Webanwendungen",
+      },
+    };
 
-    mockUseLanguageStore.mockReturnValue('de')
-    mockGetTranslation.mockReturnValue(mockTranslations)
+    mockUseLanguageStore.mockReturnValue("de");
+    mockGetTranslation.mockReturnValue(mockTranslations);
 
-    const { result } = renderHook(() => useTranslation())
+    const { result } = renderHook(() => useTranslation());
 
-    expect(result.current.language).toBe('de')
-    expect(result.current.t).toBe(mockTranslations)
-    expect(mockGetTranslation).toHaveBeenCalledWith('de')
-  })
+    expect(result.current.language).toBe("de");
+    expect(result.current.t).toBe(mockTranslations);
+    expect(mockGetTranslation).toHaveBeenCalledWith("de");
+  });
 
-  it('should return translation and language for English', () => {
+  it("should return translation and language for English", () => {
     const mockTranslations: any = {
       nav: {
-        home: 'Home',
-        about: 'About',
-        projects: 'Projects',
-        contact: 'Contact'
+        home: "Home",
+        about: "About",
+        projects: "Projects",
+        contact: "Contact",
       },
       hero: {
-        title: 'Hello, I am',
-        subtitle: 'Software Developer',
-        description: 'I create modern web applications'
-      }
-    }
+        title: "Hello, I am",
+        subtitle: "Software Developer",
+        description: "I create modern web applications",
+      },
+    };
 
-    mockUseLanguageStore.mockReturnValue('en')
-    mockGetTranslation.mockReturnValue(mockTranslations)
+    mockUseLanguageStore.mockReturnValue("en");
+    mockGetTranslation.mockReturnValue(mockTranslations);
 
-    const { result } = renderHook(() => useTranslation())
+    const { result } = renderHook(() => useTranslation());
 
-    expect(result.current.language).toBe('en')
-    expect(result.current.t).toBe(mockTranslations)
-    expect(mockGetTranslation).toHaveBeenCalledWith('en')
-  })
+    expect(result.current.language).toBe("en");
+    expect(result.current.t).toBe(mockTranslations);
+    expect(mockGetTranslation).toHaveBeenCalledWith("en");
+  });
 
-  it('should update when language changes', () => {
+  it("should update when language changes", () => {
     const germanTranslations: any = {
       nav: {
-        home: 'Startseite',
-        about: 'Über mich',
-        projects: 'Projekte',
-        contact: 'Kontakt'
-      }
-    }
+        home: "Startseite",
+        about: "Über mich",
+        projects: "Projekte",
+        contact: "Kontakt",
+      },
+    };
 
     const englishTranslations: any = {
       nav: {
-        home: 'Home',
-        about: 'About',
-        projects: 'Projects',
-        contact: 'Contact'
-      }
-    }
+        home: "Home",
+        about: "About",
+        projects: "Projects",
+        contact: "Contact",
+      },
+    };
 
     // Initially return German
-    mockUseLanguageStore.mockReturnValueOnce('de')
-    mockGetTranslation.mockReturnValueOnce(germanTranslations)
+    mockUseLanguageStore.mockReturnValueOnce("de");
+    mockGetTranslation.mockReturnValueOnce(germanTranslations);
 
-    const { result, rerender } = renderHook(() => useTranslation())
+    const { result, rerender } = renderHook(() => useTranslation());
 
-    expect(result.current.language).toBe('de')
-    expect(result.current.t).toBe(germanTranslations)
+    expect(result.current.language).toBe("de");
+    expect(result.current.t).toBe(germanTranslations);
 
     // Change to English
-    mockUseLanguageStore.mockReturnValueOnce('en')
-    mockGetTranslation.mockReturnValueOnce(englishTranslations)
+    mockUseLanguageStore.mockReturnValueOnce("en");
+    mockGetTranslation.mockReturnValueOnce(englishTranslations);
 
-    rerender()
+    rerender();
 
-    expect(result.current.language).toBe('en')
-    expect(result.current.t).toBe(englishTranslations)
-  })
+    expect(result.current.language).toBe("en");
+    expect(result.current.t).toBe(englishTranslations);
+  });
 
-  it('should call useLanguageStore selector correctly', () => {
-    const mockSelector = vi.fn((state) => state.language)
-    mockUseLanguageStore.mockImplementation(mockSelector)
-    mockGetTranslation.mockReturnValue({} as any)
+  it("should call useLanguageStore selector correctly", () => {
+    const mockSelector = vi.fn((state) => state.language);
+    mockUseLanguageStore.mockImplementation(mockSelector);
+    mockGetTranslation.mockReturnValue({} as any);
 
-    renderHook(() => useTranslation())
+    renderHook(() => useTranslation());
 
-    expect(mockUseLanguageStore).toHaveBeenCalledWith(expect.any(Function))
+    expect(mockUseLanguageStore).toHaveBeenCalledWith(expect.any(Function));
 
     // Test the selector function
-    const selectorFn = mockUseLanguageStore.mock.calls[0][0]
-    const mockState: any = { language: 'de', setLanguage: vi.fn() }
-    expect(selectorFn(mockState)).toBe('de')
-  })
+    const selectorFn = mockUseLanguageStore.mock.calls[0][0];
+    const mockState: any = { language: "de", setLanguage: vi.fn() };
+    expect(selectorFn(mockState)).toBe("de");
+  });
 
-  it('should handle empty translations gracefully', () => {
-    const emptyTranslations: any = {}
+  it("should handle empty translations gracefully", () => {
+    const emptyTranslations: any = {};
 
-    mockUseLanguageStore.mockReturnValue('en')
-    mockGetTranslation.mockReturnValue(emptyTranslations)
+    mockUseLanguageStore.mockReturnValue("en");
+    mockGetTranslation.mockReturnValue(emptyTranslations);
 
-    const { result } = renderHook(() => useTranslation())
+    const { result } = renderHook(() => useTranslation());
 
-    expect(result.current.language).toBe('en')
-    expect(result.current.t).toBe(emptyTranslations)
-  })
-})
+    expect(result.current.language).toBe("en");
+    expect(result.current.t).toBe(emptyTranslations);
+  });
+});

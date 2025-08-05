@@ -1,11 +1,32 @@
-import { Stack, Title, Text, Group, Button, Anchor, Divider, Box } from '@mantine/core';
-import { IconMail, IconPhone, IconBrandLinkedin, IconBrandGithub, IconBrandStackoverflow, IconMapPin } from '@tabler/icons-react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { useState } from 'react';
-import { Section } from '../Layout';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { useTranslation } from '@/hooks/useTranslation';
-import { LegalModal } from '../Legal/LegalModal';
+import { useState } from "react";
+
+import {
+  Anchor,
+  Box,
+  Button,
+  Divider,
+  Group,
+  Stack,
+  Text,
+  Title,
+} from "@mantine/core";
+
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandStackoverflow,
+  IconMail,
+  IconMapPin,
+  IconPhone,
+} from "@tabler/icons-react";
+
+import { motion, useReducedMotion } from "framer-motion";
+
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useTranslation } from "@/hooks/useTranslation";
+
+import { Section } from "../Layout";
+import { LegalModal } from "../Legal/LegalModal";
 
 export const Contact = () => {
   const { isMobile } = useMediaQuery();
@@ -18,59 +39,64 @@ export const Contact = () => {
     hidden: { opacity: shouldReduceMotion ? 1 : 0 },
     visible: {
       opacity: 1,
-      transition: shouldReduceMotion ? {} : {
-        staggerChildren: 0.2,
-        delayChildren: 0.1
-      }
-    }
+      transition: shouldReduceMotion
+        ? {}
+        : {
+            staggerChildren: 0.2,
+            delayChildren: 0.1,
+          },
+    },
   };
 
   const itemVariants = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 20 },
+    hidden: {
+      opacity: shouldReduceMotion ? 1 : 0,
+      y: shouldReduceMotion ? 0 : 20,
+    },
     visible: {
       opacity: 1,
       y: 0,
-      transition: shouldReduceMotion ? {} : { duration: 0.6 }
-    }
+      transition: shouldReduceMotion ? {} : { duration: 0.6 },
+    },
   };
 
   const contactItems = [
     {
       icon: IconMail,
       label: t.contact.contactItems.email,
-      value: 'info@12ofspades.com',
-      href: 'mailto:info@12ofspades.com'
+      value: "info@12ofspades.com",
+      href: "mailto:info@12ofspades.com",
     },
     {
       icon: IconPhone,
       label: t.contact.contactItems.phone,
-      value: '+49 176 8100 1371',
-      href: 'tel:+4917681001371'
+      value: "+49 176 8100 1371",
+      href: "tel:+4917681001371",
     },
     {
       icon: IconMapPin,
       label: t.contact.contactItems.location,
       value: t.contact.contactItems.locationValue,
-      href: null
-    }
+      href: null,
+    },
   ];
 
   const socialLinks = [
     {
       icon: IconBrandLinkedin,
-      label: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/johannes-herrmann-795550128/'
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/johannes-herrmann-795550128/",
     },
     {
       icon: IconBrandGithub,
-      label: 'GitHub',
-      href: 'https://github.com/woozar'
+      label: "GitHub",
+      href: "https://github.com/woozar",
     },
     {
       icon: IconBrandStackoverflow,
-      label: 'StackOverflow',
-      href: 'https://stackoverflow.com/users/3914932/woozar'
-    }
+      label: "StackOverflow",
+      href: "https://stackoverflow.com/users/3914932/woozar",
+    },
   ];
 
   return (
@@ -87,11 +113,12 @@ export const Contact = () => {
               <Title
                 order={2}
                 style={{
-                  fontSize: isMobile ? '2rem' : '2.5rem',
-                  background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
+                  fontSize: isMobile ? "2rem" : "2.5rem",
+                  background:
+                    "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
                 }}
               >
                 {t.contact.title}
@@ -103,7 +130,11 @@ export const Contact = () => {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <Group gap="xl" justify="center" style={{ flexDirection: isMobile ? 'column' : 'row' }}>
+            <Group
+              gap="xl"
+              justify="center"
+              style={{ flexDirection: isMobile ? "column" : "row" }}
+            >
               {contactItems.map((item) => (
                 <motion.div
                   key={item.label}
@@ -111,32 +142,43 @@ export const Contact = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Box
-                    component={item.href ? 'a' : 'div'}
+                    component={item.href ? "a" : "div"}
                     href={item.href || undefined}
                     style={{
-                      textDecoration: 'none',
-                      color: 'inherit',
-                      cursor: item.href ? 'pointer' : 'default'
+                      textDecoration: "none",
+                      color: "inherit",
+                      cursor: item.href ? "pointer" : "default",
                     }}
                   >
-                    <Stack gap="sm" align="center" ta="center" p="md" style={{ minWidth: '200px' }}>
+                    <Stack
+                      gap="sm"
+                      align="center"
+                      ta="center"
+                      p="md"
+                      style={{ minWidth: "200px" }}
+                    >
                       <Box
                         style={{
-                          width: '60px',
-                          height: '60px',
-                          borderRadius: '50%',
-                          background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          color: 'white'
+                          width: "60px",
+                          height: "60px",
+                          borderRadius: "50%",
+                          background:
+                            "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "white",
                         }}
                       >
                         <item.icon size={28} />
                       </Box>
                       <Stack gap="xs" align="center">
-                        <Text fw={600} c="var(--text-primary)">{item.label}</Text>
-                        <Text size="sm" c="var(--text-secondary)">{item.value}</Text>
+                        <Text fw={600} c="var(--text-primary)">
+                          {item.label}
+                        </Text>
+                        <Text size="sm" c="var(--text-secondary)">
+                          {item.value}
+                        </Text>
                       </Stack>
                     </Stack>
                   </Box>
@@ -147,7 +189,9 @@ export const Contact = () => {
 
           <motion.div variants={itemVariants}>
             <Stack gap="md" align="center">
-              <Text fw={600} c="var(--text-primary)">{t.contact.followMe}</Text>
+              <Text fw={600} c="var(--text-primary)">
+                {t.contact.followMe}
+              </Text>
               <Group gap="md">
                 {socialLinks.map((link) => (
                   <motion.div
@@ -163,8 +207,8 @@ export const Contact = () => {
                       variant="outline"
                       leftSection={<link.icon size={20} />}
                       style={{
-                        borderColor: 'var(--primary-orange)',
-                        color: 'var(--primary-orange)'
+                        borderColor: "var(--primary-orange)",
+                        color: "var(--primary-orange)",
                       }}
                     >
                       {link.label}
@@ -175,26 +219,29 @@ export const Contact = () => {
             </Stack>
           </motion.div>
 
-          <motion.div variants={itemVariants} style={{ width: '100%' }}>
+          <motion.div variants={itemVariants} style={{ width: "100%" }}>
             <Divider my="lg" />
             <Stack gap="xs" align="center" ta="center">
               <Text size="xs" c="var(--text-secondary)">
-                <strong>Johannes Herrmann - 12 of Spades</strong> • Feldweiher 9, 91085 Weisendorf (Buch) • Umsatzsteuer-ID: DE323916092
+                <strong>Johannes Herrmann - 12 of Spades</strong> • Feldweiher
+                9, 91085 Weisendorf (Buch) • Umsatzsteuer-ID: DE323916092
               </Text>
               <Group gap="sm" justify="center">
                 <Anchor
                   size="xs"
                   c="var(--primary-orange)"
-                  style={{ textDecoration: 'none', cursor: 'pointer' }}
+                  style={{ textDecoration: "none", cursor: "pointer" }}
                   onClick={() => setImpressumOpened(true)}
                 >
                   {t.contact.legal.impressum}
                 </Anchor>
-                <Text size="xs" c="var(--text-secondary)">•</Text>
+                <Text size="xs" c="var(--text-secondary)">
+                  •
+                </Text>
                 <Anchor
                   size="xs"
                   c="var(--primary-orange)"
-                  style={{ textDecoration: 'none', cursor: 'pointer' }}
+                  style={{ textDecoration: "none", cursor: "pointer" }}
                   onClick={() => setDatenschutzOpened(true)}
                 >
                   {t.contact.legal.datenschutz}
@@ -204,7 +251,7 @@ export const Contact = () => {
           </motion.div>
         </Stack>
       </motion.div>
-      
+
       {/* Legal Modals */}
       <LegalModal
         opened={impressumOpened}

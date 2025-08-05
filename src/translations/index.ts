@@ -1,6 +1,6 @@
-import { de } from './de';
-import { en } from './en';
-import { Language } from '../stores/languageStore';
+import { Language } from "../stores/languageStore";
+import { de } from "./de";
+import { en } from "./en";
 
 export const translations = { de, en };
 

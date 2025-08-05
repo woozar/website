@@ -1,10 +1,10 @@
-import { Project } from '../types';
+import { Project } from "../types";
 
 export interface TechnologyStats {
   name: string;
   count: number;
   percentage: number;
-  category: 'primary' | 'secondary';
+  category: "primary" | "secondary";
 }
 
 export interface ProjectStats {
@@ -25,18 +25,46 @@ export interface ProjectStats {
 
 // Define common frameworks for categorization
 const FRAMEWORKS = [
-  'React', 'Angular', 'Vue', 'Vue.js', 'Svelte', 'Next.js', 'Nuxt.js',
-  'Express', 'Express.js', 'Fastify', 'Koa', 'NestJS',
-  'Django', 'Flask', 'FastAPI', 'Spring', 'Spring Boot',
-  'Laravel', 'Symfony', 'CodeIgniter',
-  'Bootstrap', 'Tailwind', 'Tailwind CSS', 'Material UI', 'Ant Design', 'Chakra UI',
-  'Jest', 'Cypress', 'Playwright', 'Vitest', 'Mocha', 'Jasmine',
-  'T3 Stack', 'T3', 'create-t3-app'
+  "React",
+  "Angular",
+  "Vue",
+  "Vue.js",
+  "Svelte",
+  "Next.js",
+  "Nuxt.js",
+  "Express",
+  "Express.js",
+  "Fastify",
+  "Koa",
+  "NestJS",
+  "Django",
+  "Flask",
+  "FastAPI",
+  "Spring",
+  "Spring Boot",
+  "Laravel",
+  "Symfony",
+  "CodeIgniter",
+  "Bootstrap",
+  "Tailwind",
+  "Tailwind CSS",
+  "Material UI",
+  "Ant Design",
+  "Chakra UI",
+  "Jest",
+  "Cypress",
+  "Playwright",
+  "Vitest",
+  "Mocha",
+  "Jasmine",
+  "T3 Stack",
+  "T3",
+  "create-t3-app",
 ];
 
 export const calculateProjectStats = (projects: Project[]): ProjectStats => {
   const totalProjects = projects.length;
-  
+
   // Count all technologies (primary_tags + tags)
   const technologyCount = new Map<string, number>();
   const primaryTagCount = new Map<string, number>();
@@ -44,28 +72,28 @@ export const calculateProjectStats = (projects: Project[]): ProjectStats => {
   const companies = new Set<string>();
   const categories = new Map<string, number>();
 
-  projects.forEach(project => {
+  projects.forEach((project) => {
     // Count companies
     companies.add(project.customer);
 
     // Count primary tags
-    project.primary_tags?.forEach(tag => {
+    project.primary_tags?.forEach((tag) => {
       primaryTagCount.set(tag, (primaryTagCount.get(tag) || 0) + 1);
       technologyCount.set(tag, (technologyCount.get(tag) || 0) + 1);
-      
+
       // Check if it's a framework
       if (FRAMEWORKS.includes(tag)) {
         frameworks.add(tag);
       }
-      
+
       // Categorize primary tags
       categories.set(tag, (categories.get(tag) || 0) + 1);
     });
 
     // Count secondary tags
-    project.tags?.forEach(tag => {
+    project.tags?.forEach((tag) => {
       technologyCount.set(tag, (technologyCount.get(tag) || 0) + 1);
-      
+
       // Check if it's a framework
       if (FRAMEWORKS.includes(tag)) {
         frameworks.add(tag);
@@ -74,22 +102,28 @@ export const calculateProjectStats = (projects: Project[]): ProjectStats => {
   });
 
   // Convert to arrays and sort
-  const topTechnologies: TechnologyStats[] = Array.from(technologyCount.entries())
+  const topTechnologies: TechnologyStats[] = Array.from(
+    technologyCount.entries()
+  )
     .map(([name, count]) => ({
       name,
       count,
       percentage: Math.round((count / totalProjects) * 100),
-      category: primaryTagCount.has(name) ? 'primary' as const : 'secondary' as const
+      category: primaryTagCount.has(name)
+        ? ("primary" as const)
+        : ("secondary" as const),
     }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 15); // Top 15 technologies
 
-  const primaryTagStats: TechnologyStats[] = Array.from(primaryTagCount.entries())
+  const primaryTagStats: TechnologyStats[] = Array.from(
+    primaryTagCount.entries()
+  )
     .map(([name, count]) => ({
       name,
       count,
       percentage: Math.round((count / totalProjects) * 100),
-      category: 'primary' as const
+      category: "primary" as const,
     }))
     .sort((a, b) => b.count - a.count);
 
@@ -98,7 +132,7 @@ export const calculateProjectStats = (projects: Project[]): ProjectStats => {
   const currentYear = new Date().getFullYear();
   const yearRange = {
     start: currentYear - Math.max(10, Math.floor(totalProjects / 2)), // Rough estimate
-    end: currentYear
+    end: currentYear,
   };
 
   return {
@@ -109,26 +143,29 @@ export const calculateProjectStats = (projects: Project[]): ProjectStats => {
     primaryTagStats,
     companiesWorkedWith: Array.from(companies).sort(),
     yearRange,
-    categoryBreakdown: Object.fromEntries(categories)
+    categoryBreakdown: Object.fromEntries(categories),
   };
 };
 
-export const getTechnologyExperienceLevel = (count: number, totalProjects: number): string => {
+export const getTechnologyExperienceLevel = (
+  count: number,
+  totalProjects: number
+): string => {
   const percentage = (count / totalProjects) * 100;
-  
-  if (percentage >= 60) return 'Expert';
-  if (percentage >= 40) return 'Advanced';
-  if (percentage >= 20) return 'Intermediate';
-  return 'Familiar';
+
+  if (percentage >= 60) return "Expert";
+  if (percentage >= 40) return "Advanced";
+  if (percentage >= 20) return "Intermediate";
+  return "Familiar";
 };
 
 export const getYearsOfExperience = (count: number): string => {
   // Rough estimation: 1 project ≈ 3-6 months of experience
   const years = Math.max(1, Math.floor((count * 4) / 12)); // Average 4 months per project
-  
-  if (years >= 8) return '8+ years';
-  if (years >= 5) return '5+ years';
-  if (years >= 3) return '3+ years';
-  if (years >= 2) return '2+ years';
-  return '1+ year';
+
+  if (years >= 8) return "8+ years";
+  if (years >= 5) return "5+ years";
+  if (years >= 3) return "3+ years";
+  if (years >= 2) return "2+ years";
+  return "1+ year";
 };

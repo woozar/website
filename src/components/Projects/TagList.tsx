@@ -1,8 +1,11 @@
-import { Group, Badge } from '@mantine/core';
-import { motion } from 'framer-motion';
-import { TagChip } from '../Filter/TagChip';
-import { useTranslation } from '@/hooks/useTranslation';
-import { useFilterStore } from '@/stores/filterStore';
+import { Badge, Group } from "@mantine/core";
+
+import { motion } from "framer-motion";
+
+import { useTranslation } from "@/hooks/useTranslation";
+import { useFilterStore } from "@/stores/filterStore";
+
+import { TagChip } from "../Filter/TagChip";
 
 interface TagListProps {
   primaryTags: string[];
@@ -13,13 +16,13 @@ interface TagListProps {
   selectable?: boolean;
 }
 
-export const TagList = ({ 
-  primaryTags, 
-  secondaryTags, 
-  maxTags = 100, 
-  fontSize = '0.8rem',
+export const TagList = ({
+  primaryTags,
+  secondaryTags,
+  maxTags = 100,
+  fontSize = "0.8rem",
   showMoreBadge = true,
-  selectable = true
+  selectable = true,
 }: TagListProps) => {
   const { t } = useTranslation();
   const { toggleTag, selectedTags } = useFilterStore();
@@ -29,11 +32,13 @@ export const TagList = ({
   // Also deduplicate within each array
   const uniquePrimaryTags = [...new Set(primaryTags || [])].sort();
   const uniqueSecondaryTags = [...new Set(secondaryTags || [])].sort();
-  const filteredSecondaryTags = uniqueSecondaryTags.filter(tag => !uniquePrimaryTags.includes(tag));
-  
+  const filteredSecondaryTags = uniqueSecondaryTags.filter(
+    (tag) => !uniquePrimaryTags.includes(tag)
+  );
+
   const allTags = [
-    ...uniquePrimaryTags.map(tag => ({ tag, isPrimary: true })),
-    ...filteredSecondaryTags.map(tag => ({ tag, isPrimary: false }))
+    ...uniquePrimaryTags.map((tag) => ({ tag, isPrimary: true })),
+    ...filteredSecondaryTags.map((tag) => ({ tag, isPrimary: false })),
   ];
 
   const displayedTags = allTags.slice(0, maxTags);
@@ -48,7 +53,7 @@ export const TagList = ({
     <Group gap={8} style={{ rowGap: 0 }}>
       {displayedTags.map(({ tag, isPrimary }) => (
         <motion.div
-          key={`${isPrimary ? 'primary' : 'secondary'}-${tag}`}
+          key={`${isPrimary ? "primary" : "secondary"}-${tag}`}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -57,10 +62,10 @@ export const TagList = ({
             isPrimary={isPrimary}
             isSelected={selectable ? selectedTags.includes(tag) : false}
             onClick={() => handleTagClick(tag)}
-            style={{ 
-              cursor: selectable ? 'pointer' : 'default', 
+            style={{
+              cursor: selectable ? "pointer" : "default",
               fontSize,
-              lineHeight: 1
+              lineHeight: 1,
             }}
           />
         </motion.div>
