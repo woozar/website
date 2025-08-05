@@ -175,11 +175,15 @@ export const ProjectStats = () => {
       <motion.div
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        animate="visible"
       >
         <Stack gap="xl">
-          <motion.div variants={itemVariants}>
+          <motion.div 
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             <Stack gap="md" align="center" ta="center">
               <Title
                 order={2}
@@ -200,7 +204,12 @@ export const ProjectStats = () => {
           </motion.div>
 
           {/* Overview Cards */}
-          <motion.div variants={itemVariants}>
+          <motion.div 
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <SimpleGrid cols={{ base: 2, sm: 3, md: 5 }} spacing={isMobile ? 'md' : 'lg'}>
               {statCards.map((card) => {
                 // Use FlippableStatCard for frameworks card
@@ -288,7 +297,12 @@ export const ProjectStats = () => {
           </motion.div>
 
           {/* Core Technologies - Simplified */}
-          <motion.div variants={itemVariants}>
+          <motion.div 
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             <Stack gap="lg">
               <Title order={3} ta="center" c="var(--text-primary)">
                 {t.projectStats.coreExpertise}
@@ -359,7 +373,12 @@ export const ProjectStats = () => {
           </motion.div>
 
           {/* Company Logos */}
-          <motion.div variants={itemVariants}>
+          <motion.div 
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             <Stack gap="lg" align="center">
               <Title order={4} c="var(--text-primary)">
                 {t.projectStats.trustedBy}

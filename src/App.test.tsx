@@ -1,7 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen } from './test/test-utils'
+import { render as testingLibraryRender, screen } from '@testing-library/react'
+import { AllTheProvidersWithRouter } from './test/router-providers'
 import App from './App'
 import { useLanguageStore, Language } from './stores/languageStore'
+
+const render = (ui: React.ReactElement) => 
+  testingLibraryRender(ui, { wrapper: AllTheProvidersWithRouter })
 
 // Mock all child components
 vi.mock('./components/Navigation/ImprovedNavigation', () => ({
