@@ -14,6 +14,8 @@ import {
 
 import { IconFileText, IconMail } from "@tabler/icons-react";
 
+import { useLocation } from "react-router-dom";
+
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useModal } from "@/hooks/useModal";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -25,11 +27,12 @@ import { ThemeSwitcher } from "../ThemeSwitcher";
 // import logoImage from '../../assets/logo.webp';
 const logoImage = "/assets/logo.webp";
 
-export const ImprovedNavigation = () => {
+export const Navigation = () => {
   const [drawerOpened, setDrawerOpened] = useState(false);
   const { isMobile, isTablet } = useMediaQuery();
   const { t } = useTranslation();
   const { isModalOpen } = useModal();
+  const location = useLocation();
 
   // Close drawer when screen becomes desktop size or when modal opens
   useEffect(() => {
@@ -45,15 +48,29 @@ export const ImprovedNavigation = () => {
     }
   }, [isModalOpen, drawerOpened]);
 
-  const navItems = [
-    { label: t.navigation.services, href: "#services" },
-    { label: t.navigation.statistics, href: "#statistics" },
-    { label: t.navigation.projects, href: "#projects" },
-    { label: t.navigation.about, href: "#about" },
-  ];
+  // Determine navigation items based on current route
+  const isWorkshopPage = location.pathname.startsWith("/workshops/");
+
+  const navItems = isWorkshopPage
+    ? [
+        {
+          label: t.navigation.workshop.successStories,
+          href: "#success-stories",
+        },
+        { label: t.navigation.workshop.details, href: "#workshop-details" },
+        { label: t.navigation.workshop.agenda, href: "#workshop-agenda" },
+        { label: t.navigation.workshop.contact, href: "#contact" },
+      ]
+    : [
+        { label: t.navigation.services, href: "#services" },
+        { label: t.navigation.statistics, href: "#statistics" },
+        { label: t.navigation.projects, href: "#projects" },
+        { label: t.navigation.about, href: "#about" },
+      ];
 
   const handleNavClick = (href: string) => {
     setDrawerOpened(false);
+
     const element = document.querySelector(href);
     if (element) {
       const headerHeight = 100; // Fixed header height
@@ -90,7 +107,11 @@ export const ImprovedNavigation = () => {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
+                if (isWorkshopPage) {
+                  window.location.href = "/";
+                } else {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
               }}
               style={{ textDecoration: "none" }}
             >
