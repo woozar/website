@@ -1,5 +1,5 @@
-import { Stack, Title, Text, Card, Image, Box } from '@mantine/core';
-import { IconBrain, IconCloud, IconCode } from '@tabler/icons-react';
+import { Stack, Title, Text, Card, Image, Box, Button } from '@mantine/core';
+import { IconBrain, IconCloud, IconCode, IconArrowRight } from '@tabler/icons-react';
 import { motion, Variants, useReducedMotion } from 'framer-motion';
 import { Section, Grid } from '../Layout';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
@@ -43,7 +43,10 @@ export const SimpleServices = () => {
       title: t.services.items.ai.title,
       description: t.services.items.ai.description,
       technologies: ['OpenAI GPT-4', 'Anthropic Claude', 'Google Gemini', 'LangChain', 'Vercel AI'],
-      image: aiImage
+      image: aiImage,
+      hasWorkshop: true,
+      workshopTitle: t.services.items.ai.workshopTitle,
+      workshopDescription: t.services.items.ai.workshopDescription
     },
     {
       icon: IconCloud,
@@ -182,7 +185,29 @@ export const SimpleServices = () => {
                     selectable={false}
                     fontSize="0.75rem"
                   />
-                  </Stack>
+                  
+                  {service.hasWorkshop && (
+                    <Button
+                      component="a"
+                      href="/workshops/ai-low-hanging-fruits"
+                      size="xs"
+                      variant="outline"
+                      color="orange"
+                      rightSection={<IconArrowRight size={12} />}
+                      styles={{
+                        section: { marginLeft: '4px' }
+                      }}
+                      style={{ 
+                        alignSelf: 'flex-end',
+                        marginTop: '0.5rem',
+                        fontSize: '0.75rem',
+                        textDecoration: 'none'
+                      }}
+                    >
+                      {t.services.items.ai.workshopSpecificButton}
+                    </Button>
+                  )}
+                </Stack>
                 </Stack>
                 </Card>
             </motion.div>

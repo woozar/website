@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { MantineProvider, createTheme } from '@mantine/core'
+import { BrowserRouter } from 'react-router-dom'
 import { useThemeStore } from './stores/themeStore'
 import App from './App'
 
@@ -43,7 +44,9 @@ export function ThemedApp() {
 
   return (
     <MantineProvider theme={theme} forceColorScheme={currentTheme}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </MantineProvider>
   );
 }
