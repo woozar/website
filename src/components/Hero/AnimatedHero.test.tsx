@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useReducedMotion } from "framer-motion";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useModal } from "@/hooks/useModal";
 import { useTranslation } from "@/hooks/useTranslation";
 import { fireEvent, render, screen } from "@/test/test-utils";
 import { de } from "@/translations/de";
@@ -11,6 +12,7 @@ import { AnimatedHero } from "./AnimatedHero";
 
 // Mock dependencies
 vi.mock("@/hooks/useMediaQuery");
+vi.mock("@/hooks/useModal");
 vi.mock("@/hooks/useTranslation");
 vi.mock("framer-motion", () => ({
   motion: {
@@ -28,6 +30,7 @@ vi.mock("../../assets/hero-portrait.webp", () => ({
 }));
 
 const mockUseMediaQuery = vi.mocked(useMediaQuery);
+const mockUseModal = vi.mocked(useModal);
 const mockUseTranslation = vi.mocked(useTranslation);
 
 describe("AnimatedHero", () => {
@@ -38,6 +41,13 @@ describe("AnimatedHero", () => {
       isMobile: false,
       isTablet: false,
       isDesktop: true,
+    });
+    mockUseModal.mockReturnValue({
+      isModalOpen: false,
+      imageModalData: null,
+      openModal: vi.fn(),
+      closeModal: vi.fn(),
+      openImageModal: vi.fn(),
     });
     mockUseTranslation.mockReturnValue({
       t: de,
@@ -295,6 +305,40 @@ describe("AnimatedHero", () => {
 
       // Component functionality should still work with reduced motion
       expect(screen.getByText("Kontakt aufnehmen")).toBeInTheDocument();
+    });
+  });
+
+  describe("Profile Image Modal", () => {
+    it("should call openImageModal when profile image is clicked", () => {
+      const mockOpenImageModal = vi.fn();
+      mockUseModal.mockReturnValue({
+        isModalOpen: false,
+        imageModalData: null,
+        openModal: vi.fn(),
+        closeModal: vi.fn(),
+        openImageModal: mockOpenImageModal,
+      });
+
+      render(<AnimatedHero />);
+
+      const profileImage = screen.getByAltText(
+        "Johannes Herrmann - Software Freelancer"
+      );
+      fireEvent.click(profileImage);
+
+      expect(mockOpenImageModal).toHaveBeenCalledWith({
+        src: "/assets/hero-portrait.webp",
+        alt: "Johannes Herrmann - Software Freelancer (Vergrößerte Ansicht)",
+      });
+    });
+
+    it("should show pointer cursor on profile image", () => {
+      render(<AnimatedHero />);
+
+      const profileImage = screen.getByAltText(
+        "Johannes Herrmann - Software Freelancer"
+      );
+      expect(profileImage).toHaveStyle({ cursor: "pointer" });
     });
   });
 });
