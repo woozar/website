@@ -12,16 +12,28 @@ const TestComponent = () => {
   if (!context) {
     throw new Error("TestComponent must be used within a ModalProvider");
   }
-  const { isModalOpen, openModal, closeModal } = context;
+  const { isModalOpen, imageModalData, openModal, closeModal, openImageModal } =
+    context;
 
   return (
     <div>
       <div data-testid="modal-state">{isModalOpen ? "open" : "closed"}</div>
+      <div data-testid="image-modal-data">
+        {imageModalData
+          ? `${imageModalData.src}|${imageModalData.alt}`
+          : "no-data"}
+      </div>
       <button onClick={openModal} data-testid="open-button">
         Open Modal
       </button>
       <button onClick={closeModal} data-testid="close-button">
         Close Modal
+      </button>
+      <button
+        onClick={() => openImageModal({ src: "/test.jpg", alt: "Test image" })}
+        data-testid="open-image-button"
+      >
+        Open Image Modal
       </button>
     </div>
   );
@@ -211,11 +223,86 @@ describe("ModalContext", () => {
       );
 
       expect(contextValue).toHaveProperty("isModalOpen");
+      expect(contextValue).toHaveProperty("imageModalData");
       expect(contextValue).toHaveProperty("openModal");
       expect(contextValue).toHaveProperty("closeModal");
+      expect(contextValue).toHaveProperty("openImageModal");
       expect(typeof contextValue.isModalOpen).toBe("boolean");
       expect(typeof contextValue.openModal).toBe("function");
       expect(typeof contextValue.closeModal).toBe("function");
+      expect(typeof contextValue.openImageModal).toBe("function");
+    });
+  });
+
+  describe("Image Modal functionality", () => {
+    it("should open image modal with provided data", () => {
+      render(
+        <ModalProvider>
+          <TestComponent />
+        </ModalProvider>
+      );
+
+      expect(screen.getByTestId("modal-state")).toHaveTextContent("closed");
+      expect(screen.getByTestId("image-modal-data")).toHaveTextContent(
+        "no-data"
+      );
+
+      fireEvent.click(screen.getByTestId("open-image-button"));
+
+      expect(screen.getByTestId("modal-state")).toHaveTextContent("open");
+      expect(screen.getByTestId("image-modal-data")).toHaveTextContent(
+        "/test.jpg|Test image"
+      );
+    });
+
+    it("should clear image modal data when closing modal", () => {
+      render(
+        <ModalProvider>
+          <TestComponent />
+        </ModalProvider>
+      );
+
+      // Open image modal
+      fireEvent.click(screen.getByTestId("open-image-button"));
+      expect(screen.getByTestId("modal-state")).toHaveTextContent("open");
+      expect(screen.getByTestId("image-modal-data")).toHaveTextContent(
+        "/test.jpg|Test image"
+      );
+
+      // Close modal
+      fireEvent.click(screen.getByTestId("close-button"));
+      expect(screen.getByTestId("modal-state")).toHaveTextContent("closed");
+      expect(screen.getByTestId("image-modal-data")).toHaveTextContent(
+        "no-data"
+      );
+    });
+
+    it("should handle multiple image modal operations", () => {
+      render(
+        <ModalProvider>
+          <TestComponent />
+        </ModalProvider>
+      );
+
+      // Open first image modal
+      fireEvent.click(screen.getByTestId("open-image-button"));
+      expect(screen.getByTestId("modal-state")).toHaveTextContent("open");
+      expect(screen.getByTestId("image-modal-data")).toHaveTextContent(
+        "/test.jpg|Test image"
+      );
+
+      // Close and reopen
+      fireEvent.click(screen.getByTestId("close-button"));
+      expect(screen.getByTestId("modal-state")).toHaveTextContent("closed");
+      expect(screen.getByTestId("image-modal-data")).toHaveTextContent(
+        "no-data"
+      );
+
+      fireEvent.click(screen.getByTestId("open-image-button"));
+      expect(screen.getByTestId("modal-state")).toHaveTextContent("open");
+      expect(screen.getByTestId("image-modal-data")).toHaveTextContent(
+        "/test.jpg|Test image"
+      );
     });
   });
 });

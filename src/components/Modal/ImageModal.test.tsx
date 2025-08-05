@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useModal } from "@/hooks/useModal";
 import { fireEvent, render, screen } from "@/test/test-utils";
 
@@ -7,11 +8,10 @@ import { ImageModal } from "./ImageModal";
 
 // Mock dependencies
 vi.mock("@/hooks/useModal");
-vi.mock("@/hooks/useMediaQuery", () => ({
-  useMediaQuery: () => ({ isMobile: false }),
-}));
+vi.mock("@/hooks/useMediaQuery");
 
 const mockUseModal = vi.mocked(useModal);
+const mockUseMediaQuery = vi.mocked(useMediaQuery);
 
 describe("ImageModal", () => {
   const mockCloseModal = vi.fn();
@@ -22,6 +22,13 @@ describe("ImageModal", () => {
     Object.defineProperty(document.body, "style", {
       value: { overflow: "" },
       writable: true,
+    });
+
+    // Default mock for useMediaQuery
+    mockUseMediaQuery.mockReturnValue({
+      isMobile: false,
+      isTablet: false,
+      isDesktop: true,
     });
   });
 
@@ -140,5 +147,124 @@ describe("ImageModal", () => {
     unmount();
 
     expect(document.body.style.overflow).toBe("unset");
+  });
+
+  it("should handle close button hover states", () => {
+    const imageData = {
+      src: "/test-image.jpg",
+      alt: "Test image",
+    };
+
+    mockUseModal.mockReturnValue({
+      isModalOpen: true,
+      imageModalData: imageData,
+      openModal: vi.fn(),
+      closeModal: mockCloseModal,
+      openImageModal: vi.fn(),
+    });
+
+    render(<ImageModal />);
+
+    const closeButton = screen.getByLabelText("Modal schließen");
+
+    // Test mouse enter
+    fireEvent.mouseEnter(closeButton);
+    expect(closeButton.style.backgroundColor).toBe("rgba(255, 255, 255, 0.1)");
+    expect(closeButton.style.transform).toBe("scale(1.1)");
+
+    // Test mouse leave
+    fireEvent.mouseLeave(closeButton);
+    expect(closeButton.style.backgroundColor).toBe("transparent");
+    expect(closeButton.style.transform).toBe("scale(1)");
+  });
+
+  it("should handle keyboard navigation on close button", () => {
+    const imageData = {
+      src: "/test-image.jpg",
+      alt: "Test image",
+    };
+
+    mockUseModal.mockReturnValue({
+      isModalOpen: true,
+      imageModalData: imageData,
+      openModal: vi.fn(),
+      closeModal: mockCloseModal,
+      openImageModal: vi.fn(),
+    });
+
+    render(<ImageModal />);
+
+    const closeButton = screen.getByLabelText("Modal schließen");
+
+    // Test Enter key
+    fireEvent.keyDown(closeButton, { key: "Enter" });
+
+    // Test Space key
+    fireEvent.keyDown(closeButton, { key: " " });
+
+    // Should call close twice (once for Enter, once for Space)
+    setTimeout(() => {
+      expect(mockCloseModal).toHaveBeenCalledTimes(2);
+    }, 350);
+  });
+
+  it("should handle image load event", () => {
+    const imageData = {
+      src: "/test-image.jpg",
+      alt: "Test image",
+    };
+
+    mockUseModal.mockReturnValue({
+      isModalOpen: true,
+      imageModalData: imageData,
+      openModal: vi.fn(),
+      closeModal: mockCloseModal,
+      openImageModal: vi.fn(),
+    });
+
+    render(<ImageModal />);
+
+    const image = screen.getByRole("img");
+
+    // Initially image should have opacity 0
+    expect(image.style.opacity).toBe("0");
+
+    // Trigger load event
+    fireEvent.load(image);
+
+    // After load, opacity should be 1
+    expect(image.style.opacity).toBe("1");
+  });
+
+  it("should render correctly on mobile devices", () => {
+    mockUseMediaQuery.mockReturnValue({
+      isMobile: true,
+      isTablet: false,
+      isDesktop: false,
+    });
+
+    const imageData = {
+      src: "/test-image.jpg",
+      alt: "Test image",
+    };
+
+    mockUseModal.mockReturnValue({
+      isModalOpen: true,
+      imageModalData: imageData,
+      openModal: vi.fn(),
+      closeModal: mockCloseModal,
+      openImageModal: vi.fn(),
+    });
+
+    render(<ImageModal />);
+
+    const closeButton = screen.getByLabelText("Modal schließen");
+    const image = screen.getByRole("img");
+
+    // Check mobile-specific positioning and sizing
+    expect(closeButton.style.top).toBe("10px");
+    expect(closeButton.style.right).toBe("10px");
+    expect(image.style.maxWidth).toBe("90vw");
+    expect(image.style.maxHeight).toBe("70vh");
   });
 });
