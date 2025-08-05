@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import { About } from "./components/About/About";
 import { Contact } from "./components/Contact/Contact";
 import { AnimatedHero } from "./components/Hero/AnimatedHero";
+import { ImageModal } from "./components/Modal";
 import { Navigation } from "./components/Navigation";
 import { ProjectStats } from "./components/ProjectStats";
 import { ProjectsSection } from "./components/Projects/ProjectsSection";
@@ -59,6 +60,7 @@ function App() {
             element={<WorkshopLandingPage />}
           />
         </Routes>
+        <ImageModal />
       </Box>
     </ModalProvider>
   );

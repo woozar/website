@@ -5,6 +5,7 @@ import { IconDownload, IconMail } from "@tabler/icons-react";
 import { Variants, motion, useReducedMotion } from "framer-motion";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useModal } from "@/hooks/useModal";
 import { useTranslation } from "@/hooks/useTranslation";
 
 import { Section } from "../Layout";
@@ -14,6 +15,7 @@ const heroPortrait = "/assets/hero-portrait.webp";
 
 export const AnimatedHero = () => {
   const { isMobile, isTablet } = useMediaQuery();
+  const { openImageModal } = useModal();
   const { t } = useTranslation();
   const shouldReduceMotion = useReducedMotion();
 
@@ -242,6 +244,13 @@ export const AnimatedHero = () => {
                     borderRadius: "50%",
                     border: "4px solid var(--primary-orange)",
                     filter: "drop-shadow(0 15px 35px rgba(0,0,0,0.15))",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    openImageModal({
+                      src: heroPortrait,
+                      alt: "Johannes Herrmann - Software Freelancer (Vergrößerte Ansicht)",
+                    });
                   }}
                 />
               </motion.div>

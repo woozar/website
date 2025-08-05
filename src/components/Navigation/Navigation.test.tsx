@@ -67,8 +67,10 @@ describe("Navigation", () => {
     });
     mockUseModal.mockReturnValue({
       isModalOpen: false,
+      imageModalData: null,
       openModal: vi.fn(),
       closeModal: vi.fn(),
+      openImageModal: vi.fn(),
     });
 
     // Mock scrollTo
@@ -465,8 +467,10 @@ describe("Navigation", () => {
       // Mock modal as open
       mockUseModal.mockReturnValue({
         isModalOpen: true,
+        imageModalData: null,
         openModal: vi.fn(),
         closeModal: vi.fn(),
+        openImageModal: vi.fn(),
       });
 
       renderNavigation();
@@ -490,8 +494,10 @@ describe("Navigation", () => {
       // Start with modal closed
       mockUseModal.mockReturnValue({
         isModalOpen: false,
+        imageModalData: null,
         openModal: vi.fn(),
         closeModal: vi.fn(),
+        openImageModal: vi.fn(),
       });
 
       const { rerender } = renderNavigation();
@@ -503,8 +509,10 @@ describe("Navigation", () => {
       // Now modal opens
       mockUseModal.mockReturnValue({
         isModalOpen: true,
+        imageModalData: null,
         openModal: vi.fn(),
         closeModal: vi.fn(),
+        openImageModal: vi.fn(),
       });
       rerender(
         <BrowserRouter>
@@ -526,8 +534,10 @@ describe("Navigation", () => {
       // Start with modal open
       mockUseModal.mockReturnValue({
         isModalOpen: true,
+        imageModalData: null,
         openModal: vi.fn(),
         closeModal: vi.fn(),
+        openImageModal: vi.fn(),
       });
 
       renderNavigation();
