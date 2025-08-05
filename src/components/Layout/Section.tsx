@@ -1,27 +1,29 @@
-import { ReactNode } from 'react';
-import { Box } from '@mantine/core';
-import { Container } from './Container';
+import { ReactNode } from "react";
+
+import { Box } from "@mantine/core";
+
+import { Container } from "./Container";
 
 interface SectionProps {
   children: ReactNode;
   id?: string;
   className?: string;
-  paddingY?: 'sm' | 'md' | 'lg' | 'xl';
-  containerSize?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  paddingY?: "sm" | "md" | "lg" | "xl";
+  containerSize?: "sm" | "md" | "lg" | "xl" | "full";
 }
 
-export const Section = ({ 
-  children, 
-  id, 
+export const Section = ({
+  children,
+  id,
   className,
   paddingY,
-  containerSize = 'xl'
+  containerSize = "xl",
 }: SectionProps) => {
   const paddings = {
-    sm: '2rem 0',
-    md: '3rem 0',
-    lg: '4rem 0',
-    xl: '6rem 0'
+    sm: "2rem 0",
+    md: "3rem 0",
+    lg: "4rem 0",
+    xl: "6rem 0",
   };
 
   return (
@@ -30,14 +32,12 @@ export const Section = ({
       className={className}
       component="section"
       style={{
-        background: 'transparent',
-        padding: paddingY ? paddings[paddingY] : '0',
-        color: 'var(--text-primary)'
+        background: "transparent",
+        padding: paddingY ? paddings[paddingY] : "0",
+        color: "var(--text-primary)",
       }}
     >
-      <Container size={containerSize}>
-        {children}
-      </Container>
+      <Container size={containerSize}>{children}</Container>
     </Box>
   );
 };

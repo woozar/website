@@ -1,56 +1,59 @@
-import { Button } from '@mantine/core';
-import { IconSun, IconMoon } from '@tabler/icons-react';
-import { useThemeStore } from '@/stores/themeStore';
-import { useTranslation } from '@/hooks/useTranslation';
+import { Button } from "@mantine/core";
+
+import { IconMoon, IconSun } from "@tabler/icons-react";
+
+import { useTranslation } from "@/hooks/useTranslation";
+import { useThemeStore } from "@/stores/themeStore";
 
 interface ThemeSwitcherProps {
-  variant?: 'desktop' | 'mobile';
+  variant?: "desktop" | "mobile";
 }
 
-export const ThemeSwitcher = ({ variant = 'desktop' }: ThemeSwitcherProps) => {
+export const ThemeSwitcher = ({ variant = "desktop" }: ThemeSwitcherProps) => {
   const { t } = useTranslation();
   const { theme, toggleTheme } = useThemeStore();
 
-  const isDark = theme === 'dark';
+  const isDark = theme === "dark";
   const Icon = isDark ? IconSun : IconMoon;
 
   const buttonStyle = {
-    borderColor: 'var(--primary-orange)',
-    color: 'var(--primary-orange)',
-    background: 'transparent',
-    border: '1px solid var(--primary-orange)',
-    borderRadius: '0.5rem'
+    borderColor: "var(--primary-orange)",
+    color: "var(--primary-orange)",
+    background: "transparent",
+    border: "1px solid var(--primary-orange)",
+    borderRadius: "0.5rem",
   };
 
   const hoverStyle = {
-    '&:hover': {
-      background: 'rgba(255, 107, 53, 0.08)',
-      transform: 'translateY(-1px)'
-    }
+    "&:hover": {
+      background: "rgba(255, 107, 53, 0.08)",
+      transform: "translateY(-1px)",
+    },
   };
 
   const transitionStyle = {
-    transition: 'all 0.2s ease',
-    '@media (prefers-reduced-motion: reduce)': {
-      transition: 'none'
-    }
+    transition: "all 0.2s ease",
+    "@media (prefers-reduced-motion: reduce)": {
+      transition: "none",
+    },
   };
 
-  if (variant === 'mobile') {
+  if (variant === "mobile") {
     return (
-      <div style={{ display: 'flex', gap: '0.5rem', width: '100%' }}>
+      <div style={{ display: "flex", gap: "0.5rem", width: "100%" }}>
         <Button
           variant="outline"
           size="sm"
           fullWidth
           leftSection={<IconSun size={16} />}
-          onClick={() => theme !== 'light' && toggleTheme()}
+          onClick={() => theme !== "light" && toggleTheme()}
           style={{
-            borderColor: 'var(--primary-orange)',
-            color: theme === 'light' ? 'white' : 'var(--primary-orange)',
-            background: theme === 'light' 
-              ? 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))' 
-              : 'transparent'
+            borderColor: "var(--primary-orange)",
+            color: theme === "light" ? "white" : "var(--primary-orange)",
+            background:
+              theme === "light"
+                ? "linear-gradient(135deg, var(--primary-orange), var(--primary-red))"
+                : "transparent",
           }}
         >
           {t.theme.light}
@@ -60,13 +63,14 @@ export const ThemeSwitcher = ({ variant = 'desktop' }: ThemeSwitcherProps) => {
           size="sm"
           fullWidth
           leftSection={<IconMoon size={16} />}
-          onClick={() => theme !== 'dark' && toggleTheme()}
+          onClick={() => theme !== "dark" && toggleTheme()}
           style={{
-            borderColor: 'var(--primary-orange)',
-            color: theme === 'dark' ? 'white' : 'var(--primary-orange)',
-            background: theme === 'dark' 
-              ? 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))' 
-              : 'transparent'
+            borderColor: "var(--primary-orange)",
+            color: theme === "dark" ? "white" : "var(--primary-orange)",
+            background:
+              theme === "dark"
+                ? "linear-gradient(135deg, var(--primary-orange), var(--primary-red))"
+                : "transparent",
           }}
         >
           {t.theme.dark}
@@ -83,10 +87,10 @@ export const ThemeSwitcher = ({ variant = 'desktop' }: ThemeSwitcherProps) => {
       style={{
         ...buttonStyle,
         ...transitionStyle,
-        minWidth: '40px',
-        height: '28px',
-        fontSize: '1rem',
-        padding: '0 8px'
+        minWidth: "40px",
+        height: "28px",
+        fontSize: "1rem",
+        padding: "0 8px",
       }}
       styles={{ root: { ...hoverStyle, ...transitionStyle } }}
       title={isDark ? t.theme.switchToLight : t.theme.switchToDark}

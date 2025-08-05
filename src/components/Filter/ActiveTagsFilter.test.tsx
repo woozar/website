@@ -1,237 +1,243 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { screen, fireEvent } from '@testing-library/react';
-import { customRender as render } from '@/test/render';
-import { ActiveTagsFilter } from './ActiveTagsFilter';
-import { useFilterStore } from '@/stores/filterStore';
+import { fireEvent, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import { useFilterStore } from "@/stores/filterStore";
+import { customRender as render } from "@/test/render";
+
+import { ActiveTagsFilter } from "./ActiveTagsFilter";
 
 // Mock framer-motion
-vi.mock('framer-motion', () => ({
+vi.mock("framer-motion", () => ({
   motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>
+    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
   },
-  AnimatePresence: ({ children }: any) => <>{children}</>
+  AnimatePresence: ({ children }: any) => <>{children}</>,
 }));
 
 // Mock the filter store
-vi.mock('../../stores/filterStore', () => ({
-  useFilterStore: vi.fn()
+vi.mock("../../stores/filterStore", () => ({
+  useFilterStore: vi.fn(),
 }));
 
 const mockFilterStore = {
   selectedTags: [],
-  selectedCustomer: '',
+  selectedCustomer: "",
   toggleTag: vi.fn(),
   setCustomerFilter: vi.fn(),
-  clearAllFilters: vi.fn()
+  clearAllFilters: vi.fn(),
 };
 
-describe('ActiveTagsFilter', () => {
+describe("ActiveTagsFilter", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     (useFilterStore as any).mockReturnValue(mockFilterStore);
   });
 
-  it('should not render when no filters are active', () => {
+  it("should not render when no filters are active", () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
       selectedTags: [],
-      selectedCustomer: ''
+      selectedCustomer: "",
     });
 
     render(<ActiveTagsFilter />);
-    
+
     // Component should return null when no filters are active
-    expect(screen.queryByText('Active Filters:')).not.toBeInTheDocument();
-    expect(screen.queryByText('Clear all filters')).not.toBeInTheDocument();
+    expect(screen.queryByText("Active Filters:")).not.toBeInTheDocument();
+    expect(screen.queryByText("Clear all filters")).not.toBeInTheDocument();
   });
 
-  it('should render with tags', () => {
+  it("should render with tags", () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedTags: ['React', 'TypeScript']
+      selectedTags: ["React", "TypeScript"],
     });
 
     render(<ActiveTagsFilter />);
-    
-    expect(screen.getByText('Active Filters:')).toBeInTheDocument();
-    expect(screen.getByText('React')).toBeInTheDocument();
-    expect(screen.getByText('TypeScript')).toBeInTheDocument();
-    expect(screen.getByText('Clear all filters')).toBeInTheDocument();
+
+    expect(screen.getByText("Active Filters:")).toBeInTheDocument();
+    expect(screen.getByText("React")).toBeInTheDocument();
+    expect(screen.getByText("TypeScript")).toBeInTheDocument();
+    expect(screen.getByText("Clear all filters")).toBeInTheDocument();
   });
 
-  it('should render with multiple tags', () => {
+  it("should render with multiple tags", () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedTags: ['Node.js', 'Express']
+      selectedTags: ["Node.js", "Express"],
     });
 
     render(<ActiveTagsFilter />);
-    
-    expect(screen.getByText('Active Filters:')).toBeInTheDocument();
-    expect(screen.getByText('Node.js')).toBeInTheDocument();
-    expect(screen.getByText('Express')).toBeInTheDocument();
-    expect(screen.getByText('Clear all filters')).toBeInTheDocument();
+
+    expect(screen.getByText("Active Filters:")).toBeInTheDocument();
+    expect(screen.getByText("Node.js")).toBeInTheDocument();
+    expect(screen.getByText("Express")).toBeInTheDocument();
+    expect(screen.getByText("Clear all filters")).toBeInTheDocument();
   });
 
-  it('should render with mixed tags', () => {
+  it("should render with mixed tags", () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedTags: ['React', 'Node.js']
+      selectedTags: ["React", "Node.js"],
     });
 
     render(<ActiveTagsFilter />);
-    
-    expect(screen.getByText('React')).toBeInTheDocument();
-    expect(screen.getByText('Node.js')).toBeInTheDocument();
+
+    expect(screen.getByText("React")).toBeInTheDocument();
+    expect(screen.getByText("Node.js")).toBeInTheDocument();
   });
 
-  it('should call toggleTag when removing a tag', () => {
+  it("should call toggleTag when removing a tag", () => {
     const mockToggleTag = vi.fn();
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedTags: ['React'],
-      toggleTag: mockToggleTag
+      selectedTags: ["React"],
+      toggleTag: mockToggleTag,
     });
 
     render(<ActiveTagsFilter />);
-    
+
     // Find the remove button inside the React badge
-    const reactBadge = screen.getByText('React').closest('.mantine-Badge-root');
-    const removeButton = reactBadge?.querySelector('button');
-    
+    const reactBadge = screen.getByText("React").closest(".mantine-Badge-root");
+    const removeButton = reactBadge?.querySelector("button");
+
     expect(removeButton).toBeInTheDocument();
     fireEvent.click(removeButton!);
-    expect(mockToggleTag).toHaveBeenCalledWith('React');
+    expect(mockToggleTag).toHaveBeenCalledWith("React");
   });
 
-  it('should call toggleTag when removing another tag', () => {
+  it("should call toggleTag when removing another tag", () => {
     const mockToggleTag = vi.fn();
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedTags: ['Node.js'],
-      toggleTag: mockToggleTag
+      selectedTags: ["Node.js"],
+      toggleTag: mockToggleTag,
     });
 
     render(<ActiveTagsFilter />);
-    
+
     // Find the remove button inside the Node.js badge
-    const nodeBadge = screen.getByText('Node.js').closest('.mantine-Badge-root');
-    const removeButton = nodeBadge?.querySelector('button');
-    
+    const nodeBadge = screen
+      .getByText("Node.js")
+      .closest(".mantine-Badge-root");
+    const removeButton = nodeBadge?.querySelector("button");
+
     expect(removeButton).toBeInTheDocument();
     fireEvent.click(removeButton!);
-    expect(mockToggleTag).toHaveBeenCalledWith('Node.js');
+    expect(mockToggleTag).toHaveBeenCalledWith("Node.js");
   });
 
-  it('should call clearAllFilters when clicking clear all button', () => {
+  it("should call clearAllFilters when clicking clear all button", () => {
     const mockClearAllFilters = vi.fn();
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedTags: ['React', 'Node.js'],
-      clearAllFilters: mockClearAllFilters
+      selectedTags: ["React", "Node.js"],
+      clearAllFilters: mockClearAllFilters,
     });
 
     render(<ActiveTagsFilter />);
-    
-    const clearAllButton = screen.getByText('Clear all filters');
+
+    const clearAllButton = screen.getByText("Clear all filters");
     fireEvent.click(clearAllButton);
-    
+
     expect(mockClearAllFilters).toHaveBeenCalled();
   });
 
-  it('should have correct styling for tags', () => {
+  it("should have correct styling for tags", () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedTags: ['React']
+      selectedTags: ["React"],
     });
 
     render(<ActiveTagsFilter />);
-    
-    const reactTag = screen.getByText('React');
-    const badge = reactTag.closest('.mantine-Badge-root');
-    
+
+    const reactTag = screen.getByText("React");
+    const badge = reactTag.closest(".mantine-Badge-root");
+
     expect(badge).toHaveStyle({
-      color: 'rgb(255, 255, 255)'
+      color: "rgb(255, 255, 255)",
     });
   });
 
-  it('should have consistent styling for all tags', () => {
+  it("should have consistent styling for all tags", () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedTags: ['Node.js']
+      selectedTags: ["Node.js"],
     });
 
     render(<ActiveTagsFilter />);
-    
-    const nodeTag = screen.getByText('Node.js');
-    const badge = nodeTag.closest('.mantine-Badge-root');
-    
+
+    const nodeTag = screen.getByText("Node.js");
+    const badge = nodeTag.closest(".mantine-Badge-root");
+
     expect(badge).toHaveStyle({
-      color: 'rgb(255, 255, 255)'
+      color: "rgb(255, 255, 255)",
     });
   });
 
-  it('should handle multiple tags display', () => {
+  it("should handle multiple tags display", () => {
     const mockToggleTag = vi.fn();
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedTags: ['React', 'TypeScript', 'JavaScript'],
-      toggleTag: mockToggleTag
+      selectedTags: ["React", "TypeScript", "JavaScript"],
+      toggleTag: mockToggleTag,
     });
 
     render(<ActiveTagsFilter />);
-    
-    expect(screen.getByText('React')).toBeInTheDocument();
-    expect(screen.getByText('TypeScript')).toBeInTheDocument();
-    expect(screen.getByText('JavaScript')).toBeInTheDocument();
+
+    expect(screen.getByText("React")).toBeInTheDocument();
+    expect(screen.getByText("TypeScript")).toBeInTheDocument();
+    expect(screen.getByText("JavaScript")).toBeInTheDocument();
   });
 
-  it('should handle large number of tags', () => {
+  it("should handle large number of tags", () => {
     const mockToggleTag = vi.fn();
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
-      selectedTags: ['Node.js', 'Express', 'MongoDB'],
-      toggleTag: mockToggleTag
+      selectedTags: ["Node.js", "Express", "MongoDB"],
+      toggleTag: mockToggleTag,
     });
 
     render(<ActiveTagsFilter />);
-    
-    expect(screen.getByText('Node.js')).toBeInTheDocument();
-    expect(screen.getByText('Express')).toBeInTheDocument();
-    expect(screen.getByText('MongoDB')).toBeInTheDocument();
+
+    expect(screen.getByText("Node.js")).toBeInTheDocument();
+    expect(screen.getByText("Express")).toBeInTheDocument();
+    expect(screen.getByText("MongoDB")).toBeInTheDocument();
   });
 
-  it('should render with customer filter only', () => {
+  it("should render with customer filter only", () => {
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
       selectedTags: [],
-      selectedCustomer: 'DMG Mori Software Solution'
+      selectedCustomer: "DMG Mori Software Solution",
     });
 
     render(<ActiveTagsFilter />);
-    
-    expect(screen.getByText('Active Filters:')).toBeInTheDocument();
-    expect(screen.getByText('DMG')).toBeInTheDocument(); // Shows first word
-    expect(screen.getByText('Clear all filters')).toBeInTheDocument();
+
+    expect(screen.getByText("Active Filters:")).toBeInTheDocument();
+    expect(screen.getByText("DMG")).toBeInTheDocument(); // Shows first word
+    expect(screen.getByText("Clear all filters")).toBeInTheDocument();
   });
 
-  it('should call setCustomerFilter when removing customer filter', () => {
+  it("should call setCustomerFilter when removing customer filter", () => {
     const mockSetCustomerFilter = vi.fn();
     (useFilterStore as any).mockReturnValue({
       ...mockFilterStore,
       selectedTags: [],
-      selectedCustomer: 'TestCompany GmbH',
-      setCustomerFilter: mockSetCustomerFilter
+      selectedCustomer: "TestCompany GmbH",
+      setCustomerFilter: mockSetCustomerFilter,
     });
 
     render(<ActiveTagsFilter />);
-    
+
     // Find the remove button inside the customer badge
-    const customerBadge = screen.getByText('TestCompany').closest('.mantine-Badge-root');
-    const removeButton = customerBadge?.querySelector('button');
-    
+    const customerBadge = screen
+      .getByText("TestCompany")
+      .closest(".mantine-Badge-root");
+    const removeButton = customerBadge?.querySelector("button");
+
     expect(removeButton).toBeInTheDocument();
     fireEvent.click(removeButton!);
-    expect(mockSetCustomerFilter).toHaveBeenCalledWith('');
+    expect(mockSetCustomerFilter).toHaveBeenCalledWith("");
   });
 });

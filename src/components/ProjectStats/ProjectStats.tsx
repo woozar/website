@@ -1,15 +1,34 @@
-import { Stack, Title, Text, Card, Badge, SimpleGrid, Box } from '@mantine/core';
-import { IconCode, IconUsers, IconCalendar, IconTrendingUp, IconStack } from '@tabler/icons-react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { Section } from '../Layout';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { useTranslation } from '@/hooks/useTranslation';
-import { useProjects } from '@/hooks/useProjects';
-import { calculateProjectStats } from '@/utils/projectStats';
-import { useMemo } from 'react';
-import { CompanyLogos } from './CompanyLogos';
-import { useFilterStore } from '@/stores/filterStore';
-import { FlippableStatCard } from './FlippableStatCard';
+import { useMemo } from "react";
+
+import {
+  Badge,
+  Box,
+  Card,
+  SimpleGrid,
+  Stack,
+  Text,
+  Title,
+} from "@mantine/core";
+
+import {
+  IconCalendar,
+  IconCode,
+  IconStack,
+  IconTrendingUp,
+  IconUsers,
+} from "@tabler/icons-react";
+
+import { motion, useReducedMotion } from "framer-motion";
+
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useProjects } from "@/hooks/useProjects";
+import { useTranslation } from "@/hooks/useTranslation";
+import { useFilterStore } from "@/stores/filterStore";
+import { calculateProjectStats } from "@/utils/projectStats";
+
+import { Section } from "../Layout";
+import { CompanyLogos } from "./CompanyLogos";
+import { FlippableStatCard } from "./FlippableStatCard";
 
 export const ProjectStats = () => {
   const { isMobile } = useMediaQuery();
@@ -27,90 +46,93 @@ export const ProjectStats = () => {
       [...project.primary_tags, ...project.tags].forEach((tag) => {
         const FRAMEWORKS = [
           // Frontend Frameworks
-          'React',
-          'Angular',
-          'AngularJS',
-          'Vue',
-          'Vue.js',
-          'Svelte',
-          'Next.js',
-          'NextJS',
-          'Nuxt.js',
-          'React Native',
+          "React",
+          "Angular",
+          "AngularJS",
+          "Vue",
+          "Vue.js",
+          "Svelte",
+          "Next.js",
+          "NextJS",
+          "Nuxt.js",
+          "React Native",
           // Backend Frameworks
-          'Express',
-          'Express.js',
-          'express',
-          'Fastify',
-          'Koa',
-          'NestJS',
-          'Django',
-          'Flask',
-          'FastAPI',
-          'Spring',
-          'Spring Boot',
-          'Laravel',
-          'Symfony',
-          'CodeIgniter',
+          "Express",
+          "Express.js",
+          "express",
+          "Fastify",
+          "Koa",
+          "NestJS",
+          "Django",
+          "Flask",
+          "FastAPI",
+          "Spring",
+          "Spring Boot",
+          "Laravel",
+          "Symfony",
+          "CodeIgniter",
           // UI/CSS Frameworks
-          'Bootstrap',
-          'Tailwind',
-          'Tailwind CSS',
-          'TailwindCSS',
-          'Material UI',
-          'Angular Material',
-          'Ant Design',
-          'Chakra UI',
-          'Mantine',
+          "Bootstrap",
+          "Tailwind",
+          "Tailwind CSS",
+          "TailwindCSS",
+          "Material UI",
+          "Angular Material",
+          "Ant Design",
+          "Chakra UI",
+          "Mantine",
           // Testing Frameworks
-          'Jest',
-          'Cypress',
-          'Playwright',
-          'Vitest',
-          'Mocha',
-          'Jasmine',
-          'Karma',
-          'Testcafe',
-          'MSTest',
+          "Jest",
+          "Cypress",
+          "Playwright",
+          "Vitest",
+          "Mocha",
+          "Jasmine",
+          "Karma",
+          "Testcafe",
+          "MSTest",
           // Mobile Frameworks
-          'Expo',
+          "Expo",
           // Build Tools & Meta-Frameworks
-          'Vite',
-          'create-t3-app',
+          "Vite",
+          "create-t3-app",
           // Animation & Motion
-          'Framer Motion',
+          "Framer Motion",
           // Data Management
-          'Apollo',
-          'Prisma',
-          'Zustand',
-          'ngrx',
-          'TanStack Query',
-          'tRPC',
-          'Mongoose',
-          'knex.js',
+          "Apollo",
+          "Prisma",
+          "Zustand",
+          "ngrx",
+          "TanStack Query",
+          "tRPC",
+          "Mongoose",
+          "knex.js",
           // Specialized Frameworks
-          'LangChain',
-          'Socket.IO',
+          "LangChain",
+          "Socket.IO",
         ];
         if (FRAMEWORKS.includes(tag)) {
           frameworks.add(tag);
         }
       });
     });
-    return Array.from(frameworks).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+    return Array.from(frameworks).sort((a, b) =>
+      a.toLowerCase().localeCompare(b.toLowerCase())
+    );
   }, [projects]);
 
   // Function to handle company logo clicks
   const handleCompanyClick = (customerName: string) => {
     setCustomerFilter(customerName);
     // Scroll to projects section
-    const projectsElement = document.querySelector('#projects');
+    const projectsElement = document.querySelector("#projects");
     if (projectsElement) {
       const headerHeight = 100; // Fixed header height
-      const elementPosition = (projectsElement as HTMLElement).offsetTop - headerHeight;
+      const elementPosition =
+        (projectsElement as HTMLElement).offsetTop - headerHeight;
       window.scrollTo({
         top: elementPosition,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   };
@@ -129,7 +151,10 @@ export const ProjectStats = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 20 },
+    hidden: {
+      opacity: shouldReduceMotion ? 1 : 0,
+      y: shouldReduceMotion ? 0 : 20,
+    },
     visible: {
       opacity: 1,
       y: 0,
@@ -165,7 +190,7 @@ export const ProjectStats = () => {
     {
       icon: IconCalendar,
       title: t.projectStats.cards.yearsExperience,
-      value: '20',
+      value: "20",
       description: t.projectStats.cards.yearsExperienceDesc,
     },
   ];
@@ -178,7 +203,7 @@ export const ProjectStats = () => {
         animate="visible"
       >
         <Stack gap="xl">
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             initial="hidden"
             whileInView="visible"
@@ -188,11 +213,12 @@ export const ProjectStats = () => {
               <Title
                 order={2}
                 style={{
-                  fontSize: isMobile ? '2rem' : '2.5rem',
-                  background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
+                  fontSize: isMobile ? "2rem" : "2.5rem",
+                  background:
+                    "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
                 }}
               >
                 {t.projectStats.title}
@@ -204,13 +230,16 @@ export const ProjectStats = () => {
           </motion.div>
 
           {/* Overview Cards */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            <SimpleGrid cols={{ base: 2, sm: 3, md: 5 }} spacing={isMobile ? 'md' : 'lg'}>
+            <SimpleGrid
+              cols={{ base: 2, sm: 3, md: 5 }}
+              spacing={isMobile ? "md" : "lg"}
+            >
               {statCards.map((card) => {
                 // Use FlippableStatCard for frameworks card
                 if (card.title === t.projectStats.cards.frameworks) {
@@ -223,7 +252,7 @@ export const ProjectStats = () => {
                       description={card.description}
                       backContent={{
                         title: t.projectStats.frameworksTooltip,
-                        items: usedFrameworks
+                        items: usedFrameworks,
                       }}
                       isMobile={isMobile}
                       accessibility={t.projectStats.accessibility}
@@ -249,25 +278,26 @@ export const ProjectStats = () => {
                       radius="lg"
                       withBorder
                       style={{
-                        height: '100%',
-                        textAlign: 'center',
-                        borderColor: 'var(--border-color)',
-                        backgroundColor: 'var(--background-primary)',
-                        position: 'relative',
+                        height: "100%",
+                        textAlign: "center",
+                        borderColor: "var(--border-color)",
+                        backgroundColor: "var(--background-primary)",
+                        position: "relative",
                       }}
                     >
-                      <Stack gap="sm" style={{ height: '100%' }}>
+                      <Stack gap="sm" style={{ height: "100%" }}>
                         <Box
                           style={{
-                            width: '40px',
-                            height: '40px',
-                            borderRadius: '50%',
-                            background: 'linear-gradient(135deg, var(--primary-orange), var(--primary-red))',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            color: 'white',
-                            margin: '0 auto',
+                            width: "40px",
+                            height: "40px",
+                            borderRadius: "50%",
+                            background:
+                              "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            color: "white",
+                            margin: "0 auto",
                           }}
                         >
                           <card.icon size={20} />
@@ -277,7 +307,7 @@ export const ProjectStats = () => {
                             size="xl"
                             fw={700}
                             c="var(--text-primary)"
-                            style={{ fontSize: isMobile ? '1.5rem' : '2rem' }}
+                            style={{ fontSize: isMobile ? "1.5rem" : "2rem" }}
                           >
                             {card.value}
                           </Text>
@@ -297,7 +327,7 @@ export const ProjectStats = () => {
           </motion.div>
 
           {/* Core Technologies - Simplified */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             initial="hidden"
             whileInView="visible"
@@ -313,10 +343,10 @@ export const ProjectStats = () => {
                 radius="lg"
                 withBorder
                 style={{
-                  maxWidth: '600px',
-                  margin: '0 auto',
-                  borderColor: 'var(--border-color)',
-                  backgroundColor: 'var(--background-primary)',
+                  maxWidth: "600px",
+                  margin: "0 auto",
+                  borderColor: "var(--border-color)",
+                  backgroundColor: "var(--background-primary)",
                 }}
               >
                 <SimpleGrid cols={{ base: 2, sm: 4 }} spacing="lg">
@@ -373,7 +403,7 @@ export const ProjectStats = () => {
           </motion.div>
 
           {/* Company Logos */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             initial="hidden"
             whileInView="visible"
