@@ -1,12 +1,14 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import { BrowserRouter, MemoryRouter } from "react-router-dom";
+
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useModal } from "@/hooks/useModal";
 import { useTranslation } from "@/hooks/useTranslation";
 import { fireEvent, render, screen } from "@/test/test-utils";
 import { de } from "@/translations/de";
 
-import { ImprovedNavigation } from "./ImprovedNavigation";
+import { Navigation } from "./Navigation";
 
 // Mock dependencies
 vi.mock("@/hooks/useMediaQuery");
@@ -42,7 +44,16 @@ const mockUseMediaQuery = vi.mocked(useMediaQuery);
 const mockUseTranslation = vi.mocked(useTranslation);
 const mockUseModal = vi.mocked(useModal);
 
-describe("ImprovedNavigation", () => {
+// Helper function to render Navigation component with BrowserRouter
+const renderNavigation = () => {
+  return render(
+    <BrowserRouter>
+      <Navigation />
+    </BrowserRouter>
+  );
+};
+
+describe("Navigation", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockUseMediaQuery.mockReturnValue({
@@ -77,7 +88,7 @@ describe("ImprovedNavigation", () => {
 
   describe("Desktop Navigation", () => {
     it("should render desktop navigation with logo and menu items", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       expect(screen.getByRole("img")).toBeInTheDocument();
       expect(screen.getByText("Services")).toBeInTheDocument();
@@ -86,7 +97,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should render logo with correct attributes", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const logo = screen.getByRole("img");
       expect(logo).toHaveAttribute("src", "/assets/logo.webp");
@@ -94,13 +105,13 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should render contact button", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       expect(screen.getByText("Kontakt")).toBeInTheDocument();
     });
 
     it("should render desktop language switcher", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       expect(
         screen.getByTestId("language-switcher-desktop")
@@ -108,7 +119,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should not render burger menu on desktop", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       expect(
         screen.queryByRole("button", { name: /menu/i })
@@ -116,7 +127,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should handle navigation link clicks", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const servicesLink = screen.getByText("Services");
       fireEvent.click(servicesLink);
@@ -129,7 +140,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should handle contact button click", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const contactButton = screen.getByText("Kontakt");
       fireEvent.click(contactButton);
@@ -152,14 +163,14 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should render mobile navigation with burger menu", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       expect(screen.getAllByRole("button")).toHaveLength(2); // Contact button + Burger menu
       expect(screen.getByRole("img")).toBeInTheDocument(); // Logo
     });
 
     it("should render mobile language switcher", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       // Open drawer to see the mobile language switcher
       const burgerButton = screen.getAllByRole("button")[1]; // Second button is burger menu
@@ -171,7 +182,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should open drawer when burger menu is clicked", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const burgerButton = screen.getAllByRole("button")[1]; // Second button is burger menu
       fireEvent.click(burgerButton);
@@ -181,7 +192,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should close drawer when navigation item is clicked", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       // Open drawer
       const burgerButton = screen.getAllByRole("button")[1]; // Second button is burger menu
@@ -200,7 +211,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should render contact button in mobile drawer", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       // Open drawer
       const burgerButton = screen.getAllByRole("button")[1]; // Second button is burger menu
@@ -210,7 +221,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should handle mobile contact button click", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       // Click the mobile contact button (first button in mobile view)
       const mobileContactButton = screen.getAllByRole("button")[0]; // First button is mobile contact
@@ -224,7 +235,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should handle drawer contact button click", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       // Open drawer
       const burgerButton = screen.getAllByRole("button")[1]; // Second button is burger menu
@@ -242,7 +253,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should handle all mobile drawer navigation clicks", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       // Open drawer
       const burgerButton = screen.getAllByRole("button")[1]; // Second button is burger menu
@@ -280,7 +291,7 @@ describe("ImprovedNavigation", () => {
         isDesktop: false,
       });
 
-      const { rerender } = render(<ImprovedNavigation />);
+      const { rerender } = renderNavigation();
 
       // Open drawer
       const burgerButton = screen.getAllByRole("button")[1]; // Second button is burger menu
@@ -293,7 +304,11 @@ describe("ImprovedNavigation", () => {
         isDesktop: true,
       });
 
-      rerender(<ImprovedNavigation />);
+      rerender(
+        <BrowserRouter>
+          <Navigation />
+        </BrowserRouter>
+      );
 
       // Drawer should be closed (burger menu shouldn't be visible)
       expect(
@@ -304,7 +319,7 @@ describe("ImprovedNavigation", () => {
 
   describe("Language Support", () => {
     it("should handle German language translations", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       expect(screen.getByText("Projekte")).toBeInTheDocument();
       expect(screen.getByText("Über mich")).toBeInTheDocument();
@@ -316,7 +331,7 @@ describe("ImprovedNavigation", () => {
     it("should handle missing target element gracefully", () => {
       document.querySelector = vi.fn().mockReturnValue(null);
 
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const servicesLink = screen.getByText("Services");
 
@@ -325,7 +340,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should navigate to all available sections", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       // Test services navigation
       fireEvent.click(screen.getByText("Services"));
@@ -355,7 +370,7 @@ describe("ImprovedNavigation", () => {
 
       document.querySelector = vi.fn().mockReturnValue(mockElement);
 
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const servicesLink = screen.getByText("Services");
       fireEvent.click(servicesLink);
@@ -369,7 +384,7 @@ describe("ImprovedNavigation", () => {
 
   describe("Accessibility", () => {
     it("should have proper semantic structure", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const header = screen.getByRole("banner");
       expect(header).toBeInTheDocument();
@@ -382,7 +397,7 @@ describe("ImprovedNavigation", () => {
         isDesktop: false,
       });
 
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const buttons = screen.getAllByRole("button");
       expect(buttons).toHaveLength(2); // Contact button and burger menu
@@ -391,7 +406,7 @@ describe("ImprovedNavigation", () => {
 
   describe("Fixed Header Behavior", () => {
     it("should render as fixed positioned header", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const header = screen.getByRole("banner");
       expect(header).toHaveStyle({
@@ -401,7 +416,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should have backdrop blur styling", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const header = screen.getByRole("banner");
       expect(header).toHaveStyle({
@@ -412,7 +427,7 @@ describe("ImprovedNavigation", () => {
 
   describe("Logo Click Behavior", () => {
     it("should scroll to top when logo is clicked", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const logoLink = screen.getByRole("img").closest("a");
       expect(logoLink).toBeInTheDocument();
@@ -426,7 +441,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should prevent default anchor behavior on logo click", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const logoLink = screen.getByRole("img").closest("a");
       const clickEvent = new MouseEvent("click", { bubbles: true });
@@ -454,7 +469,7 @@ describe("ImprovedNavigation", () => {
         closeModal: vi.fn(),
       });
 
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const burgerButton = screen.getAllByRole("button")[1]; // Second button is burger menu
 
@@ -479,7 +494,7 @@ describe("ImprovedNavigation", () => {
         closeModal: vi.fn(),
       });
 
-      const { rerender } = render(<ImprovedNavigation />);
+      const { rerender } = renderNavigation();
 
       // Open drawer first
       const burgerButton = screen.getAllByRole("button")[1];
@@ -491,7 +506,11 @@ describe("ImprovedNavigation", () => {
         openModal: vi.fn(),
         closeModal: vi.fn(),
       });
-      rerender(<ImprovedNavigation />);
+      rerender(
+        <BrowserRouter>
+          <Navigation />
+        </BrowserRouter>
+      );
 
       // The useEffect should trigger and close the drawer
       expect(screen.queryByTestId("drawer")).not.toBeInTheDocument();
@@ -511,7 +530,7 @@ describe("ImprovedNavigation", () => {
         closeModal: vi.fn(),
       });
 
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const burgerButton = screen.getAllByRole("button")[1];
 
@@ -533,7 +552,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should show tablet-specific branding", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       expect(screen.getByText("J. Herrmann")).toBeInTheDocument();
       expect(
@@ -542,7 +561,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should hide theme/language switchers on tablet", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       expect(screen.queryByTestId("theme-switcher")).not.toBeInTheDocument();
       expect(
@@ -551,7 +570,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should use tablet-specific spacing and sizing", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const contactButton = screen.getByText("Kontakt");
 
@@ -568,7 +587,7 @@ describe("ImprovedNavigation", () => {
       // Mock querySelector to return null
       document.querySelector = vi.fn().mockReturnValue(null);
 
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const servicesLink = screen.getByText("Services");
 
@@ -584,7 +603,7 @@ describe("ImprovedNavigation", () => {
         isDesktop: false,
       });
 
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const burgerButton = screen.getAllByRole("button")[1];
 
@@ -600,7 +619,7 @@ describe("ImprovedNavigation", () => {
 
   describe("Navigation Item Structure", () => {
     it("should construct navigation items from translations", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       // Verify all navigation items are present and use translations
       expect(screen.getByText("Services")).toBeInTheDocument();
@@ -610,7 +629,7 @@ describe("ImprovedNavigation", () => {
     });
 
     it("should have correct href attributes for navigation items", () => {
-      render(<ImprovedNavigation />);
+      renderNavigation();
 
       const servicesLink = screen.getByText("Services").closest("a");
       const projectsLink = screen.getByText("Projekte").closest("a");
@@ -619,6 +638,91 @@ describe("ImprovedNavigation", () => {
       expect(servicesLink).toHaveAttribute("href", "#services");
       expect(projectsLink).toHaveAttribute("href", "#projects");
       expect(aboutLink).toHaveAttribute("href", "#about");
+    });
+  });
+
+  describe("Workshop Page Navigation", () => {
+    // Helper function to render Navigation component with MemoryRouter at workshop path
+    const renderWorkshopNavigation = () => {
+      return render(
+        <MemoryRouter initialEntries={["/workshops/ai-low-hanging-fruits"]}>
+          <Navigation />
+        </MemoryRouter>
+      );
+    };
+
+    it("should show workshop navigation items on workshop page", () => {
+      renderWorkshopNavigation();
+
+      // Should show workshop-specific navigation
+      expect(screen.getByText("Erfolgsgeschichten")).toBeInTheDocument(); // success stories first
+      expect(screen.getByText("Workshop Details")).toBeInTheDocument();
+      expect(screen.getByText("Agenda")).toBeInTheDocument();
+
+      // Should NOT show main site navigation
+      expect(screen.queryByText("Services")).not.toBeInTheDocument();
+      expect(screen.queryByText("Projekte")).not.toBeInTheDocument();
+    });
+
+    it("should handle logo click on workshop page", () => {
+      // Mock window.location.href
+      const originalLocation = window.location;
+      delete (window as any).location;
+      (window as any).location = { ...originalLocation, href: "" };
+
+      renderWorkshopNavigation();
+
+      const logoLink = screen.getByRole("img").closest("a");
+      fireEvent.click(logoLink!);
+
+      // Should redirect to homepage
+      expect(window.location.href).toBe("/");
+
+      // Restore original location
+      (window as any).location = originalLocation;
+    });
+
+    it("should handle workshop page navigation redirects for mobile drawer", () => {
+      // Mock window.location.href
+      const originalLocation = window.location;
+      delete (window as any).location;
+      (window as any).location = { ...originalLocation, href: "" };
+
+      // Set mobile mode to trigger drawer functionality
+      mockUseMediaQuery.mockReturnValue({
+        isMobile: true,
+        isTablet: false,
+        isDesktop: false,
+      });
+
+      renderWorkshopNavigation();
+
+      // Open mobile drawer
+      const burgerButton = screen.getAllByRole("button")[1]; // Second button is burger menu
+      fireEvent.click(burgerButton);
+
+      // The mobile drawer should show workshop navigation items
+      expect(screen.getByText("Erfolgsgeschichten")).toBeInTheDocument();
+      expect(screen.getByText("Workshop Details")).toBeInTheDocument();
+      expect(screen.getByText("Agenda")).toBeInTheDocument();
+      expect(screen.getAllByText("Kontakt")).toHaveLength(2); // Desktop contact button + drawer contact button
+
+      // Restore original location
+      (window as any).location = originalLocation;
+    });
+  });
+
+  describe("Logo Navigation Behavior", () => {
+    it("should scroll to top on homepage when logo is clicked", () => {
+      renderNavigation();
+
+      const logoLink = screen.getByRole("img").closest("a");
+      fireEvent.click(logoLink!);
+
+      expect(window.scrollTo).toHaveBeenCalledWith({
+        top: 0,
+        behavior: "smooth",
+      });
     });
   });
 });

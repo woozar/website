@@ -9,10 +9,8 @@ const render = (ui: React.ReactElement) =>
   testingLibraryRender(ui, { wrapper: AllTheProvidersWithRouter });
 
 // Mock all child components
-vi.mock("./components/Navigation/ImprovedNavigation", () => ({
-  ImprovedNavigation: () => (
-    <div data-testid="improved-navigation">Navigation</div>
-  ),
+vi.mock("./components/Navigation", () => ({
+  Navigation: () => <div data-testid="navigation">Navigation</div>,
 }));
 
 vi.mock("./components/Hero/AnimatedHero", () => ({
@@ -49,7 +47,7 @@ describe("App", () => {
   it("should render all main components", () => {
     render(<App />);
 
-    expect(screen.getByTestId("improved-navigation")).toBeInTheDocument();
+    expect(screen.getByTestId("navigation")).toBeInTheDocument();
     expect(screen.getByTestId("animated-hero")).toBeInTheDocument();
     expect(screen.getByTestId("simple-services")).toBeInTheDocument();
     expect(screen.getByTestId("projects-section")).toBeInTheDocument();
@@ -97,7 +95,7 @@ describe("App", () => {
     render(<App />);
 
     // The Box component should have minHeight: '100vh'
-    const container = screen.getByTestId("improved-navigation").parentElement;
+    const container = screen.getByTestId("navigation").parentElement;
     expect(container).toHaveStyle({ minHeight: "100vh" });
   });
 
@@ -116,7 +114,7 @@ describe("App", () => {
     render(<App />);
 
     const components = [
-      screen.getByTestId("improved-navigation"),
+      screen.getByTestId("navigation"),
       screen.getByTestId("animated-hero"),
       screen.getByTestId("simple-services"),
       screen.getByTestId("projects-section"),

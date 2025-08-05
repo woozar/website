@@ -7,7 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import { About } from "./components/About/About";
 import { Contact } from "./components/Contact/Contact";
 import { AnimatedHero } from "./components/Hero/AnimatedHero";
-import { ImprovedNavigation } from "./components/Navigation/ImprovedNavigation";
+import { Navigation } from "./components/Navigation";
 import { ProjectStats } from "./components/ProjectStats";
 import { ProjectsSection } from "./components/Projects/ProjectsSection";
 import { SEOHead } from "./components/SEO/SEOHead";
@@ -51,7 +51,7 @@ function App() {
   return (
     <ModalProvider>
       <Box style={{ minHeight: "100vh" }}>
-        <ImprovedNavigation />
+        <Navigation />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
