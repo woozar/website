@@ -6,6 +6,12 @@ export const de = {
     about: "Über mich",
     contact: "Kontakt",
     contactAction: "Kontakt aufnehmen",
+    workshop: {
+      details: "Workshop Details",
+      agenda: "Agenda",
+      successStories: "Erfolgsgeschichten",
+      contact: "Kontakt",
+    },
   },
   hero: {
     name: "Johannes Herrmann",

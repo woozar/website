@@ -1,1 +1,1 @@
-export { ImprovedNavigation } from "./ImprovedNavigation";
+export { Navigation } from "./Navigation";

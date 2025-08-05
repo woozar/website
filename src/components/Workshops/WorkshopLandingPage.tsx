@@ -332,10 +332,12 @@ Viele Grüße`);
         </Section>
 
         {/* Success Stories */}
-        <SuccessStories />
+        <div id="success-stories">
+          <SuccessStories />
+        </div>
 
         {/* Workshop Details */}
-        <Section>
+        <Section id="workshop-details">
           <motion.div
             key="workshop-details"
             variants={itemVariants}
@@ -552,7 +554,7 @@ Viele Grüße`);
         </Section>
 
         {/* Workshop Agenda */}
-        <Section>
+        <Section id="workshop-agenda">
           <motion.div
             variants={itemVariants}
             initial="hidden"
