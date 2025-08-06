@@ -232,7 +232,7 @@ export const en = {
       ctaSubtext: "Non-binding inquiry - workshops@12ofspades.com",
     },
     problem: {
-      title: "The Challenge",
+      title: "The Challenges",
       points: [
         "AI seems complex and overwhelming",
         "Unclear ROI expectations for AI projects",
