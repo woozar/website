@@ -139,7 +139,7 @@ export const SEOHead = ({
         addressLocality: "Weisendorf",
         addressCountry: "DE",
       },
-      email: "info@12ofspades.com",
+      email: "info@12-of-spades.com",
       telephone: "+49 176 8100 1371",
     });
 

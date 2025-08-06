@@ -112,7 +112,7 @@ export const LegalModal = ({ opened, onClose, type }: LegalModalProps) => {
                 <strong>Telefon:</strong> +49 176 8100 1371
               </Text>
               <Text>
-                <strong>E-Mail:</strong> info@12ofspades.com
+                <strong>E-Mail:</strong> info@12-of-spades.com
               </Text>
             </Stack>
 

@@ -57,7 +57,7 @@ describe("Contact", () => {
     render(<Contact />);
 
     expect(screen.getByText("E-Mail")).toBeInTheDocument();
-    expect(screen.getByText("info@12ofspades.com")).toBeInTheDocument();
+    expect(screen.getByText("info@12-of-spades.com")).toBeInTheDocument();
 
     expect(screen.getByText("Telefon")).toBeInTheDocument();
     expect(screen.getByText("+49 176 8100 1371")).toBeInTheDocument();
@@ -69,8 +69,8 @@ describe("Contact", () => {
   it("should render contact links with correct hrefs", () => {
     render(<Contact />);
 
-    const emailLink = screen.getByText("info@12ofspades.com").closest("a");
-    expect(emailLink).toHaveAttribute("href", "mailto:info@12ofspades.com");
+    const emailLink = screen.getByText("info@12-of-spades.com").closest("a");
+    expect(emailLink).toHaveAttribute("href", "mailto:info@12-of-spades.com");
 
     const phoneLink = screen.getByText("+49 176 8100 1371").closest("a");
     expect(phoneLink).toHaveAttribute("href", "tel:+4917681001371");
@@ -175,7 +175,7 @@ describe("Contact", () => {
 
     // Should still render all content on mobile
     expect(screen.getByText("Kontakt")).toBeInTheDocument();
-    expect(screen.getByText("info@12ofspades.com")).toBeInTheDocument();
+    expect(screen.getByText("info@12-of-spades.com")).toBeInTheDocument();
     expect(screen.getByText("LinkedIn")).toBeInTheDocument();
   });
 
@@ -251,7 +251,7 @@ describe("Contact", () => {
 
       // Component should render successfully with animations enabled
       expect(screen.getByText("Kontakt")).toBeInTheDocument();
-      expect(screen.getByText("info@12ofspades.com")).toBeInTheDocument();
+      expect(screen.getByText("info@12-of-spades.com")).toBeInTheDocument();
     });
 
     it("should render with reduced motion animations when reduced motion is true", () => {
@@ -261,7 +261,7 @@ describe("Contact", () => {
 
       // Component should render successfully with reduced animations
       expect(screen.getByText("Kontakt")).toBeInTheDocument();
-      expect(screen.getByText("info@12ofspades.com")).toBeInTheDocument();
+      expect(screen.getByText("info@12-of-spades.com")).toBeInTheDocument();
       expect(screen.getByText("LinkedIn")).toBeInTheDocument();
     });
 

@@ -63,7 +63,6 @@ const mockTranslations = {
       subtitle:
         "Maximum AI value with minimal effort. Let us identify and pick the low hanging fruits in your company together.",
       ctaButton: "Get in Touch",
-      ctaSubtext: "Non-binding inquiry - workshops@12ofspades.com",
     },
     problem: {
       title: "The Challenge",
@@ -396,7 +395,7 @@ describe("WorkshopLandingPage", () => {
     fireEvent.click(contactButton);
 
     // Should have set mailto link
-    expect(window.location.href).toContain("mailto:workshops@12ofspades.com");
+    expect(window.location.href).toContain("mailto:workshops@12-of-spades.com");
     expect(window.location.href).toContain("Workshop%20Anfrage");
   });
 

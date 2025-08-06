@@ -229,7 +229,6 @@ export const en = {
       subtitle:
         "Maximum AI value with minimal effort. Let us together identify and strategically harvest the Low Hanging Fruits in your company - before you consider expensive projects that pay off late or never.",
       ctaButton: "Get in Touch",
-      ctaSubtext: "Non-binding inquiry - workshops@12ofspades.com",
     },
     problem: {
       title: "The Challenges",

@@ -230,7 +230,6 @@ export const de = {
       subtitle:
         "Maximaler AI-Nutzen mit minimalem Aufwand. Lassen Sie uns gemeinsam die Low Hanging Fruits in Ihrem Unternehmen identifizieren und gemeinsam pflücken - bevor Sie über aufwändige Projekte nachdenken, die sich spät oder nie bezahlt machen.",
       ctaButton: "Kontakt aufnehmen",
-      ctaSubtext: "Unverbindliche Anfrage - workshops@12ofspades.com",
     },
     problem: {
       title: "Die Herausforderungen",
