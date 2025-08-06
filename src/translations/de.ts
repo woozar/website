@@ -7,32 +7,32 @@ export const de = {
     contact: "Kontakt",
     contactAction: "Kontakt aufnehmen",
     workshop: {
-      details: "Workshop Details",
+      details: "Details",
       agenda: "Agenda",
-      successStories: "Erfolgsgeschichten",
+      successStories: "Erfolge",
       contact: "Kontakt",
     },
   },
   hero: {
     name: "Johannes Herrmann",
-    title: "Software Freelancer & AI Specialist",
+    title: "Software Freelancer & KI-Spezialist",
     description:
-      "Spezialisiert auf AI/LLM Entwicklung, Cloud Architecture und Full-Stack Development. Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen.",
+      "Spezialisiert auf KI/LLM Entwicklung, Cloud Architecture und Full-Stack Development. Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen.",
     contactButton: "Kontakt aufnehmen",
     projectsButton: "Projekte ansehen",
   },
   services: {
     title: "Meine Services",
     subtitle:
-      "Spezialisierte Expertise in den wichtigsten Zukunftstechnologien. Von AI-Integration bis hin zu skalierbaren Cloud-Architekturen.",
+      "Spezialisierte Expertise in den wichtigsten Zukunftstechnologien. Von KI-Integration bis hin zu skalierbaren Cloud-Architekturen.",
     technologies: "Technologien:",
     items: {
       ai: {
-        title: "AI Development",
+        title: "KI Development",
         description:
-          "Entwicklung von AI-basierten Anwendungen z.B. mit modernsten Large Language Models wie GPT-4, Claude und Gemini. Von Chatbots bis hin zu komplexen AI-Workflows.",
+          "Entwicklung von KI-basierten Anwendungen z.B. mit modernsten Large Language Models wie GPT-4, Claude und Gemini. Von Chatbots bis hin zu komplexen KI-Workflows.",
         workshopTitle: "Workshop verfügbar",
-        workshopDescription: "AI - Low Hanging Fruits",
+        workshopDescription: "KI - Low Hanging Fruits",
         workshopSpecificButton: "Beispiel: Low Hanging Fruits Workshop",
         workshopGeneralButton: "Anderen Workshop anfragen",
       },
@@ -51,25 +51,25 @@ export const de = {
   about: {
     title: "Über mich",
     subtitle:
-      "Software Freelancer mit Leidenschaft für innovative AI-Lösungen und moderne Webtechnologien.",
+      "Software Freelancer mit Leidenschaft für innovative KI-Lösungen und moderne Webtechnologien.",
     description1:
-      "Als erfahrener Software Freelancer mit dem Fokus auf AI/LLM Entwicklung und moderne Webtechnologien unterstütze ich Unternehmen dabei, innovative digitale Lösungen zu entwickeln und umzusetzen.",
+      "Als erfahrener Software Freelancer mit dem Fokus auf KI/LLM Entwicklung und moderne Webtechnologien unterstütze ich Unternehmen dabei, innovative digitale Lösungen zu entwickeln und umzusetzen.",
     description2:
-      "Meine Expertise liegt in der Entwicklung von AI-basierten Anwendungen, der Implementierung von Cloud-Architekturen und der Erstellung von skalierbaren Full-Stack-Webanwendungen. Dabei lege ich besonderen Wert auf benutzerfreundliche Interfaces und performante Backend-Systeme.",
+      "Meine Expertise liegt in der Entwicklung von KI-basierten Anwendungen, der Implementierung von Cloud-Architekturen und der Erstellung von skalierbaren Full-Stack-Webanwendungen. Dabei lege ich besonderen Wert auf benutzerfreundliche Interfaces und performante Backend-Systeme.",
     description3:
-      "In meiner Laufbahn habe ich bereits für renommierte Unternehmen wie DMG Mori gearbeitet und dabei komplexe SharePoint-Migration, Intranet-Modernisierung und Business Process Automation Projekte erfolgreich umgesetzt.",
+      "In meiner Laufbahn habe ich bereits für renommierte Unternehmen wie DMG Mori gearbeitet und dabei komplexe Smart Factories, Intranet-Modernisierung und Business Process Automation Projekte erfolgreich umgesetzt.",
     highlights: "Highlights",
     expertise: "Technische Expertise",
     highlightsList: [
       "~20 Jahre Erfahrung in Softwareentwicklung",
-      "Spezialist für AI/LLM Integration und Prompt Engineering",
+      "Spezialist für KI/LLM-Integration und Prompt Engineering",
       "Erfolgreich abgeschlossene Projekte für Unternehmen wie DMG Mori",
       "Expertise in modernen Web-Technologien und Cloud-Architekturen",
       "Fokus auf benutzerfreundlichen und skalierbaren Lösungen",
     ],
     skills: {
       aiLlm: {
-        category: "AI & LLM",
+        category: "KI & LLM",
         items: [
           "LLMs (GPT, Claude, Gemini)",
           "LangChain",
@@ -126,7 +126,7 @@ export const de = {
       training: {
         category: "Training & Workshops",
         items: [
-          "AI Workshop: Low Hanging Fruits",
+          "KI Workshop: Low Hanging Fruits",
           "Workshop-Durchführung",
           "Technische Schulungen",
           "Team-Mentoring",
@@ -140,7 +140,9 @@ export const de = {
     title: "Kontakt",
     subtitle:
       "Bereit für Ihr nächstes Projekt? Lassen Sie uns über Ihre Anforderungen sprechen und gemeinsam innovative Lösungen entwickeln.",
-    followMe: "Finden Sie mich auch hier",
+    gernePerDu:
+      "#GernePerDu - Ich arbeite gerne auf Augenhöhe und freue mich auf unkomplizierte Zusammenarbeit!",
+    followMe: "Finden Sie mich auch hier:",
     contactItems: {
       email: "E-Mail",
       phone: "Telefon",
@@ -190,7 +192,7 @@ export const de = {
       typescript: "TypeScript",
       nodejs: "Node.js",
       azure: "Azure",
-      aiLlm: "AI & LLM",
+      aiLlm: "KI & LLM",
     },
     experience: {
       years8: "8 Jahre",
@@ -219,23 +221,29 @@ export const de = {
   },
   workshop: {
     seo: {
-      title: "AI Workshop - Low Hanging Fruits | 12 of Spades",
+      title: "KI Workshop - Low Hanging Fruits | 12 of Spades",
       description:
-        "Praktischer AI-Workshop für Unternehmen: Maximaler AI-Nutzen mit minimalem Aufwand. Sofortige Ergebnisse durch bewährte Low-Hanging-Fruits-Strategien.",
+        "Praktischer KI-Workshop für Unternehmen: Maximaler KI-Nutzen mit minimalem Aufwand. Sofortige Ergebnisse durch bewährte Low-Hanging-Fruits-Strategien.",
       keywords:
-        "AI Workshop, Künstliche Intelligenz, Low Hanging Fruits, AI Training, Unternehmen, Sofortige Ergebnisse",
+        "KI Workshop, Künstliche Intelligenz, Low Hanging Fruits, KI Training, Unternehmen, Sofortige Ergebnisse",
     },
     hero: {
-      title: "AI - Low Hanging Fruits",
+      title: "Workshop: KI - Low Hanging Fruits",
       subtitle:
-        "Maximaler AI-Nutzen mit minimalem Aufwand. Lassen Sie uns gemeinsam die Low Hanging Fruits in Ihrem Unternehmen identifizieren und gemeinsam pflücken - bevor Sie über aufwändige Projekte nachdenken, die sich spät oder nie bezahlt machen.",
+        "Alle reden über KI, aber der Einstieg ist oft überwältigend. Lassen Sie sich von der Konkurrenz nicht abhängen, sondern schwimmen Sie auf der KI-Erfolgswelle mit! Gemeinsam identifizieren wir die Low Hanging Fruits in Ihrem Unternehmen - maximaler Nutzen mit minimalem Aufwand, bevor wir über größere Projekte nachdenken.",
+      textPrompt:
+        "Schreibe einen catchy Aufhänger für meinen 'KI Low Hanging Fruits' Workshop in einem Absatz. Zielgruppe: Unternehmen, die KI nutzen wollen aber überwältigt sind. Nutze gängige Metaphern und motivierende Phrasen. Verwende Buzzwords wie 'Erfolgswelle' und 'Konkurrenz'. Ton: Professionell-motivierend im Marketing-Stil. Struktur: Problem → Dringlichkeit → Partnerschaftliche Lösung. Kernbotschaft: Einfache KI-Lösungen zuerst, maximaler Nutzen mit minimalem Aufwand.",
+      imagePrompt:
+        'Creative visual metaphor illustration combining technology and "low hanging fruits" concept. Show a stylized tree with branches, where instead of regular fruits, there are glowing tech icons (AI brain, chat bubbles, automation gears, data charts) hanging at different heights. The lower, easily reachable fruits glow brighter with orange/red colors (#ff6b35, #d32f2f), representing easy AI wins. Higher fruits are dimmer/grayed out. Include a subtle ladder or stepping stones leading to the tree, symbolizing the workshop\'s guided approach. Background: Clean, professional gradient. Style: Modern, friendly, inspiring - showing AI is approachable and has quick wins available.',
       ctaButton: "Kontakt aufnehmen",
+      aiGenerated: "Text & Bild mit KI erstellt",
+      showPrompt: "Prompts anzeigen",
     },
     problem: {
       title: "Die Herausforderungen",
       points: [
-        "AI wirkt komplex und überwältigend",
-        "Unklare ROI-Erwartungen bei AI-Projekten",
+        "KI wirkt komplex und überwältigend",
+        "Unklare ROI-Erwartungen bei KI-Projekten",
         "Lange Implementierungszeiten befürchtet",
         "Hohe Investitionskosten abschreckend",
         "Fehlendes Know-how im Team",
@@ -244,15 +252,15 @@ export const de = {
     solution: {
       title: "Die Lösung",
       points: [
-        "Fokus auf sofort umsetzbare AI-Anwendungen",
+        "Fokus auf sofort umsetzbare KI-Anwendungen",
         "Bewährte Strategien mit schnellem ROI",
         "Praktische Hands-on-Erfahrung",
-        "Keine Vorkenntnisse erforderlich",
         "Direkt anwendbare Ergebnisse",
+        "Keine Vorkenntnisse erforderlich",
       ],
     },
     details: {
-      title: "Workshop-Details",
+      title: "Details",
       duration: {
         title: "Dauer",
         value: "1-3 Tage",
@@ -271,34 +279,34 @@ export const de = {
       },
     },
     agenda: {
-      title: "Workshop-Agenda",
+      title: "Agenda",
       items: [
         {
-          title: "AI-Grundlagen & Mindset",
+          title: "KI-Grundlagen & Mindset",
           description:
-            "Verstehen Sie die Grundlagen und entwickeln Sie das richtige Mindset für AI in Ihrem Unternehmen.",
+            "Verstehen Sie die Grundlagen und entwickeln Sie das richtige Mindset für KI in Ihrem Unternehmen.",
           points: [
-            "Was ist AI wirklich und was nicht?",
+            "Was ist KI wirklich und was nicht?",
             "Realistische Erwartungen setzen",
-            "AI-Mythen entlarven",
+            "KI-Mythen entlarven",
           ],
         },
         {
           title: "Low Hanging Fruits identifizieren",
           description:
-            "Finden Sie die besten Anwendungsfälle in Ihrem Unternehmen für schnelle AI-Erfolge.",
+            "Finden Sie die besten Anwendungsfälle in Ihrem Unternehmen für schnelle KI-Erfolge.",
           points: [
             "Prozessanalyse Ihres Unternehmens",
-            "Bewertung von AI-Potenzialen",
+            "Bewertung von KI-Potenzialen",
             "Priorisierung nach Aufwand und Nutzen",
           ],
         },
         {
           title: "Praktische Umsetzung",
           description:
-            "Hands-on Session mit echten AI-Tools und direkter Anwendung auf Ihre Anwendungsfälle.",
+            "Hands-on Session mit echten KI-Tools und direkter Anwendung auf Ihre Anwendungsfälle.",
           points: [
-            "Live-Demo bewährter AI-Tools",
+            "Live-Demo bewährter KI-Tools",
             "Gemeinsame Implementierung",
             "Best Practices und Fallstricke",
           ],
@@ -306,25 +314,67 @@ export const de = {
         {
           title: "Roadmap & nächste Schritte",
           description:
-            "Entwickeln Sie eine konkrete Roadmap für die AI-Implementierung in Ihrem Unternehmen.",
+            "Entwickeln Sie eine konkrete Roadmap für die KI-Implementierung in Ihrem Unternehmen.",
           points: [
-            "Individuelle AI-Roadmap erstellen",
+            "Individuelle KI-Roadmap erstellen",
             "Ressourcenplanung",
             "Erfolg messen und optimieren",
           ],
         },
       ],
     },
-    cta: {
-      title: "Bereit für Ihren AI-Durchbruch?",
+    process: {
+      title: "Üblicher Ablauf",
       subtitle:
-        "Lassen Sie uns gemeinsam die Low Hanging Fruits in Ihrem Unternehmen identifizieren und sofort pflücken.",
+        "Unser bewährtes Vorgehen in drei Schritten – flexibel anpassbar an Ihre Bedürfnisse. Durchführung vor Ort, online oder in von uns organisierten Räumlichkeiten.",
+      steps: [
+        {
+          number: "01",
+          title: "Identifikation sinnvoller KI-Anwendungen",
+          description:
+            "Zunächst erkläre ich, wie typische Aufgaben aussehen, die sich gut für den Einsatz von KI eignen – also solche, die regelmäßig anfallen, Zeit oder Nerven kosten und ein gewisses Automatisierungspotenzial haben. Gemeinsam erarbeiten wir dann eine Liste konkreter Aufgaben aus dem Arbeitsalltag, die sich für den KI-Einsatz anbieten.",
+        },
+        {
+          number: "02",
+          title: "Analyse & Lösungsansätze",
+          description:
+            "Im nächsten Schritt analysieren wir, welche dieser Aufgaben sich tatsächlich mit KI unterstützen oder automatisieren lassen. Dabei besprechen wir auch, in welcher Form die jeweilige Lösung umsetzbar wäre – etwa als lokal installierte Software, als Serveranwendung oder als Cloud-Dienst. Zu jedem Punkt gebe ich eine erste Einschätzung zum Aufwand und möglichen Varianten der Umsetzung.",
+        },
+        {
+          number: "03",
+          title: "Nächste Schritte – je nach Lösungsweg",
+          description:
+            "Je nach Ergebnis ergeben sich dann drei mögliche nächste Schritte:",
+          options: [
+            {
+              title: "Bestehende Produkte",
+              description:
+                "Gibt es bereits ein passendes Tool oder Produkt am Markt, stelle ich dieses vor und zeige, wie es eingesetzt werden kann.",
+            },
+            {
+              title: "Interne Umsetzung",
+              description:
+                "Soll die Lösung intern entwickelt werden, arbeite ich direkt mit den zuständigen Entwicklern zusammen und vermittle das nötige Know-how.",
+            },
+            {
+              title: "Externe Umsetzung",
+              description:
+                "Alternativ erarbeiten wir eine klare Spezifikation, die an externe Dienstleister weitergegeben werden kann.",
+            },
+          ],
+        },
+      ],
+    },
+    cta: {
+      title: "Bereit für Ihren KI-Durchbruch?",
+      subtitle:
+        "Lassen Sie uns gemeinsam die Low Hanging Fruits in Ihrem Unternehmen identifizieren und sofort umsetzen (pflücken).",
       button: "Jetzt anfragen",
     },
     successStories: {
-      title: "Gepflückte Früchte",
+      title: "Erfolgsgeschichten",
       subtitle:
-        "Konkrete Beispiele erfolgreicher AI-Implementierungen von meinen Kunden",
+        "Konkrete Beispiele bereits gepflückter Low Hanging Fruits von meinen Kunden",
       benefitLabels: {
         oneTime: "Einmalig:",
         ongoing: "Dauerhaft:",
@@ -332,8 +382,10 @@ export const de = {
       newsletter: {
         title: "Newsletter-Personalisierung",
         description:
-          "Statt Newsletter-Spam an alle Kunden: AI analysiert CRM-Daten und Kaufhistorie, um für jeden Kunden individuell relevante Newsletter zu erstellen. Automatische Anpassung von Inhalten und Ansprache.",
-        goal: "Ziel: Höhere Öffnungsraten und deutlich bessere Kundenbindung durch wirklich relevante Kommunikation.",
+          "Statt Newsletter-Spam an alle Kunden: KI analysiert CRM-Daten und Kaufhistorie, um für jeden Kunden individuell relevante Newsletter zu erstellen. Automatische Anpassung von Inhalten und Ansprache.",
+        goal: "Höhere Öffnungsraten und deutlich bessere Kundenbindung durch relevante Kommunikation",
+        result:
+          "Positives Kundenfeedback über die Verbesserung vom alten auf den neuen Newsletter",
         inputs: [
           {
             title: "CRM-Daten",
@@ -345,7 +397,7 @@ export const de = {
           },
         ],
         processing: {
-          title: "AI-Analyse",
+          title: "KI-Analyse",
           description: "Relevanz-Bewertung & Personalisierung",
         },
         output: {
@@ -364,13 +416,15 @@ export const de = {
       support: {
         title: "Support Schutzschild",
         description:
-          "Aggressive oder unfreundliche Kundenmails erreichen Ihr Support-Team nicht mehr direkt. Die AI erkennt problematische Nachrichten automatisch und wandelt sie in höfliche, konstruktive Versionen um - mit Kontext und Lösungsvorschlägen.",
-        goal: "Ziel: Weniger psychische Belastung im Support-Team, höhere Mitarbeiterzufriedenheit und trotzdem exzellenter Kundenservice.",
+          "Aggressive oder unfreundliche Kundenmails erreichen Ihr Support-Team nicht mehr direkt. Die KI erkennt problematische Nachrichten automatisch und wandelt sie in höfliche, konstruktive Versionen um - mit Kontext und Lösungsvorschlägen.",
+        goal: "Weniger psychische Belastung im Support-Team, höhere Mitarbeiterzufriedenheit",
+        result:
+          "Bei der Mitarbeiterbefragung zeigte sich im Support-Team eine sehr deutliche Verbesserung der Stimmung im Vergleich zum Vorjahr - die Mitarbeiter nannten die gefilterten E-Mails als einen der Hauptgründe. Besonders bemerkenswert: Einige Kunden entschuldigten sich sogar, nachdem sie in der Antwort-Email sahen, wie ihre ursprüngliche Nachricht umformuliert worden war.",
         inputs: [
           { title: "Kunden-Email", description: "Beliebige Support-Anfrage" },
         ],
         processing: {
-          title: "AI-Filter & Umformulierung",
+          title: "KI-Filter & Umformulierung",
           description: "Freundlichkeits-Check & bedingte Neuformulierung",
         },
         output: {
@@ -391,7 +445,9 @@ export const de = {
         title: "Content-Autopilot",
         description:
           "Rohtexte werden automatisch strukturiert und optimiert. Das System führt Lektorat durch, optimiert für SEO und generiert passende Bilder basierend auf dem Textinhalt.",
-        goal: "Ziel: Zeit- und Geldersparnis bei der Content-Erstellung und Verbesserung der Reichweite.",
+        goal: "Zeit- und Geldersparnis bei der Content-Erstellung und Verbesserung der Reichweite",
+        result:
+          "Das System wird täglich genutzt und hat die Content-Erstellung erheblich beschleunigt",
         inputs: [
           { title: "Blog-Entwurf", description: "Roher Text-Content" },
           {
@@ -400,17 +456,17 @@ export const de = {
           },
         ],
         processing: {
-          title: "AI-Optimierung",
+          title: "KI-Optimierung",
           description: "Lektorat & Bild-Generierung",
         },
         output: {
           title: "Fertiger Post",
           description:
-            "Professionell lektorierter Artikel mit passenden AI-Bildern, SEO-optimiert und publikationsfertig",
+            "Professionell lektorierter Artikel mit passenden KI-Bildern, SEO-optimiert und publikationsfertig",
           benefits: [
             "Automatisches Lektorat & Korrekturvorschläge",
             "SEO-optimierte Headlines und Meta-Beschreibungen",
-            "Passende AI-generierte Bilder",
+            "Passende KI-generierte Bilder",
           ],
         },
         implementation: "1 Tag",
@@ -420,13 +476,15 @@ export const de = {
         title: "Legacy-Code Testing",
         description:
           "Unit Tests für Legacy-Projekte erstellen - inklusive Dokumentation und Bug-Reports. Das Projekt hatte ursprünglich einen Aufwand von 4 Monaten geplant, als noch keine KI eingesetzt wurde.",
-        goal: "Ziel: Dramatische Zeitersparnis und nachhaltige Verbesserung der Codequalität - 2 Wochen statt 4 Monate.",
+        goal: "Deutliche Einsparung bei den Entwicklungskosten und nachhaltige Verbesserung der Codequalität",
+        result:
+          "Die Umsetzung erfolgte in nur 2 Wochen anstelle der ursprünglich geplanten 4 Monate. Zu den langfristigen Auswirkungen auf die Codequalität haben wir noch keine Rückmeldung erhalten.",
         inputs: [
           { title: "Legacy Code", description: "Bestehendes Repository" },
           { title: "Dokumentation", description: "Vorhandene Specs & Docs" },
         ],
         processing: {
-          title: "AI-Analyse",
+          title: "KI-Analyse",
           description: "Code verstehen & Tests generieren",
         },
         output: {

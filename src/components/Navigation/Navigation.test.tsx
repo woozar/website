@@ -665,8 +665,8 @@ describe("Navigation", () => {
       renderWorkshopNavigation();
 
       // Should show workshop-specific navigation
-      expect(screen.getByText("Erfolgsgeschichten")).toBeInTheDocument(); // success stories first
-      expect(screen.getByText("Workshop Details")).toBeInTheDocument();
+      expect(screen.getByText("Erfolge")).toBeInTheDocument(); // success stories first
+      expect(screen.getByText("Details")).toBeInTheDocument();
       expect(screen.getByText("Agenda")).toBeInTheDocument();
 
       // Should NOT show main site navigation
@@ -712,8 +712,8 @@ describe("Navigation", () => {
       fireEvent.click(burgerButton);
 
       // The mobile drawer should show workshop navigation items
-      expect(screen.getByText("Erfolgsgeschichten")).toBeInTheDocument();
-      expect(screen.getByText("Workshop Details")).toBeInTheDocument();
+      expect(screen.getByText("Erfolge")).toBeInTheDocument();
+      expect(screen.getByText("Details")).toBeInTheDocument();
       expect(screen.getByText("Agenda")).toBeInTheDocument();
       expect(screen.getAllByText("Kontakt")).toHaveLength(2); // Desktop contact button + drawer contact button
 

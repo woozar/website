@@ -51,7 +51,7 @@ describe("Services", () => {
     expect(screen.getByText("Meine Services")).toBeInTheDocument();
     expect(
       screen.getByText(
-        "Spezialisierte Expertise in den wichtigsten Zukunftstechnologien. Von AI-Integration bis hin zu skalierbaren Cloud-Architekturen."
+        "Spezialisierte Expertise in den wichtigsten Zukunftstechnologien. Von KI-Integration bis hin zu skalierbaren Cloud-Architekturen."
       )
     ).toBeInTheDocument();
   });
@@ -59,7 +59,7 @@ describe("Services", () => {
   it("should render all three service cards", () => {
     render(<Services />);
 
-    expect(screen.getByText("AI Development")).toBeInTheDocument();
+    expect(screen.getByText("KI Development")).toBeInTheDocument();
     expect(screen.getByText("Cloud Architecture")).toBeInTheDocument();
     expect(screen.getByText("Full-Stack Development")).toBeInTheDocument();
   });
@@ -71,7 +71,7 @@ describe("Services", () => {
     expect(
       screen.getByText(
         (content) =>
-          content.includes("Entwicklung von AI-basierten Anwendungen") &&
+          content.includes("Entwicklung von KI-basierten Anwendungen") &&
           content.includes("Large Language Models")
       )
     ).toBeInTheDocument();
@@ -147,7 +147,7 @@ describe("Services", () => {
 
     // Should still render all content on mobile
     expect(screen.getByText("Meine Services")).toBeInTheDocument();
-    expect(screen.getByText("AI Development")).toBeInTheDocument();
+    expect(screen.getByText("KI Development")).toBeInTheDocument();
     expect(screen.getByText("Cloud Architecture")).toBeInTheDocument();
     expect(screen.getByText("Full-Stack Development")).toBeInTheDocument();
   });
@@ -156,7 +156,7 @@ describe("Services", () => {
     render(<Services />);
 
     expect(screen.getByText("Meine Services")).toBeInTheDocument();
-    expect(screen.getByText("AI Development")).toBeInTheDocument();
+    expect(screen.getByText("KI Development")).toBeInTheDocument();
     expect(screen.getAllByText("Technologien:")).toHaveLength(3); // One for each service
   });
 
@@ -168,7 +168,7 @@ describe("Services", () => {
 
     const serviceHeadings = screen.getAllByRole("heading", { level: 3 });
     expect(serviceHeadings).toHaveLength(3);
-    expect(serviceHeadings[0]).toHaveTextContent("AI Development");
+    expect(serviceHeadings[0]).toHaveTextContent("KI Development");
     expect(serviceHeadings[1]).toHaveTextContent("Cloud Architecture");
     expect(serviceHeadings[2]).toHaveTextContent("Full-Stack Development");
   });
@@ -177,13 +177,13 @@ describe("Services", () => {
     render(<Services />);
 
     // Check that service titles are present
-    const aiTitle = screen.getByText("AI Development");
+    const aiTitle = screen.getByText("KI Development");
     expect(aiTitle).toBeInTheDocument();
 
     // Check that service descriptions are present using flexible matching
     const aiDescription = screen.getByText(
       (content) =>
-        content.includes("Entwicklung von AI-basierten Anwendungen") &&
+        content.includes("Entwicklung von KI-basierten Anwendungen") &&
         content.includes("Large Language Models")
     );
     expect(aiDescription).toBeInTheDocument();
@@ -232,7 +232,7 @@ describe("Services", () => {
 
     const serviceHeadings = screen.getAllByRole("heading", { level: 3 });
 
-    expect(serviceHeadings[0]).toHaveTextContent("AI Development");
+    expect(serviceHeadings[0]).toHaveTextContent("KI Development");
     expect(serviceHeadings[1]).toHaveTextContent("Cloud Architecture");
     expect(serviceHeadings[2]).toHaveTextContent("Full-Stack Development");
   });
@@ -247,7 +247,7 @@ describe("Services", () => {
     expect(servicesSection).toBeInTheDocument();
 
     // All service cards should be present
-    expect(screen.getByText("AI Development")).toBeInTheDocument();
+    expect(screen.getByText("KI Development")).toBeInTheDocument();
     expect(screen.getByText("Cloud Architecture")).toBeInTheDocument();
     expect(screen.getByText("Full-Stack Development")).toBeInTheDocument();
   });
@@ -260,7 +260,7 @@ describe("Services", () => {
 
       // Component should render successfully with animations enabled
       expect(screen.getByText("Meine Services")).toBeInTheDocument();
-      expect(screen.getByText("AI Development")).toBeInTheDocument();
+      expect(screen.getByText("KI Development")).toBeInTheDocument();
       expect(screen.getByText("Cloud Architecture")).toBeInTheDocument();
     });
 
@@ -271,7 +271,7 @@ describe("Services", () => {
 
       // Component should render successfully with reduced animations
       expect(screen.getByText("Meine Services")).toBeInTheDocument();
-      expect(screen.getByText("AI Development")).toBeInTheDocument();
+      expect(screen.getByText("KI Development")).toBeInTheDocument();
       expect(screen.getByText("Full-Stack Development")).toBeInTheDocument();
     });
 
@@ -281,7 +281,7 @@ describe("Services", () => {
       render(<Services />);
 
       // All service cards should still render with reduced motion
-      expect(screen.getByText("AI Development")).toBeInTheDocument();
+      expect(screen.getByText("KI Development")).toBeInTheDocument();
       expect(screen.getByText("Cloud Architecture")).toBeInTheDocument();
       expect(screen.getByText("Full-Stack Development")).toBeInTheDocument();
     });

@@ -39,6 +39,7 @@ const mockTranslations = {
         title: "Newsletter Personalization",
         description: "AI analyzes CRM data to create personalized newsletters.",
         goal: "Goal: Higher open rates through relevant communication.",
+        result: "Increased open rates by 25%",
         inputs: [
           { title: "CRM Data", description: "Customer profiles" },
           { title: "Newsletter Content", description: "Standard content" },
@@ -142,10 +143,14 @@ describe("SuccessStories", () => {
   it("renders all story selection buttons", () => {
     renderWithProviders(<SuccessStories />);
 
-    expect(screen.getByText("Newsletter Personalization")).toBeInTheDocument();
-    expect(screen.getByText("Support Shield")).toBeInTheDocument();
-    expect(screen.getByText("Content Autopilot")).toBeInTheDocument();
-    expect(screen.getByText("Legacy Testing")).toBeInTheDocument();
+    // Use getAllByRole to find buttons specifically
+    const buttons = screen.getAllByRole("button");
+    const buttonTexts = buttons.map((button) => button.textContent);
+
+    expect(buttonTexts).toContain("Newsletter Personalization");
+    expect(buttonTexts).toContain("Support Shield");
+    expect(buttonTexts).toContain("Content Autopilot");
+    expect(buttonTexts).toContain("Legacy Testing");
   });
 
   it("displays the first story by default", () => {
@@ -175,8 +180,10 @@ describe("SuccessStories", () => {
     expect(screen.getByText("2 days")).toBeInTheDocument();
     expect(screen.getByText("€0.025 per customer")).toBeInTheDocument();
 
-    // Click Support button
-    const supportButton = screen.getByText("Support Shield");
+    // Click Support button using role
+    const supportButton = screen.getByRole("button", {
+      name: /Support Shield/,
+    });
     fireEvent.click(supportButton);
 
     expect(
@@ -188,8 +195,10 @@ describe("SuccessStories", () => {
     expect(screen.getByText("1 day (in-house)")).toBeInTheDocument();
     expect(screen.getByText("€0.005 per email")).toBeInTheDocument();
 
-    // Click Content button
-    const contentButton = screen.getByText("Content Autopilot");
+    // Click Content button using role
+    const contentButton = screen.getByRole("button", {
+      name: /Content Autopilot/,
+    });
     fireEvent.click(contentButton);
 
     expect(screen.getByText("AI optimizes blog content.")).toBeInTheDocument();
@@ -226,11 +235,13 @@ describe("SuccessStories", () => {
   it("handles legacy story with structured benefits", () => {
     renderWithProviders(<SuccessStories />);
 
-    const testingButton = screen.getByText("Legacy Testing");
+    const testingButton = screen.getByRole("button", {
+      name: /Legacy Testing/,
+    });
     fireEvent.click(testingButton);
 
-    expect(screen.getByText("One-time:")).toBeInTheDocument();
-    expect(screen.getByText("Ongoing:")).toBeInTheDocument();
+    expect(screen.getByText("Einmalig:")).toBeInTheDocument();
+    expect(screen.getByText("Dauerhaft:")).toBeInTheDocument();
     expect(screen.getByText("Missing tests")).toBeInTheDocument();
     expect(screen.getByText("Better quality")).toBeInTheDocument();
   });
@@ -245,11 +256,14 @@ describe("SuccessStories", () => {
       { text: "Legacy Testing", category: "Development" },
     ];
 
-    buttons.forEach(({ text, category }) => {
-      const button = screen.getByText(text);
+    // Check that all buttons exist
+    buttons.forEach(({ text }) => {
+      const button = screen.getByRole("button", { name: new RegExp(text) });
       expect(button).toBeInTheDocument();
-      expect(screen.getByText(category)).toBeInTheDocument();
     });
+
+    // Check that the first category is visible (since first story is selected by default)
+    expect(screen.getByText("Marketing")).toBeInTheDocument();
   });
 
   it("tests desktop vs mobile layout switching", () => {
@@ -274,7 +288,9 @@ describe("SuccessStories", () => {
   it("validates button selection state changes", () => {
     renderWithProviders(<SuccessStories />);
 
-    const supportButton = screen.getByText("Support Shield");
+    const supportButton = screen.getByRole("button", {
+      name: /Support Shield/,
+    });
 
     // Click support button
     fireEvent.click(supportButton);
@@ -289,7 +305,9 @@ describe("SuccessStories", () => {
     renderWithProviders(<SuccessStories />);
 
     // Click Content button to see optional input
-    const contentButton = screen.getByText("Content Autopilot");
+    const contentButton = screen.getByRole("button", {
+      name: /Content Autopilot/,
+    });
     fireEvent.click(contentButton);
 
     expect(screen.getByText("Optional: Images")).toBeInTheDocument();
@@ -324,7 +342,7 @@ describe("SuccessStories", () => {
       // Component should still render without animations
       expect(screen.getByText("Picked Fruits")).toBeInTheDocument();
       expect(
-        screen.getByText("Newsletter Personalization")
+        screen.getByRole("button", { name: /Newsletter Personalization/ })
       ).toBeInTheDocument();
     });
 
@@ -342,12 +360,14 @@ describe("SuccessStories", () => {
     renderWithProviders(<SuccessStories />);
 
     // Click testing button to access structured benefits
-    const testingButton = screen.getByText("Legacy Testing");
+    const testingButton = screen.getByRole("button", {
+      name: /Legacy Testing/,
+    });
     fireEvent.click(testingButton);
 
     // Test the specific nested benefit structure that wasn't covered
-    expect(screen.getByText("One-time:")).toBeInTheDocument();
-    expect(screen.getByText("Ongoing:")).toBeInTheDocument();
+    expect(screen.getByText("Einmalig:")).toBeInTheDocument();
+    expect(screen.getByText("Dauerhaft:")).toBeInTheDocument();
 
     // Test specific benefits that might not be covered
     expect(screen.getByText("Missing tests")).toBeInTheDocument();
@@ -363,15 +383,55 @@ describe("SuccessStories", () => {
 
     // Should still render all content in mobile
     expect(screen.getByText("Picked Fruits")).toBeInTheDocument();
-    expect(screen.getByText("Newsletter Personalization")).toBeInTheDocument();
-    expect(screen.getByText("Support Shield")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Newsletter Personalization/ })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Support Shield/ })
+    ).toBeInTheDocument();
 
     // Test story switching still works on mobile
-    const supportButton = screen.getByText("Support Shield");
+    const supportButton = screen.getByRole("button", {
+      name: /Support Shield/,
+    });
     fireEvent.click(supportButton);
 
     expect(
       screen.getByText("AI filters aggressive emails.")
     ).toBeInTheDocument();
+  });
+
+  describe("Story Goal and ProcessVisualization Rendering", () => {
+    it("should render goal section when goal field exists", () => {
+      renderWithProviders(<SuccessStories />);
+
+      // Newsletter should be selected by default (index 0)
+      // Should show the goal field
+      expect(screen.getByText("Ziel:")).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          "Goal: Higher open rates through relevant communication."
+        )
+      ).toBeInTheDocument();
+    });
+
+    it("should render result section when result field exists", () => {
+      renderWithProviders(<SuccessStories />);
+
+      // Newsletter should be selected by default (index 0) and has result field in mock
+      // Should show the result field (lines 233-244 in SuccessStories)
+      expect(screen.getByText("Ergebnis:")).toBeInTheDocument();
+      expect(
+        screen.getByText("Increased open rates by 25%")
+      ).toBeInTheDocument();
+    });
+
+    it("should render ProcessVisualization component", () => {
+      renderWithProviders(<SuccessStories />);
+
+      // Should render the ProcessVisualization component which shows implementation and cost
+      expect(screen.getByText("Aufwand")).toBeInTheDocument();
+      expect(screen.getByText("Kosten")).toBeInTheDocument();
+    });
   });
 });
