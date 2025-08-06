@@ -18,6 +18,7 @@ import {
   IconTarget,
   IconTrendingUp,
   IconUsers,
+  IconX,
 } from "@tabler/icons-react";
 
 import { Variants, motion, useReducedMotion } from "framer-motion";
@@ -249,7 +250,7 @@ Viele Grüße`);
                       spacing="sm"
                       icon={
                         <ThemeIcon color="red" size={20} radius="xl">
-                          <IconCheck size={12} />
+                          <IconX size={12} />
                         </ThemeIcon>
                       }
                     >
@@ -694,7 +695,6 @@ Viele Grüße`);
                         padding: "0.75rem 2rem",
                         backgroundColor: "var(--background-primary)",
                         color: "var(--text-primary)",
-                        border: "2px solid var(--text-primary)",
                         transition: "all 0.3s ease",
                       }}
                       styles={{

@@ -233,7 +233,7 @@ export const de = {
       ctaSubtext: "Unverbindliche Anfrage - workshops@12ofspades.com",
     },
     problem: {
-      title: "Die Herausforderung",
+      title: "Die Herausforderungen",
       points: [
         "AI wirkt komplex und überwältigend",
         "Unklare ROI-Erwartungen bei AI-Projekten",
