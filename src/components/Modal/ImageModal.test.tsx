@@ -1,3 +1,4 @@
+import { act } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
@@ -103,10 +104,13 @@ describe("ImageModal", () => {
     render(<ImageModal />);
 
     const closeButton = screen.getByLabelText("Modal schließen");
-    fireEvent.click(closeButton);
 
-    // The component uses setTimeout, so closeModal is called after delay
-    await new Promise((resolve) => setTimeout(resolve, 350));
+    await act(async () => {
+      fireEvent.click(closeButton);
+      // The component uses setTimeout, so closeModal is called after delay
+      await new Promise((resolve) => setTimeout(resolve, 350));
+    });
+
     expect(mockCloseModal).toHaveBeenCalledTimes(1);
   });
 

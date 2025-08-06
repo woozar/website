@@ -4,12 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import { customRender as render } from "../../test/render";
 import { TagChip } from "./TagChip";
 
-// Mock framer-motion
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-  },
-}));
+// framer-motion is globally mocked in test setup
 
 describe("TagChip", () => {
   it("should render tag name", () => {

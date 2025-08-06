@@ -23,18 +23,7 @@ const renderWithProviders = (component: React.ReactElement) => {
   );
 };
 
-// Mock framer-motion
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    h1: ({ children, ...props }: any) => <h1 {...props}>{children}</h1>,
-    section: ({ children, ...props }: any) => (
-      <section {...props}>{children}</section>
-    ),
-  },
-  AnimatePresence: ({ children }: any) => <>{children}</>,
-  useReducedMotion: vi.fn(),
-}));
+// framer-motion is globally mocked in test setup
 
 // Mock hooks
 vi.mock("@/hooks/useMediaQuery", () => ({

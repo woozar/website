@@ -6,15 +6,9 @@ import { useReducedMotion } from "framer-motion";
 import { customRender as render } from "@/test/render";
 import { Project } from "@/types";
 
-import { ImprovedProjectCard } from "./ImprovedProjectCard";
+import { ProjectCard } from "./ProjectCard";
 
-// Mock framer-motion
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-  },
-  useReducedMotion: vi.fn(),
-}));
+// framer-motion is globally mocked in test setup
 
 // Mock TagList component
 vi.mock("./TagList", () => ({
@@ -49,26 +43,26 @@ const mockProject: Project = {
   tags: ["Node.js", "Express"],
 };
 
-describe("ImprovedProjectCard", () => {
+describe("ProjectCard", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(useReducedMotion).mockReturnValue(false);
   });
 
   it("should render project title", () => {
-    render(<ImprovedProjectCard project={mockProject} index={0} />);
+    render(<ProjectCard project={mockProject} index={0} />);
 
     expect(screen.getByText("Test Project")).toBeInTheDocument();
   });
 
   it("should render customer name", () => {
-    render(<ImprovedProjectCard project={mockProject} index={0} />);
+    render(<ProjectCard project={mockProject} index={0} />);
 
     expect(screen.getByText("Test Customer")).toBeInTheDocument();
   });
 
   it("should render project description", () => {
-    render(<ImprovedProjectCard project={mockProject} index={0} />);
+    render(<ProjectCard project={mockProject} index={0} />);
 
     expect(
       screen.getByText("This is a test project description")
@@ -77,9 +71,7 @@ describe("ImprovedProjectCard", () => {
 
   it("should render default description when description is missing", () => {
     const projectWithoutDescription = { ...mockProject, description: [] };
-    render(
-      <ImprovedProjectCard project={projectWithoutDescription} index={0} />
-    );
+    render(<ProjectCard project={projectWithoutDescription} index={0} />);
 
     expect(screen.getByText("No description available")).toBeInTheDocument();
   });
@@ -88,15 +80,13 @@ describe("ImprovedProjectCard", () => {
     const projectWithoutDescription = { ...mockProject, description: [] };
     // @ts-expect-error - testing edge case
     projectWithoutDescription.description = undefined;
-    render(
-      <ImprovedProjectCard project={projectWithoutDescription} index={0} />
-    );
+    render(<ProjectCard project={projectWithoutDescription} index={0} />);
 
     expect(screen.getByText("No description available")).toBeInTheDocument();
   });
 
   it("should render TagList with primary and secondary tags", () => {
-    render(<ImprovedProjectCard project={mockProject} index={0} />);
+    render(<ProjectCard project={mockProject} index={0} />);
 
     const tagList = screen.getByTestId("tag-list");
     expect(tagList).toBeInTheDocument();
@@ -107,7 +97,7 @@ describe("ImprovedProjectCard", () => {
   });
 
   it("should open modal when card is clicked", () => {
-    render(<ImprovedProjectCard project={mockProject} index={0} />);
+    render(<ProjectCard project={mockProject} index={0} />);
 
     const titleElements = screen.getAllByText("Test Project");
     const card = titleElements[0].closest(".mantine-Card-root");
@@ -117,7 +107,7 @@ describe("ImprovedProjectCard", () => {
   });
 
   it("should close modal when close button is clicked", () => {
-    render(<ImprovedProjectCard project={mockProject} index={0} />);
+    render(<ProjectCard project={mockProject} index={0} />);
 
     // Open modal
     const titleElements = screen.getAllByText("Test Project");
@@ -134,7 +124,7 @@ describe("ImprovedProjectCard", () => {
   });
 
   it("should have correct card styling", () => {
-    render(<ImprovedProjectCard project={mockProject} index={0} />);
+    render(<ProjectCard project={mockProject} index={0} />);
 
     const card = screen.getByText("Test Project").closest(".mantine-Card-root");
     expect(card).toHaveStyle({
@@ -145,9 +135,7 @@ describe("ImprovedProjectCard", () => {
 
   it("should handle project with empty primary tags", () => {
     const projectWithoutPrimaryTags = { ...mockProject, primary_tags: [] };
-    render(
-      <ImprovedProjectCard project={projectWithoutPrimaryTags} index={0} />
-    );
+    render(<ProjectCard project={projectWithoutPrimaryTags} index={0} />);
 
     const tagList = screen.getByTestId("tag-list");
     expect(tagList).toBeInTheDocument();
@@ -157,9 +145,7 @@ describe("ImprovedProjectCard", () => {
 
   it("should handle project with empty secondary tags", () => {
     const projectWithoutSecondaryTags = { ...mockProject, tags: [] };
-    render(
-      <ImprovedProjectCard project={projectWithoutSecondaryTags} index={0} />
-    );
+    render(<ProjectCard project={projectWithoutSecondaryTags} index={0} />);
 
     const tagList = screen.getByTestId("tag-list");
     expect(tagList).toBeInTheDocument();
@@ -171,9 +157,7 @@ describe("ImprovedProjectCard", () => {
     const projectWithUndefinedTags = { ...mockProject, primary_tags: [] };
     // @ts-expect-error - testing edge case
     projectWithUndefinedTags.primary_tags = undefined;
-    render(
-      <ImprovedProjectCard project={projectWithUndefinedTags} index={0} />
-    );
+    render(<ProjectCard project={projectWithUndefinedTags} index={0} />);
 
     const tagList = screen.getByTestId("tag-list");
     expect(tagList).toBeInTheDocument();
@@ -183,9 +167,7 @@ describe("ImprovedProjectCard", () => {
     const projectWithUndefinedTags = { ...mockProject, tags: [] };
     // @ts-expect-error - testing edge case
     projectWithUndefinedTags.tags = undefined;
-    render(
-      <ImprovedProjectCard project={projectWithUndefinedTags} index={0} />
-    );
+    render(<ProjectCard project={projectWithUndefinedTags} index={0} />);
 
     const tagList = screen.getByTestId("tag-list");
     expect(tagList).toBeInTheDocument();
@@ -196,7 +178,7 @@ describe("ImprovedProjectCard", () => {
       3
     );
     const projectWithLongTitle = { ...mockProject, title: longTitle };
-    render(<ImprovedProjectCard project={projectWithLongTitle} index={0} />);
+    render(<ProjectCard project={projectWithLongTitle} index={0} />);
 
     expect(screen.getByText(longTitle)).toBeInTheDocument();
   });
@@ -208,9 +190,7 @@ describe("ImprovedProjectCard", () => {
       ...mockProject,
       description: [longDescription],
     };
-    render(
-      <ImprovedProjectCard project={projectWithLongDescription} index={0} />
-    );
+    render(<ProjectCard project={projectWithLongDescription} index={0} />);
 
     // Since the text is truncated by CSS, we check if the beginning of the text is present
     expect(
@@ -228,12 +208,7 @@ describe("ImprovedProjectCard", () => {
       ...mockProject,
       description: ["First paragraph", "Second paragraph", "Third paragraph"],
     };
-    render(
-      <ImprovedProjectCard
-        project={projectWithMultipleDescriptions}
-        index={0}
-      />
-    );
+    render(<ProjectCard project={projectWithMultipleDescriptions} index={0} />);
 
     // Should only show the first paragraph
     expect(screen.getByText("First paragraph")).toBeInTheDocument();
@@ -241,7 +216,7 @@ describe("ImprovedProjectCard", () => {
   });
 
   it("should pass correct props to TagList", () => {
-    render(<ImprovedProjectCard project={mockProject} index={0} />);
+    render(<ProjectCard project={mockProject} index={0} />);
 
     // TagList should be rendered with the correct tags
     const tagList = screen.getByTestId("tag-list");
@@ -250,13 +225,13 @@ describe("ImprovedProjectCard", () => {
 
   describe("modal state management", () => {
     it("should start with modal closed", () => {
-      render(<ImprovedProjectCard project={mockProject} index={0} />);
+      render(<ProjectCard project={mockProject} index={0} />);
 
       expect(screen.queryByTestId("project-modal")).not.toBeInTheDocument();
     });
 
     it("should toggle modal state correctly", () => {
-      render(<ImprovedProjectCard project={mockProject} index={0} />);
+      render(<ProjectCard project={mockProject} index={0} />);
 
       const titleElements = screen.getAllByText("Test Project");
       const card = titleElements[0].closest(".mantine-Card-root");
@@ -278,7 +253,7 @@ describe("ImprovedProjectCard", () => {
 
   describe("accessibility", () => {
     it("should have clickable card", () => {
-      render(<ImprovedProjectCard project={mockProject} index={0} />);
+      render(<ProjectCard project={mockProject} index={0} />);
 
       const titleElements = screen.getAllByText("Test Project");
       const card = titleElements[0].closest(".mantine-Card-root");
@@ -291,7 +266,7 @@ describe("ImprovedProjectCard", () => {
     it("should render with normal animations when reduced motion is false", () => {
       vi.mocked(useReducedMotion).mockReturnValue(false);
 
-      render(<ImprovedProjectCard project={mockProject} index={0} />);
+      render(<ProjectCard project={mockProject} index={0} />);
 
       // Component should render successfully with animations enabled
       expect(screen.getByText("Test Project")).toBeInTheDocument();
@@ -300,7 +275,7 @@ describe("ImprovedProjectCard", () => {
     it("should render with reduced motion animations when reduced motion is true", () => {
       vi.mocked(useReducedMotion).mockReturnValue(true);
 
-      render(<ImprovedProjectCard project={mockProject} index={0} />);
+      render(<ProjectCard project={mockProject} index={0} />);
 
       // Component should render successfully with reduced animations
       expect(screen.getByText("Test Project")).toBeInTheDocument();
@@ -309,7 +284,7 @@ describe("ImprovedProjectCard", () => {
     it("should handle functionality with reduced motion enabled", () => {
       vi.mocked(useReducedMotion).mockReturnValue(true);
 
-      render(<ImprovedProjectCard project={mockProject} index={0} />);
+      render(<ProjectCard project={mockProject} index={0} />);
 
       // Component functionality should still work with reduced motion
       expect(screen.getByText("Test Customer")).toBeInTheDocument();

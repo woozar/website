@@ -1,1 +1,1 @@
-export { AnimatedHero } from "./AnimatedHero";
+export { Hero } from "./Hero";

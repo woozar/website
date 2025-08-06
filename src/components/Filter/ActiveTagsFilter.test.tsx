@@ -6,13 +6,7 @@ import { customRender as render } from "@/test/render";
 
 import { ActiveTagsFilter } from "./ActiveTagsFilter";
 
-// Mock framer-motion
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-  },
-  AnimatePresence: ({ children }: any) => <>{children}</>,
-}));
+// framer-motion is globally mocked in test setup
 
 // Mock the filter store
 vi.mock("../../stores/filterStore", () => ({

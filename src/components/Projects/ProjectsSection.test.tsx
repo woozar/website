@@ -13,13 +13,7 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useFilterStore } from "../../stores/filterStore";
 import { ProjectsSection } from "./ProjectsSection";
 
-// Mock framer-motion
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-  },
-  useReducedMotion: vi.fn(),
-}));
+// framer-motion is globally mocked in test setup
 
 // Mock hooks
 const mockProjects = [
@@ -107,8 +101,8 @@ vi.mock("../../stores/filterStore", () => ({
 }));
 
 // Mock child components
-vi.mock("./ImprovedProjectCard", () => ({
-  ImprovedProjectCard: ({ project, index }: any) => (
+vi.mock("./ProjectCard", () => ({
+  ProjectCard: ({ project, index }: any) => (
     <div data-testid={`project-card-${index}`}>
       <h3>{project.title}</h3>
       <p>{project.customer}</p>
