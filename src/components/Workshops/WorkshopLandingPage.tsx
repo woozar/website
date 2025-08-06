@@ -77,7 +77,7 @@ Bitte kontaktieren Sie mich für ein unverbindliches Gespräch.
 
 Viele Grüße`);
 
-    window.location.href = `mailto:workshops@12ofspades.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:workshops@12-of-spades.com?subject=${subject}&body=${body}`;
   };
 
   return (
