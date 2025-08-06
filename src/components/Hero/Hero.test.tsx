@@ -66,7 +66,7 @@ describe("Hero", () => {
 
     expect(screen.getByText("Johannes Herrmann")).toBeInTheDocument();
     expect(
-      screen.getByText("Software Freelancer & AI Specialist")
+      screen.getByText("Software Freelancer & KI-Spezialist")
     ).toBeInTheDocument();
   });
 
@@ -75,7 +75,7 @@ describe("Hero", () => {
 
     expect(
       screen.getByText(
-        "Spezialisiert auf AI/LLM Entwicklung, Cloud Architecture und Full-Stack Development. Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen."
+        "Spezialisiert auf KI/LLM Entwicklung, Cloud Architecture und Full-Stack Development. Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen."
       )
     ).toBeInTheDocument();
   });
@@ -163,7 +163,7 @@ describe("Hero", () => {
     // Should still render all content on tablet
     expect(screen.getByText("Johannes Herrmann")).toBeInTheDocument();
     expect(
-      screen.getByText("Software Freelancer & AI Specialist")
+      screen.getByText("Software Freelancer & KI-Spezialist")
     ).toBeInTheDocument();
   });
 
@@ -171,7 +171,7 @@ describe("Hero", () => {
     render(<Hero />);
 
     expect(
-      screen.getByText("Software Freelancer & AI Specialist")
+      screen.getByText("Software Freelancer & KI-Spezialist")
     ).toBeInTheDocument();
     expect(screen.getByText("Kontakt aufnehmen")).toBeInTheDocument();
     expect(screen.getByText("Projekte ansehen")).toBeInTheDocument();
@@ -185,7 +185,7 @@ describe("Hero", () => {
 
     // The title is rendered as regular text, not an h2
     expect(
-      screen.getByText("Software Freelancer & AI Specialist")
+      screen.getByText("Software Freelancer & KI-Spezialist")
     ).toBeInTheDocument();
   });
 
@@ -259,11 +259,11 @@ describe("Hero", () => {
     // Check all main content is present
     expect(screen.getByText("Johannes Herrmann")).toBeInTheDocument();
     expect(
-      screen.getByText("Software Freelancer & AI Specialist")
+      screen.getByText("Software Freelancer & KI-Spezialist")
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        "Spezialisiert auf AI/LLM Entwicklung, Cloud Architecture und Full-Stack Development. Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen."
+        "Spezialisiert auf KI/LLM Entwicklung, Cloud Architecture und Full-Stack Development. Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen."
       )
     ).toBeInTheDocument();
     expect(screen.getByText("Kontakt aufnehmen")).toBeInTheDocument();

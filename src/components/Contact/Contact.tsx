@@ -130,10 +130,28 @@ export const Contact = () => {
           </motion.div>
 
           <motion.div variants={itemVariants}>
+            <Box
+              style={{
+                backgroundColor: "rgba(255, 107, 53, 0.1)",
+                border: "1px solid rgba(255, 107, 53, 0.3)",
+                color: "var(--primary-orange)",
+                padding: "0.5rem 1rem",
+                borderRadius: "12px",
+                textAlign: "center",
+                maxWidth: "400px",
+              }}
+            >
+              <Text size="sm" fw={400}>
+                {t.contact.gernePerDu}
+              </Text>
+            </Box>
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
             <Group
               gap="xl"
               justify="center"
-              style={{ flexDirection: isMobile ? "column" : "row" }}
+              style={{ flexDirection: "row", flexWrap: "wrap" }}
             >
               {contactItems.map((item) => (
                 <motion.div
@@ -150,13 +168,7 @@ export const Contact = () => {
                       cursor: item.href ? "pointer" : "default",
                     }}
                   >
-                    <Stack
-                      gap="sm"
-                      align="center"
-                      ta="center"
-                      p="md"
-                      style={{ minWidth: "200px" }}
-                    >
+                    <Stack gap="sm" align="center" ta="center">
                       <Box
                         style={{
                           width: "60px",

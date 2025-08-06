@@ -22,3 +22,20 @@ export interface MediaQueries {
   isTablet: boolean;
   isDesktop: boolean;
 }
+
+export interface StoryData {
+  inputs: Array<{ title: string; description: string }>;
+  processing: { title: string; description: string };
+  output: {
+    title: string;
+    description: string;
+    benefits?:
+      | string[]
+      | {
+          oneTime: string[];
+          ongoing: string[];
+        };
+  };
+  implementation: string;
+  cost: string;
+}
