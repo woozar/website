@@ -22,7 +22,7 @@ const aiImage = "/assets/ai-development.webp";
 const cloudImage = "/assets/cloud-architecture.webp";
 const fullstackImage = "/assets/fullstack-development.webp";
 
-export const SimpleServices = () => {
+export const Services = () => {
   const { isMobile } = useMediaQuery();
   const { t } = useTranslation();
   const shouldReduceMotion = useReducedMotion();

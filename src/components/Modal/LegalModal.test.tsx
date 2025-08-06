@@ -10,14 +10,7 @@ import { ModalProvider } from "@/contexts/ModalContext";
 
 import { LegalModal } from "./LegalModal";
 
-// Mock framer-motion
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-  },
-  AnimatePresence: ({ children }: any) => children,
-  useReducedMotion: vi.fn(),
-}));
+// framer-motion is globally mocked in test setup
 
 // Mock hooks
 const mockOpenModal = vi.fn();

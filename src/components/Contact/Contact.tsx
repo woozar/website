@@ -26,7 +26,7 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useTranslation } from "@/hooks/useTranslation";
 
 import { Section } from "../Layout";
-import { LegalModal } from "../Legal/LegalModal";
+import { LegalModal } from "../Modal/LegalModal";
 
 export const Contact = () => {
   const { isMobile } = useMediaQuery();

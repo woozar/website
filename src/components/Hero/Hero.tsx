@@ -13,7 +13,7 @@ import { Section } from "../Layout";
 // import heroPortrait from '../../assets/hero-portrait.webp';
 const heroPortrait = "/assets/hero-portrait.webp";
 
-export const AnimatedHero = () => {
+export const Hero = () => {
   const { isMobile, isTablet } = useMediaQuery();
   const { openImageModal } = useModal();
   const { t } = useTranslation();

@@ -1,3 +1,3 @@
 export { ProjectsSection } from "./ProjectsSection";
-export { ImprovedProjectCard } from "./ImprovedProjectCard";
+export { ProjectCard } from "./ProjectCard";
 export { ProjectDetailModal } from "./ProjectDetailModal";

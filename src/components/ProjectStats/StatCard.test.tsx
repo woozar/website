@@ -9,13 +9,7 @@ import { useReducedMotion } from "framer-motion";
 
 import { StatCard } from "./StatCard";
 
-// Mock framer-motion
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-  },
-  useReducedMotion: vi.fn(),
-}));
+// framer-motion is globally mocked in test setup
 
 const renderComponent = (props = {}) => {
   const defaultProps = {

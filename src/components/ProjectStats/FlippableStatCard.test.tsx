@@ -10,13 +10,7 @@ import { customRender as render } from "@/test/render";
 
 import { FlippableStatCard } from "./FlippableStatCard";
 
-// Mock framer-motion to avoid animation issues in tests
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-  },
-  useReducedMotion: vi.fn(),
-}));
+// framer-motion is globally mocked in test setup
 
 const mockUseReducedMotion = useReducedMotion as ReturnType<typeof vi.fn>;
 

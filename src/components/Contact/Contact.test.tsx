@@ -13,7 +13,7 @@ import { Contact } from "./Contact";
 // Mock dependencies
 vi.mock("@/hooks/useMediaQuery");
 vi.mock("@/hooks/useTranslation");
-vi.mock("../Legal/LegalModal", () => ({
+vi.mock("../Modal/LegalModal", () => ({
   LegalModal: ({ opened, onClose, type }: any) =>
     opened ? (
       <div data-testid={`legal-modal-${type}`} onClick={onClose}>
@@ -21,27 +21,19 @@ vi.mock("../Legal/LegalModal", () => ({
       </div>
     ) : null,
 }));
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    section: ({ children, ...props }: any) => (
-      <section {...props}>{children}</section>
-    ),
-  },
-  useReducedMotion: vi.fn(),
-}));
+// framer-motion is globally mocked in test setup
 
 const mockUseMediaQuery = vi.mocked(useMediaQuery);
 const mockUseTranslation = vi.mocked(useTranslation);
 
 describe("Contact", () => {
   beforeEach(() => {
-    vi.clearAllMocks();
     mockUseMediaQuery.mockReturnValue({
       isMobile: false,
       isTablet: false,
       isDesktop: true,
     });
+
     mockUseTranslation.mockReturnValue({
       t: de,
       language: "de",

@@ -11,7 +11,7 @@ import { useFilterStore } from "@/stores/filterStore";
 
 import { ActiveTagsFilter } from "../Filter/ActiveTagsFilter";
 import { Grid, Section } from "../Layout";
-import { ImprovedProjectCard } from "./ImprovedProjectCard";
+import { ProjectCard } from "./ProjectCard";
 
 export const ProjectsSection = () => {
   const { isMobile } = useMediaQuery();
@@ -107,7 +107,7 @@ export const ProjectsSection = () => {
             spacing={isMobile ? "md" : "lg"}
           >
             {filteredProjects.map((project, index) => (
-              <ImprovedProjectCard
+              <ProjectCard
                 key={`${project.customer}-${project.title}`}
                 project={project}
                 index={index}
