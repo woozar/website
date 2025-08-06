@@ -7,7 +7,7 @@ export const en = {
     contact: "Contact",
     contactAction: "Get in Touch",
     workshop: {
-      details: "Workshop Details",
+      details: "Details",
       agenda: "Agenda",
       successStories: "Success Stories",
       contact: "Contact",
@@ -140,7 +140,9 @@ export const en = {
     title: "Contact",
     subtitle:
       "Ready for your next project? Let's discuss your requirements and develop innovative solutions together.",
-    followMe: "Find me also on",
+    gernePerDu:
+      "#GernePerDu - I prefer working on equal footing and look forward to uncomplicated collaboration!",
+    followMe: "Find me also on:",
     contactItems: {
       email: "Email",
       phone: "Phone",
@@ -225,10 +227,16 @@ export const en = {
         "AI Workshop, Artificial Intelligence, Low Hanging Fruits, AI Training, Business, Immediate Results",
     },
     hero: {
-      title: "AI - Low Hanging Fruits",
+      title: "Workshop: AI - Low Hanging Fruits",
       subtitle:
-        "Maximum AI value with minimal effort. Let us together identify and strategically harvest the Low Hanging Fruits in your company - before you consider expensive projects that pay off late or never.",
+        "Maximum AI value with minimal effort. Let us together identify and strategically harvest the Low Hanging Fruits in your company - before you consider larger projects that pay off late or never.",
+      textPrompt:
+        "Write a catchy hook for my 'AI Low Hanging Fruits' workshop in one paragraph. Target audience: Companies that want to use AI but are overwhelmed. Use common metaphors and motivating phrases. Use buzzwords like 'success wave' and 'competition'. Tone: Professional-motivating in marketing style. Structure: Problem → Urgency → Partnership solution. Core message: Simple AI solutions first, maximum benefit with minimal effort.",
+      imagePrompt:
+        'Creative visual metaphor illustration combining technology and "low hanging fruits" concept. Show a stylized tree with branches, where instead of regular fruits, there are glowing tech icons (AI brain, chat bubbles, automation gears, data charts) hanging at different heights. The lower, easily reachable fruits glow brighter with orange/red colors (#ff6b35, #d32f2f), representing easy AI wins. Higher fruits are dimmer/grayed out. Include a subtle ladder or stepping stones leading to the tree, symbolizing the workshop\'s guided approach. Background: Clean, professional gradient. Style: Modern, friendly, inspiring - showing AI is approachable and has quick wins available.',
       ctaButton: "Get in Touch",
+      aiGenerated: "Text & Image generated with AI",
+      showPrompt: "Show Prompts",
     },
     problem: {
       title: "The Challenges",
@@ -246,12 +254,12 @@ export const en = {
         "Focus on immediately implementable AI applications",
         "Proven strategies with quick ROI",
         "Practical hands-on experience",
-        "No prior knowledge required",
         "Directly applicable results",
+        "No prior knowledge required",
       ],
     },
     details: {
-      title: "Workshop Details",
+      title: "Details",
       duration: {
         title: "Duration",
         value: "1-3 Days",
@@ -270,7 +278,7 @@ export const en = {
       },
     },
     agenda: {
-      title: "Workshop Agenda",
+      title: "Agenda",
       items: [
         {
           title: "AI Fundamentals & Mindset",
@@ -314,16 +322,58 @@ export const en = {
         },
       ],
     },
+    process: {
+      title: "Typical Process",
+      subtitle:
+        "Our proven three-step approach – flexibly adapted to your needs. Available on-site, online, or at venues we organize.",
+      steps: [
+        {
+          number: "01",
+          title: "Identifying meaningful AI applications",
+          description:
+            "First, I explain what typical tasks look like that are well-suited for AI deployment – those that occur regularly, cost time or nerves, and have certain automation potential. Together we then develop a list of concrete tasks from everyday work that are suitable for AI use.",
+        },
+        {
+          number: "02",
+          title: "Analysis & Solution approaches",
+          description:
+            "In the next step, we analyze which of these tasks can actually be supported or automated with AI. We also discuss in what form the respective solution would be implementable – for example as locally installed software, as a server application, or as a cloud service. For each point, I provide an initial assessment of the effort and possible implementation variants.",
+        },
+        {
+          number: "03",
+          title: "Next steps – depending on solution path",
+          description:
+            "Depending on the result, three possible next steps emerge:",
+          options: [
+            {
+              title: "Existing products",
+              description:
+                "If there is already a suitable tool or product on the market, I present it and show how it can be used.",
+            },
+            {
+              title: "Internal implementation",
+              description:
+                "If the solution is to be developed internally, I work directly with the responsible developers and impart the necessary know-how.",
+            },
+            {
+              title: "External implementation",
+              description:
+                "Alternatively, we develop a clear specification that can be passed on to external service providers.",
+            },
+          ],
+        },
+      ],
+    },
     cta: {
       title: "Ready for Your AI Breakthrough?",
       subtitle:
-        "Let us identify the low hanging fruits in your company together and pick them immediately.",
+        "Let us identify the low hanging fruits in your company together and implement them immediately (pick them).",
       button: "Contact Now",
     },
     successStories: {
-      title: "Picked Fruits",
+      title: "Success Stories",
       subtitle:
-        "Concrete examples of successful AI implementations from my clients",
+        "Concrete examples of already picked low hanging fruits from my clients",
       benefitLabels: {
         oneTime: "One-time:",
         ongoing: "Ongoing:",
@@ -332,7 +382,9 @@ export const en = {
         title: "Newsletter Personalization",
         description:
           "Instead of newsletter spam to all customers: AI analyzes CRM data and purchase history to create individually relevant newsletters for each customer. Automatic adaptation of content and tone.",
-        goal: "Goal: Higher open rates and significantly better customer retention through truly relevant communication.",
+        goal: "Higher open rates and significantly better customer retention through truly relevant communication",
+        result:
+          "Positive customer feedback about the improvement from old to new newsletter",
         inputs: [
           {
             title: "CRM Data",
@@ -365,7 +417,9 @@ export const en = {
         title: "Support Shield",
         description:
           "Aggressive or unfriendly customer emails no longer reach your support team directly. The AI automatically detects problematic messages and transforms them into polite, constructive versions - with context and solution suggestions.",
-        goal: "Goal: Less psychological stress in the support team, higher employee satisfaction, and still excellent customer service.",
+        goal: "Less psychological stress in the support team, higher employee satisfaction",
+        result:
+          "Employee survey in the support team showed a very significant improvement in mood compared to the previous year - employees cited filtered emails as one of the main reasons. Particularly noteworthy: Some customers even apologized after seeing in the reply email how their original message had been reformulated.",
         inputs: [
           { title: "Customer Email", description: "Any support request" },
         ],
@@ -391,7 +445,9 @@ export const en = {
         title: "Content Autopilot",
         description:
           "Raw texts are automatically structured and optimized. The system performs proofreading, optimizes for SEO, and generates matching images based on the text content.",
-        goal: "Goal: Time and cost savings in content creation and improvement of reach.",
+        goal: "Time and cost savings in content creation and improvement of reach",
+        result:
+          "The system is used daily and has significantly accelerated content creation",
         inputs: [
           { title: "Blog Draft", description: "Raw text content" },
           {
@@ -420,7 +476,9 @@ export const en = {
         title: "Legacy Code Testing",
         description:
           "Create unit tests for legacy projects - including documentation and bug reports. The project originally planned 4 months of effort when no AI was used yet.",
-        goal: "Goal: Dramatic time savings and sustainable improvement of code quality - 2 weeks instead of 4 months.",
+        goal: "Significant savings in development costs and sustainable improvement of code quality",
+        result:
+          "The implementation was completed in only 2 weeks instead of the originally planned 4 months. We have not yet received feedback on the long-term impact on code quality.",
         inputs: [
           { title: "Legacy Code", description: "Existing repository" },
           { title: "Documentation", description: "Available specs & docs" },
