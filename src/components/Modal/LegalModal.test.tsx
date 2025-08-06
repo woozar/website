@@ -157,7 +157,7 @@ describe("LegalModal", () => {
       expect(screen.getByText("Feldweiher 9")).toBeInTheDocument();
       expect(screen.getByText("91085 Weisendorf(Buch)")).toBeInTheDocument();
       expect(screen.getByText("+49 176 8100 1371")).toBeInTheDocument();
-      expect(screen.getByText("info@12ofspades.com")).toBeInTheDocument();
+      expect(screen.getByText("info@12-of-spades.com")).toBeInTheDocument();
     });
 
     it("should render impressum tax information", () => {

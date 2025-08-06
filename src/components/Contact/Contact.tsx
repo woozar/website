@@ -64,8 +64,8 @@ export const Contact = () => {
     {
       icon: IconMail,
       label: t.contact.contactItems.email,
-      value: "info@12ofspades.com",
-      href: "mailto:info@12ofspades.com",
+      value: "info@12-of-spades.com",
+      href: "mailto:info@12-of-spades.com",
     },
     {
       icon: IconPhone,
