@@ -8,20 +8,12 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { render, screen } from "@/test/test-utils";
 import { de } from "@/translations/de";
 
-import { SimpleServices } from "./SimpleServices";
+import { Services } from "./Services";
 
 // Mock dependencies
 vi.mock("@/hooks/useMediaQuery");
 vi.mock("@/hooks/useTranslation");
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    section: ({ children, ...props }: any) => (
-      <section {...props}>{children}</section>
-    ),
-  },
-  useReducedMotion: vi.fn(),
-}));
+// framer-motion is globally mocked in test setup
 
 // Mock the image imports
 vi.mock("../../assets/ai-development.webp", () => ({
@@ -37,7 +29,7 @@ vi.mock("../../assets/fullstack-development.webp", () => ({
 const mockUseMediaQuery = vi.mocked(useMediaQuery);
 const mockUseTranslation = vi.mocked(useTranslation);
 
-describe("SimpleServices", () => {
+describe("Services", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockUseMediaQuery.mockReturnValue({
@@ -54,7 +46,7 @@ describe("SimpleServices", () => {
   });
 
   it("should render services section with title and subtitle", () => {
-    render(<SimpleServices />);
+    render(<Services />);
 
     expect(screen.getByText("Meine Services")).toBeInTheDocument();
     expect(
@@ -65,7 +57,7 @@ describe("SimpleServices", () => {
   });
 
   it("should render all three service cards", () => {
-    render(<SimpleServices />);
+    render(<Services />);
 
     expect(screen.getByText("AI Development")).toBeInTheDocument();
     expect(screen.getByText("Cloud Architecture")).toBeInTheDocument();
@@ -73,7 +65,7 @@ describe("SimpleServices", () => {
   });
 
   it("should render service descriptions", () => {
-    render(<SimpleServices />);
+    render(<Services />);
 
     // Check for key parts of descriptions using partial text matching
     expect(
@@ -104,7 +96,7 @@ describe("SimpleServices", () => {
   });
 
   it("should render service images", () => {
-    render(<SimpleServices />);
+    render(<Services />);
 
     const images = screen.getAllByRole("img");
     expect(images).toHaveLength(3);
@@ -118,7 +110,7 @@ describe("SimpleServices", () => {
   });
 
   it("should render technologies lists", () => {
-    render(<SimpleServices />);
+    render(<Services />);
 
     expect(screen.getAllByText("Technologien:")).toHaveLength(3); // One for each service
 
@@ -151,7 +143,7 @@ describe("SimpleServices", () => {
       isDesktop: false,
     });
 
-    render(<SimpleServices />);
+    render(<Services />);
 
     // Should still render all content on mobile
     expect(screen.getByText("Meine Services")).toBeInTheDocument();
@@ -161,7 +153,7 @@ describe("SimpleServices", () => {
   });
 
   it("should handle German language translations", () => {
-    render(<SimpleServices />);
+    render(<Services />);
 
     expect(screen.getByText("Meine Services")).toBeInTheDocument();
     expect(screen.getByText("AI Development")).toBeInTheDocument();
@@ -169,7 +161,7 @@ describe("SimpleServices", () => {
   });
 
   it("should render with proper semantic structure", () => {
-    render(<SimpleServices />);
+    render(<Services />);
 
     const mainTitle = screen.getByRole("heading", { level: 2 });
     expect(mainTitle).toHaveTextContent("Meine Services");
@@ -182,7 +174,7 @@ describe("SimpleServices", () => {
   });
 
   it("should render service cards with proper structure", () => {
-    render(<SimpleServices />);
+    render(<Services />);
 
     // Check that service titles are present
     const aiTitle = screen.getByText("AI Development");
@@ -198,7 +190,7 @@ describe("SimpleServices", () => {
   });
 
   it("should render images with proper alt attributes", () => {
-    render(<SimpleServices />);
+    render(<Services />);
 
     const images = screen.getAllByRole("img");
 
@@ -209,7 +201,7 @@ describe("SimpleServices", () => {
   });
 
   it("should render technology chips/badges correctly", () => {
-    render(<SimpleServices />);
+    render(<Services />);
 
     // Check that technology names are rendered as individual elements
     const technologies = [
@@ -236,7 +228,7 @@ describe("SimpleServices", () => {
   });
 
   it("should render services in correct order", () => {
-    render(<SimpleServices />);
+    render(<Services />);
 
     const serviceHeadings = screen.getAllByRole("heading", { level: 3 });
 
@@ -246,7 +238,7 @@ describe("SimpleServices", () => {
   });
 
   it("should have proper card layout structure", () => {
-    render(<SimpleServices />);
+    render(<Services />);
 
     // Check that the main services section is rendered
     const servicesSection = screen
@@ -264,7 +256,7 @@ describe("SimpleServices", () => {
     it("should render with normal animations when reduced motion is false", () => {
       vi.mocked(useReducedMotion).mockReturnValue(false);
 
-      render(<SimpleServices />);
+      render(<Services />);
 
       // Component should render successfully with animations enabled
       expect(screen.getByText("Meine Services")).toBeInTheDocument();
@@ -275,7 +267,7 @@ describe("SimpleServices", () => {
     it("should render with reduced motion animations when reduced motion is true", () => {
       vi.mocked(useReducedMotion).mockReturnValue(true);
 
-      render(<SimpleServices />);
+      render(<Services />);
 
       // Component should render successfully with reduced animations
       expect(screen.getByText("Meine Services")).toBeInTheDocument();
@@ -286,7 +278,7 @@ describe("SimpleServices", () => {
     it("should render all service cards with reduced motion enabled", () => {
       vi.mocked(useReducedMotion).mockReturnValue(true);
 
-      render(<SimpleServices />);
+      render(<Services />);
 
       // All service cards should still render with reduced motion
       expect(screen.getByText("AI Development")).toBeInTheDocument();

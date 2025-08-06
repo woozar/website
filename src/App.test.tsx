@@ -13,12 +13,12 @@ vi.mock("./components/Navigation", () => ({
   Navigation: () => <div data-testid="navigation">Navigation</div>,
 }));
 
-vi.mock("./components/Hero/AnimatedHero", () => ({
-  AnimatedHero: () => <div data-testid="animated-hero">Hero</div>,
+vi.mock("./components/Hero", () => ({
+  Hero: () => <div data-testid="hero">Hero</div>,
 }));
 
-vi.mock("./components/Services/SimpleServices", () => ({
-  SimpleServices: () => <div data-testid="simple-services">Services</div>,
+vi.mock("./components/Services", () => ({
+  Services: () => <div data-testid="services">Services</div>,
 }));
 
 vi.mock("./components/Projects/ProjectsSection", () => ({
@@ -48,8 +48,8 @@ describe("App", () => {
     render(<App />);
 
     expect(screen.getByTestId("navigation")).toBeInTheDocument();
-    expect(screen.getByTestId("animated-hero")).toBeInTheDocument();
-    expect(screen.getByTestId("simple-services")).toBeInTheDocument();
+    expect(screen.getByTestId("hero")).toBeInTheDocument();
+    expect(screen.getByTestId("services")).toBeInTheDocument();
     expect(screen.getByTestId("projects-section")).toBeInTheDocument();
     expect(screen.getByTestId("about")).toBeInTheDocument();
     expect(screen.getByTestId("contact")).toBeInTheDocument();
@@ -115,8 +115,8 @@ describe("App", () => {
 
     const components = [
       screen.getByTestId("navigation"),
-      screen.getByTestId("animated-hero"),
-      screen.getByTestId("simple-services"),
+      screen.getByTestId("hero"),
+      screen.getByTestId("services"),
       screen.getByTestId("projects-section"),
       screen.getByTestId("about"),
       screen.getByTestId("contact"),

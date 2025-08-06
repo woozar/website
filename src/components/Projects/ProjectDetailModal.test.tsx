@@ -16,13 +16,7 @@ vi.mock("@/hooks/useModal", () => ({
   }),
 }));
 
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-  },
-  AnimatePresence: ({ children }: any) => <div>{children}</div>,
-  useReducedMotion: vi.fn(),
-}));
+// framer-motion is globally mocked in test setup
 
 const mockProject: Project = {
   customer: "Test Customer",

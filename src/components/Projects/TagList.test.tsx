@@ -6,12 +6,7 @@ import { customRender as render } from "@/test/render";
 
 import { TagList } from "./TagList";
 
-// Mock framer-motion
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-  },
-}));
+// framer-motion is globally mocked in test setup
 
 // Mock TagChip component
 vi.mock("../Filter/TagChip", () => ({

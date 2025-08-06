@@ -8,21 +8,13 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { fireEvent, render, screen } from "@/test/test-utils";
 import { de } from "@/translations/de";
 
-import { AnimatedHero } from "./AnimatedHero";
+import { Hero } from "./Hero";
 
 // Mock dependencies
 vi.mock("@/hooks/useMediaQuery");
 vi.mock("@/hooks/useModal");
 vi.mock("@/hooks/useTranslation");
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    section: ({ children, ...props }: any) => (
-      <section {...props}>{children}</section>
-    ),
-  },
-  useReducedMotion: vi.fn(),
-}));
+// framer-motion is globally mocked in test setup
 
 // Mock the image import
 vi.mock("../../assets/hero-portrait.webp", () => ({
@@ -33,7 +25,7 @@ const mockUseMediaQuery = vi.mocked(useMediaQuery);
 const mockUseModal = vi.mocked(useModal);
 const mockUseTranslation = vi.mocked(useTranslation);
 
-describe("AnimatedHero", () => {
+describe("Hero", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(useReducedMotion).mockReturnValue(false);
@@ -70,7 +62,7 @@ describe("AnimatedHero", () => {
   });
 
   it("should render hero section with name and title", () => {
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     expect(screen.getByText("Johannes Herrmann")).toBeInTheDocument();
     expect(
@@ -79,7 +71,7 @@ describe("AnimatedHero", () => {
   });
 
   it("should render description text", () => {
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     expect(
       screen.getByText(
@@ -89,14 +81,14 @@ describe("AnimatedHero", () => {
   });
 
   it("should render action buttons", () => {
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     expect(screen.getByText("Kontakt aufnehmen")).toBeInTheDocument();
     expect(screen.getByText("Projekte ansehen")).toBeInTheDocument();
   });
 
   it("should render hero portrait image", () => {
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     const heroImage = screen.getByRole("img");
     expect(heroImage).toBeInTheDocument();
@@ -108,7 +100,7 @@ describe("AnimatedHero", () => {
   });
 
   it("should handle contact button click", () => {
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     const contactButton = screen.getByText("Kontakt aufnehmen");
     fireEvent.click(contactButton);
@@ -121,7 +113,7 @@ describe("AnimatedHero", () => {
   });
 
   it("should handle projects button click", () => {
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     const projectsButton = screen.getByText("Projekte ansehen");
     fireEvent.click(projectsButton);
@@ -136,7 +128,7 @@ describe("AnimatedHero", () => {
   it("should handle missing target element gracefully", () => {
     document.querySelector = vi.fn().mockReturnValue(null);
 
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     const contactButton = screen.getByText("Kontakt aufnehmen");
 
@@ -151,7 +143,7 @@ describe("AnimatedHero", () => {
       isDesktop: false,
     });
 
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     // Should still render all content on mobile
     expect(screen.getByText("Johannes Herrmann")).toBeInTheDocument();
@@ -166,7 +158,7 @@ describe("AnimatedHero", () => {
       isDesktop: false,
     });
 
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     // Should still render all content on tablet
     expect(screen.getByText("Johannes Herrmann")).toBeInTheDocument();
@@ -176,7 +168,7 @@ describe("AnimatedHero", () => {
   });
 
   it("should handle German language translations", () => {
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     expect(
       screen.getByText("Software Freelancer & AI Specialist")
@@ -186,7 +178,7 @@ describe("AnimatedHero", () => {
   });
 
   it("should render with proper semantic structure", () => {
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     const mainTitle = screen.getByRole("heading", { level: 1 });
     expect(mainTitle).toHaveTextContent("Johannes Herrmann");
@@ -198,7 +190,7 @@ describe("AnimatedHero", () => {
   });
 
   it("should have proper button attributes", () => {
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     const contactButton = screen.getByText("Kontakt aufnehmen");
     const projectsButton = screen.getByText("Projekte ansehen");
@@ -209,7 +201,7 @@ describe("AnimatedHero", () => {
   });
 
   it("should render image with proper accessibility attributes", () => {
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     const heroImage = screen.getByRole("img");
     expect(heroImage).toHaveAttribute(
@@ -225,7 +217,7 @@ describe("AnimatedHero", () => {
 
     document.querySelector = vi.fn().mockReturnValue(mockElement);
 
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     const contactButton = screen.getByText("Kontakt aufnehmen");
     fireEvent.click(contactButton);
@@ -237,7 +229,7 @@ describe("AnimatedHero", () => {
   });
 
   it("should render buttons with proper styling classes", () => {
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     const contactButton = screen.getByText("Kontakt aufnehmen");
     const projectsButton = screen.getByText("Projekte ansehen");
@@ -248,7 +240,7 @@ describe("AnimatedHero", () => {
   });
 
   it("should handle navigation to different sections", () => {
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     // Test contact button navigation
     const contactButton = screen.getByText("Kontakt aufnehmen");
@@ -262,7 +254,7 @@ describe("AnimatedHero", () => {
   });
 
   it("should render all required content elements", () => {
-    render(<AnimatedHero />);
+    render(<Hero />);
 
     // Check all main content is present
     expect(screen.getByText("Johannes Herrmann")).toBeInTheDocument();
@@ -283,7 +275,7 @@ describe("AnimatedHero", () => {
     it("should render with normal animations when reduced motion is false", () => {
       vi.mocked(useReducedMotion).mockReturnValue(false);
 
-      render(<AnimatedHero />);
+      render(<Hero />);
 
       // Component should render successfully with animations enabled
       expect(screen.getByText("Johannes Herrmann")).toBeInTheDocument();
@@ -292,7 +284,7 @@ describe("AnimatedHero", () => {
     it("should render with reduced motion animations when reduced motion is true", () => {
       vi.mocked(useReducedMotion).mockReturnValue(true);
 
-      render(<AnimatedHero />);
+      render(<Hero />);
 
       // Component should render successfully with reduced animations
       expect(screen.getByText("Johannes Herrmann")).toBeInTheDocument();
@@ -301,7 +293,7 @@ describe("AnimatedHero", () => {
     it("should handle functionality with reduced motion enabled", () => {
       vi.mocked(useReducedMotion).mockReturnValue(true);
 
-      render(<AnimatedHero />);
+      render(<Hero />);
 
       // Component functionality should still work with reduced motion
       expect(screen.getByText("Kontakt aufnehmen")).toBeInTheDocument();
@@ -319,7 +311,7 @@ describe("AnimatedHero", () => {
         openImageModal: mockOpenImageModal,
       });
 
-      render(<AnimatedHero />);
+      render(<Hero />);
 
       const profileImage = screen.getByAltText(
         "Johannes Herrmann - Software Freelancer"
@@ -333,7 +325,7 @@ describe("AnimatedHero", () => {
     });
 
     it("should show pointer cursor on profile image", () => {
-      render(<AnimatedHero />);
+      render(<Hero />);
 
       const profileImage = screen.getByAltText(
         "Johannes Herrmann - Software Freelancer"

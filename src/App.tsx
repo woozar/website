@@ -6,13 +6,13 @@ import { Route, Routes } from "react-router-dom";
 
 import { About } from "./components/About/About";
 import { Contact } from "./components/Contact/Contact";
-import { AnimatedHero } from "./components/Hero/AnimatedHero";
+import { Hero } from "./components/Hero";
 import { ImageModal } from "./components/Modal";
 import { Navigation } from "./components/Navigation";
 import { ProjectStats } from "./components/ProjectStats";
 import { ProjectsSection } from "./components/Projects/ProjectsSection";
 import { SEOHead } from "./components/SEO/SEOHead";
-import { SimpleServices } from "./components/Services/SimpleServices";
+import { Services } from "./components/Services";
 import { WorkshopLandingPage } from "./components/Workshops/WorkshopLandingPage";
 import { ModalProvider } from "./contexts/ModalContext";
 import { useLanguageStore } from "./stores/languageStore";
@@ -30,8 +30,8 @@ const HomePage = () => {
           paddingBottom: "1rem",
         }}
       >
-        <AnimatedHero />
-        <SimpleServices />
+        <Hero />
+        <Services />
         <ProjectStats />
         <ProjectsSection />
         <About />

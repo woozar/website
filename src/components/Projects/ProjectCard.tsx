@@ -10,12 +10,12 @@ import { Project } from "@/types";
 import { ProjectDetailModal } from "./ProjectDetailModal";
 import { TagList } from "./TagList";
 
-interface ImprovedProjectCardProps {
+interface ProjectCardProps {
   project: Project;
   index: number;
 }
 
-export const ImprovedProjectCard = ({ project }: ImprovedProjectCardProps) => {
+export const ProjectCard = ({ project }: ProjectCardProps) => {
   const { t } = useTranslation();
   const [modalOpened, setModalOpened] = useState(false);
   const shouldReduceMotion = useReducedMotion();
