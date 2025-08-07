@@ -1,15 +1,6 @@
 import { useState } from "react";
 
-import {
-  Box,
-  Button,
-  Card,
-  Group,
-  Stack,
-  Text,
-  ThemeIcon,
-  Title,
-} from "@mantine/core";
+import { Button, Card, Group, Stack, Text, Title } from "@mantine/core";
 
 import {
   IconHeart,
@@ -181,42 +172,19 @@ export const SuccessStories = () => {
               }}
             >
               <Stack gap="lg">
-                {/* Story Header */}
-                <Box style={{ textAlign: "center" }}>
-                  <Group
-                    justify="center"
-                    gap="md"
-                    style={{ marginBottom: "1rem" }}
-                  >
-                    <ThemeIcon
-                      size="xl"
-                      style={{
-                        background:
-                          "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
-                      }}
-                    >
-                      {(() => {
-                        const IconComponent = stories[selectedStory].icon;
-                        return <IconComponent size={28} />;
-                      })()}
-                    </ThemeIcon>
-                    <Stack gap={4}>
-                      <Title order={3} c="var(--text-primary)">
-                        {stories[selectedStory].title}
-                      </Title>
-                      <Text size="sm" c="var(--text-secondary)">
-                        {stories[selectedStory].category}
-                      </Text>
-                    </Stack>
-                  </Group>
-
+                {/* Goal */}
+                {stories[selectedStory].description && (
                   <Text
+                    size="md"
                     c="var(--text-secondary)"
-                    style={{ lineHeight: 1.6, marginBottom: "1rem" }}
+                    style={{ lineHeight: 1.5, textAlign: "left" }}
                   >
+                    <Text component="span" fw={600} c="var(--text-primary)">
+                      {t.workshop.successStories.labels.description}
+                    </Text>{" "}
                     {stories[selectedStory].description}
                   </Text>
-                </Box>
+                )}
 
                 {/* Goal */}
                 {stories[selectedStory].goal && (
@@ -226,7 +194,7 @@ export const SuccessStories = () => {
                     style={{ lineHeight: 1.5, textAlign: "left" }}
                   >
                     <Text component="span" fw={600} c="var(--text-primary)">
-                      Ziel:
+                      {t.workshop.successStories.labels.goal}
                     </Text>{" "}
                     {stories[selectedStory].goal}
                   </Text>
@@ -240,7 +208,7 @@ export const SuccessStories = () => {
                     style={{ lineHeight: 1.5, textAlign: "left" }}
                   >
                     <Text component="span" fw={600} c="var(--text-primary)">
-                      Ergebnis:
+                      {t.workshop.successStories.labels.result}
                     </Text>{" "}
                     <Text component="span" fw={600} c="var(--primary-orange)">
                       {stories[selectedStory].result}

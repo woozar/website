@@ -6,7 +6,6 @@ import { MantineProvider } from "@mantine/core";
 import { useReducedMotion } from "framer-motion";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { useTranslation } from "@/hooks/useTranslation";
 
 import { SuccessStories } from "./SuccessStories";
 
@@ -21,107 +20,14 @@ vi.mock("@/hooks/useMediaQuery", () => ({
   useMediaQuery: vi.fn(),
 }));
 
-vi.mock("@/hooks/useTranslation", () => ({
-  useTranslation: vi.fn(),
-}));
-
-const mockTranslations = {
-  workshop: {
-    successStories: {
-      title: "Picked Fruits",
-      subtitle:
-        "Concrete examples of successful AI implementations from my clients",
-      benefitLabels: {
-        oneTime: "One-time:",
-        ongoing: "Ongoing:",
-      },
-      newsletter: {
-        title: "Newsletter Personalization",
-        description: "AI analyzes CRM data to create personalized newsletters.",
-        goal: "Goal: Higher open rates through relevant communication.",
-        result: "Increased open rates by 25%",
-        inputs: [
-          { title: "CRM Data", description: "Customer profiles" },
-          { title: "Newsletter Content", description: "Standard content" },
-        ],
-        processing: {
-          title: "AI Analysis",
-          description: "Personalization engine",
-        },
-        output: {
-          title: "Personalized Newsletter",
-          description: "Customized content",
-          benefits: ["Higher open rates", "Better engagement"],
-        },
-        implementation: "2 days",
-        cost: "€0.025 per customer",
-      },
-      support: {
-        title: "Support Shield",
-        description: "AI filters aggressive emails.",
-        goal: "Goal: Less stress for support team.",
-        inputs: [{ title: "Customer Email", description: "Support request" }],
-        processing: { title: "AI Filter", description: "Tone analysis" },
-        output: {
-          title: "Filtered Message",
-          description: "Polite version",
-          benefits: ["Better tone", "Reduced stress"],
-        },
-        implementation: "1 day (in-house)",
-        cost: "€0.005 per email",
-      },
-      blogging: {
-        title: "Content Autopilot",
-        description: "AI optimizes blog content.",
-        goal: "Goal: Better content efficiency.",
-        inputs: [
-          { title: "Draft", description: "Raw content" },
-          { title: "Optional: Images", description: "Image themes" },
-        ],
-        processing: {
-          title: "AI Optimization",
-          description: "Content enhancement",
-        },
-        output: {
-          title: "Finished Post",
-          description: "Optimized content",
-          benefits: ["SEO optimized", "Professional quality"],
-        },
-        implementation: "1 day",
-        cost: "€0.06 per image",
-      },
-      testing: {
-        title: "Legacy Testing",
-        description: "AI creates unit tests.",
-        goal: "Goal: Better code quality.",
-        inputs: [
-          { title: "Legacy Code", description: "Existing code" },
-          { title: "Documentation", description: "Available docs" },
-        ],
-        processing: { title: "AI Analysis", description: "Test generation" },
-        output: {
-          title: "Test Suite",
-          description: "Complete test coverage",
-          benefits: {
-            oneTime: ["Missing tests", "Documentation"],
-            ongoing: ["Better quality", "Faster development"],
-          },
-        },
-        implementation: "€150 + 2 weeks (in-house)",
-        cost: "€300/month",
-      },
-    },
-  },
-};
+// useTranslation will use real translations
 
 describe("SuccessStories", () => {
   const mockUseMediaQuery = useMediaQuery as ReturnType<typeof vi.fn>;
-  const mockUseTranslation = useTranslation as ReturnType<typeof vi.fn>;
   const mockUseReducedMotion = useReducedMotion as ReturnType<typeof vi.fn>;
 
   beforeEach(() => {
     mockUseMediaQuery.mockReturnValue({ isMobile: false });
-    mockUseTranslation.mockReturnValue({ t: mockTranslations });
     mockUseReducedMotion.mockReturnValue(false);
   });
 
@@ -132,10 +38,10 @@ describe("SuccessStories", () => {
   it("renders the title and subtitle", () => {
     renderWithProviders(<SuccessStories />);
 
-    expect(screen.getByText("Picked Fruits")).toBeInTheDocument();
+    expect(screen.getByText("Success Stories")).toBeInTheDocument();
     expect(
       screen.getByText(
-        "Concrete examples of successful AI implementations from my clients"
+        "Concrete examples of already picked low hanging fruits from my clients"
       )
     ).toBeInTheDocument();
   });
@@ -150,7 +56,7 @@ describe("SuccessStories", () => {
     expect(buttonTexts).toContain("Newsletter Personalization");
     expect(buttonTexts).toContain("Support Shield");
     expect(buttonTexts).toContain("Content Autopilot");
-    expect(buttonTexts).toContain("Legacy Testing");
+    expect(buttonTexts).toContain("Legacy Code Testing");
   });
 
   it("displays the first story by default", () => {
@@ -158,12 +64,12 @@ describe("SuccessStories", () => {
 
     expect(
       screen.getByText(
-        "AI analyzes CRM data to create personalized newsletters."
+        "Instead of newsletter spam to all customers: AI analyzes CRM data and purchase history to create individually relevant newsletters for each customer. Automatic adaptation of content and tone."
       )
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        "Goal: Higher open rates through relevant communication."
+        "Higher open rates and significantly better customer retention through truly relevant communication"
       )
     ).toBeInTheDocument();
   });
@@ -174,11 +80,11 @@ describe("SuccessStories", () => {
     // Initially shows first story (Newsletter)
     expect(
       screen.getByText(
-        "AI analyzes CRM data to create personalized newsletters."
+        "Instead of newsletter spam to all customers: AI analyzes CRM data and purchase history to create individually relevant newsletters for each customer. Automatic adaptation of content and tone."
       )
     ).toBeInTheDocument();
     expect(screen.getByText("2 days")).toBeInTheDocument();
-    expect(screen.getByText("€0.025 per customer")).toBeInTheDocument();
+    expect(screen.getByText("~€0.025 per customer")).toBeInTheDocument();
 
     // Click Support button using role
     const supportButton = screen.getByRole("button", {
@@ -187,13 +93,17 @@ describe("SuccessStories", () => {
     fireEvent.click(supportButton);
 
     expect(
-      screen.getByText("AI filters aggressive emails.")
+      screen.getByText(
+        "Aggressive or unfriendly customer emails no longer reach your support team directly. The AI automatically detects problematic messages and transforms them into polite, constructive versions - with context and solution suggestions."
+      )
     ).toBeInTheDocument();
     expect(
-      screen.getByText("Goal: Less stress for support team.")
+      screen.getByText(
+        "Less psychological stress in the support team, higher employee satisfaction"
+      )
     ).toBeInTheDocument();
     expect(screen.getByText("1 day (in-house)")).toBeInTheDocument();
-    expect(screen.getByText("€0.005 per email")).toBeInTheDocument();
+    expect(screen.getByText("~€0.005 per email")).toBeInTheDocument();
 
     // Click Content button using role
     const contentButton = screen.getByRole("button", {
@@ -201,12 +111,18 @@ describe("SuccessStories", () => {
     });
     fireEvent.click(contentButton);
 
-    expect(screen.getByText("AI optimizes blog content.")).toBeInTheDocument();
     expect(
-      screen.getByText("Goal: Better content efficiency.")
+      screen.getByText(
+        "Raw texts are automatically structured and optimized. The system performs proofreading, optimizes for SEO, and generates matching images based on the text content."
+      )
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Time and cost savings in content creation and improvement of reach"
+      )
     ).toBeInTheDocument();
     expect(screen.getByText("1 day")).toBeInTheDocument();
-    expect(screen.getByText("€0.06 per image")).toBeInTheDocument();
+    expect(screen.getByText("~€0.06 per image")).toBeInTheDocument();
   });
 
   it("renders process visualization with inputs, processing, and output", () => {
@@ -214,11 +130,15 @@ describe("SuccessStories", () => {
 
     // Check inputs
     expect(screen.getByText("CRM Data")).toBeInTheDocument();
-    expect(screen.getByText("Newsletter Content")).toBeInTheDocument();
+    expect(
+      screen.getByText("Unpersonalized Newsletter Article")
+    ).toBeInTheDocument();
 
     // Check processing
     expect(screen.getByText("AI Analysis")).toBeInTheDocument();
-    expect(screen.getByText("Personalization engine")).toBeInTheDocument();
+    expect(
+      screen.getByText("Relevance assessment & personalization")
+    ).toBeInTheDocument();
 
     // Check output
     expect(screen.getByText("Personalized Newsletter")).toBeInTheDocument();
@@ -229,21 +149,23 @@ describe("SuccessStories", () => {
     renderWithProviders(<SuccessStories />);
 
     expect(screen.getByText("2 days")).toBeInTheDocument();
-    expect(screen.getByText("€0.025 per customer")).toBeInTheDocument();
+    expect(screen.getByText("~€0.025 per customer")).toBeInTheDocument();
   });
 
   it("handles legacy story with structured benefits", () => {
     renderWithProviders(<SuccessStories />);
 
     const testingButton = screen.getByRole("button", {
-      name: /Legacy Testing/,
+      name: /Legacy Code Testing/,
     });
     fireEvent.click(testingButton);
 
-    expect(screen.getByText("Einmalig:")).toBeInTheDocument();
-    expect(screen.getByText("Dauerhaft:")).toBeInTheDocument();
+    expect(screen.getByText("One-time:")).toBeInTheDocument();
+    expect(screen.getByText("Ongoing:")).toBeInTheDocument();
     expect(screen.getByText("Missing tests")).toBeInTheDocument();
-    expect(screen.getByText("Better quality")).toBeInTheDocument();
+    expect(
+      screen.getByText("Better product quality through test coverage")
+    ).toBeInTheDocument();
   });
 
   it("tests all story buttons and validates their categories", () => {
@@ -253,7 +175,7 @@ describe("SuccessStories", () => {
       { text: "Newsletter Personalization", category: "Marketing" },
       { text: "Support Shield", category: "Support" },
       { text: "Content Autopilot", category: "Content-Creation" },
-      { text: "Legacy Testing", category: "Development" },
+      { text: "Legacy Code Testing", category: "Development" },
     ];
 
     // Check that all buttons exist
@@ -262,8 +184,7 @@ describe("SuccessStories", () => {
       expect(button).toBeInTheDocument();
     });
 
-    // Check that the first category is visible (since first story is selected by default)
-    expect(screen.getByText("Marketing")).toBeInTheDocument();
+    // Note: Categories are not actually displayed in the UI, so we don't test for them
   });
 
   it("tests desktop vs mobile layout switching", () => {
@@ -277,7 +198,7 @@ describe("SuccessStories", () => {
     renderWithProviders(<SuccessStories />);
 
     // Should render content (desktop layout logic is tested)
-    expect(screen.getByText("Picked Fruits")).toBeInTheDocument();
+    expect(screen.getByText("Success Stories")).toBeInTheDocument();
 
     // Reset window width for mobile
     Object.defineProperty(window, "innerWidth", {
@@ -297,7 +218,9 @@ describe("SuccessStories", () => {
 
     // Now support content should be visible
     expect(
-      screen.getByText("AI filters aggressive emails.")
+      screen.getByText(
+        "Aggressive or unfriendly customer emails no longer reach your support team directly. The AI automatically detects problematic messages and transforms them into polite, constructive versions - with context and solution suggestions."
+      )
     ).toBeInTheDocument();
   });
 
@@ -310,8 +233,10 @@ describe("SuccessStories", () => {
     });
     fireEvent.click(contentButton);
 
-    expect(screen.getByText("Optional: Images")).toBeInTheDocument();
-    expect(screen.getByText("Image themes")).toBeInTheDocument();
+    expect(screen.getByText("Optional: Image Requests")).toBeInTheDocument();
+    expect(
+      screen.getByText("Desired image themes & style descriptions")
+    ).toBeInTheDocument();
   });
 
   it("tests window resize handler", () => {
@@ -330,7 +255,7 @@ describe("SuccessStories", () => {
     });
 
     // Component should still render
-    expect(screen.getByText("Picked Fruits")).toBeInTheDocument();
+    expect(screen.getByText("Success Stories")).toBeInTheDocument();
   });
 
   describe("Animation and Accessibility", () => {
@@ -340,7 +265,7 @@ describe("SuccessStories", () => {
       renderWithProviders(<SuccessStories />);
 
       // Component should still render without animations
-      expect(screen.getByText("Picked Fruits")).toBeInTheDocument();
+      expect(screen.getByText("Success Stories")).toBeInTheDocument();
       expect(
         screen.getByRole("button", { name: /Newsletter Personalization/ })
       ).toBeInTheDocument();
@@ -352,7 +277,7 @@ describe("SuccessStories", () => {
       renderWithProviders(<SuccessStories />);
 
       // Component should render with animations enabled
-      expect(screen.getByText("Picked Fruits")).toBeInTheDocument();
+      expect(screen.getByText("Success Stories")).toBeInTheDocument();
     });
   });
 
@@ -361,19 +286,26 @@ describe("SuccessStories", () => {
 
     // Click testing button to access structured benefits
     const testingButton = screen.getByRole("button", {
-      name: /Legacy Testing/,
+      name: /Legacy Code Testing/,
     });
     fireEvent.click(testingButton);
 
     // Test the specific nested benefit structure that wasn't covered
-    expect(screen.getByText("Einmalig:")).toBeInTheDocument();
-    expect(screen.getByText("Dauerhaft:")).toBeInTheDocument();
+    expect(screen.getByText("One-time:")).toBeInTheDocument();
+    expect(screen.getByText("Ongoing:")).toBeInTheDocument();
 
     // Test specific benefits that might not be covered
     expect(screen.getByText("Missing tests")).toBeInTheDocument();
-    expect(screen.getAllByText("Documentation")).toHaveLength(2); // Title and benefit
-    expect(screen.getByText("Better quality")).toBeInTheDocument();
-    expect(screen.getByText("Faster development")).toBeInTheDocument();
+    expect(screen.getByText("Documentation")).toBeInTheDocument(); // Input title
+    expect(
+      screen.getByText("Corrected/completed documentation")
+    ).toBeInTheDocument(); // Benefit
+    expect(
+      screen.getByText("Better product quality through test coverage")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Shorter development time for features and bugfixes")
+    ).toBeInTheDocument();
   });
 
   it("tests mobile layout behavior", () => {
@@ -382,7 +314,7 @@ describe("SuccessStories", () => {
     renderWithProviders(<SuccessStories />);
 
     // Should still render all content in mobile
-    expect(screen.getByText("Picked Fruits")).toBeInTheDocument();
+    expect(screen.getByText("Success Stories")).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /Newsletter Personalization/ })
     ).toBeInTheDocument();
@@ -397,7 +329,9 @@ describe("SuccessStories", () => {
     fireEvent.click(supportButton);
 
     expect(
-      screen.getByText("AI filters aggressive emails.")
+      screen.getByText(
+        "Aggressive or unfriendly customer emails no longer reach your support team directly. The AI automatically detects problematic messages and transforms them into polite, constructive versions - with context and solution suggestions."
+      )
     ).toBeInTheDocument();
   });
 
@@ -407,10 +341,10 @@ describe("SuccessStories", () => {
 
       // Newsletter should be selected by default (index 0)
       // Should show the goal field
-      expect(screen.getByText("Ziel:")).toBeInTheDocument();
+      expect(screen.getByText("Goal:")).toBeInTheDocument();
       expect(
         screen.getByText(
-          "Goal: Higher open rates through relevant communication."
+          "Higher open rates and significantly better customer retention through truly relevant communication"
         )
       ).toBeInTheDocument();
     });
@@ -419,10 +353,12 @@ describe("SuccessStories", () => {
       renderWithProviders(<SuccessStories />);
 
       // Newsletter should be selected by default (index 0) and has result field in mock
-      // Should show the result field (lines 233-244 in SuccessStories)
-      expect(screen.getByText("Ergebnis:")).toBeInTheDocument();
+      // Should show the result field
+      expect(screen.getByText("Result:")).toBeInTheDocument();
       expect(
-        screen.getByText("Increased open rates by 25%")
+        screen.getByText(
+          "Positive customer feedback about the improvement from old to new newsletter"
+        )
       ).toBeInTheDocument();
     });
 
@@ -430,8 +366,8 @@ describe("SuccessStories", () => {
       renderWithProviders(<SuccessStories />);
 
       // Should render the ProcessVisualization component which shows implementation and cost
-      expect(screen.getByText("Aufwand")).toBeInTheDocument();
-      expect(screen.getByText("Kosten")).toBeInTheDocument();
+      expect(screen.getByText("Effort:")).toBeInTheDocument();
+      expect(screen.getByText("Operation:")).toBeInTheDocument();
     });
   });
 });
