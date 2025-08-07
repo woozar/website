@@ -375,6 +375,13 @@ export const de = {
       title: "Erfolgsgeschichten",
       subtitle:
         "Konkrete Beispiele bereits gepflückter Low Hanging Fruits von meinen Kunden",
+      labels: {
+        description: "Beschreibung:",
+        goal: "Ziel:",
+        result: "Ergebnis:",
+        effort: "Aufwand:",
+        cost: "Betrieb:",
+      },
       benefitLabels: {
         oneTime: "Einmalig:",
         ongoing: "Dauerhaft:",

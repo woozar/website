@@ -9,17 +9,7 @@ import type { StoryData } from "@/types";
 
 import { ProcessVisualization } from "./ProcessVisualization";
 
-// Mock dependencies
-vi.mock("framer-motion", async () => {
-  const actual = await vi.importActual("framer-motion");
-  return {
-    ...actual,
-    useReducedMotion: vi.fn(),
-    motion: {
-      div: "div",
-    },
-  };
-});
+// framer-motion is globally mocked in test setup
 
 const mockUseReducedMotion = vi.mocked(useReducedMotion);
 
@@ -129,9 +119,9 @@ describe("ProcessVisualization", () => {
   it("should render complex benefits object", () => {
     renderProcessVisualization(mockStoryDataWithComplexBenefits);
 
-    // Check for category labels (hardcoded in component)
-    expect(screen.getByText("Einmalig:")).toBeInTheDocument();
-    expect(screen.getByText("Dauerhaft:")).toBeInTheDocument();
+    // Check for category labels (from real translations - English by default)
+    expect(screen.getByText("One-time:")).toBeInTheDocument();
+    expect(screen.getByText("Ongoing:")).toBeInTheDocument();
 
     // Check for benefits
     expect(screen.getByText("One-time benefit 1")).toBeInTheDocument();
@@ -143,9 +133,9 @@ describe("ProcessVisualization", () => {
   it("should render implementation and cost info", () => {
     renderProcessVisualization(mockStoryData);
 
-    expect(screen.getByText("Aufwand")).toBeInTheDocument();
+    expect(screen.getByText("Effort:")).toBeInTheDocument();
     expect(screen.getByText("2 days")).toBeInTheDocument();
-    expect(screen.getByText("Kosten")).toBeInTheDocument();
+    expect(screen.getByText("Operation:")).toBeInTheDocument();
     expect(screen.getByText("€100")).toBeInTheDocument();
   });
 

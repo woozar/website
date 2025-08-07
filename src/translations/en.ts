@@ -374,6 +374,13 @@ export const en = {
       title: "Success Stories",
       subtitle:
         "Concrete examples of already picked low hanging fruits from my clients",
+      labels: {
+        description: "Description:",
+        goal: "Goal:",
+        result: "Result:",
+        effort: "Effort:",
+        cost: "Operation:",
+      },
       benefitLabels: {
         oneTime: "One-time:",
         ongoing: "Ongoing:",
