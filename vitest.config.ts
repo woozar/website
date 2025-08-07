@@ -27,7 +27,7 @@ export default defineConfig({
         "dist/**",
         "src/main.tsx",
         "src/vite-env.d.ts",
-        "src/components/*/index.ts",
+        "src/**/index.ts",
       ],
       thresholds: {
         global: {
