@@ -209,6 +209,17 @@ describe("ProcessVisualization", () => {
     expect(screen.getByText("Test Output")).toBeInTheDocument();
   });
 
+  it("should handle null reduced motion preference", () => {
+    mockUseReducedMotion.mockReturnValue(null);
+
+    renderProcessVisualization(mockStoryData);
+
+    // Should still render all content when reduced motion is null
+    expect(screen.getByText("Test Input 1")).toBeInTheDocument();
+    expect(screen.getByText("Test Processing")).toBeInTheDocument();
+    expect(screen.getByText("Test Output")).toBeInTheDocument();
+  });
+
   it("should handle story without benefits", () => {
     const storyWithoutBenefits: StoryData = {
       ...mockStoryData,
