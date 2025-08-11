@@ -17,7 +17,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { Section } from "../Layout";
 
 export const About = () => {
-  const { isMobile } = useMediaQuery();
+  const { isMobile, isTablet } = useMediaQuery();
   const { t } = useTranslation();
   const shouldReduceMotion = useReducedMotion();
 
@@ -190,16 +190,26 @@ export const About = () => {
                 {t.about.expertise}
               </Title>
 
-              <Group
-                gap="lg"
-                justify="center"
-                style={{ flexDirection: isMobile ? "column" : "row" }}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: isMobile
+                    ? "1fr"
+                    : isTablet
+                      ? "repeat(2, 1fr)"
+                      : "repeat(3, 1fr)",
+                  gap: "1.5rem",
+                  justifyContent: "center",
+                }}
               >
                 {skills.map((skillGroup) => (
                   <motion.div
                     key={skillGroup.category}
                     variants={itemVariants}
-                    style={{ flex: 1, minWidth: isMobile ? "100%" : "250px" }}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.15 }}
+                    style={{ minWidth: "250px" }}
                   >
                     <Box
                       className="skill-box"
@@ -244,7 +254,7 @@ export const About = () => {
                     </Box>
                   </motion.div>
                 ))}
-              </Group>
+              </div>
             </Stack>
           </motion.div>
         </Stack>
