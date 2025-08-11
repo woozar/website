@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { Badge, Group } from "@mantine/core";
 
 import { motion } from "framer-motion";
@@ -26,6 +28,7 @@ export const TagList = ({
 }: TagListProps) => {
   const { t } = useTranslation();
   const { toggleTag, selectedTags } = useFilterStore();
+  const [showAllTags, setShowAllTags] = useState(false);
 
   // Combine and sort tags: primary first, then secondary, both alphabetically sorted
   // Remove duplicates - if a tag exists in both arrays, prioritize primary
@@ -41,8 +44,23 @@ export const TagList = ({
     ...filteredSecondaryTags.map((tag) => ({ tag, isPrimary: false })),
   ];
 
-  const displayedTags = allTags.slice(0, maxTags);
-  const hasMoreTags = allTags.length > maxTags;
+  // Ensure selected tags are always visible by prioritizing them
+  const selectedTagsSet = new Set(selectedTags);
+  const selectedTagItems = allTags.filter(({ tag }) =>
+    selectedTagsSet.has(tag)
+  );
+  const unselectedTagItems = allTags.filter(
+    ({ tag }) => !selectedTagsSet.has(tag)
+  );
+
+  // Combine with selected tags first, then unselected tags
+  const prioritizedTags = [...selectedTagItems, ...unselectedTagItems];
+
+  // Show all tags if showAllTags is true, otherwise limit to maxTags
+  const displayedTags = showAllTags
+    ? prioritizedTags
+    : prioritizedTags.slice(0, maxTags);
+  const hasMoreTags = prioritizedTags.length > maxTags && !showAllTags;
 
   const handleTagClick = (tag: string) => {
     if (!selectable) return;
@@ -71,8 +89,17 @@ export const TagList = ({
         </motion.div>
       ))}
       {hasMoreTags && showMoreBadge && (
-        <Badge size="sm" color="orange" variant="outline">
-          +{allTags.length - maxTags} {t.filters.showMore}
+        <Badge
+          size="sm"
+          color="orange"
+          variant="outline"
+          style={{ cursor: "pointer" }}
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowAllTags(true);
+          }}
+        >
+          +{prioritizedTags.length - maxTags} {t.filters.showMore}
         </Badge>
       )}
     </Group>

@@ -303,6 +303,130 @@ describe("TagList", () => {
     expect(screen.getAllByRole("button")).toHaveLength(100);
   });
 
+  describe("prioritized selected tags", () => {
+    it("should prioritize selected tags to be visible within maxTags limit", () => {
+      (useFilterStore as any).mockReturnValue({
+        ...mockFilterStore,
+        selectedTags: ["Tag5"], // Tag5 would normally be hidden
+      });
+
+      render(
+        <TagList
+          primaryTags={["Tag1", "Tag2", "Tag3"]}
+          secondaryTags={["Tag4", "Tag5"]}
+          maxTags={3}
+        />
+      );
+
+      // Tag5 should be visible because it's selected
+      expect(screen.getByTestId("tag-Tag5")).toBeInTheDocument();
+      // Other tags should also be visible
+      expect(screen.getByTestId("tag-Tag1")).toBeInTheDocument();
+      expect(screen.getByTestId("tag-Tag2")).toBeInTheDocument();
+      // Tag3 or Tag4 might not be visible due to the limit, but selected Tag5 should be
+    });
+
+    it("should show selected tags first, then unselected tags", () => {
+      (useFilterStore as any).mockReturnValue({
+        ...mockFilterStore,
+        selectedTags: ["Tag2", "Tag4"],
+      });
+
+      render(
+        <TagList
+          primaryTags={["Tag1", "Tag2", "Tag3"]}
+          secondaryTags={["Tag4", "Tag5"]}
+          maxTags={4}
+        />
+      );
+
+      const allTags = screen
+        .getAllByRole("button")
+        .filter((button) =>
+          button.getAttribute("data-testid")?.startsWith("tag-")
+        );
+
+      // First tags should be the selected ones (Tag2, Tag4)
+      expect(allTags[0]).toHaveAttribute("data-selected", "true");
+      expect(allTags[1]).toHaveAttribute("data-selected", "true");
+    });
+  });
+
+  describe("show more/less functionality", () => {
+    it("should expand tags when clicking show more badge", () => {
+      (useFilterStore as any).mockReturnValue({
+        ...mockFilterStore,
+        selectedTags: [],
+      });
+
+      render(
+        <TagList
+          primaryTags={["Tag1", "Tag2", "Tag3"]}
+          secondaryTags={["Tag4", "Tag5"]}
+          maxTags={3}
+        />
+      );
+
+      // Initially only 3 tags visible + show more badge
+      expect(screen.getByText("+2 more")).toBeInTheDocument();
+      expect(screen.queryByTestId("tag-Tag4")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("tag-Tag5")).not.toBeInTheDocument();
+
+      // Click show more
+      fireEvent.click(screen.getByText("+2 more"));
+
+      // Now all tags should be visible
+      expect(screen.getByTestId("tag-Tag4")).toBeInTheDocument();
+      expect(screen.getByTestId("tag-Tag5")).toBeInTheDocument();
+      expect(screen.queryByText("+2 more")).not.toBeInTheDocument();
+    });
+
+    it("should not show less badge once expanded (tags stay expanded)", () => {
+      (useFilterStore as any).mockReturnValue({
+        ...mockFilterStore,
+        selectedTags: [],
+      });
+
+      render(
+        <TagList
+          primaryTags={["Tag1", "Tag2", "Tag3"]}
+          secondaryTags={["Tag4", "Tag5"]}
+          maxTags={3}
+        />
+      );
+
+      // Click show more to expand
+      fireEvent.click(screen.getByText("+2 more"));
+
+      // Should not show "less" badge - tags stay expanded permanently
+      expect(screen.queryByText("less")).not.toBeInTheDocument();
+      expect(screen.queryByText("+2 more")).not.toBeInTheDocument();
+
+      // All tags should remain visible
+      expect(screen.getByTestId("tag-Tag4")).toBeInTheDocument();
+      expect(screen.getByTestId("tag-Tag5")).toBeInTheDocument();
+    });
+
+    it("should not show any badges when showMoreBadge is false", () => {
+      (useFilterStore as any).mockReturnValue({
+        ...mockFilterStore,
+        selectedTags: [],
+      });
+
+      render(
+        <TagList
+          primaryTags={["Tag1", "Tag2", "Tag3"]}
+          secondaryTags={["Tag4", "Tag5"]}
+          maxTags={3}
+          showMoreBadge={false}
+        />
+      );
+
+      // No badges should be visible when showMoreBadge is false
+      expect(screen.queryByText("+2 more")).not.toBeInTheDocument();
+    });
+  });
+
   describe("edge cases", () => {
     it("should handle empty arrays", () => {
       render(<TagList primaryTags={[]} secondaryTags={[]} />);
