@@ -1,4 +1,13 @@
-import { Box, Group, List, Stack, Text, ThemeIcon, Title } from "@mantine/core";
+import {
+  Box,
+  Grid,
+  Group,
+  List,
+  Stack,
+  Text,
+  ThemeIcon,
+  Title,
+} from "@mantine/core";
 
 import {
   IconBrain,
@@ -17,7 +26,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { Section } from "../Layout";
 
 export const About = () => {
-  const { isMobile, isTablet } = useMediaQuery();
+  const { isMobile } = useMediaQuery();
   const { t } = useTranslation();
   const shouldReduceMotion = useReducedMotion();
 
@@ -146,7 +155,10 @@ export const About = () => {
             {/* Highlights */}
             <motion.div
               variants={itemVariants}
-              style={{ flex: isMobile ? 1 : 0.8 }}
+              style={{
+                flex: isMobile ? "none" : 0.8,
+                width: isMobile ? "100%" : "auto",
+              }}
             >
               <Box
                 style={{
@@ -190,71 +202,64 @@ export const About = () => {
                 {t.about.expertise}
               </Title>
 
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: isMobile
-                    ? "1fr"
-                    : isTablet
-                      ? "repeat(2, 1fr)"
-                      : "repeat(3, 1fr)",
-                  gap: "1.5rem",
-                  justifyContent: "center",
-                }}
-              >
+              <Grid gutter="lg" justify="center">
                 {skills.map((skillGroup) => (
-                  <motion.div
+                  <Grid.Col
                     key={skillGroup.category}
-                    variants={itemVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.15 }}
-                    style={{ minWidth: "250px" }}
+                    span={{ base: 12, md: 6, lg: 4 }}
                   >
-                    <Box
-                      className="skill-box"
-                      style={{
-                        padding: "1.5rem",
-                        border: "1px solid #e0e0e0",
-                        borderRadius: "0.75rem",
-                        height: "100%",
-                      }}
+                    <motion.div
+                      variants={itemVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.15 }}
+                      style={{ minWidth: "250px", height: "100%" }}
                     >
-                      <Stack gap="md">
-                        <Group gap="sm">
-                          <ThemeIcon
-                            variant="light"
-                            color="orange"
-                            size={30}
-                            style={{
-                              background:
-                                "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
-                              color: "white",
-                            }}
-                          >
-                            <skillGroup.icon size={16} />
-                          </ThemeIcon>
-                          <Title order={5} c="var(--text-primary)">
-                            {skillGroup.category}
-                          </Title>
-                        </Group>
-
-                        <Stack gap="xs">
-                          {skillGroup.items.map((skill) => (
-                            <Text
-                              key={skill}
-                              size="sm"
-                              c="var(--text-secondary)"
+                      <Box
+                        className="skill-box"
+                        style={{
+                          padding: "1.5rem",
+                          border: "1px solid #e0e0e0",
+                          borderRadius: "0.75rem",
+                          height: "100%",
+                        }}
+                      >
+                        <Stack gap="md">
+                          <Group gap="sm">
+                            <ThemeIcon
+                              variant="light"
+                              color="orange"
+                              size={30}
+                              style={{
+                                background:
+                                  "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
+                                color: "white",
+                              }}
                             >
-                              • {skill}
-                            </Text>
-                          ))}
+                              <skillGroup.icon size={16} />
+                            </ThemeIcon>
+                            <Title order={5} c="var(--text-primary)">
+                              {skillGroup.category}
+                            </Title>
+                          </Group>
+
+                          <Stack gap="xs">
+                            {skillGroup.items.map((skill) => (
+                              <Text
+                                key={skill}
+                                size="sm"
+                                c="var(--text-secondary)"
+                              >
+                                • {skill}
+                              </Text>
+                            ))}
+                          </Stack>
                         </Stack>
-                      </Stack>
-                    </Box>
-                  </motion.div>
+                      </Box>
+                    </motion.div>
+                  </Grid.Col>
                 ))}
-              </div>
+              </Grid>
             </Stack>
           </motion.div>
         </Stack>
