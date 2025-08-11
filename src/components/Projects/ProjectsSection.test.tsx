@@ -71,6 +71,24 @@ const mockProjects = [
     outcomes: ["Outcome 3"],
     images: [],
   },
+  {
+    id: "4",
+    title: "Test Project 4",
+    customer: "Multi Tag Company",
+    primary_tags: ["React", "TypeScript"],
+    tags: ["JavaScript", "CSS"],
+    description: "Test description 4",
+    technologies: ["React", "TypeScript"],
+    completion_year: 2024,
+    customer_sector: "Technology",
+    project_type: "Web Development",
+    team_size: 4,
+    duration_months: 3,
+    features: ["Feature 4"],
+    challenges: ["Challenge 4"],
+    outcomes: ["Outcome 4"],
+    images: [],
+  },
 ];
 
 vi.mock("../../hooks/useMediaQuery", () => ({
@@ -182,7 +200,7 @@ describe("ProjectsSection", () => {
     it("should render project count information", () => {
       renderComponent();
 
-      expect(screen.getByText("Showing 3 of 3 projects")).toBeInTheDocument();
+      expect(screen.getByText("Showing 4 of 4 projects")).toBeInTheDocument();
     });
   });
 
@@ -193,10 +211,12 @@ describe("ProjectsSection", () => {
       expect(screen.getByTestId("project-card-0")).toBeInTheDocument();
       expect(screen.getByTestId("project-card-1")).toBeInTheDocument();
       expect(screen.getByTestId("project-card-2")).toBeInTheDocument();
+      expect(screen.getByTestId("project-card-3")).toBeInTheDocument();
 
       expect(screen.getByText("Test Project 1")).toBeInTheDocument();
       expect(screen.getByText("Test Project 2")).toBeInTheDocument();
       expect(screen.getByText("Test Project 3")).toBeInTheDocument();
+      expect(screen.getByText("Test Project 4")).toBeInTheDocument();
     });
 
     it("should render project details correctly", () => {
@@ -231,7 +251,8 @@ describe("ProjectsSection", () => {
       expect(screen.getByText("Test Project 1")).toBeInTheDocument();
       expect(screen.getByText("Test Project 2")).toBeInTheDocument();
       expect(screen.getByText("Test Project 3")).toBeInTheDocument();
-      expect(screen.getByText("Showing 3 of 3 projects")).toBeInTheDocument();
+      expect(screen.getByText("Test Project 4")).toBeInTheDocument();
+      expect(screen.getByText("Showing 4 of 4 projects")).toBeInTheDocument();
     });
   });
 
@@ -244,7 +265,8 @@ describe("ProjectsSection", () => {
       expect(screen.getByText("Test Project 1")).toBeInTheDocument();
       expect(screen.getByText("Test Project 2")).toBeInTheDocument();
       expect(screen.getByText("Test Project 3")).toBeInTheDocument();
-      expect(screen.getByText("Showing 3 of 3 projects")).toBeInTheDocument();
+      expect(screen.getByText("Test Project 4")).toBeInTheDocument();
+      expect(screen.getByText("Showing 4 of 4 projects")).toBeInTheDocument();
     });
   });
 
@@ -259,7 +281,7 @@ describe("ProjectsSection", () => {
       ).toBeInTheDocument();
       expect(screen.getByTestId("active-tags-filter")).toBeInTheDocument();
       expect(screen.getByTestId("grid")).toBeInTheDocument();
-      expect(screen.getByText("Showing 3 of 3 projects")).toBeInTheDocument();
+      expect(screen.getByText("Showing 4 of 4 projects")).toBeInTheDocument();
     });
 
     it("should render all project cards with correct structure", () => {
@@ -269,6 +291,7 @@ describe("ProjectsSection", () => {
       expect(screen.getByTestId("project-card-0")).toBeInTheDocument();
       expect(screen.getByTestId("project-card-1")).toBeInTheDocument();
       expect(screen.getByTestId("project-card-2")).toBeInTheDocument();
+      expect(screen.getByTestId("project-card-3")).toBeInTheDocument();
     });
   });
 
@@ -282,11 +305,12 @@ describe("ProjectsSection", () => {
 
       renderComponent();
 
-      // Should only show projects with React tag
+      // Should only show projects with React tag (Projects 1 and 4 have React)
       expect(screen.getByText("Test Project 1")).toBeInTheDocument();
       expect(screen.queryByText("Test Project 2")).not.toBeInTheDocument();
       expect(screen.queryByText("Test Project 3")).not.toBeInTheDocument();
-      expect(screen.getByText("Showing 1 of 3 projects")).toBeInTheDocument();
+      expect(screen.getByText("Test Project 4")).toBeInTheDocument();
+      expect(screen.getByText("Showing 2 of 4 projects")).toBeInTheDocument();
     });
 
     it("should filter projects by customer name", () => {
@@ -302,7 +326,7 @@ describe("ProjectsSection", () => {
       expect(screen.queryByText("Test Project 1")).not.toBeInTheDocument();
       expect(screen.queryByText("Test Project 2")).not.toBeInTheDocument();
       expect(screen.getByText("Test Project 3")).toBeInTheDocument();
-      expect(screen.getByText("Showing 1 of 3 projects")).toBeInTheDocument();
+      expect(screen.getByText("Showing 1 of 4 projects")).toBeInTheDocument();
     });
 
     it("should filter projects by both tags and customer", () => {
@@ -314,11 +338,12 @@ describe("ProjectsSection", () => {
 
       renderComponent();
 
-      // Should only show projects that match both criteria
+      // Should only show projects that match both criteria (Projects 1 has TypeScript and "Test Customer 1")
       expect(screen.getByText("Test Project 1")).toBeInTheDocument();
       expect(screen.queryByText("Test Project 2")).not.toBeInTheDocument();
       expect(screen.queryByText("Test Project 3")).not.toBeInTheDocument();
-      expect(screen.getByText("Showing 1 of 3 projects")).toBeInTheDocument();
+      expect(screen.queryByText("Test Project 4")).not.toBeInTheDocument(); // "Multi Tag Company" doesn't contain "Test"
+      expect(screen.getByText("Showing 1 of 4 projects")).toBeInTheDocument();
     });
 
     it("should handle case insensitive customer filtering", () => {
@@ -332,7 +357,58 @@ describe("ProjectsSection", () => {
 
       // Should still find "Another Company" with case insensitive search
       expect(screen.getByText("Test Project 3")).toBeInTheDocument();
-      expect(screen.getByText("Showing 1 of 3 projects")).toBeInTheDocument();
+      expect(screen.getByText("Showing 1 of 4 projects")).toBeInTheDocument();
+    });
+
+    it("should filter projects using AND logic for multiple tags", () => {
+      // Mock filter store with multiple tags that only Project 1 and 4 have both
+      vi.mocked(useFilterStore).mockReturnValue({
+        selectedTags: ["React", "TypeScript"],
+        selectedCustomer: "",
+      });
+
+      renderComponent();
+
+      // Should only show projects that have BOTH React AND TypeScript
+      expect(screen.getByText("Test Project 1")).toBeInTheDocument(); // has both React and TypeScript
+      expect(screen.queryByText("Test Project 2")).not.toBeInTheDocument(); // has neither
+      expect(screen.queryByText("Test Project 3")).not.toBeInTheDocument(); // has neither
+      expect(screen.getByText("Test Project 4")).toBeInTheDocument(); // has both React and TypeScript
+      expect(screen.getByText("Showing 2 of 4 projects")).toBeInTheDocument();
+    });
+
+    it("should filter with AND logic - no results when no project has all selected tags", () => {
+      // Mock filter store with tags that no single project has all of
+      vi.mocked(useFilterStore).mockReturnValue({
+        selectedTags: ["React", "Angular"], // No project has both
+        selectedCustomer: "",
+      });
+
+      renderComponent();
+
+      // Should show no projects since no project has both React AND Angular
+      expect(screen.queryByText("Test Project 1")).not.toBeInTheDocument();
+      expect(screen.queryByText("Test Project 2")).not.toBeInTheDocument();
+      expect(screen.queryByText("Test Project 3")).not.toBeInTheDocument();
+      expect(screen.queryByText("Test Project 4")).not.toBeInTheDocument();
+      expect(screen.getByText("Showing 0 of 4 projects")).toBeInTheDocument();
+    });
+
+    it("should consider both primary and secondary tags for AND filtering", () => {
+      // Mock filter store with one primary tag and one secondary tag
+      vi.mocked(useFilterStore).mockReturnValue({
+        selectedTags: ["React", "JavaScript"], // React is primary, JavaScript is secondary
+        selectedCustomer: "",
+      });
+
+      renderComponent();
+
+      // Should show projects that have React (primary) AND JavaScript (secondary)
+      expect(screen.getByText("Test Project 1")).toBeInTheDocument(); // React primary, JavaScript secondary
+      expect(screen.queryByText("Test Project 2")).not.toBeInTheDocument(); // no React
+      expect(screen.queryByText("Test Project 3")).not.toBeInTheDocument(); // no React or JavaScript
+      expect(screen.getByText("Test Project 4")).toBeInTheDocument(); // React primary, JavaScript secondary
+      expect(screen.getByText("Showing 2 of 4 projects")).toBeInTheDocument();
     });
   });
 
@@ -370,10 +446,11 @@ describe("ProjectsSection", () => {
 
       renderComponent();
 
-      // Filtering should still work with reduced motion
+      // Filtering should still work with reduced motion (Projects 1 and 4 have React)
       expect(screen.getByText("Test Project 1")).toBeInTheDocument();
       expect(screen.queryByText("Test Project 2")).not.toBeInTheDocument();
-      expect(screen.getByText("Showing 1 of 3 projects")).toBeInTheDocument();
+      expect(screen.getByText("Test Project 4")).toBeInTheDocument();
+      expect(screen.getByText("Showing 2 of 4 projects")).toBeInTheDocument();
     });
   });
 
@@ -396,7 +473,8 @@ describe("ProjectsSection", () => {
       expect(screen.getByText("Test Project 1")).toBeInTheDocument();
       expect(screen.getByText("Test Project 2")).toBeInTheDocument();
       expect(screen.getByText("Test Project 3")).toBeInTheDocument();
-      expect(screen.getByText("Showing 3 of 3 projects")).toBeInTheDocument();
+      expect(screen.getByText("Test Project 4")).toBeInTheDocument();
+      expect(screen.getByText("Showing 4 of 4 projects")).toBeInTheDocument();
     });
   });
 });
