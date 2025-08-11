@@ -48,10 +48,10 @@ export const ProjectsSection = () => {
   const filteredProjects = useMemo(() => {
     let filtered = projects;
 
-    // Filter by any tag (primary or secondary)
+    // Filter by all tags (project must have ALL selected tags)
     if (selectedTags.length > 0) {
       filtered = filtered.filter((project) =>
-        selectedTags.some(
+        selectedTags.every(
           (tag) =>
             project.primary_tags.includes(tag) || project.tags.includes(tag)
         )

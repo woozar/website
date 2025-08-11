@@ -14,18 +14,7 @@ const renderWithProviders = (component: React.ReactElement) => {
   return render(<MantineProvider>{component}</MantineProvider>);
 };
 
-// Mock framer-motion
-vi.mock("framer-motion", async () => {
-  const actual = (await vi.importActual("framer-motion")) as any;
-  return {
-    ...actual,
-    motion: {
-      ...actual.motion,
-      div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    },
-    useReducedMotion: vi.fn(),
-  };
-});
+// framer-motion is globally mocked in test setup
 
 // Mock useTranslation
 vi.mock("@/hooks/useTranslation", () => ({
