@@ -16,8 +16,24 @@ export const de = {
   hero: {
     name: "Johannes Herrmann",
     title: "Software Freelancer & KI-Spezialist",
-    description:
-      "Spezialisiert auf KI/LLM Entwicklung, Cloud Architecture und Full-Stack Development. Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen.",
+    description: [
+      {
+        highlight: "KI & Sprachmodelle",
+        text: "Entwicklung intelligenter Anwendungen mit modernsten LLMs",
+      },
+      {
+        highlight: "Cloud Architecture",
+        text: "Skalierbare Infrastrukturen in AWS, Azure & Co.",
+      },
+      {
+        highlight: "Full-Stack Development",
+        text: "Von der Benutzeroberfläche bis zur Datenbank",
+      },
+      {
+        highlight: "Startup bis Enterprise",
+        text: "Maßgeschneiderte Lösungen für jede Unternehmensgröße",
+      },
+    ],
     contactButton: "Kontakt aufnehmen",
     projectsButton: "Projekte ansehen",
   },

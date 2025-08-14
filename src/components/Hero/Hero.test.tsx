@@ -70,14 +70,20 @@ describe("Hero", () => {
     ).toBeInTheDocument();
   });
 
-  it("should render description text", () => {
+  it("should render structured description with highlights", () => {
     render(<Hero />);
 
+    // Check that key highlights are rendered
+    expect(screen.getByText("KI & Sprachmodelle")).toBeInTheDocument();
+    expect(screen.getByText("Cloud Architecture")).toBeInTheDocument();
+    expect(screen.getByText("Full-Stack Development")).toBeInTheDocument();
+    expect(screen.getByText("Startup bis Enterprise")).toBeInTheDocument();
+
+    // Check some description text content
     expect(
-      screen.getByText(
-        "Spezialisiert auf KI/LLM Entwicklung, Cloud Architecture und Full-Stack Development. Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen."
-      )
+      screen.getByText(/Entwicklung intelligenter Anwendungen/)
     ).toBeInTheDocument();
+    expect(screen.getByText(/Skalierbare Infrastrukturen/)).toBeInTheDocument();
   });
 
   it("should render action buttons", () => {
@@ -261,11 +267,9 @@ describe("Hero", () => {
     expect(
       screen.getByText("Software Freelancer & KI-Spezialist")
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        "Spezialisiert auf KI/LLM Entwicklung, Cloud Architecture und Full-Stack Development. Langjährige Erfahrung in der Entwicklung innovativer Tech-Lösungen für Unternehmen verschiedener Größen."
-      )
-    ).toBeInTheDocument();
+    // Check that structured content is rendered
+    expect(screen.getByText("KI & Sprachmodelle")).toBeInTheDocument();
+    expect(screen.getByText("Cloud Architecture")).toBeInTheDocument();
     expect(screen.getByText("Kontakt aufnehmen")).toBeInTheDocument();
     expect(screen.getByText("Projekte ansehen")).toBeInTheDocument();
     expect(screen.getByRole("img")).toBeInTheDocument();
