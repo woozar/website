@@ -23,7 +23,26 @@ export const SEOHead = ({
 
   const siteTitle = "12 of Spades - Johannes Herrmann";
   const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
-  const siteDescription = description || t.hero.description;
+  // Convert structured description to plain text for SEO
+  const getDescriptionText = (
+    desc: string | { highlight: string; text: string }[] | undefined
+  ): string => {
+    if (typeof desc === "string") {
+      return desc;
+    }
+    if (Array.isArray(desc)) {
+      return desc
+        .map((item) =>
+          typeof item === "object" && item.highlight && item.text
+            ? `${item.highlight}: ${item.text}`
+            : item
+        )
+        .join(". ");
+    }
+    return "Software Freelancer & AI Specialist - Specialized in AI/LLM Development, Cloud Architecture and Full-Stack Development";
+  };
+
+  const siteDescription = description || getDescriptionText(t.hero.description);
   const imageUrl = image.startsWith("http") ? image : `${url}${image}`;
 
   useEffect(() => {

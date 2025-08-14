@@ -16,8 +16,24 @@ export const en = {
   hero: {
     name: "Johannes Herrmann",
     title: "Software Freelancer & AI Specialist",
-    description:
-      "Specialized in AI/LLM Development, Cloud Architecture and Full-Stack Development. Extensive experience in developing innovative tech solutions for companies of various sizes.",
+    description: [
+      {
+        highlight: "AI & Language Models",
+        text: "Building intelligent applications with cutting-edge LLMs",
+      },
+      {
+        highlight: "Cloud Architecture",
+        text: "Scalable infrastructures on AWS, Azure & beyond",
+      },
+      {
+        highlight: "Full-Stack Development",
+        text: "From user interface to database and everything between",
+      },
+      {
+        highlight: "Startup to Enterprise",
+        text: "Tailored solutions for any company size",
+      },
+    ],
     contactButton: "Get in Touch",
     projectsButton: "View Projects",
   },
@@ -269,7 +285,7 @@ export const en = {
         title: "Participants",
         value: "3-5 representatives",
         description:
-          "Recommended: from different departments for better perspectives",
+          "Recommended: from various departments for broader perspectives",
       },
       outcome: {
         title: "Outcome",

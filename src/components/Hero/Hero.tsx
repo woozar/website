@@ -110,10 +110,7 @@ export const Hero = () => {
           }}
         >
           {/* Content */}
-          <Stack
-            gap="xl"
-            style={{ flex: 1, maxWidth: isMobile ? "100%" : "600px" }}
-          >
+          <Stack gap="xl" style={{ flex: 1 }}>
             <motion.div variants={itemVariants}>
               <Stack gap="md">
                 <Title
@@ -147,16 +144,48 @@ export const Hero = () => {
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <Text
-                size={isMobile ? "md" : "lg"}
-                c="var(--text-secondary)"
-                style={{
-                  lineHeight: 1.7,
-                  maxWidth: "600px",
-                }}
-              >
-                {t.hero.description}
-              </Text>
+              <Stack gap="sm">
+                {Array.isArray(t.hero.description) ? (
+                  t.hero.description.map((item, index) => {
+                    const descItem = item as
+                      | { highlight: string; text: string }
+                      | string;
+                    return (
+                      <Text
+                        key={index}
+                        size={isMobile ? "md" : "lg"}
+                        c="var(--text-secondary)"
+                        style={{ lineHeight: 1.7 }}
+                      >
+                        {typeof descItem === "object" && descItem.highlight ? (
+                          <>
+                            <Text
+                              component="span"
+                              fw={700}
+                              c="var(--primary-orange)"
+                            >
+                              {descItem.highlight}
+                            </Text>
+                            <Text component="span">: {descItem.text}</Text>
+                          </>
+                        ) : typeof descItem === "string" ? (
+                          descItem
+                        ) : (
+                          ""
+                        )}
+                      </Text>
+                    );
+                  })
+                ) : (
+                  <Text
+                    size={isMobile ? "md" : "lg"}
+                    c="var(--text-secondary)"
+                    style={{ lineHeight: 1.7 }}
+                  >
+                    {t.hero.description}
+                  </Text>
+                )}
+              </Stack>
             </motion.div>
 
             <motion.div variants={itemVariants}>
