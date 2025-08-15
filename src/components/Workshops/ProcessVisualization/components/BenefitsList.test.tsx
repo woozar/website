@@ -1,45 +1,8 @@
-import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
-
-import { MantineProvider } from "@mantine/core";
-
-import { useTranslation } from "@/hooks/useTranslation";
+import { render, screen } from "@/test/test-utils";
 
 import { BenefitsList } from "./BenefitsList";
 
-const renderWithProviders = (component: React.ReactElement) => {
-  return render(<MantineProvider>{component}</MantineProvider>);
-};
-
-// Mock useTranslation
-vi.mock("@/hooks/useTranslation", () => ({
-  useTranslation: vi.fn(),
-}));
-
-const mockUseTranslation = useTranslation as ReturnType<typeof vi.fn>;
-
 describe("BenefitsList", () => {
-  const mockTranslations = {
-    workshop: {
-      successStories: {
-        benefitLabels: {
-          oneTime: "One-time:",
-          ongoing: "Ongoing:",
-        },
-      },
-    },
-  };
-
-  beforeEach(() => {
-    mockUseTranslation.mockReturnValue({
-      t: mockTranslations,
-    });
-  });
-
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it("renders simple benefits array", () => {
     const benefits = [
       "Improved efficiency",
@@ -47,7 +10,7 @@ describe("BenefitsList", () => {
       "Better user experience",
     ];
 
-    renderWithProviders(<BenefitsList benefits={benefits} />);
+    render(<BenefitsList benefits={benefits} />);
 
     expect(screen.getByText("Improved efficiency")).toBeInTheDocument();
     expect(screen.getByText("Cost reduction")).toBeInTheDocument();
@@ -64,7 +27,7 @@ describe("BenefitsList", () => {
       ongoing: ["Monthly maintenance", "Continuous support"],
     };
 
-    renderWithProviders(<BenefitsList benefits={benefits} />);
+    render(<BenefitsList benefits={benefits} />);
 
     // Check section labels
     expect(screen.getByText("One-time:")).toBeInTheDocument();
@@ -86,7 +49,7 @@ describe("BenefitsList", () => {
   it("handles empty benefits arrays", () => {
     const benefits: string[] = [];
 
-    renderWithProviders(<BenefitsList benefits={benefits} />);
+    render(<BenefitsList benefits={benefits} />);
 
     // Should not have any checkmarks
     expect(screen.queryByText("✓")).not.toBeInTheDocument();
@@ -98,7 +61,7 @@ describe("BenefitsList", () => {
       ongoing: ["Continuous support"],
     };
 
-    renderWithProviders(<BenefitsList benefits={benefits} />);
+    render(<BenefitsList benefits={benefits} />);
 
     expect(screen.getByText("One-time:")).toBeInTheDocument();
     expect(screen.getByText("Ongoing:")).toBeInTheDocument();
@@ -112,7 +75,7 @@ describe("BenefitsList", () => {
   it("applies correct styling to benefit items", () => {
     const benefits = ["Test benefit"];
 
-    renderWithProviders(<BenefitsList benefits={benefits} />);
+    render(<BenefitsList benefits={benefits} />);
 
     const checkmark = screen.getByText("✓");
     // Mantine transforms "green" to CSS variable, so we check for the presence of green in the color
@@ -125,7 +88,7 @@ describe("BenefitsList", () => {
       "This is a very long benefit description that should wrap properly and be displayed correctly without breaking the layout or causing overflow issues",
     ];
 
-    renderWithProviders(<BenefitsList benefits={benefits} />);
+    render(<BenefitsList benefits={benefits} />);
 
     expect(
       screen.getByText(/This is a very long benefit description/)

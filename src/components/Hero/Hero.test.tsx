@@ -41,10 +41,7 @@ describe("Hero", () => {
       closeModal: vi.fn(),
       openImageModal: vi.fn(),
     });
-    mockUseTranslation.mockReturnValue({
-      t: de,
-      language: "de",
-    });
+    mockUseTranslation.mockReturnValue({ t: de, language: "de" });
 
     // Mock scrollTo
     Object.defineProperty(window, "scrollTo", {
@@ -335,6 +332,48 @@ describe("Hero", () => {
         "Johannes Herrmann - Software Freelancer"
       );
       expect(profileImage).toHaveStyle({ cursor: "pointer" });
+    });
+  });
+
+  describe("Description Rendering with Real Translations", () => {
+    it("should render structured description items correctly", () => {
+      render(<Hero />);
+
+      // Test that all real description items from translations are rendered
+      expect(screen.getByText("KI & Sprachmodelle")).toBeInTheDocument();
+      expect(screen.getByText("Cloud Architecture")).toBeInTheDocument();
+      expect(screen.getByText("Full-Stack Development")).toBeInTheDocument();
+      expect(screen.getByText("Startup bis Enterprise")).toBeInTheDocument();
+    });
+
+    it("should handle text content for each description item", () => {
+      render(<Hero />);
+
+      // Test that description text content is properly rendered
+      expect(
+        screen.getByText(/Entwicklung intelligenter Anwendungen/)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(/Skalierbare Infrastrukturen/)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(/Von der Benutzeroberfläche bis zur Datenbank/)
+      ).toBeInTheDocument();
+      expect(screen.getByText(/Maßgeschneiderte Lösungen/)).toBeInTheDocument();
+    });
+
+    it("should handle description rendering on mobile", () => {
+      mockUseMediaQuery.mockReturnValue({
+        isMobile: true,
+        isTablet: false,
+        isDesktop: false,
+      });
+
+      render(<Hero />);
+
+      // Should still render all description items on mobile
+      expect(screen.getByText("KI & Sprachmodelle")).toBeInTheDocument();
+      expect(screen.getByText("Cloud Architecture")).toBeInTheDocument();
     });
   });
 });
