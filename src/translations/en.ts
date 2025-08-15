@@ -247,7 +247,7 @@ export const en = {
       subtitle:
         "Maximum AI value with minimal effort. Let us together identify and strategically harvest the Low Hanging Fruits in your company - before you consider larger projects that pay off late or never.",
       textPrompt:
-        "Write a catchy hook for my 'AI Low Hanging Fruits' workshop in one paragraph. Target audience: Companies that want to use AI but are overwhelmed. Use common metaphors and motivating phrases. Use buzzwords like 'success wave' and 'competition'. Tone: Professional-motivating in marketing style. Structure: Problem → Urgency → Partnership solution. Core message: Simple AI solutions first, maximum benefit with minimal effort.",
+        "Write a catchy hook for my 'AI Low Hanging Fruits' workshop in one paragraph. Target audience: Companies that want to use AI but are intimidated. Use common metaphors and motivating phrases. Use buzzwords like 'success wave' and 'competition'. Tone: Professional-motivating in marketing style. Structure: Problem → Urgency → Partnership solution. Core message: Simple AI solutions first, maximum benefit with minimal effort.",
       imagePrompt:
         'Creative visual metaphor illustration combining technology and "low hanging fruits" concept. Show a stylized tree with branches, where instead of regular fruits, there are glowing tech icons (AI brain, chat bubbles, automation gears, data charts) hanging at different heights. The lower, easily reachable fruits glow brighter with orange/red colors (#ff6b35, #d32f2f), representing easy AI wins. Higher fruits are dimmer/grayed out. Include a subtle ladder or stepping stones leading to the tree, symbolizing the workshop\'s guided approach. Background: Clean, professional gradient. Style: Modern, friendly, inspiring - showing AI is approachable and has quick wins available.',
       ctaButton: "Get in Touch",
@@ -257,8 +257,8 @@ export const en = {
     problem: {
       title: "The Challenges",
       points: [
-        "AI seems complex and overwhelming",
-        "Unclear ROI expectations for AI projects",
+        "AI seems complex and intimidating",
+        "Unclear Return on Investment expectations for AI projects",
         "Long implementation timeframes expected",
         "High investment costs are deterrent",
         "Missing know-how in the team",
@@ -268,7 +268,7 @@ export const en = {
       title: "The Solution",
       points: [
         "Focus on immediately implementable AI applications",
-        "Proven strategies with quick ROI",
+        "Proven strategies with quick Return on Investment",
         "Practical hands-on experience",
         "Directly applicable results",
         "No prior knowledge required",

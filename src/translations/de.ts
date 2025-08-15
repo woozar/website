@@ -246,9 +246,9 @@ export const de = {
     hero: {
       title: "Workshop: KI - Low Hanging Fruits",
       subtitle:
-        "Alle reden über KI, aber der Einstieg ist oft überwältigend. Lassen Sie sich von der Konkurrenz nicht abhängen, sondern schwimmen Sie auf der KI-Erfolgswelle mit! Gemeinsam identifizieren wir die Low Hanging Fruits in Ihrem Unternehmen - maximaler Nutzen mit minimalem Aufwand, bevor wir über größere Projekte nachdenken.",
+        "Alle reden über KI, aber der Einstieg ist oft überfordernd. Lassen Sie sich von der Konkurrenz nicht abhängen, sondern schwimmen Sie auf der KI-Erfolgswelle mit! Gemeinsam identifizieren wir die Low Hanging Fruits in Ihrem Unternehmen - maximaler Nutzen mit minimalem Aufwand, bevor wir über größere Projekte nachdenken.",
       textPrompt:
-        "Schreibe einen catchy Aufhänger für meinen 'KI Low Hanging Fruits' Workshop in einem Absatz. Zielgruppe: Unternehmen, die KI nutzen wollen aber überwältigt sind. Nutze gängige Metaphern und motivierende Phrasen. Verwende Buzzwords wie 'Erfolgswelle' und 'Konkurrenz'. Ton: Professionell-motivierend im Marketing-Stil. Struktur: Problem → Dringlichkeit → Partnerschaftliche Lösung. Kernbotschaft: Einfache KI-Lösungen zuerst, maximaler Nutzen mit minimalem Aufwand.",
+        "Schreibe einen catchy Aufhänger für meinen 'KI Low Hanging Fruits' Workshop in einem Absatz. Zielgruppe: Unternehmen, die KI nutzen wollen aber überfordert sind. Nutze gängige Metaphern und motivierende Phrasen. Verwende Buzzwords wie 'Erfolgswelle' und 'Konkurrenz'. Ton: Professionell-motivierend im Marketing-Stil. Struktur: Problem → Dringlichkeit → Partnerschaftliche Lösung. Kernbotschaft: Einfache KI-Lösungen zuerst, maximaler Nutzen mit minimalem Aufwand.",
       imagePrompt:
         'Creative visual metaphor illustration combining technology and "low hanging fruits" concept. Show a stylized tree with branches, where instead of regular fruits, there are glowing tech icons (AI brain, chat bubbles, automation gears, data charts) hanging at different heights. The lower, easily reachable fruits glow brighter with orange/red colors (#ff6b35, #d32f2f), representing easy AI wins. Higher fruits are dimmer/grayed out. Include a subtle ladder or stepping stones leading to the tree, symbolizing the workshop\'s guided approach. Background: Clean, professional gradient. Style: Modern, friendly, inspiring - showing AI is approachable and has quick wins available.',
       ctaButton: "Kontakt aufnehmen",
@@ -258,8 +258,8 @@ export const de = {
     problem: {
       title: "Die Herausforderungen",
       points: [
-        "KI wirkt komplex und überwältigend",
-        "Unklare ROI-Erwartungen bei KI-Projekten",
+        "KI wirkt komplex und überfordernd",
+        "Unklare Return on Investment-Erwartungen bei KI-Projekten",
         "Lange Implementierungszeiten befürchtet",
         "Hohe Investitionskosten abschreckend",
         "Fehlendes Know-how im Team",
@@ -269,7 +269,7 @@ export const de = {
       title: "Die Lösung",
       points: [
         "Fokus auf sofort umsetzbare KI-Anwendungen",
-        "Bewährte Strategien mit schnellem ROI",
+        "Bewährte Strategien mit schnellem Return on Investment",
         "Praktische Hands-on-Erfahrung",
         "Direkt anwendbare Ergebnisse",
         "Keine Vorkenntnisse erforderlich",
