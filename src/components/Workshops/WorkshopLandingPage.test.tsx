@@ -83,7 +83,7 @@ describe("WorkshopLandingPage", () => {
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        /Alle reden über KI, aber der Einstieg ist oft überwältigend/
+        /Alle reden über KI, aber der Einstieg ist oft überfordernd/
       )
     ).toBeInTheDocument();
   });
@@ -99,7 +99,7 @@ describe("WorkshopLandingPage", () => {
 
     expect(screen.getByText("Die Herausforderungen")).toBeInTheDocument();
     expect(
-      screen.getByText("KI wirkt komplex und überwältigend")
+      screen.getByText("KI wirkt komplex und überfordernd")
     ).toBeInTheDocument();
     expect(
       screen.getByText("Unklare ROI-Erwartungen bei KI-Projekten")
@@ -176,7 +176,7 @@ describe("WorkshopLandingPage", () => {
 
     // Problem points from German translation - exact matches
     expect(
-      screen.getByText("KI wirkt komplex und überwältigend")
+      screen.getByText("KI wirkt komplex und überfordernd")
     ).toBeInTheDocument();
     expect(
       screen.getByText("Unklare ROI-Erwartungen bei KI-Projekten")
