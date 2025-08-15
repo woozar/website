@@ -113,12 +113,7 @@ export const SuccessStories = () => {
             >
               {t.workshop.successStories.title}
             </Title>
-            <Text
-              size="lg"
-              c="var(--text-secondary)"
-              ta="center"
-              style={{ maxWidth: "600px" }}
-            >
+            <Text size="lg" c="var(--text-secondary)" ta="center">
               {t.workshop.successStories.subtitle}
             </Text>
           </Stack>
