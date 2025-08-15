@@ -145,46 +145,27 @@ export const Hero = () => {
 
             <motion.div variants={itemVariants}>
               <Stack gap="sm">
-                {Array.isArray(t.hero.description) ? (
-                  t.hero.description.map((item, index) => {
-                    const descItem = item as
-                      | { highlight: string; text: string }
-                      | string;
-                    return (
-                      <Text
-                        key={index}
-                        size={isMobile ? "md" : "lg"}
-                        c="var(--text-secondary)"
-                        style={{ lineHeight: 1.7 }}
-                      >
-                        {typeof descItem === "object" && descItem.highlight ? (
-                          <>
-                            <Text
-                              component="span"
-                              fw={700}
-                              c="var(--primary-orange)"
-                            >
-                              {descItem.highlight}
-                            </Text>
-                            <Text component="span">: {descItem.text}</Text>
-                          </>
-                        ) : typeof descItem === "string" ? (
-                          descItem
-                        ) : (
-                          ""
-                        )}
-                      </Text>
-                    );
-                  })
-                ) : (
-                  <Text
-                    size={isMobile ? "md" : "lg"}
-                    c="var(--text-secondary)"
-                    style={{ lineHeight: 1.7 }}
-                  >
-                    {t.hero.description}
-                  </Text>
-                )}
+                {t.hero.description.map((descItem, index) => {
+                  return (
+                    <Text
+                      key={index}
+                      size={isMobile ? "md" : "lg"}
+                      c="var(--text-secondary)"
+                      style={{ lineHeight: 1.7 }}
+                    >
+                      <>
+                        <Text
+                          component="span"
+                          fw={700}
+                          c="var(--primary-orange)"
+                        >
+                          {descItem.highlight}
+                        </Text>
+                        <Text component="span">: {descItem.text}</Text>
+                      </>
+                    </Text>
+                  );
+                })}
               </Stack>
             </motion.div>
 

@@ -1,28 +1,15 @@
-import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-
-import { MantineProvider } from "@mantine/core";
 
 import { useReducedMotion } from "framer-motion";
 
-import { useTranslation } from "@/hooks/useTranslation";
+import { render, screen } from "@/test/test-utils";
 import type { StoryData } from "@/types";
 
 import { ProcessingCard } from "./ProcessingCard";
 
-const renderWithProviders = (component: React.ReactElement) => {
-  return render(<MantineProvider>{component}</MantineProvider>);
-};
-
 // framer-motion is globally mocked in test setup
 
-// Mock useTranslation
-vi.mock("@/hooks/useTranslation", () => ({
-  useTranslation: vi.fn(),
-}));
-
 const mockUseReducedMotion = useReducedMotion as ReturnType<typeof vi.fn>;
-const mockUseTranslation = useTranslation as ReturnType<typeof vi.fn>;
 
 describe("ProcessingCard", () => {
   const mockStory: StoryData = {
@@ -40,22 +27,8 @@ describe("ProcessingCard", () => {
     cost: "€500",
   };
 
-  const mockTranslations = {
-    workshop: {
-      successStories: {
-        labels: {
-          effort: "Effort:",
-          cost: "Cost:",
-        },
-      },
-    },
-  };
-
   beforeEach(() => {
     mockUseReducedMotion.mockReturnValue(false);
-    mockUseTranslation.mockReturnValue({
-      t: mockTranslations,
-    });
   });
 
   afterEach(() => {
@@ -63,7 +36,7 @@ describe("ProcessingCard", () => {
   });
 
   it("renders processing title and description", () => {
-    renderWithProviders(
+    render(
       <ProcessingCard
         story={mockStory}
         shouldReduceMotion={false}
@@ -78,7 +51,7 @@ describe("ProcessingCard", () => {
   });
 
   it("displays effort and cost information", () => {
-    renderWithProviders(
+    render(
       <ProcessingCard
         story={mockStory}
         shouldReduceMotion={false}
@@ -88,12 +61,12 @@ describe("ProcessingCard", () => {
 
     expect(screen.getByText("Effort:")).toBeInTheDocument();
     expect(screen.getByText("2 days")).toBeInTheDocument();
-    expect(screen.getByText("Cost:")).toBeInTheDocument();
+    expect(screen.getByText("Operation:")).toBeInTheDocument();
     expect(screen.getByText("€500")).toBeInTheDocument();
   });
 
   it("has correct gradient background styling", () => {
-    renderWithProviders(
+    render(
       <ProcessingCard
         story={mockStory}
         shouldReduceMotion={false}
@@ -116,7 +89,7 @@ describe("ProcessingCard", () => {
   });
 
   it("handles reduced motion preference", () => {
-    renderWithProviders(
+    render(
       <ProcessingCard
         story={mockStory}
         shouldReduceMotion={true}
@@ -128,7 +101,7 @@ describe("ProcessingCard", () => {
   });
 
   it("uses correct delay offset for animations", () => {
-    renderWithProviders(
+    render(
       <ProcessingCard
         story={mockStory}
         shouldReduceMotion={false}
@@ -140,7 +113,7 @@ describe("ProcessingCard", () => {
   });
 
   it("renders Robot and Settings icons", () => {
-    renderWithProviders(
+    render(
       <ProcessingCard
         story={mockStory}
         shouldReduceMotion={false}
@@ -163,7 +136,7 @@ describe("ProcessingCard", () => {
       },
     };
 
-    renderWithProviders(
+    render(
       <ProcessingCard
         story={longStory}
         shouldReduceMotion={false}

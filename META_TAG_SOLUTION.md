@@ -74,11 +74,11 @@ curl http://localhost:5173/workshops/ai-low-hanging-fruits/index.html
 
 ```bash
 # Simulation eines WhatsApp Crawlers (bekommt statische HTML)
-curl -H "User-Agent: WhatsApp/2.21.4.18" https://v2.12-of-spades.com/workshops/ai-low-hanging-fruits
+curl -H "User-Agent: WhatsApp/2.21.4.18" https://12-of-spades.com/workshops/ai-low-hanging-fruits
 # → Zeigt: Workshop-spezifische Meta-Tags
 
 # Normale Browser (bekommt SPA)
-curl https://v2.12-of-spades.com/workshops/ai-low-hanging-fruits
+curl https://12-of-spades.com/workshops/ai-low-hanging-fruits
 # → Zeigt: Standard Meta-Tags + React App lädt Workshop-Seite
 ```
 
