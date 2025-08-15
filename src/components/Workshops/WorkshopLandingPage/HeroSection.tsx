@@ -191,19 +191,21 @@ export const HeroSection = ({ itemVariants }: HeroSectionProps) => {
                     flexDirection: isMobile ? "row" : "row",
                   }}
                 >
-                  <Button
-                    size="md"
-                    onClick={handleScrollToContact}
-                    style={{
-                      background:
-                        "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
-                      border: "none",
-                      fontSize: "0.9rem",
-                      padding: "0.5rem 1.2rem",
-                    }}
-                  >
-                    {t.workshop.hero.ctaButton}
-                  </Button>
+                  {!isMobile && (
+                    <Button
+                      size="md"
+                      onClick={handleScrollToContact}
+                      style={{
+                        background:
+                          "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
+                        border: "none",
+                        fontSize: "0.9rem",
+                        padding: "0.5rem 1.2rem",
+                      }}
+                    >
+                      {t.workshop.hero.ctaButton}
+                    </Button>
+                  )}
 
                   <Box
                     style={{
@@ -224,6 +226,8 @@ export const HeroSection = ({ itemVariants }: HeroSectionProps) => {
                         padding: "0.3rem 0.8rem",
                         borderColor: "var(--text-secondary)",
                         color: "var(--text-secondary)",
+                        whiteSpace: "nowrap",
+                        minWidth: "fit-content",
                       }}
                     >
                       {t.workshop.hero.showPrompt}

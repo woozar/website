@@ -121,7 +121,10 @@ describe("HeroSection", () => {
     // Should still render all content
     expect(screen.getByText(de.workshop.hero.title)).toBeInTheDocument();
     expect(screen.getByText(de.workshop.hero.subtitle)).toBeInTheDocument();
-    expect(screen.getByText(de.workshop.hero.ctaButton)).toBeInTheDocument();
+    // CTA button should NOT be visible on mobile
+    expect(
+      screen.queryByText(de.workshop.hero.ctaButton)
+    ).not.toBeInTheDocument();
   });
 
   it("should handle tablet layout correctly", () => {
