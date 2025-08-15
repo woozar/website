@@ -102,7 +102,9 @@ describe("WorkshopLandingPage", () => {
       screen.getByText("KI wirkt komplex und überfordernd")
     ).toBeInTheDocument();
     expect(
-      screen.getByText("Unklare ROI-Erwartungen bei KI-Projekten")
+      screen.getByText(
+        "Unklare Return on Investment-Erwartungen bei KI-Projekten"
+      )
     ).toBeInTheDocument();
   });
 
@@ -114,7 +116,7 @@ describe("WorkshopLandingPage", () => {
       screen.getByText("Fokus auf sofort umsetzbare KI-Anwendungen")
     ).toBeInTheDocument();
     expect(
-      screen.getByText("Bewährte Strategien mit schnellem ROI")
+      screen.getByText("Bewährte Strategien mit schnellem Return on Investment")
     ).toBeInTheDocument();
   });
 
@@ -179,7 +181,9 @@ describe("WorkshopLandingPage", () => {
       screen.getByText("KI wirkt komplex und überfordernd")
     ).toBeInTheDocument();
     expect(
-      screen.getByText("Unklare ROI-Erwartungen bei KI-Projekten")
+      screen.getByText(
+        "Unklare Return on Investment-Erwartungen bei KI-Projekten"
+      )
     ).toBeInTheDocument();
     expect(
       screen.getByText("Lange Implementierungszeiten befürchtet")
@@ -194,7 +198,7 @@ describe("WorkshopLandingPage", () => {
       screen.getByText("Fokus auf sofort umsetzbare KI-Anwendungen")
     ).toBeInTheDocument();
     expect(
-      screen.getByText("Bewährte Strategien mit schnellem ROI")
+      screen.getByText("Bewährte Strategien mit schnellem Return on Investment")
     ).toBeInTheDocument();
     expect(
       screen.getByText("Praktische Hands-on-Erfahrung")

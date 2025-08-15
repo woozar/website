@@ -259,7 +259,7 @@ export const de = {
       title: "Die Herausforderungen",
       points: [
         "KI wirkt komplex und überfordernd",
-        "Unklare ROI-Erwartungen bei KI-Projekten",
+        "Unklare Return on Investment-Erwartungen bei KI-Projekten",
         "Lange Implementierungszeiten befürchtet",
         "Hohe Investitionskosten abschreckend",
         "Fehlendes Know-how im Team",
@@ -269,7 +269,7 @@ export const de = {
       title: "Die Lösung",
       points: [
         "Fokus auf sofort umsetzbare KI-Anwendungen",
-        "Bewährte Strategien mit schnellem ROI",
+        "Bewährte Strategien mit schnellem Return on Investment",
         "Praktische Hands-on-Erfahrung",
         "Direkt anwendbare Ergebnisse",
         "Keine Vorkenntnisse erforderlich",

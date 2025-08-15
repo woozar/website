@@ -258,7 +258,7 @@ export const en = {
       title: "The Challenges",
       points: [
         "AI seems complex and intimidating",
-        "Unclear ROI expectations for AI projects",
+        "Unclear Return on Investment expectations for AI projects",
         "Long implementation timeframes expected",
         "High investment costs are deterrent",
         "Missing know-how in the team",
@@ -268,7 +268,7 @@ export const en = {
       title: "The Solution",
       points: [
         "Focus on immediately implementable AI applications",
-        "Proven strategies with quick ROI",
+        "Proven strategies with quick Return on Investment",
         "Practical hands-on experience",
         "Directly applicable results",
         "No prior knowledge required",
