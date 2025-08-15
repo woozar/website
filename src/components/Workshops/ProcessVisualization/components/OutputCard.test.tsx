@@ -1,46 +1,19 @@
-import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-
-import { MantineProvider } from "@mantine/core";
 
 import { useReducedMotion } from "framer-motion";
 
-import { useTranslation } from "@/hooks/useTranslation";
+import { render, screen } from "@/test/test-utils";
 import type { StoryData } from "@/types";
 
 import { OutputCard } from "./OutputCard";
 
-const renderWithProviders = (component: React.ReactElement) => {
-  return render(<MantineProvider>{component}</MantineProvider>);
-};
-
 // framer-motion is globally mocked in test setup
 
-// Mock useTranslation
-vi.mock("@/hooks/useTranslation", () => ({
-  useTranslation: vi.fn(),
-}));
-
 const mockUseReducedMotion = useReducedMotion as ReturnType<typeof vi.fn>;
-const mockUseTranslation = useTranslation as ReturnType<typeof vi.fn>;
 
 describe("OutputCard", () => {
-  const mockTranslations = {
-    workshop: {
-      successStories: {
-        benefitLabels: {
-          oneTime: "One-time:",
-          ongoing: "Ongoing:",
-        },
-      },
-    },
-  };
-
   beforeEach(() => {
     mockUseReducedMotion.mockReturnValue(false);
-    mockUseTranslation.mockReturnValue({
-      t: mockTranslations,
-    });
   });
 
   afterEach(() => {
@@ -53,7 +26,7 @@ describe("OutputCard", () => {
       description: "Generated comprehensive reports automatically",
     };
 
-    renderWithProviders(
+    render(
       <OutputCard
         output={output}
         delayOffset={0.5}
@@ -74,7 +47,7 @@ describe("OutputCard", () => {
       benefits: ["Improved accuracy", "Time savings"],
     };
 
-    renderWithProviders(
+    render(
       <OutputCard
         output={output}
         delayOffset={0.5}
@@ -97,7 +70,7 @@ describe("OutputCard", () => {
       },
     };
 
-    renderWithProviders(
+    render(
       <OutputCard
         output={output}
         delayOffset={0.5}
@@ -118,7 +91,7 @@ describe("OutputCard", () => {
       description: "Basic output without benefits",
     };
 
-    renderWithProviders(
+    render(
       <OutputCard
         output={output}
         delayOffset={0.5}
@@ -141,7 +114,7 @@ describe("OutputCard", () => {
       description: "Test description",
     };
 
-    renderWithProviders(
+    render(
       <OutputCard
         output={output}
         delayOffset={0.5}
@@ -163,7 +136,7 @@ describe("OutputCard", () => {
       description: "Testing reduced motion",
     };
 
-    renderWithProviders(
+    render(
       <OutputCard output={output} delayOffset={0.5} shouldReduceMotion={true} />
     );
 
@@ -176,7 +149,7 @@ describe("OutputCard", () => {
       description: "Testing animation delay",
     };
 
-    renderWithProviders(
+    render(
       <OutputCard
         output={output}
         delayOffset={1.5}

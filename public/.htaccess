@@ -1,6 +1,14 @@
 # Enable URL rewriting for React Router
 RewriteEngine On
 
+# Social Media Bot Detection for Workshop Pages
+# Redirect social media crawlers to static HTML for better meta tag support
+RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit|Twitterbot|WhatsApp|LinkedInBot|Slackbot|TelegramBot|SkypeUriPreview|Discordbot|AppleBot) [NC]
+RewriteRule ^workshops/ai-low-hanging-fruits/?$ /workshops/ai-low-hanging-fruits/index.html [L]
+
+# For normal browsers accessing workshop routes, serve the main SPA
+RewriteRule ^workshops/ai-low-hanging-fruits/?$ /index.html [L]
+
 # Handle client-side routing
 # If the request is for a file or directory that exists, serve it directly
 RewriteCond %{REQUEST_FILENAME} !-f

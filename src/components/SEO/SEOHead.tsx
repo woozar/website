@@ -15,7 +15,7 @@ export const SEOHead = ({
   title,
   description,
   image = "/assets/hero-portrait.webp",
-  url = "https://v2.12-of-spades.com",
+  url = "https://12-of-spades.com",
   type = "website",
   keywords,
 }: SEOHeadProps) => {
@@ -24,25 +24,12 @@ export const SEOHead = ({
   const siteTitle = "12 of Spades - Johannes Herrmann";
   const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
   // Convert structured description to plain text for SEO
-  const getDescriptionText = (
-    desc: string | { highlight: string; text: string }[] | undefined
-  ): string => {
-    if (typeof desc === "string") {
-      return desc;
-    }
-    if (Array.isArray(desc)) {
-      return desc
-        .map((item) =>
-          typeof item === "object" && item.highlight && item.text
-            ? `${item.highlight}: ${item.text}`
-            : item
-        )
-        .join(". ");
-    }
-    return "Software Freelancer & AI Specialist - Specialized in AI/LLM Development, Cloud Architecture and Full-Stack Development";
-  };
 
-  const siteDescription = description || getDescriptionText(t.hero.description);
+  const siteDescription =
+    description ||
+    t.hero.description
+      .map((item) => `${item.highlight}: ${item.text}`)
+      .join(". ");
   const imageUrl = image.startsWith("http") ? image : `${url}${image}`;
 
   useEffect(() => {
