@@ -71,6 +71,8 @@ Viele Grüße`);
         title={t.workshop.seo.title}
         description={t.workshop.seo.description}
         keywords={t.workshop.seo.keywords}
+        url="https://v2.12-of-spades.com/workshops/ai-low-hanging-fruits"
+        image="/assets/workshop-participants.webp"
       />
       <main
         key={location.pathname}
