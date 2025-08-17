@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 
 import { Box, Group, Stack } from "@mantine/core";
 
-import { Variants, motion, useReducedMotion } from "framer-motion";
+import { Variants, motion } from "framer-motion";
 
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import type { StoryData } from "@/types";
 
 import {

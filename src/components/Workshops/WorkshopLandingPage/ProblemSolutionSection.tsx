@@ -7,8 +7,9 @@ import {
   IconX,
 } from "@tabler/icons-react";
 
-import { Variants, motion, useReducedMotion } from "framer-motion";
+import { Variants, motion } from "framer-motion";
 
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 
 import { Grid } from "../../Layout";
