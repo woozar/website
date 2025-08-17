@@ -2,8 +2,9 @@ import { useState } from "react";
 
 import { Box, Card, Stack, Text } from "@mantine/core";
 
-import { Variants, motion, useReducedMotion } from "framer-motion";
+import { Variants, motion } from "framer-motion";
 
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Project } from "@/types";
 

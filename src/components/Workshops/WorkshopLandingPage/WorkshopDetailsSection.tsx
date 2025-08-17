@@ -2,9 +2,10 @@ import { Box, Card, Image, Stack, Text, ThemeIcon, Title } from "@mantine/core";
 
 import { IconClock, IconTrendingUp, IconUsers } from "@tabler/icons-react";
 
-import { Variants, motion, useReducedMotion } from "framer-motion";
+import { Variants, motion } from "framer-motion";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 
 import { Grid } from "../../Layout";

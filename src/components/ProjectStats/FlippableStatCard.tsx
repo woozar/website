@@ -4,7 +4,9 @@ import { ActionIcon, Box, Card, SimpleGrid, Stack, Text } from "@mantine/core";
 
 import { IconProps, IconRefresh } from "@tabler/icons-react";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface FlippableStatCardProps {
   icon: React.ComponentType<IconProps>;

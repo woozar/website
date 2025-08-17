@@ -7,9 +7,10 @@ import {
   IconCode,
 } from "@tabler/icons-react";
 
-import { Variants, motion, useReducedMotion } from "framer-motion";
+import { Variants, motion } from "framer-motion";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 
 import { Grid, Section } from "../Layout";
