@@ -2,7 +2,9 @@ import { Box, Card, Stack, Text, Tooltip } from "@mantine/core";
 
 import { IconProps } from "@tabler/icons-react";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface StatCardProps {
   icon: React.ComponentType<IconProps>;

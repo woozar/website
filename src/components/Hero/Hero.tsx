@@ -2,10 +2,11 @@ import { Box, Button, Group, Image, Stack, Text, Title } from "@mantine/core";
 
 import { IconDownload, IconMail } from "@tabler/icons-react";
 
-import { Variants, motion, useReducedMotion } from "framer-motion";
+import { Variants, motion } from "framer-motion";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useModal } from "@/hooks/useModal";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 
 import { Section } from "../Layout";

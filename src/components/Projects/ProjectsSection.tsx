@@ -2,10 +2,11 @@ import { useMemo } from "react";
 
 import { Stack, Text, Title } from "@mantine/core";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useProjects } from "@/hooks/useProjects";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useFilterStore } from "@/stores/filterStore";
 

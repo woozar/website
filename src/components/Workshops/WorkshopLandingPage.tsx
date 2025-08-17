@@ -2,11 +2,12 @@ import { Box, Button, Card, List, Stack, Text, Title } from "@mantine/core";
 
 import { IconHome } from "@tabler/icons-react";
 
-import { Variants, motion, useReducedMotion } from "framer-motion";
+import { Variants, motion } from "framer-motion";
 
 import { useLocation } from "react-router-dom";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 
 import { Contact } from "../Contact/Contact";
@@ -72,7 +73,7 @@ Viele Grüße`);
         description={t.workshop.seo.description}
         keywords={t.workshop.seo.keywords}
         url="https://12-of-spades.com/workshops/ai-low-hanging-fruits"
-        image="/assets/workshop-participants.webp"
+        image="/assets/ai-low-hanging-fruits-illustration.webp"
       />
       <main
         key={location.pathname}
