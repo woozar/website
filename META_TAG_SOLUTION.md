@@ -24,7 +24,7 @@ Zwei-teiliger Ansatz für optimale Social Media Unterstützung:
   - Title: `KI Workshop - Low Hanging Fruits | 12 of Spades`
   - OpenGraph Type: `article`
   - Workshop-spezifische Beschreibung und Keywords
-  - Workshop-Image: `workshop-participants.webp`
+  - Workshop-Image: `ai-low-hanging-fruits-illustration.webp`
   - Korrekte URL: `/workshops/ai-low-hanging-fruits`
 
 ### 2. .htaccess Konfiguration für Bot-Detection
