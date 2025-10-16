@@ -3,6 +3,7 @@ export const en = {
     services: "Services",
     statistics: "Statistics",
     projects: "Projects",
+    workshops: "Workshops",
     about: "About",
     contact: "Contact",
     contactAction: "Get in Touch",
@@ -73,6 +74,8 @@ export const en = {
     description2:
       "My expertise lies in developing AI-based applications, implementing cloud architectures, and creating scalable full-stack web applications. I place special emphasis on user-friendly interfaces and performant backend systems.",
     description3:
+      "For me, AI is a tool – not a cure-all. I help companies understand where AI delivers real value and where classic software development is the better choice. This pragmatic approach ensures measurable results instead of expensive experiments.",
+    description4:
       "In my career, I have already worked for renowned companies like DMG Mori, successfully implementing complex SharePoint migration, intranet modernization, and business process automation projects.",
     highlights: "Highlights",
     expertise: "Technical Expertise",
@@ -151,6 +154,43 @@ export const en = {
         ],
       },
     },
+  },
+  workshopsOverview: {
+    title: "Workshops & Training",
+    subtitle:
+      "From quick wins to strategy – practical AI know-how for your team",
+    workshops: [
+      {
+        title: "AI Low Hanging Fruits",
+        type: "Practical Workshop",
+        duration: "1-3 Days",
+        description:
+          "Identify immediately implementable AI applications in your company. Maximum value with minimal effort – no prior knowledge required.",
+        highlights: [
+          "Concrete use cases from your daily work",
+          "Hands-on with real tools",
+          "Immediately implementable results",
+        ],
+        cta: "View Workshop",
+        link: "/workshops/ai-low-hanging-fruits",
+        available: true,
+      },
+      {
+        title: "AI as a Tool – Strategy Training",
+        type: "Strategy Workshop",
+        duration: "0.5-1 Day",
+        description:
+          "Learn to recognize when AI makes sense and when it doesn't. Develop an intuition for meaningful AI use cases and avoid expensive misinvestments.",
+        highlights: [
+          "Decision framework for AI projects",
+          "Real case examples and lessons learned",
+          "ROI evaluation of AI initiatives",
+        ],
+        cta: "Interested? Contact",
+        comingSoon: true,
+        available: false,
+      },
+    ],
   },
   contact: {
     title: "Contact",
