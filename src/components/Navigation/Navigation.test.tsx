@@ -93,8 +93,9 @@ describe("Navigation", () => {
       renderNavigation();
 
       expect(screen.getByRole("img")).toBeInTheDocument();
-      expect(screen.getByText("Services")).toBeInTheDocument();
+      expect(screen.getByText("Statistiken")).toBeInTheDocument();
       expect(screen.getByText("Projekte")).toBeInTheDocument();
+      expect(screen.getByText("Workshops")).toBeInTheDocument();
       expect(screen.getByText("Über mich")).toBeInTheDocument();
     });
 
@@ -131,10 +132,10 @@ describe("Navigation", () => {
     it("should handle navigation link clicks", () => {
       renderNavigation();
 
-      const servicesLink = screen.getByText("Services");
-      fireEvent.click(servicesLink);
+      const workshopsLink = screen.getByText("Workshops");
+      fireEvent.click(workshopsLink);
 
-      expect(document.querySelector).toHaveBeenCalledWith("#services");
+      expect(document.querySelector).toHaveBeenCalledWith("#workshops");
       expect(window.scrollTo).toHaveBeenCalledWith({
         top: 400, // 500 - 100 (header height)
         behavior: "smooth",
@@ -201,11 +202,11 @@ describe("Navigation", () => {
       fireEvent.click(burgerButton);
 
       // Click navigation item
-      const servicesButton = screen.getByText("Services");
-      fireEvent.click(servicesButton);
+      const workshopsButton = screen.getByText("Workshops");
+      fireEvent.click(workshopsButton);
 
       // Should handle navigation and close drawer
-      expect(document.querySelector).toHaveBeenCalledWith("#services");
+      expect(document.querySelector).toHaveBeenCalledWith("#workshops");
       expect(window.scrollTo).toHaveBeenCalledWith({
         top: 400,
         behavior: "smooth",
@@ -335,18 +336,14 @@ describe("Navigation", () => {
 
       renderNavigation();
 
-      const servicesLink = screen.getByText("Services");
+      const workshopsLink = screen.getByText("Workshops");
 
-      expect(() => fireEvent.click(servicesLink)).not.toThrow();
+      expect(() => fireEvent.click(workshopsLink)).not.toThrow();
       expect(window.scrollTo).not.toHaveBeenCalled();
     });
 
     it("should navigate to all available sections", () => {
       renderNavigation();
-
-      // Test services navigation
-      fireEvent.click(screen.getByText("Services"));
-      expect(document.querySelector).toHaveBeenCalledWith("#services");
 
       // Test statistics navigation
       fireEvent.click(screen.getByText("Statistiken"));
@@ -355,6 +352,10 @@ describe("Navigation", () => {
       // Test projects navigation
       fireEvent.click(screen.getByText("Projekte"));
       expect(document.querySelector).toHaveBeenCalledWith("#projects");
+
+      // Test workshops navigation
+      fireEvent.click(screen.getByText("Workshops"));
+      expect(document.querySelector).toHaveBeenCalledWith("#workshops");
 
       // Test about navigation
       fireEvent.click(screen.getByText("Über mich"));
@@ -374,8 +375,8 @@ describe("Navigation", () => {
 
       renderNavigation();
 
-      const servicesLink = screen.getByText("Services");
-      fireEvent.click(servicesLink);
+      const workshopsLink = screen.getByText("Workshops");
+      fireEvent.click(workshopsLink);
 
       expect(window.scrollTo).toHaveBeenCalledWith({
         top: 700, // 800 - 100 (header height)
@@ -599,10 +600,10 @@ describe("Navigation", () => {
 
       renderNavigation();
 
-      const servicesLink = screen.getByText("Services");
+      const workshopsLink = screen.getByText("Workshops");
 
       // Should not throw error when element is not found
-      expect(() => fireEvent.click(servicesLink)).not.toThrow();
+      expect(() => fireEvent.click(workshopsLink)).not.toThrow();
       expect(window.scrollTo).not.toHaveBeenCalled();
     });
 
@@ -632,21 +633,23 @@ describe("Navigation", () => {
       renderNavigation();
 
       // Verify all navigation items are present and use translations
-      expect(screen.getByText("Services")).toBeInTheDocument();
       expect(screen.getByText("Statistiken")).toBeInTheDocument(); // t.navigation.statistics
       expect(screen.getByText("Projekte")).toBeInTheDocument();
+      expect(screen.getByText("Workshops")).toBeInTheDocument();
       expect(screen.getByText("Über mich")).toBeInTheDocument();
     });
 
     it("should have correct href attributes for navigation items", () => {
       renderNavigation();
 
-      const servicesLink = screen.getByText("Services").closest("a");
+      const statisticsLink = screen.getByText("Statistiken").closest("a");
       const projectsLink = screen.getByText("Projekte").closest("a");
+      const workshopsLink = screen.getByText("Workshops").closest("a");
       const aboutLink = screen.getByText("Über mich").closest("a");
 
-      expect(servicesLink).toHaveAttribute("href", "#services");
+      expect(statisticsLink).toHaveAttribute("href", "#statistics");
       expect(projectsLink).toHaveAttribute("href", "#projects");
+      expect(workshopsLink).toHaveAttribute("href", "#workshops");
       expect(aboutLink).toHaveAttribute("href", "#about");
     });
   });
@@ -670,7 +673,8 @@ describe("Navigation", () => {
       expect(screen.getByText("Agenda")).toBeInTheDocument();
 
       // Should NOT show main site navigation
-      expect(screen.queryByText("Services")).not.toBeInTheDocument();
+      expect(screen.queryByText("Statistiken")).not.toBeInTheDocument();
+      expect(screen.queryByText("Workshops")).not.toBeInTheDocument();
       expect(screen.queryByText("Projekte")).not.toBeInTheDocument();
     });
 

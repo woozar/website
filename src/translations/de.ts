@@ -3,6 +3,7 @@ export const de = {
     services: "Services",
     statistics: "Statistiken",
     projects: "Projekte",
+    workshops: "Workshops",
     about: "Über mich",
     contact: "Kontakt",
     contactAction: "Kontakt aufnehmen",
@@ -73,6 +74,8 @@ export const de = {
     description2:
       "Meine Expertise liegt in der Entwicklung von KI-basierten Anwendungen, der Implementierung von Cloud-Architekturen und der Erstellung von skalierbaren Full-Stack-Webanwendungen. Dabei lege ich besonderen Wert auf benutzerfreundliche Interfaces und performante Backend-Systeme.",
     description3:
+      "KI ist für mich ein Werkzeug – kein Allheilmittel. Ich helfe Unternehmen zu verstehen, wo KI echten Mehrwert liefert und wo klassische Softwareentwicklung die bessere Wahl ist. Diese pragmatische Herangehensweise sorgt für messbare Ergebnisse statt teurer Experimente.",
+    description4:
       "In meiner Laufbahn habe ich bereits für renommierte Unternehmen wie DMG Mori gearbeitet und dabei komplexe Smart Factories, Intranet-Modernisierung und Business Process Automation Projekte erfolgreich umgesetzt.",
     highlights: "Highlights",
     expertise: "Technische Expertise",
@@ -151,6 +154,43 @@ export const de = {
         ],
       },
     },
+  },
+  workshopsOverview: {
+    title: "Workshops & Training",
+    subtitle:
+      "Vom Quick Win zur Strategie – praktisches KI-Know-how für Ihr Team",
+    workshops: [
+      {
+        title: "AI Low Hanging Fruits",
+        type: "Praktischer Workshop",
+        duration: "1-3 Tage",
+        description:
+          "Identifizieren Sie sofort umsetzbare KI-Anwendungen in Ihrem Unternehmen. Maximaler Nutzen mit minimalem Aufwand – ohne Vorkenntnisse.",
+        highlights: [
+          "Konkrete Use Cases aus Ihrem Alltag",
+          "Hands-on mit echten Tools",
+          "Sofort umsetzbare Ergebnisse",
+        ],
+        cta: "Zum Workshop",
+        link: "/workshops/ai-low-hanging-fruits",
+        available: true,
+      },
+      {
+        title: "KI als Werkzeug – Strategie-Training",
+        type: "Strategie-Workshop",
+        duration: "0,5-1 Tag",
+        description:
+          "Lernen Sie zu erkennen, wann KI Sinn macht und wann nicht. Entwickeln Sie ein Gespür für sinnvolle KI-Einsatzgebiete und vermeiden Sie teure Fehlinvestitionen.",
+        highlights: [
+          "Entscheidungs-Framework für KI-Projekte",
+          "Reale Fallbeispiele und Lessons Learned",
+          "ROI-Bewertung von KI-Vorhaben",
+        ],
+        cta: "Interesse? Kontakt",
+        comingSoon: true,
+        available: false,
+      },
+    ],
   },
   contact: {
     title: "Kontakt",

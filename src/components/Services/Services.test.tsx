@@ -15,17 +15,6 @@ vi.mock("@/hooks/useMediaQuery");
 vi.mock("@/hooks/useTranslation");
 // framer-motion is globally mocked in test setup
 
-// Mock the image imports
-vi.mock("../../assets/ai-development.webp", () => ({
-  default: "/mock-ai-development.webp",
-}));
-vi.mock("../../assets/cloud-architecture.webp", () => ({
-  default: "/mock-cloud-architecture.webp",
-}));
-vi.mock("../../assets/fullstack-development.webp", () => ({
-  default: "/mock-fullstack-development.webp",
-}));
-
 const mockUseMediaQuery = vi.mocked(useMediaQuery);
 const mockUseTranslation = vi.mocked(useTranslation);
 
@@ -72,7 +61,7 @@ describe("Services", () => {
       screen.getByText(
         (content) =>
           content.includes("Entwicklung von KI-basierten Anwendungen") &&
-          content.includes("Large Language Models")
+          content.includes("modernsten Large Language Models")
       )
     ).toBeInTheDocument();
 
@@ -93,47 +82,6 @@ describe("Services", () => {
           ) && content.includes("React, Angular")
       )
     ).toBeInTheDocument();
-  });
-
-  it("should render service images", () => {
-    render(<Services />);
-
-    const images = screen.getAllByRole("img");
-    expect(images).toHaveLength(3);
-
-    expect(images[0]).toHaveAttribute("src", "/assets/ai-development.webp");
-    expect(images[1]).toHaveAttribute("src", "/assets/cloud-architecture.webp");
-    expect(images[2]).toHaveAttribute(
-      "src",
-      "/assets/fullstack-development.webp"
-    );
-  });
-
-  it("should render technologies lists", () => {
-    render(<Services />);
-
-    expect(screen.getAllByText("Technologien:")).toHaveLength(3); // One for each service
-
-    // AI technologies
-    expect(screen.getByText("OpenAI GPT-4")).toBeInTheDocument();
-    expect(screen.getByText("Anthropic Claude")).toBeInTheDocument();
-    expect(screen.getByText("Google Gemini")).toBeInTheDocument();
-    expect(screen.getByText("LangChain")).toBeInTheDocument();
-    expect(screen.getByText("Vercel AI")).toBeInTheDocument();
-
-    // Cloud technologies
-    expect(screen.getByText("AWS")).toBeInTheDocument();
-    expect(screen.getByText("Azure")).toBeInTheDocument();
-    expect(screen.getByText("Docker")).toBeInTheDocument();
-    expect(screen.getByText("Kubernetes")).toBeInTheDocument();
-    expect(screen.getByText("Terraform")).toBeInTheDocument();
-
-    // Full-stack technologies
-    expect(screen.getByText("React")).toBeInTheDocument();
-    expect(screen.getByText("Angular")).toBeInTheDocument();
-    expect(screen.getByText("Node.js")).toBeInTheDocument();
-    expect(screen.getByText("TypeScript")).toBeInTheDocument();
-    expect(screen.getByText("Next.js")).toBeInTheDocument();
   });
 
   it("should adapt layout for mobile devices", () => {
@@ -157,7 +105,6 @@ describe("Services", () => {
 
     expect(screen.getByText("Meine Services")).toBeInTheDocument();
     expect(screen.getByText("KI Development")).toBeInTheDocument();
-    expect(screen.getAllByText("Technologien:")).toHaveLength(3); // One for each service
   });
 
   it("should render with proper semantic structure", () => {
@@ -184,47 +131,9 @@ describe("Services", () => {
     const aiDescription = screen.getByText(
       (content) =>
         content.includes("Entwicklung von KI-basierten Anwendungen") &&
-        content.includes("Large Language Models")
+        content.includes("modernsten Large Language Models")
     );
     expect(aiDescription).toBeInTheDocument();
-  });
-
-  it("should render images with proper alt attributes", () => {
-    render(<Services />);
-
-    const images = screen.getAllByRole("img");
-
-    // Check that all images have alt attributes (exact text may vary)
-    images.forEach((img) => {
-      expect(img).toHaveAttribute("alt");
-    });
-  });
-
-  it("should render technology chips/badges correctly", () => {
-    render(<Services />);
-
-    // Check that technology names are rendered as individual elements
-    const technologies = [
-      "OpenAI GPT-4",
-      "Anthropic Claude",
-      "Google Gemini",
-      "LangChain",
-      "Vercel AI",
-      "AWS",
-      "Azure",
-      "Docker",
-      "Kubernetes",
-      "Terraform",
-      "React",
-      "Angular",
-      "Node.js",
-      "TypeScript",
-      "Next.js",
-    ];
-
-    technologies.forEach((tech) => {
-      expect(screen.getByText(tech)).toBeInTheDocument();
-    });
   });
 
   it("should render services in correct order", () => {
