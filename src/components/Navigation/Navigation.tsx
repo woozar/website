@@ -12,7 +12,7 @@ import {
   Text,
 } from "@mantine/core";
 
-import { IconFileText, IconMail } from "@tabler/icons-react";
+import { IconFileText } from "@tabler/icons-react";
 
 import { useLocation } from "react-router-dom";
 
@@ -20,6 +20,7 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useModal } from "@/hooks/useModal";
 import { useTranslation } from "@/hooks/useTranslation";
 
+import { CtaButton } from "../CtaButton.tsx";
 import { LanguageSwitcher } from "../LanguageSwitcher";
 import { Container } from "../Layout";
 import { ThemeSwitcher } from "../ThemeSwitcher";
@@ -196,6 +197,13 @@ export const Navigation = () => {
                   </Anchor>
                 ))}
 
+                {/* CTA Button */}
+                <CtaButton
+                  onClick={() => handleNavClick("#contact")}
+                  variant="desktop"
+                  isTablet={isTablet}
+                />
+
                 {/* Theme & Language Switchers */}
                 {!isTablet && (
                   <Group gap="xs">
@@ -203,34 +211,6 @@ export const Navigation = () => {
                     <LanguageSwitcher variant="desktop" />
                   </Group>
                 )}
-
-                {/* CTA Button */}
-                <Button
-                  variant="filled"
-                  leftSection={<IconMail size={18} />}
-                  style={{
-                    background:
-                      "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
-                    border: "none",
-                    fontSize: isTablet ? "0.85rem" : "0.9rem",
-                    fontWeight: 600,
-                    padding: isTablet ? "0.5rem 1rem" : "0.6rem 1.2rem",
-                    borderRadius: "2rem",
-                    boxShadow: "0 4px 15px rgba(255, 107, 53, 0.3)",
-                    transition: "all 0.2s ease",
-                  }}
-                  styles={{
-                    root: {
-                      "&:hover": {
-                        transform: "translateY(-2px)",
-                        boxShadow: "0 6px 20px rgba(255, 107, 53, 0.4)",
-                      },
-                    },
-                  }}
-                  onClick={() => handleNavClick("#contact")}
-                >
-                  {t.navigation.contact}
-                </Button>
               </Group>
             )}
 
@@ -238,20 +218,10 @@ export const Navigation = () => {
             {isMobile && (
               <Group gap="md" align="center">
                 {/* Mobile CTA */}
-                <Button
-                  variant="filled"
-                  size="sm"
-                  leftSection={<IconMail size={16} />}
-                  style={{
-                    background:
-                      "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
-                    border: "none",
-                    borderRadius: "1.5rem",
-                  }}
+                <CtaButton
                   onClick={() => handleNavClick("#contact")}
-                >
-                  {t.navigation.contact}
-                </Button>
+                  variant="mobile"
+                />
 
                 <Burger
                   opened={drawerOpened}

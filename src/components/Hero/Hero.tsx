@@ -1,6 +1,6 @@
 import { Box, Button, Group, Image, Stack, Text, Title } from "@mantine/core";
 
-import { IconDownload, IconMail } from "@tabler/icons-react";
+import { IconDownload } from "@tabler/icons-react";
 
 import { Variants, motion } from "framer-motion";
 
@@ -9,6 +9,7 @@ import { useModal } from "@/hooks/useModal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 
+import { CtaButton } from "../CtaButton.tsx";
 import { Section } from "../Layout";
 
 // import heroPortrait from '../../assets/hero-portrait.webp';
@@ -181,20 +182,12 @@ export const Hero = () => {
                   whileHover="hover"
                   whileTap="tap"
                 >
-                  <Button
-                    size="lg"
-                    variant="filled"
-                    leftSection={<IconMail size={20} />}
-                    style={{
-                      background:
-                        "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
-                      border: "none",
-                      fontSize: "1rem",
-                    }}
+                  <CtaButton
+                    variant="hero"
                     onClick={() => handleNavClick("#contact")}
                   >
                     {t.hero.contactButton}
-                  </Button>
+                  </CtaButton>
                 </motion.div>
 
                 <motion.div
