@@ -150,6 +150,14 @@ export const About = () => {
                 >
                   {t.about.description3}
                 </Text>
+
+                <Text
+                  size="md"
+                  c="var(--text-secondary)"
+                  style={{ lineHeight: 1.7 }}
+                >
+                  {t.about.description4}
+                </Text>
               </Stack>
             </motion.div>
 
