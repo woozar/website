@@ -14,6 +14,7 @@ import { ProjectsSection } from "./components/Projects/ProjectsSection";
 import { SEOHead } from "./components/SEO/SEOHead";
 import { Services } from "./components/Services";
 import { WorkshopLandingPage } from "./components/Workshops/WorkshopLandingPage";
+import { WorkshopsOverview } from "./components/Workshops/WorkshopsOverview";
 import { ModalProvider } from "./contexts/ModalContext";
 import { useLanguageStore } from "./stores/languageStore";
 
@@ -32,6 +33,7 @@ const HomePage = () => {
       >
         <Hero />
         <Services />
+        <WorkshopsOverview />
         <ProjectStats />
         <ProjectsSection />
         <About />
