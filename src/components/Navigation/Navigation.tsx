@@ -63,10 +63,10 @@ export const Navigation = () => {
         { label: t.navigation.workshop.contact, href: "#contact" },
       ]
     : [
+        { label: t.navigation.services, href: "#services" },
+        { label: t.navigation.workshops, href: "#workshops" },
         { label: t.navigation.statistics, href: "#statistics" },
         { label: t.navigation.projects, href: "#projects" },
-        { label: t.navigation.workshops, href: "#workshops" },
-        { label: t.navigation.about, href: "#about" },
       ];
 
   const handleNavClick = (href: string) => {
@@ -305,12 +305,6 @@ export const Navigation = () => {
             </Button>
           ))}
 
-          {/* Theme Switcher */}
-          <ThemeSwitcher variant="mobile" />
-
-          {/* Language Switcher */}
-          <LanguageSwitcher variant="mobile" />
-
           <Button
             variant="filled"
             fullWidth
@@ -321,12 +315,19 @@ export const Navigation = () => {
               height: "50px",
               fontSize: "1rem",
               fontWeight: 600,
-              marginTop: "1rem",
             }}
             onClick={() => handleNavClick("#contact")}
           >
             {t.navigation.contactAction}
           </Button>
+
+          {/* Theme Switcher */}
+          <Box mt="xl">
+            <ThemeSwitcher variant="mobile" />
+          </Box>
+
+          {/* Language Switcher */}
+          <LanguageSwitcher variant="mobile" />
         </Stack>
       </Drawer>
 

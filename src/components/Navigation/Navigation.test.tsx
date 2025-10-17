@@ -93,10 +93,10 @@ describe("Navigation", () => {
       renderNavigation();
 
       expect(screen.getByRole("img")).toBeInTheDocument();
+      expect(screen.getByText("Services")).toBeInTheDocument();
+      expect(screen.getByText("Workshops")).toBeInTheDocument();
       expect(screen.getByText("Statistiken")).toBeInTheDocument();
       expect(screen.getByText("Projekte")).toBeInTheDocument();
-      expect(screen.getByText("Workshops")).toBeInTheDocument();
-      expect(screen.getByText("Über mich")).toBeInTheDocument();
     });
 
     it("should render logo with correct attributes", () => {
@@ -274,10 +274,10 @@ describe("Navigation", () => {
       // Re-open drawer since clicking closes it
       fireEvent.click(burgerButton);
 
-      // Test about navigation item in mobile drawer
-      const aboutButton = screen.getByText("Über mich");
-      fireEvent.click(aboutButton);
-      expect(document.querySelector).toHaveBeenCalledWith("#about");
+      // Test services navigation item in mobile drawer
+      const servicesButton = screen.getByText("Services");
+      fireEvent.click(servicesButton);
+      expect(document.querySelector).toHaveBeenCalledWith("#services");
       expect(window.scrollTo).toHaveBeenCalledWith({
         top: 400,
         behavior: "smooth",
@@ -324,8 +324,8 @@ describe("Navigation", () => {
     it("should handle German language translations", () => {
       renderNavigation();
 
+      expect(screen.getByText("Services")).toBeInTheDocument();
       expect(screen.getByText("Projekte")).toBeInTheDocument();
-      expect(screen.getByText("Über mich")).toBeInTheDocument();
       expect(screen.getByText("Kontakt")).toBeInTheDocument();
     });
   });
@@ -345,6 +345,14 @@ describe("Navigation", () => {
     it("should navigate to all available sections", () => {
       renderNavigation();
 
+      // Test services navigation
+      fireEvent.click(screen.getByText("Services"));
+      expect(document.querySelector).toHaveBeenCalledWith("#services");
+
+      // Test workshops navigation
+      fireEvent.click(screen.getByText("Workshops"));
+      expect(document.querySelector).toHaveBeenCalledWith("#workshops");
+
       // Test statistics navigation
       fireEvent.click(screen.getByText("Statistiken"));
       expect(document.querySelector).toHaveBeenCalledWith("#statistics");
@@ -352,14 +360,6 @@ describe("Navigation", () => {
       // Test projects navigation
       fireEvent.click(screen.getByText("Projekte"));
       expect(document.querySelector).toHaveBeenCalledWith("#projects");
-
-      // Test workshops navigation
-      fireEvent.click(screen.getByText("Workshops"));
-      expect(document.querySelector).toHaveBeenCalledWith("#workshops");
-
-      // Test about navigation
-      fireEvent.click(screen.getByText("Über mich"));
-      expect(document.querySelector).toHaveBeenCalledWith("#about");
 
       // Test contact navigation
       fireEvent.click(screen.getByText("Kontakt"));
@@ -633,24 +633,24 @@ describe("Navigation", () => {
       renderNavigation();
 
       // Verify all navigation items are present and use translations
+      expect(screen.getByText("Services")).toBeInTheDocument(); // t.navigation.services
+      expect(screen.getByText("Workshops")).toBeInTheDocument();
       expect(screen.getByText("Statistiken")).toBeInTheDocument(); // t.navigation.statistics
       expect(screen.getByText("Projekte")).toBeInTheDocument();
-      expect(screen.getByText("Workshops")).toBeInTheDocument();
-      expect(screen.getByText("Über mich")).toBeInTheDocument();
     });
 
     it("should have correct href attributes for navigation items", () => {
       renderNavigation();
 
+      const servicesLink = screen.getByText("Services").closest("a");
+      const workshopsLink = screen.getByText("Workshops").closest("a");
       const statisticsLink = screen.getByText("Statistiken").closest("a");
       const projectsLink = screen.getByText("Projekte").closest("a");
-      const workshopsLink = screen.getByText("Workshops").closest("a");
-      const aboutLink = screen.getByText("Über mich").closest("a");
 
+      expect(servicesLink).toHaveAttribute("href", "#services");
+      expect(workshopsLink).toHaveAttribute("href", "#workshops");
       expect(statisticsLink).toHaveAttribute("href", "#statistics");
       expect(projectsLink).toHaveAttribute("href", "#projects");
-      expect(workshopsLink).toHaveAttribute("href", "#workshops");
-      expect(aboutLink).toHaveAttribute("href", "#about");
     });
   });
 
