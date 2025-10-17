@@ -15,6 +15,7 @@ import {
   IconBrandGithub,
   IconBrandLinkedin,
   IconBrandStackoverflow,
+  IconBrandXing,
   IconMail,
   IconMapPin,
   IconPhone,
@@ -87,6 +88,11 @@ export const Contact = () => {
       icon: IconBrandLinkedin,
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/johannes-herrmann-795550128/",
+    },
+    {
+      icon: IconBrandXing,
+      label: "Xing",
+      href: "https://www.xing.com/profile/Johannes_Herrmann14",
     },
     {
       icon: IconBrandGithub,
