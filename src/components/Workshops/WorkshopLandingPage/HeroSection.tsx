@@ -19,6 +19,11 @@ export const HeroSection = ({ itemVariants }: HeroSectionProps) => {
   const [frontHeight, setFrontHeight] = useState<number>(300);
 
   useEffect(() => {
+    // SSR safety check
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const updateHeight = () => {
       if (frontRef.current) {
         // Measure the natural height of the front content
@@ -40,6 +45,11 @@ export const HeroSection = ({ itemVariants }: HeroSectionProps) => {
   }, []);
 
   const handleScrollToContact = () => {
+    // SSR safety check
+    if (typeof document === "undefined" || typeof window === "undefined") {
+      return;
+    }
+
     const contactSection = document.querySelector("#contact");
     if (contactSection) {
       const headerHeight = 100;
@@ -58,7 +68,10 @@ export const HeroSection = ({ itemVariants }: HeroSectionProps) => {
         style={{
           display: "flex",
           gap: "2rem",
-          alignItems: window.innerWidth >= 1024 ? "flex-start" : "center",
+          alignItems:
+            typeof window !== "undefined" && window.innerWidth >= 1024
+              ? "flex-start"
+              : "center",
           flexDirection: isMobile ? "column" : "row",
         }}
       >

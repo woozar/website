@@ -10,8 +10,13 @@ interface LanguageStore {
 
 // Function to detect browser language
 const detectBrowserLanguage = (): Language => {
+  // SSR safety check
+  if (typeof navigator === "undefined") {
+    return "en"; // Default to English for SSR
+  }
+
   const browserLanguage =
-    navigator.language || navigator.languages?.[0] || "de";
+    navigator.language || navigator.languages?.[0] || "en";
 
   // Check if browser language is English
   if (browserLanguage.toLowerCase().startsWith("en")) {

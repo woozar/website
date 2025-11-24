@@ -6,10 +6,15 @@ export const useMediaQuery = (): MediaQueries => {
   const [mediaQueries, setMediaQueries] = useState<MediaQueries>({
     isMobile: false,
     isTablet: false,
-    isDesktop: false,
+    isDesktop: true, // Default to desktop for SSR
   });
 
   useEffect(() => {
+    // SSR safety check
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const updateMediaQueries = () => {
       const width = window.innerWidth;
       setMediaQueries({

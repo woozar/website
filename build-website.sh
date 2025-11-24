@@ -20,4 +20,7 @@ cd dist
 zip -r ../website.zip .
 cd ..
 
+echo "🗑️  Cleaning up dist-server folder..."
+rm -rf dist-server
+
 echo "✅ Build complete! website.zip created in root folder."

@@ -21,21 +21,27 @@ export const ImageModal = () => {
       setIsImageLoaded(false);
       setModalOpened(true);
       // Hide body scroll when modal opens
-      document.body.style.overflow = "hidden";
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "hidden";
+      }
     }
   }, [imageModalData]);
 
   useEffect(() => {
     return () => {
       // Cleanup: restore scroll when component unmounts
-      document.body.style.overflow = "unset";
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "unset";
+      }
     };
   }, []);
 
   const handleClose = () => {
     setModalOpened(false);
     // Restore body scroll immediately when closing
-    document.body.style.overflow = "unset";
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = "unset";
+    }
     // Delay clearing the image data until modal close animation is complete
     setTimeout(() => {
       setCurrentImageData(null);

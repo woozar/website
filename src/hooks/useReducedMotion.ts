@@ -17,11 +17,16 @@ export const useReducedMotion = () => {
   const systemReducedMotion = useFramerReducedMotion();
 
   const shouldReduceMotion = useMemo(() => {
+    // SSR safety check
+    if (typeof window === "undefined") {
+      return systemReducedMotion;
+    }
+
     // Check for query parameter
     const urlParams = new URLSearchParams(window.location.search);
-    const noMotionParam = urlParams.get("no-motion");
 
     if (urlParams.has("no-motion")) {
+      const noMotionParam = urlParams.get("no-motion");
       // If no-motion parameter is present, it overrides system preference
       // Only "false" and "0" explicitly disable motion reduction
       return noMotionParam !== "false" && noMotionParam !== "0";

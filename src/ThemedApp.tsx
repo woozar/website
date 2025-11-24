@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 
 import { MantineProvider, createTheme } from "@mantine/core";
 
@@ -37,19 +37,33 @@ const theme = createTheme({
   primaryColor: "orange",
 });
 
-export function ThemedApp() {
+interface AppProviderProps {
+  children: ReactNode;
+}
+
+export function AppProvider({ children }: AppProviderProps) {
   const currentTheme = useThemeStore((state) => state.theme);
 
   useEffect(() => {
     // Set initial data attribute on mount
-    document.documentElement.setAttribute("data-theme", currentTheme);
+    if (typeof document !== "undefined") {
+      document.documentElement.setAttribute("data-theme", currentTheme);
+    }
   }, [currentTheme]);
 
   return (
     <MantineProvider theme={theme} forceColorScheme={currentTheme}>
+      {children}
+    </MantineProvider>
+  );
+}
+
+export function ThemedApp() {
+  return (
+    <AppProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </MantineProvider>
+    </AppProvider>
   );
 }
