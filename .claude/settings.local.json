@@ -19,6 +19,7 @@
       "Bash(magick:*)",
       "Bash(mkdir:*)",
       "Bash(mv:*)",
+      "Bash(npm audit:*)",
       "Bash(npm install:*)",
       "Bash(npm run build:*)",
       "Bash(npm run dev:*)",
@@ -33,7 +34,9 @@
       "Bash(npm test)",
       "Bash(npx tsc:*)",
       "mcp__ide__getDiagnostics",
-      "WebFetch(domain:12ofspades.com)"
+      "WebFetch(domain:12ofspades.com)",
+      "WebFetch(domain:vike.dev)",
+      "WebSearch"
     ],
     "deny": []
   }
