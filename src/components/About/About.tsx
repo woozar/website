@@ -191,8 +191,8 @@ export const About = () => {
                       </ThemeIcon>
                     }
                   >
-                    {t.about.highlightsList.map((highlight, index) => (
-                      <List.Item key={index}>
+                    {t.about.highlightsList.map((highlight) => (
+                      <List.Item key={highlight}>
                         <Text size="sm" c="var(--text-secondary)">
                           {highlight}
                         </Text>

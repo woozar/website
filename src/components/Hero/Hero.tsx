@@ -12,7 +12,6 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { CtaButton } from "../CtaButton.tsx";
 import { Section } from "../Layout";
 
-// import heroPortrait from '../../assets/hero-portrait.webp';
 const heroPortrait = "/assets/hero-portrait.webp";
 
 export const Hero = () => {
@@ -103,12 +102,8 @@ export const Hero = () => {
           justify="space-between"
           gap="xl"
           style={{
-            flexDirection: isMobile
-              ? "column-reverse"
-              : isTablet
-                ? "column-reverse"
-                : "row",
-            textAlign: isMobile ? "center" : isTablet ? "center" : "left",
+            flexDirection: isMobile || isTablet ? "column-reverse" : "row",
+            textAlign: isMobile || isTablet ? "center" : "left",
           }}
         >
           {/* Content */}
@@ -147,10 +142,10 @@ export const Hero = () => {
 
             <motion.div variants={itemVariants}>
               <Stack gap="sm">
-                {t.hero.description.map((descItem, index) => {
+                {t.hero.description.map((descItem) => {
                   return (
                     <Text
-                      key={index}
+                      key={descItem.highlight}
                       size={isMobile ? "md" : "lg"}
                       c="var(--text-secondary)"
                       style={{ lineHeight: 1.7 }}

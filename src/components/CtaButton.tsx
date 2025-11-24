@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 import { Button, ButtonProps } from "@mantine/core";
 
-import { IconMail } from "@tabler/icons-react";
+import { IconMail, IconProps } from "@tabler/icons-react";
 
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -16,6 +16,19 @@ interface CtaButtonProps {
   fullWidth?: boolean;
   component?: "button" | "a";
   href?: string;
+}
+
+function getSizeForVariant(
+  variant: CtaButtonProps["variant"]
+): IconProps["size"] {
+  switch (variant) {
+    case "mobile":
+      return 16;
+    case "hero":
+      return 20;
+    default:
+      return 18;
+  }
 }
 
 export const CtaButton = ({
@@ -32,7 +45,15 @@ export const CtaButton = ({
   const { t } = useTranslation();
 
   const defaultIcon = leftSection ?? (
-    <IconMail size={variant === "mobile" ? 16 : variant === "hero" ? 20 : 18} />
+    <IconMail
+      size={
+        getSizeForVariant(variant) === "mobile"
+          ? 16
+          : variant === "hero"
+            ? 20
+            : 18
+      }
+    />
   );
   const buttonText = children ?? t.navigation.contact;
 

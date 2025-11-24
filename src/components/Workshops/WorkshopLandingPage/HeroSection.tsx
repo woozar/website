@@ -201,7 +201,7 @@ export const HeroSection = ({ itemVariants }: HeroSectionProps) => {
                     justifyContent: isMobile ? "center" : "space-between",
                     gap: "1rem",
                     marginTop: "1rem",
-                    flexDirection: isMobile ? "row" : "row",
+                    flexDirection: "row",
                   }}
                 >
                   {!isMobile && (
