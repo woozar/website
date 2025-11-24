@@ -23,13 +23,21 @@ export const ProcessVisualization = ({ story }: ProcessVisualizationProps) => {
   const shouldReduceMotionRaw = useReducedMotion();
   const shouldReduceMotion = shouldReduceMotionRaw ?? false;
   const [isDesktopLayout, setIsDesktopLayout] = useState(
-    () => window.innerWidth >= 1280
+    () => (typeof window !== "undefined" ? window.innerWidth >= 1280 : true) // Default to desktop for SSR
   );
 
   useEffect(() => {
+    // SSR safety check
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const handleResize = () => {
       setIsDesktopLayout(window.innerWidth >= 1280);
     };
+
+    // Set initial value
+    handleResize();
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);

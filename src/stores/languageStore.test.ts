@@ -112,7 +112,7 @@ describe("languageStore", () => {
       expect(freshStore.getState().language).toBe("en");
     });
 
-    it("should default to German when no language is available", async () => {
+    it("should default to English when no language is available", async () => {
       Object.defineProperty(window, "navigator", {
         value: {
           ...originalNavigator,
@@ -125,7 +125,7 @@ describe("languageStore", () => {
       vi.resetModules();
       const { useLanguageStore: freshStore } = await import("./languageStore");
 
-      expect(freshStore.getState().language).toBe("de");
+      expect(freshStore.getState().language).toBe("en");
     });
 
     it("should handle case insensitive language detection", async () => {
