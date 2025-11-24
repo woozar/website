@@ -25,4 +25,5 @@ dist-server
 *.sw?
 coverage/
 *.zip
+.scannerwork
 
