@@ -5,7 +5,6 @@ import { Stack, Text, Title } from "@mantine/core";
 import { motion } from "framer-motion";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { useProjects } from "@/hooks/useProjects";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useFilterStore } from "@/stores/filterStore";
@@ -16,8 +15,8 @@ import { ProjectCard } from "./ProjectCard";
 
 export const ProjectsSection = () => {
   const { isMobile } = useMediaQuery();
-  const { projects } = useProjects();
   const { t } = useTranslation();
+  const projects = t.projectsData;
   const { selectedTags, selectedCustomer } = useFilterStore();
   const shouldReduceMotion = useReducedMotion();
 
