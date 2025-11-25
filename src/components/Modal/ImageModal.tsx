@@ -89,9 +89,7 @@ export const ImageModal = () => {
           minHeight: "300px",
         }}
       >
-        {/* Close Button */}
-        <Box
-          role="button"
+        <button
           tabIndex={0}
           aria-label="Modal schließen"
           style={{
@@ -108,6 +106,8 @@ export const ImageModal = () => {
             color: "white",
             borderRadius: "50%",
             transition: "all 0.2s ease",
+            border: 0,
+            background: "transparent",
           }}
           onClick={handleClose}
           onKeyDown={(e) => {
@@ -126,7 +126,7 @@ export const ImageModal = () => {
           }}
         >
           <IconX size={24} />
-        </Box>
+        </button>
 
         {/* Image */}
         <img

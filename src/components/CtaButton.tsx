@@ -45,15 +45,7 @@ export const CtaButton = ({
   const { t } = useTranslation();
 
   const defaultIcon = leftSection ?? (
-    <IconMail
-      size={
-        getSizeForVariant(variant) === "mobile"
-          ? 16
-          : variant === "hero"
-            ? 20
-            : 18
-      }
-    />
+    <IconMail size={getSizeForVariant(variant)} />
   );
   const buttonText = children ?? t.navigation.contact;
 

@@ -90,6 +90,18 @@ export const Hero = () => {
     tap: { scale: shouldReduceMotion ? 1 : 0.95 },
   };
 
+  function getFontSize() {
+    if (isMobile) return "2.5rem";
+    if (isTablet) return "3rem";
+    return "3.5rem";
+  }
+
+  function getPortraitSize() {
+    if (isMobile) return "200px";
+    if (isTablet) return "250px";
+    return "300px";
+  }
+
   return (
     <Section>
       <motion.div
@@ -113,11 +125,7 @@ export const Hero = () => {
                 <Title
                   order={1}
                   style={{
-                    fontSize: isMobile
-                      ? "2.5rem"
-                      : isTablet
-                        ? "3rem"
-                        : "3.5rem",
+                    fontSize: getFontSize(),
                     fontWeight: 800,
                     lineHeight: 1.1,
                     background:
@@ -237,8 +245,8 @@ export const Hero = () => {
                   src={heroPortrait}
                   alt="Johannes Herrmann - Software Freelancer"
                   style={{
-                    width: isMobile ? "200px" : isTablet ? "250px" : "300px",
-                    height: isMobile ? "200px" : isTablet ? "250px" : "300px",
+                    width: getPortraitSize(),
+                    height: getPortraitSize(),
                     objectFit: "cover",
                     borderRadius: "50%",
                     border: "4px solid var(--primary-orange)",
