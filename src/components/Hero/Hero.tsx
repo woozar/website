@@ -12,7 +12,6 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { CtaButton } from "../CtaButton.tsx";
 import { Section } from "../Layout";
 
-// import heroPortrait from '../../assets/hero-portrait.webp';
 const heroPortrait = "/assets/hero-portrait.webp";
 
 export const Hero = () => {
@@ -91,6 +90,18 @@ export const Hero = () => {
     tap: { scale: shouldReduceMotion ? 1 : 0.95 },
   };
 
+  function getFontSize() {
+    if (isMobile) return "2.5rem";
+    if (isTablet) return "3rem";
+    return "3.5rem";
+  }
+
+  function getPortraitSize() {
+    if (isMobile) return "200px";
+    if (isTablet) return "250px";
+    return "300px";
+  }
+
   return (
     <Section>
       <motion.div
@@ -103,12 +114,8 @@ export const Hero = () => {
           justify="space-between"
           gap="xl"
           style={{
-            flexDirection: isMobile
-              ? "column-reverse"
-              : isTablet
-                ? "column-reverse"
-                : "row",
-            textAlign: isMobile ? "center" : isTablet ? "center" : "left",
+            flexDirection: isMobile || isTablet ? "column-reverse" : "row",
+            textAlign: isMobile || isTablet ? "center" : "left",
           }}
         >
           {/* Content */}
@@ -118,11 +125,7 @@ export const Hero = () => {
                 <Title
                   order={1}
                   style={{
-                    fontSize: isMobile
-                      ? "2.5rem"
-                      : isTablet
-                        ? "3rem"
-                        : "3.5rem",
+                    fontSize: getFontSize(),
                     fontWeight: 800,
                     lineHeight: 1.1,
                     background:
@@ -147,10 +150,10 @@ export const Hero = () => {
 
             <motion.div variants={itemVariants}>
               <Stack gap="sm">
-                {t.hero.description.map((descItem, index) => {
+                {t.hero.description.map((descItem) => {
                   return (
                     <Text
-                      key={index}
+                      key={descItem.highlight}
                       size={isMobile ? "md" : "lg"}
                       c="var(--text-secondary)"
                       style={{ lineHeight: 1.7 }}
@@ -242,8 +245,8 @@ export const Hero = () => {
                   src={heroPortrait}
                   alt="Johannes Herrmann - Software Freelancer"
                   style={{
-                    width: isMobile ? "200px" : isTablet ? "250px" : "300px",
-                    height: isMobile ? "200px" : isTablet ? "250px" : "300px",
+                    width: getPortraitSize(),
+                    height: getPortraitSize(),
                     objectFit: "cover",
                     borderRadius: "50%",
                     border: "4px solid var(--primary-orange)",

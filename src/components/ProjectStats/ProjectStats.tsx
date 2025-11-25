@@ -21,7 +21,6 @@ import {
 import { motion } from "framer-motion";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { useProjects } from "@/hooks/useProjects";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useFilterStore } from "@/stores/filterStore";
@@ -34,7 +33,7 @@ import { FlippableStatCard } from "./FlippableStatCard";
 export const ProjectStats = () => {
   const { isMobile } = useMediaQuery();
   const { t } = useTranslation();
-  const { projects } = useProjects();
+  const projects = t.projectsData;
   const shouldReduceMotion = useReducedMotion();
   const { setCustomerFilter } = useFilterStore();
 

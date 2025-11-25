@@ -41,7 +41,7 @@ interface AppProviderProps {
   children: ReactNode;
 }
 
-export function AppProvider({ children }: AppProviderProps) {
+export function AppProvider({ children }: Readonly<AppProviderProps>) {
   const currentTheme = useThemeStore((state) => state.theme);
 
   useEffect(() => {

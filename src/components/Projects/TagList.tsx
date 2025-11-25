@@ -33,8 +33,12 @@ export const TagList = ({
   // Combine and sort tags: primary first, then secondary, both alphabetically sorted
   // Remove duplicates - if a tag exists in both arrays, prioritize primary
   // Also deduplicate within each array
-  const uniquePrimaryTags = [...new Set(primaryTags || [])].sort();
-  const uniqueSecondaryTags = [...new Set(secondaryTags || [])].sort();
+  const uniquePrimaryTags = [...new Set(primaryTags || [])].sort((a, b) =>
+    a.localeCompare(b)
+  );
+  const uniqueSecondaryTags = [...new Set(secondaryTags || [])].sort((a, b) =>
+    a.localeCompare(b)
+  );
   const filteredSecondaryTags = uniqueSecondaryTags.filter(
     (tag) => !uniquePrimaryTags.includes(tag)
   );

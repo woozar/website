@@ -141,7 +141,9 @@ export const calculateProjectStats = (projects: Project[]): ProjectStats => {
     totalFrameworks: frameworks.size,
     topTechnologies,
     primaryTagStats,
-    companiesWorkedWith: Array.from(companies).sort(),
+    companiesWorkedWith: Array.from(companies).sort((a, b) =>
+      a.localeCompare(b)
+    ),
     yearRange,
     categoryBreakdown: Object.fromEntries(categories),
   };

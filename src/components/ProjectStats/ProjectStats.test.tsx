@@ -6,8 +6,9 @@ import { useReducedMotion } from "framer-motion";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 // Import after mocking
-import { useProjects } from "@/hooks/useProjects";
+import { useTranslation } from "@/hooks/useTranslation";
 import { customRender as render } from "@/test/render";
+import { de } from "@/translations/de";
 
 import { ProjectStats } from "./ProjectStats";
 
@@ -15,7 +16,7 @@ import { ProjectStats } from "./ProjectStats";
 
 // Mock dependencies
 vi.mock("@/hooks/useMediaQuery");
-vi.mock("@/hooks/useProjects");
+vi.mock("@/hooks/useTranslation");
 
 // Mock CompanyLogos component
 vi.mock("./CompanyLogos", () => ({
@@ -49,24 +50,10 @@ describe("ProjectStats", () => {
       isDesktop: true,
     });
 
-    // Set default mock for useProjects
-    vi.mocked(useProjects).mockReturnValue({
-      projects: [
-        {
-          customer: "Test Company A",
-          title: "Test Project 1",
-          description: ["Test description"],
-          primary_tags: ["React", "TypeScript"],
-          tags: ["Node.js", "AWS"],
-        },
-        {
-          customer: "Test Company B",
-          title: "Test Project 2",
-          description: ["Test description"],
-          primary_tags: ["Angular", "TypeScript"],
-          tags: ["Docker", "Azure"],
-        },
-      ],
+    // Set default mock for useTranslation with real German translations
+    vi.mocked(useTranslation).mockReturnValue({
+      t: de,
+      language: "de",
     });
 
     // Mock DOM methods
@@ -86,9 +73,11 @@ describe("ProjectStats", () => {
   it("should render project statistics section", () => {
     render(<ProjectStats />);
 
-    expect(screen.getByText("Project Statistics")).toBeInTheDocument();
+    expect(screen.getByText("Projekt-Statistiken")).toBeInTheDocument();
     expect(
-      screen.getByText("Quantified expertise based on real project experience")
+      screen.getByText(
+        "Quantifizierte Expertise basierend auf realer Projekterfahrung"
+      )
     ).toBeInTheDocument();
   });
 
@@ -96,23 +85,23 @@ describe("ProjectStats", () => {
     render(<ProjectStats />);
 
     // Check that all stat card content is displayed
-    expect(screen.getByText("Total Projects")).toBeInTheDocument();
-    expect(screen.getByText("Technologies")).toBeInTheDocument();
+    expect(screen.getByText("Gesamt-Projekte")).toBeInTheDocument();
+    expect(screen.getByText("Technologien")).toBeInTheDocument();
     expect(screen.getByText("Frameworks")).toBeInTheDocument();
-    expect(screen.getByText("Companies")).toBeInTheDocument();
-    expect(screen.getByText("Years Experience")).toBeInTheDocument();
+    expect(screen.getByText("Unternehmen")).toBeInTheDocument();
+    expect(screen.getByText("Jahre Erfahrung")).toBeInTheDocument();
 
     // Check that the grid is rendered (stat cards are in a SimpleGrid)
     // This is a more robust test that doesn't depend on exact values
-    expect(screen.getByText("Total Projects")).toBeInTheDocument();
-    expect(screen.getByText("Technologies")).toBeInTheDocument();
+    expect(screen.getByText("Gesamt-Projekte")).toBeInTheDocument();
+    expect(screen.getByText("Technologien")).toBeInTheDocument();
   });
 
   it("should render company logos section", () => {
     render(<ProjectStats />);
 
     expect(
-      screen.getByText("Trusted by Leading Companies")
+      screen.getByText("Erfolgreich zusammengearbeitet mit")
     ).toBeInTheDocument();
     // CompanyLogos component is tested separately in CompanyLogos.test.tsx
   });
@@ -144,7 +133,7 @@ describe("ProjectStats", () => {
     render(<ProjectStats />);
 
     // Just verify that the Total Projects card is rendered
-    expect(screen.getByText("Total Projects")).toBeInTheDocument();
+    expect(screen.getByText("Gesamt-Projekte")).toBeInTheDocument();
   });
 
   it("should show years experience", () => {
@@ -177,14 +166,14 @@ describe("ProjectStats", () => {
     it("should use reduced motion setting", () => {
       render(<ProjectStats />);
 
-      expect(screen.getByText("Project Statistics")).toBeInTheDocument();
+      expect(screen.getByText("Projekt-Statistiken")).toBeInTheDocument();
     });
 
     it("should render motion elements", () => {
       render(<ProjectStats />);
 
-      expect(screen.getByText("Project Statistics")).toBeInTheDocument();
-      expect(screen.getByText("Total Projects")).toBeInTheDocument();
+      expect(screen.getByText("Projekt-Statistiken")).toBeInTheDocument();
+      expect(screen.getByText("Gesamt-Projekte")).toBeInTheDocument();
     });
 
     it("should handle reduced motion animations", () => {
@@ -193,9 +182,9 @@ describe("ProjectStats", () => {
       render(<ProjectStats />);
 
       // Component should still render normally with reduced motion
-      expect(screen.getByText("Project Statistics")).toBeInTheDocument();
-      expect(screen.getByText("Total Projects")).toBeInTheDocument();
-      expect(screen.getByText("Technologies")).toBeInTheDocument();
+      expect(screen.getByText("Projekt-Statistiken")).toBeInTheDocument();
+      expect(screen.getByText("Gesamt-Projekte")).toBeInTheDocument();
+      expect(screen.getByText("Technologien")).toBeInTheDocument();
     });
 
     it("should handle normal animations when reduced motion is false", () => {
@@ -204,8 +193,8 @@ describe("ProjectStats", () => {
       render(<ProjectStats />);
 
       // Component should render with animations enabled
-      expect(screen.getByText("Project Statistics")).toBeInTheDocument();
-      expect(screen.getByText("Total Projects")).toBeInTheDocument();
+      expect(screen.getByText("Projekt-Statistiken")).toBeInTheDocument();
+      expect(screen.getByText("Gesamt-Projekte")).toBeInTheDocument();
     });
   });
 
@@ -214,7 +203,7 @@ describe("ProjectStats", () => {
       // Test mobile responsiveness - the component should render without issues
       render(<ProjectStats />);
 
-      expect(screen.getByText("Project Statistics")).toBeInTheDocument();
+      expect(screen.getByText("Projekt-Statistiken")).toBeInTheDocument();
     });
 
     it("should render with mobile-specific styling", () => {
@@ -227,9 +216,9 @@ describe("ProjectStats", () => {
       render(<ProjectStats />);
 
       // Component should render successfully with mobile layout
-      expect(screen.getByText("Project Statistics")).toBeInTheDocument();
-      expect(screen.getByText("Total Projects")).toBeInTheDocument();
-      expect(screen.getByText("Technologies")).toBeInTheDocument();
+      expect(screen.getByText("Projekt-Statistiken")).toBeInTheDocument();
+      expect(screen.getByText("Gesamt-Projekte")).toBeInTheDocument();
+      expect(screen.getByText("Technologien")).toBeInTheDocument();
       expect(screen.getByText("Frameworks")).toBeInTheDocument();
     });
 
@@ -243,8 +232,8 @@ describe("ProjectStats", () => {
       render(<ProjectStats />);
 
       // Component should render successfully with desktop layout
-      expect(screen.getByText("Project Statistics")).toBeInTheDocument();
-      expect(screen.getByText("Total Projects")).toBeInTheDocument();
+      expect(screen.getByText("Projekt-Statistiken")).toBeInTheDocument();
+      expect(screen.getByText("Gesamt-Projekte")).toBeInTheDocument();
     });
 
     it("should handle tablet layout", () => {
@@ -257,8 +246,8 @@ describe("ProjectStats", () => {
       render(<ProjectStats />);
 
       // Component should render successfully with tablet layout
-      expect(screen.getByText("Project Statistics")).toBeInTheDocument();
-      expect(screen.getByText("Total Projects")).toBeInTheDocument();
+      expect(screen.getByText("Projekt-Statistiken")).toBeInTheDocument();
+      expect(screen.getByText("Gesamt-Projekte")).toBeInTheDocument();
     });
   });
 
@@ -266,7 +255,7 @@ describe("ProjectStats", () => {
     it("should use theme store", () => {
       render(<ProjectStats />);
 
-      expect(screen.getByText("Project Statistics")).toBeInTheDocument();
+      expect(screen.getByText("Projekt-Statistiken")).toBeInTheDocument();
     });
 
     it("should use filter store for company clicks", () => {
@@ -282,23 +271,23 @@ describe("ProjectStats", () => {
       render(<ProjectStats />);
 
       // Stats should be calculated and displayed
-      expect(screen.getByText("Total Projects")).toBeInTheDocument();
+      expect(screen.getByText("Gesamt-Projekte")).toBeInTheDocument();
     });
 
     it("should show all stat cards with correct structure", () => {
       render(<ProjectStats />);
 
       // Check that all stat titles are present
-      expect(screen.getByText("Total Projects")).toBeInTheDocument();
-      expect(screen.getByText("Technologies")).toBeInTheDocument();
+      expect(screen.getByText("Gesamt-Projekte")).toBeInTheDocument();
+      expect(screen.getByText("Technologien")).toBeInTheDocument();
       expect(screen.getByText("Frameworks")).toBeInTheDocument();
-      expect(screen.getByText("Companies")).toBeInTheDocument();
-      expect(screen.getByText("Years Experience")).toBeInTheDocument();
+      expect(screen.getByText("Unternehmen")).toBeInTheDocument();
+      expect(screen.getByText("Jahre Erfahrung")).toBeInTheDocument();
 
       // Check that the structure is correct - values are dynamically calculated
       // so we don't test exact numbers, just that the cards are present
-      expect(screen.getByText("Total Projects")).toBeInTheDocument();
-      expect(screen.getByText("Technologies")).toBeInTheDocument();
+      expect(screen.getByText("Gesamt-Projekte")).toBeInTheDocument();
+      expect(screen.getByText("Technologien")).toBeInTheDocument();
     });
   });
 
