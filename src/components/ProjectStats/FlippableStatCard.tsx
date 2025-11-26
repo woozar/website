@@ -6,6 +6,7 @@ import { IconProps, IconRefresh } from "@tabler/icons-react";
 
 import { motion } from "framer-motion";
 
+import { useWhileHover } from "@/hooks/useAnimations";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface FlippableStatCardProps {
@@ -23,6 +24,42 @@ interface FlippableStatCardProps {
     cardFlipHide: string;
   };
 }
+
+const CardFlipIndicator = ({
+  isFlipped,
+  shouldReduceMotion,
+}: {
+  isFlipped: boolean;
+  shouldReduceMotion: boolean;
+}) => (
+  <ActionIcon
+    variant="subtle"
+    size="xs"
+    style={{
+      position: "absolute",
+      top: "8px",
+      right: "8px",
+      color: "var(--text-secondary)",
+      minWidth: "16px",
+      minHeight: "16px",
+      zIndex: 3,
+    }}
+    aria-hidden="true"
+  >
+    <motion.div
+      animate={
+        shouldReduceMotion
+          ? {}
+          : {
+              rotate: isFlipped ? 180 : 0,
+              transition: { duration: 0.6 },
+            }
+      }
+    >
+      <IconRefresh size={12} data-testid="refresh-icon" />
+    </motion.div>
+  </ActionIcon>
+);
 
 export const FlippableStatCard = ({
   icon: Icon,
@@ -56,20 +93,15 @@ export const FlippableStatCard = ({
         transition: { duration: 0.6 },
       };
 
+  const cardHover = useWhileHover({ type: "card" });
+
   return (
     <motion.div
       style={{
         perspective: "1000px",
         height: "100%",
       }}
-      whileHover={
-        shouldReduceMotion
-          ? {}
-          : {
-              y: -5,
-              transition: { duration: 0.2 },
-            }
-      }
+      whileHover={cardHover}
     >
       <motion.div
         style={{
@@ -106,33 +138,10 @@ export const FlippableStatCard = ({
             zIndex: isFlipped ? 1 : 2,
           }}
         >
-          <ActionIcon
-            variant="subtle"
-            size="xs"
-            style={{
-              position: "absolute",
-              top: "8px",
-              right: "8px",
-              color: "var(--text-secondary)",
-              minWidth: "16px",
-              minHeight: "16px",
-              zIndex: 3,
-            }}
-            aria-hidden="true"
-          >
-            <motion.div
-              animate={
-                shouldReduceMotion
-                  ? {}
-                  : {
-                      rotate: isFlipped ? 180 : 0,
-                      transition: { duration: 0.6 },
-                    }
-              }
-            >
-              <IconRefresh size={12} data-testid="refresh-icon" />
-            </motion.div>
-          </ActionIcon>
+          <CardFlipIndicator
+            isFlipped={isFlipped}
+            shouldReduceMotion={shouldReduceMotion}
+          />
 
           <Stack gap="sm" style={{ height: "100%" }}>
             <Box
@@ -190,33 +199,10 @@ export const FlippableStatCard = ({
             zIndex: isFlipped ? 2 : 1,
           }}
         >
-          <ActionIcon
-            variant="subtle"
-            size="xs"
-            style={{
-              position: "absolute",
-              top: "8px",
-              right: "8px",
-              color: "var(--text-secondary)",
-              minWidth: "16px",
-              minHeight: "16px",
-              zIndex: 3,
-            }}
-            aria-hidden="true"
-          >
-            <motion.div
-              animate={
-                shouldReduceMotion
-                  ? {}
-                  : {
-                      rotate: isFlipped ? 180 : 0,
-                      transition: { duration: 0.6 },
-                    }
-              }
-            >
-              <IconRefresh size={12} data-testid="refresh-icon" />
-            </motion.div>
-          </ActionIcon>
+          <CardFlipIndicator
+            isFlipped={isFlipped}
+            shouldReduceMotion={shouldReduceMotion}
+          />
 
           <Stack gap="sm" style={{ height: "100%" }}>
             <Text

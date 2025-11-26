@@ -20,8 +20,8 @@ import {
 
 import { motion } from "framer-motion";
 
+import { useContainerVariants, useItemVariants } from "@/hooks/useAnimations";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 
 import { Section } from "../Layout";
@@ -29,32 +29,16 @@ import { Section } from "../Layout";
 export const About = () => {
   const { isMobile } = useMediaQuery();
   const { t } = useTranslation();
-  const shouldReduceMotion = useReducedMotion();
 
-  const containerVariants = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
-    visible: {
-      opacity: 1,
-      transition: shouldReduceMotion
-        ? {}
-        : {
-            staggerChildren: 0.2,
-            delayChildren: 0.1,
-          },
-    },
-  };
+  const containerVariants = useContainerVariants({
+    staggerChildren: 0.2,
+    delayChildren: 0.1,
+  });
 
-  const itemVariants = {
-    hidden: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      y: shouldReduceMotion ? 0 : 30,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: shouldReduceMotion ? {} : { duration: 0.6 },
-    },
-  };
+  const itemVariants = useItemVariants({
+    y: 30,
+    duration: 0.6,
+  });
 
   const skills = [
     {

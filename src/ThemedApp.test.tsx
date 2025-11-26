@@ -2,7 +2,9 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { ThemedApp } from "./ThemedApp";
 import { useThemeStore } from "./stores/themeStore";
-import { customRender as render } from "./test/render";
+import { render as baseRender } from "./test/test-utils";
+
+const render = (ui: React.ReactElement) => baseRender(ui, { noRouter: true });
 
 // Mock the App component
 vi.mock("./App", () => ({
@@ -14,16 +16,23 @@ vi.mock("./stores/themeStore", () => ({
   useThemeStore: vi.fn(),
 }));
 
-// Mock document.documentElement.setAttribute
-const mockSetAttribute = vi.fn();
-Object.defineProperty(document.documentElement, "setAttribute", {
-  value: mockSetAttribute,
+// Mock document.documentElement.dataset
+let datasetTheme = "";
+Object.defineProperty(document.documentElement, "dataset", {
+  value: {
+    get theme(): string {
+      return datasetTheme;
+    },
+    set theme(value: string) {
+      datasetTheme = value;
+    },
+  },
   writable: true,
 });
 
 describe("ThemedApp", () => {
   beforeEach(() => {
-    mockSetAttribute.mockClear();
+    datasetTheme = "";
     vi.clearAllMocks();
   });
 
@@ -40,7 +49,7 @@ describe("ThemedApp", () => {
 
     render(<ThemedApp />);
 
-    expect(mockSetAttribute).toHaveBeenCalledWith("data-theme", "light");
+    expect(datasetTheme).toBe("light");
   });
 
   it("should set data-theme attribute on mount with dark theme", () => {
@@ -48,7 +57,7 @@ describe("ThemedApp", () => {
 
     render(<ThemedApp />);
 
-    expect(mockSetAttribute).toHaveBeenCalledWith("data-theme", "dark");
+    expect(datasetTheme).toBe("dark");
   });
 
   it("should update data-theme attribute when theme changes", () => {
@@ -59,13 +68,13 @@ describe("ThemedApp", () => {
     mockUseThemeStore.mockReturnValue("light");
     const { rerender } = render(<ThemedApp />);
 
-    expect(mockSetAttribute).toHaveBeenCalledWith("data-theme", "light");
+    expect(datasetTheme).toBe("light");
 
     // Re-render with dark theme
     mockUseThemeStore.mockReturnValue("dark");
     rerender(<ThemedApp />);
 
-    expect(mockSetAttribute).toHaveBeenCalledWith("data-theme", "dark");
+    expect(datasetTheme).toBe("dark");
   });
 
   it("should pass correct forceColorScheme to MantineProvider", () => {

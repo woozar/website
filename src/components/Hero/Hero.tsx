@@ -2,8 +2,15 @@ import { Box, Button, Group, Image, Stack, Text, Title } from "@mantine/core";
 
 import { IconDownload } from "@tabler/icons-react";
 
-import { Variants, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
+import {
+  useButtonVariants,
+  useContainerVariants,
+  useItemVariants,
+  useScaleRotateVariants,
+  useWhileHover,
+} from "@/hooks/useAnimations";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useModal } from "@/hooks/useModal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -32,63 +39,30 @@ export const Hero = () => {
     }
   };
 
-  const containerVariants: Variants = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
-    visible: {
-      opacity: 1,
-      transition: shouldReduceMotion
-        ? {}
-        : {
-            staggerChildren: 0.2,
-            delayChildren: 0.3,
-          },
-    },
-  };
+  const containerVariants = useContainerVariants({
+    staggerChildren: 0.2,
+    delayChildren: 0.3,
+  });
 
-  const itemVariants: Variants = {
-    hidden: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      y: shouldReduceMotion ? 0 : 30,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: shouldReduceMotion
-        ? {}
-        : {
-            duration: 0.8,
-            ease: "easeOut",
-          },
-    },
-  };
+  const itemVariants = useItemVariants({
+    y: 30,
+    duration: 0.8,
+  });
 
-  const logoVariants: Variants = {
-    hidden: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      scale: shouldReduceMotion ? 1 : 0.8,
-      rotate: shouldReduceMotion ? 0 : -5,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      rotate: 0,
-      transition: shouldReduceMotion
-        ? {}
-        : {
-            duration: 1,
-            ease: "easeOut",
-          },
-    },
-  };
+  const logoVariants = useScaleRotateVariants({
+    scale: 0.8,
+    rotate: -5,
+    duration: 1,
+    ease: "easeOut",
+  });
 
-  const buttonVariants = {
-    rest: { scale: 1 },
-    hover: {
-      scale: shouldReduceMotion ? 1 : 1.05,
-      transition: shouldReduceMotion ? {} : { duration: 0.2 },
-    },
-    tap: { scale: shouldReduceMotion ? 1 : 0.95 },
-  };
+  const buttonVariants = useButtonVariants({
+    hoverScale: 1.05,
+    tapScale: 0.95,
+    duration: 0.2,
+  });
+
+  const buttonHover = useWhileHover({ type: "button" });
 
   function getFontSize() {
     if (isMobile) return "2.5rem";
@@ -231,16 +205,7 @@ export const Hero = () => {
                 gap: "1rem",
               }}
             >
-              <motion.div
-                whileHover={
-                  shouldReduceMotion
-                    ? {}
-                    : {
-                        scale: 1.05,
-                        transition: { duration: 0.3 },
-                      }
-                }
-              >
+              <motion.div whileHover={buttonHover}>
                 <Image
                   src={heroPortrait}
                   alt="Johannes Herrmann - Software Freelancer"

@@ -17,10 +17,17 @@ Object.defineProperty(window, "matchMedia", {
   })),
 });
 
-// Mock document.documentElement.setAttribute
-const mockSetAttribute = vi.fn();
-Object.defineProperty(document.documentElement, "setAttribute", {
-  value: mockSetAttribute,
+// Mock document.documentElement.dataset
+let datasetTheme = "";
+Object.defineProperty(document.documentElement, "dataset", {
+  value: {
+    get theme(): string {
+      return datasetTheme;
+    },
+    set theme(value: string) {
+      datasetTheme = value;
+    },
+  },
   writable: true,
 });
 
@@ -28,7 +35,7 @@ describe("themeStore", () => {
   beforeEach(() => {
     // Reset store state before each test
     useThemeStore.setState({ theme: "light" });
-    mockSetAttribute.mockClear();
+    datasetTheme = "";
     vi.clearAllMocks();
   });
 
@@ -60,18 +67,8 @@ describe("themeStore", () => {
       expect(newStore.getState().theme).toBe("dark");
     });
 
-    it("should fallback to light theme when window is undefined", () => {
-      // Mock window as undefined
-      const originalWindow = global.window;
-      // @ts-expect-error - testing server-side behavior
-      delete global.window;
-
-      // Re-import to test server-side behavior
-      vi.resetModules();
-
-      // Restore window
-      global.window = originalWindow;
-    });
+    // Note: SSR fallback to light theme is covered by
+    // "should return light when matchMedia is not available" test
   });
 
   describe("setTheme", () => {
@@ -88,7 +85,7 @@ describe("themeStore", () => {
 
       setTheme("dark");
 
-      expect(mockSetAttribute).toHaveBeenCalledWith("data-theme", "dark");
+      expect(datasetTheme).toBe("dark");
     });
 
     it("should work with light theme", () => {
@@ -97,7 +94,7 @@ describe("themeStore", () => {
       setTheme("light");
 
       expect(useThemeStore.getState().theme).toBe("light");
-      expect(mockSetAttribute).toHaveBeenCalledWith("data-theme", "light");
+      expect(datasetTheme).toBe("light");
     });
   });
 
@@ -109,7 +106,7 @@ describe("themeStore", () => {
       toggleTheme();
 
       expect(useThemeStore.getState().theme).toBe("dark");
-      expect(mockSetAttribute).toHaveBeenCalledWith("data-theme", "dark");
+      expect(datasetTheme).toBe("dark");
     });
 
     it("should toggle from dark to light", () => {
@@ -119,7 +116,7 @@ describe("themeStore", () => {
       toggleTheme();
 
       expect(useThemeStore.getState().theme).toBe("light");
-      expect(mockSetAttribute).toHaveBeenCalledWith("data-theme", "light");
+      expect(datasetTheme).toBe("light");
     });
   });
 
@@ -139,7 +136,7 @@ describe("themeStore", () => {
 
       rehydrateCallback(mockState);
 
-      expect(mockSetAttribute).toHaveBeenCalledWith("data-theme", "dark");
+      expect(datasetTheme).toBe("dark");
     });
 
     it("should handle rehydration with no state", () => {

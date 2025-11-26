@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Box, Button, Image, Stack, Text, Title } from "@mantine/core";
 
@@ -6,6 +6,7 @@ import { Variants, motion } from "framer-motion";
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useTranslation } from "@/hooks/useTranslation";
+import { isSSR } from "@/utils/environment";
 
 interface HeroSectionProps {
   itemVariants: Variants;
@@ -19,10 +20,8 @@ export const HeroSection = ({ itemVariants }: HeroSectionProps) => {
   const [frontHeight, setFrontHeight] = useState<number>(300);
 
   useEffect(() => {
-    // SSR safety check
-    if (typeof window === "undefined") {
-      return;
-    }
+    /* v8 ignore next */
+    if (isSSR()) return;
 
     const updateHeight = () => {
       if (frontRef.current) {
@@ -45,10 +44,8 @@ export const HeroSection = ({ itemVariants }: HeroSectionProps) => {
   }, []);
 
   const handleScrollToContact = () => {
-    // SSR safety check
-    if (typeof document === "undefined" || typeof window === "undefined") {
-      return;
-    }
+    /* v8 ignore next */
+    if (isSSR()) return;
 
     const contactSection = document.querySelector("#contact");
     if (contactSection) {
@@ -62,6 +59,12 @@ export const HeroSection = ({ itemVariants }: HeroSectionProps) => {
     }
   };
 
+  const fontSize = useMemo(() => {
+    if (isMobile) return "2.2rem";
+    if (isTablet) return "2.6rem";
+    return "3rem";
+  }, [isMobile, isTablet]);
+
   return (
     <motion.div variants={itemVariants} initial="hidden" animate="visible">
       <Box
@@ -69,9 +72,7 @@ export const HeroSection = ({ itemVariants }: HeroSectionProps) => {
           display: "flex",
           gap: "2rem",
           alignItems:
-            typeof window !== "undefined" && window.innerWidth >= 1024
-              ? "flex-start"
-              : "center",
+            !isSSR() && window.innerWidth >= 1024 ? "flex-start" : "center",
           flexDirection: isMobile ? "column" : "row",
         }}
       >
@@ -84,7 +85,7 @@ export const HeroSection = ({ itemVariants }: HeroSectionProps) => {
           <Title
             order={1}
             style={{
-              fontSize: isMobile ? "2.2rem" : isTablet ? "2.6rem" : "3rem",
+              fontSize,
               background:
                 "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
               WebkitBackgroundClip: "text",

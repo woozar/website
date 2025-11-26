@@ -32,8 +32,8 @@ vi.mock("../../stores/filterStore", () => ({
 
 // Mock child components
 vi.mock("./ProjectCard", () => ({
-  ProjectCard: ({ project, index }: any) => (
-    <div data-testid={`project-card-${index}`}>
+  ProjectCard: ({ project }: any) => (
+    <div data-testid={`project-card-${project.title}`}>
       <h3>{project.title}</h3>
       <p>{project.customer}</p>
       <div data-testid="primary-tags">{project.primary_tags?.join(", ")}</div>
@@ -130,9 +130,13 @@ describe("ProjectsSection", () => {
     it("should render all projects when no filters are applied", () => {
       renderComponent();
 
-      // Check that project cards are rendered
-      expect(screen.getByTestId("project-card-0")).toBeInTheDocument();
-      expect(screen.getByTestId("project-card-1")).toBeInTheDocument();
+      // Check that project cards are rendered (using actual project titles)
+      expect(
+        screen.getByTestId("project-card-Moderne Portfolio-Website")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId("project-card-AI Playground")
+      ).toBeInTheDocument();
 
       // Check some real project names from German translations
       expect(screen.getByText("Moderne Portfolio-Website")).toBeInTheDocument();
@@ -210,10 +214,16 @@ describe("ProjectsSection", () => {
     it("should render all project cards with correct structure", () => {
       renderComponent();
 
-      // Should render project cards (check for first few)
-      expect(screen.getByTestId("project-card-0")).toBeInTheDocument();
-      expect(screen.getByTestId("project-card-1")).toBeInTheDocument();
-      expect(screen.getByTestId("project-card-2")).toBeInTheDocument();
+      // Should render project cards (check for first few using actual titles)
+      expect(
+        screen.getByTestId("project-card-Moderne Portfolio-Website")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId("project-card-AI Playground")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId("project-card-KI-Workshop für Steuersoftware")
+      ).toBeInTheDocument();
     });
   });
 

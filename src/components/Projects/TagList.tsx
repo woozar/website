@@ -4,6 +4,7 @@ import { Badge, Group } from "@mantine/core";
 
 import { motion } from "framer-motion";
 
+import { useWhileHover, useWhileTap } from "@/hooks/useAnimations";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useFilterStore } from "@/stores/filterStore";
 
@@ -71,13 +72,16 @@ export const TagList = ({
     toggleTag(tag);
   };
 
+  const buttonHover = useWhileHover({ type: "button" });
+  const tap = useWhileTap();
+
   return (
     <Group gap={8} style={{ rowGap: 0 }}>
       {displayedTags.map(({ tag, isPrimary }) => (
         <motion.div
           key={`${isPrimary ? "primary" : "secondary"}-${tag}`}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={buttonHover}
+          whileTap={tap}
         >
           <TagChip
             tag={tag}

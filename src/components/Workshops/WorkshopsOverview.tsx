@@ -12,10 +12,14 @@ import {
 
 import { IconCheck } from "@tabler/icons-react";
 
-import { Variants, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
+import {
+  useCardVariants,
+  useItemVariants,
+  useWhileHover,
+} from "@/hooks/useAnimations";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 
 import { CtaButton } from "../CtaButton.tsx";
@@ -24,33 +28,10 @@ import { Grid, Section } from "../Layout";
 export const WorkshopsOverview = () => {
   const { isMobile } = useMediaQuery();
   const { t } = useTranslation();
-  const shouldReduceMotion = useReducedMotion();
+  const cardHover = useWhileHover({ type: "card" });
 
-  const itemVariants: Variants = {
-    hidden: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      y: shouldReduceMotion ? 0 : 30,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: shouldReduceMotion ? {} : { duration: 0.6, ease: "easeOut" },
-    },
-  };
-
-  const cardVariants: Variants = {
-    hidden: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      y: shouldReduceMotion ? 0 : 40,
-      scale: shouldReduceMotion ? 1 : 0.95,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: shouldReduceMotion ? {} : { duration: 0.6, ease: "easeOut" },
-    },
-  };
+  const itemVariants = useItemVariants({ y: 30 });
+  const cardVariants = useCardVariants({ y: 40 });
 
   const handleContactClick = () => {
     const contactSection = document.querySelector("#contact");
@@ -100,20 +81,13 @@ export const WorkshopsOverview = () => {
         >
           {t.workshopsOverview.workshops.map((workshop, index: number) => (
             <motion.div
-              key={index}
+              key={workshop.title}
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.01 }}
               transition={{ delay: index * 0.15 }}
-              whileHover={
-                shouldReduceMotion
-                  ? {}
-                  : {
-                      y: -8,
-                      transition: { duration: 0.3 },
-                    }
-              }
+              whileHover={cardHover}
             >
               <Card
                 shadow="sm"
@@ -193,11 +167,9 @@ export const WorkshopsOverview = () => {
                       </ThemeIcon>
                     }
                   >
-                    {workshop.highlights.map(
-                      (highlight: string, highlightIndex: number) => (
-                        <List.Item key={highlightIndex}>{highlight}</List.Item>
-                      )
-                    )}
+                    {workshop.highlights.map((highlight: string) => (
+                      <List.Item key={highlight}>{highlight}</List.Item>
+                    ))}
                   </List>
 
                   <Box style={{ marginTop: "auto" }}>

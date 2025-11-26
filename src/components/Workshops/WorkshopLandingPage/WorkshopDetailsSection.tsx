@@ -4,8 +4,8 @@ import { IconClock, IconTrendingUp, IconUsers } from "@tabler/icons-react";
 
 import { Variants, motion } from "framer-motion";
 
+import { useWhileHover } from "@/hooks/useAnimations";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 
 import { Grid } from "../../Layout";
@@ -19,7 +19,7 @@ export const WorkshopDetailsSection = ({
 }: WorkshopDetailsSectionProps) => {
   const { isMobile } = useMediaQuery();
   const { t } = useTranslation();
-  const shouldReduceMotion = useReducedMotion();
+  const cardHover = useWhileHover({ type: "card" });
 
   const detailCards = [
     {
@@ -73,18 +73,8 @@ export const WorkshopDetailsSection = ({
         >
           {/* Left column: Quick Details */}
           <Stack gap="md">
-            {detailCards.map((detail, index) => (
-              <motion.div
-                key={index}
-                whileHover={
-                  shouldReduceMotion
-                    ? {}
-                    : {
-                        y: -5,
-                        transition: { duration: 0.2 },
-                      }
-                }
-              >
+            {detailCards.map((detail) => (
+              <motion.div key={detail.title} whileHover={cardHover}>
                 <Card
                   padding="lg"
                   radius="lg"

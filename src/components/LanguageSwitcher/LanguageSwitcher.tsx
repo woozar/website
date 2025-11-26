@@ -1,5 +1,8 @@
 import { Button, Menu } from "@mantine/core";
 
+import { motion } from "framer-motion";
+
+import { useWhileHover, useWhileTap } from "@/hooks/useAnimations";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Language, useLanguageStore } from "@/stores/languageStore";
 
@@ -12,6 +15,9 @@ export const LanguageSwitcher = ({
 }: LanguageSwitcherProps) => {
   const { language, setLanguage } = useLanguageStore();
   const { t } = useTranslation();
+
+  const buttonHover = useWhileHover({ type: "button" });
+  const buttonTap = useWhileTap();
 
   const languages: { code: Language; label: string; flag: string }[] = [
     { code: "de", label: t.language.german, flag: "🇩🇪" },
@@ -27,20 +33,6 @@ export const LanguageSwitcher = ({
     background: "transparent",
     border: "1px solid var(--primary-orange)",
     borderRadius: "0.5rem",
-  };
-
-  const hoverStyle = {
-    "&:hover": {
-      background: "rgba(255, 107, 53, 0.08)",
-      transform: "translateY(-1px)",
-    },
-  };
-
-  const transitionStyle = {
-    transition: "all 0.2s ease",
-    "@media (prefers-reduced-motion: reduce)": {
-      transition: "none",
-    },
   };
 
   if (variant === "mobile") {
@@ -73,21 +65,21 @@ export const LanguageSwitcher = ({
   return (
     <Menu shadow="md" width={180} position="bottom-end" zIndex={1100}>
       <Menu.Target>
-        <Button
-          variant="outline"
-          size="xs"
-          style={{
-            ...buttonStyle,
-            ...transitionStyle,
-            minWidth: "40px",
-            height: "28px",
-            fontSize: "1rem",
-            padding: "0 8px",
-          }}
-          styles={{ root: { ...hoverStyle, ...transitionStyle } }}
-        >
-          {currentLanguage.flag}
-        </Button>
+        <motion.div whileHover={buttonHover} whileTap={buttonTap}>
+          <Button
+            variant="outline"
+            size="xs"
+            style={{
+              ...buttonStyle,
+              minWidth: "40px",
+              height: "28px",
+              fontSize: "1rem",
+              padding: "0 8px",
+            }}
+          >
+            {currentLanguage.flag}
+          </Button>
+        </motion.div>
       </Menu.Target>
 
       <Menu.Dropdown>

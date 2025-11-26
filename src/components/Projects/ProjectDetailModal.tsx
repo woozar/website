@@ -1,22 +1,14 @@
-import { useEffect } from "react";
+import { Stack, Text, Title } from "@mantine/core";
 
-import { Button, Modal, Stack, Text, Title } from "@mantine/core";
-
-import { IconX } from "@tabler/icons-react";
-
-import {
-  AnimatePresence,
-  Variants,
-  motion,
-  useReducedMotion,
-} from "framer-motion";
+import { motion } from "framer-motion";
 
 import ReactMarkdown from "react-markdown";
 
-import { useModal } from "@/hooks/useModal";
+import { useContainerVariants, useModalVariants } from "@/hooks/useAnimations";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Project } from "@/types";
 
+import { AnimatedModal } from "../Modal/AnimatedModal";
 import { TagList } from "./TagList";
 
 interface ProjectDetailModalProps {
@@ -31,301 +23,124 @@ export const ProjectDetailModal = ({
   onClose,
 }: ProjectDetailModalProps) => {
   const { t } = useTranslation();
-  const { openModal, closeModal } = useModal();
-  const shouldReduceMotion = useReducedMotion();
-
-  // Hide scrollbars during modal animation and update global modal state
-  useEffect(() => {
-    if (opened) {
-      document.body.style.overflow = "hidden";
-      openModal();
-    } else {
-      document.body.style.overflow = "";
-      closeModal();
-    }
-
-    // Cleanup when component unmounts
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [opened, openModal, closeModal]);
+  const modalVariants = useModalVariants();
+  const contentVariants = useContainerVariants();
 
   if (!project) return null;
 
-  const modalVariants: Variants = {
-    hidden: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      scale: shouldReduceMotion ? 1 : 0.8,
-      y: shouldReduceMotion ? 0 : 50,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: shouldReduceMotion
-        ? {}
-        : {
-            type: "spring",
-            damping: 25,
-            stiffness: 300,
-            duration: 0.4,
-          },
-    },
-    exit: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      scale: shouldReduceMotion ? 1 : 0.8,
-      y: shouldReduceMotion ? 0 : 50,
-      transition: shouldReduceMotion
-        ? {}
-        : {
-            duration: 0.3,
-            ease: "easeInOut",
-          },
-    },
-  };
-
-  const backdropVariants = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
-    visible: {
-      opacity: 1,
-      transition: shouldReduceMotion ? {} : { duration: 0.3 },
-    },
-    exit: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      transition: shouldReduceMotion ? {} : { duration: 0.2 },
-    },
-  };
-
-  const contentVariants = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
-    visible: {
-      opacity: 1,
-      transition: shouldReduceMotion
-        ? {}
-        : {
-            staggerChildren: 0.1,
-            delayChildren: 0.2,
-          },
-    },
-  };
-
-  const itemVariants = {
-    hidden: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      y: shouldReduceMotion ? 0 : 20,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: shouldReduceMotion ? {} : { duration: 0.4 },
-    },
-  };
-
   return (
-    <AnimatePresence>
-      {opened && (
-        <Modal
-          opened={opened}
-          onClose={onClose}
-          size="xl"
-          centered
-          padding={0}
-          radius="lg"
-          withCloseButton={false}
-          overlayProps={{
-            backgroundOpacity: 0.6,
-            blur: 8,
-          }}
-          zIndex={1100}
-          styles={{
-            body: {
-              background: "transparent",
-              boxShadow: "none",
-              padding: 0,
-              overflow: "hidden",
-            },
-            content: {
-              background: "transparent",
-              boxShadow: "none",
-              overflow: "hidden",
-            },
-          }}
-        >
-          <motion.div
-            variants={backdropVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "rgba(0, 0, 0, 0.4)",
-              backdropFilter: "blur(8px)",
-              zIndex: -1,
-            }}
-          />
+    <AnimatedModal
+      opened={opened}
+      onClose={onClose}
+      modalVariants={modalVariants}
+      contentVariants={contentVariants}
+      backdrop
+    >
+      {({ itemVariants }) => (
+        <>
+          {/* Header - Fixed height */}
+          <motion.div variants={itemVariants} style={{ flexShrink: 0 }}>
+            <Stack gap="md" style={{ marginBottom: "1.5rem" }}>
+              <Title
+                order={2}
+                style={{
+                  fontSize: "1.8rem",
+                  fontWeight: 700,
+                  color: "var(--text-primary)",
+                  lineHeight: 1.3,
+                  paddingRight: "3rem",
+                }}
+              >
+                {project.title}
+              </Title>
+              <Text
+                size="lg"
+                fw={600}
+                style={{
+                  color: "var(--primary-orange)",
+                  fontSize: "1.1rem",
+                }}
+              >
+                {project.customer}
+              </Text>
+            </Stack>
+          </motion.div>
 
+          {/* Scrollable Content - Takes remaining height */}
           <motion.div
-            variants={modalVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
+            variants={itemVariants}
             style={{
-              background: "var(--background-primary)",
-              borderRadius: "1rem",
-              padding: "2rem",
-              maxHeight: "80vh",
-              position: "relative",
-              boxShadow: "0 20px 60px var(--shadow-color)",
-              overflow: "hidden",
-              display: "flex",
-              flexDirection: "column",
+              flex: 1,
+              minHeight: 0, // WICHTIG: Ermöglicht Flex-Shrinking
+              overflow: "auto", // Natives CSS Scrolling
+              padding: "0 2px", // Platz für Scrollbar
             }}
           >
-            {/* Close Button */}
-            <motion.div
-              style={{
-                position: "absolute",
-                top: "1rem",
-                right: "1rem",
-                zIndex: 10,
-              }}
-              whileHover={shouldReduceMotion ? {} : { scale: 1.1 }}
-              whileTap={shouldReduceMotion ? {} : { scale: 0.9 }}
-            >
-              <Button
-                variant="subtle"
-                size="sm"
-                onClick={onClose}
-                style={{
-                  borderRadius: "50%",
-                  width: "40px",
-                  height: "40px",
-                  padding: 0,
-                  color: "var(--text-secondary)",
-                }}
-              >
-                <IconX size={20} />
-              </Button>
-            </motion.div>
+            <Stack id="content" gap="xl">
+              {/* Description */}
+              <Stack gap="md">
+                <div
+                  style={{
+                    color: "var(--text-secondary)",
+                    lineHeight: 1.7,
+                    fontSize: "1rem",
+                  }}
+                >
+                  <ReactMarkdown
+                    components={{
+                      // Style links
+                      a: ({ children, ...props }) => (
+                        <a
+                          {...props}
+                          style={{ textDecoration: "none" }}
+                          className="markdown-link"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {children}
+                        </a>
+                      ),
+                      // Style paragraphs
+                      p: ({ ...props }) => (
+                        <p {...props} style={{ marginBottom: "1rem" }} />
+                      ),
+                      // Style strong/bold text
+                      strong: ({ ...props }) => (
+                        <strong
+                          {...props}
+                          style={{ color: "var(--text-primary)" }}
+                        />
+                      ),
+                      // Style emphasis/italic text
+                      em: ({ ...props }) => (
+                        <em {...props} style={{ fontStyle: "italic" }} />
+                      ),
+                    }}
+                  >
+                    {project.description.join("\n\n")}
+                  </ReactMarkdown>
+                </div>
+              </Stack>
 
-            <motion.div
-              variants={contentVariants}
-              initial="hidden"
-              animate="visible"
-              style={{
-                flex: 1,
-                minHeight: 0, // WICHTIG: Ermöglicht Flex-Shrinking
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              {/* Header - Fixed height */}
-              <motion.div variants={itemVariants} style={{ flexShrink: 0 }}>
-                <Stack gap="md" style={{ marginBottom: "1.5rem" }}>
-                  <Title
-                    order={2}
-                    style={{
-                      fontSize: "1.8rem",
-                      fontWeight: 700,
-                      color: "var(--text-primary)",
-                      lineHeight: 1.3,
-                      paddingRight: "3rem",
-                    }}
-                  >
-                    {project.title}
-                  </Title>
-                  <Text
-                    size="lg"
-                    fw={600}
-                    style={{
-                      color: "var(--primary-orange)",
-                      fontSize: "1.1rem",
-                    }}
-                  >
-                    {project.customer}
+              {/* All Tags */}
+              <div>
+                <Stack gap="sm">
+                  <Text fw={600} size="sm" c="var(--text-primary)">
+                    {t.project.technologies}
                   </Text>
+                  <TagList
+                    primaryTags={project.primary_tags}
+                    secondaryTags={project.tags}
+                    fontSize="0.85rem"
+                    showMoreBadge={false}
+                    selectable={false}
+                  />
                 </Stack>
-              </motion.div>
-
-              {/* Scrollable Content - Takes remaining height */}
-              <motion.div
-                variants={itemVariants}
-                style={{
-                  flex: 1,
-                  minHeight: 0, // WICHTIG: Ermöglicht Flex-Shrinking
-                  overflow: "auto", // Natives CSS Scrolling
-                  padding: "0 2px", // Platz für Scrollbar
-                }}
-              >
-                <Stack id="content" gap="xl">
-                  {/* Description */}
-                  <Stack gap="md">
-                    <div
-                      style={{
-                        color: "var(--text-secondary)",
-                        lineHeight: 1.7,
-                        fontSize: "1rem",
-                      }}
-                    >
-                      <ReactMarkdown
-                        components={{
-                          // Style links
-                          a: ({ ...props }) => (
-                            <a
-                              {...props}
-                              style={{
-                                color: "var(--primary-orange)",
-                                textDecoration: "none",
-                              }}
-                              className="markdown-link"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            />
-                          ),
-                          // Style paragraphs
-                          p: ({ ...props }) => (
-                            <p {...props} style={{ marginBottom: "1rem" }} />
-                          ),
-                          // Style strong/bold text
-                          strong: ({ ...props }) => (
-                            <strong
-                              {...props}
-                              style={{ color: "var(--text-primary)" }}
-                            />
-                          ),
-                          // Style emphasis/italic text
-                          em: ({ ...props }) => (
-                            <em {...props} style={{ fontStyle: "italic" }} />
-                          ),
-                        }}
-                      >
-                        {project.description.join("\n\n")}
-                      </ReactMarkdown>
-                    </div>
-                  </Stack>
-
-                  {/* All Tags */}
-                  <div>
-                    <Stack gap="sm">
-                      <Text fw={600} size="sm" c="var(--text-primary)">
-                        {t.project.technologies}
-                      </Text>
-                      <TagList
-                        primaryTags={project.primary_tags}
-                        secondaryTags={project.tags}
-                        fontSize="0.85rem"
-                        showMoreBadge={false}
-                        selectable={false}
-                      />
-                    </Stack>
-                  </div>
-                </Stack>
-              </motion.div>
-            </motion.div>
+              </div>
+            </Stack>
           </motion.div>
-        </Modal>
+        </>
       )}
-    </AnimatePresence>
+    </AnimatedModal>
   );
 };
