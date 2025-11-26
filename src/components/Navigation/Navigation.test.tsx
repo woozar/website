@@ -49,7 +49,8 @@ const renderNavigation = () => {
   return render(
     <BrowserRouter>
       <Navigation />
-    </BrowserRouter>
+    </BrowserRouter>,
+    { noRouter: true }
   );
 };
 
@@ -660,7 +661,8 @@ describe("Navigation", () => {
       return render(
         <MemoryRouter initialEntries={["/workshops/ai-low-hanging-fruits"]}>
           <Navigation />
-        </MemoryRouter>
+        </MemoryRouter>,
+        { noRouter: true }
       );
     };
 

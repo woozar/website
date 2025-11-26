@@ -1,17 +1,10 @@
-import { useEffect } from "react";
+import { Stack, Text, Title } from "@mantine/core";
 
-import { Button, Modal, Stack, Text, Title } from "@mantine/core";
+import { motion } from "framer-motion";
 
-import { IconX } from "@tabler/icons-react";
+import { useContainerVariants, useModalVariants } from "@/hooks/useAnimations";
 
-import {
-  AnimatePresence,
-  Variants,
-  motion,
-  useReducedMotion,
-} from "framer-motion";
-
-import { useModal } from "@/hooks/useModal";
+import { AnimatedModal } from "./AnimatedModal";
 
 interface LegalModalProps {
   opened: boolean;
@@ -20,81 +13,8 @@ interface LegalModalProps {
 }
 
 export const LegalModal = ({ opened, onClose, type }: LegalModalProps) => {
-  const { openModal, closeModal } = useModal();
-  const shouldReduceMotion = useReducedMotion();
-
-  // Hide scrollbars during modal animation and update global modal state
-  useEffect(() => {
-    if (opened) {
-      document.body.style.overflow = "hidden";
-      openModal();
-    } else {
-      document.body.style.overflow = "";
-      closeModal();
-    }
-
-    // Cleanup when component unmounts
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [opened, openModal, closeModal]);
-
-  const modalVariants: Variants = {
-    hidden: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      scale: 1,
-      y: shouldReduceMotion ? 0 : 30,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: shouldReduceMotion
-        ? {}
-        : {
-            type: "spring",
-            damping: 25,
-            stiffness: 300,
-            duration: 0.3,
-          },
-    },
-    exit: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      scale: shouldReduceMotion ? 1 : 0.9,
-      y: shouldReduceMotion ? 0 : 30,
-      transition: shouldReduceMotion
-        ? {}
-        : {
-            duration: 0.2,
-            ease: "easeInOut",
-          },
-    },
-  };
-
-  const contentVariants: Variants = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
-    visible: {
-      opacity: 1,
-      transition: shouldReduceMotion
-        ? {}
-        : {
-            staggerChildren: 0.05,
-            delayChildren: 0.1,
-          },
-    },
-  };
-
-  const itemVariants = {
-    hidden: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      y: shouldReduceMotion ? 0 : 10,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: shouldReduceMotion ? {} : { duration: 0.3 },
-    },
-  };
+  const modalVariants = useModalVariants();
+  const contentVariants = useContainerVariants();
 
   const getContent = () => {
     if (type === "impressum") {
@@ -346,126 +266,48 @@ export const LegalModal = ({ opened, onClose, type }: LegalModalProps) => {
   const { title, content } = getContent();
 
   return (
-    <AnimatePresence>
-      {opened && (
-        <Modal
-          opened={opened}
-          onClose={onClose}
-          size="xl"
-          centered
-          padding={0}
-          radius="lg"
-          withCloseButton={false}
-          overlayProps={{
-            backgroundOpacity: 0.6,
-            blur: 8,
-          }}
-          zIndex={1100}
-          styles={{
-            body: {
-              background: "transparent",
-              boxShadow: "none",
-              padding: 0,
-              overflow: "hidden",
-            },
-            content: {
-              background: "transparent",
-              boxShadow: "none",
-              overflow: "hidden",
-            },
-          }}
-        >
+    <AnimatedModal
+      opened={opened}
+      onClose={onClose}
+      modalVariants={modalVariants}
+      contentVariants={contentVariants}
+    >
+      {({ itemVariants }) => (
+        <>
+          {/* Header */}
+          <motion.div variants={itemVariants} style={{ flexShrink: 0 }}>
+            <Title
+              order={2}
+              style={{
+                fontSize: "1.8rem",
+                fontWeight: 700,
+                background:
+                  "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                paddingRight: "3rem",
+                marginBottom: "1.5rem",
+              }}
+            >
+              {title}
+            </Title>
+          </motion.div>
+
+          {/* Scrollable Content */}
           <motion.div
-            variants={modalVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
+            variants={itemVariants}
             style={{
-              background: "var(--background-primary)",
-              borderRadius: "1rem",
-              padding: "2rem",
-              maxHeight: "80vh",
-              position: "relative",
-              boxShadow: "0 20px 60px var(--shadow-color)",
-              overflow: "hidden",
-              display: "flex",
-              flexDirection: "column",
+              flex: 1,
+              minHeight: 0,
+              overflow: "auto",
+              padding: "0 2px",
             }}
           >
-            {/* Close Button */}
-            <motion.div
-              style={{
-                position: "absolute",
-                top: "1rem",
-                right: "1rem",
-                zIndex: 10,
-              }}
-              whileHover={shouldReduceMotion ? {} : { scale: 1.1 }}
-              whileTap={shouldReduceMotion ? {} : { scale: 0.9 }}
-            >
-              <Button
-                variant="subtle"
-                size="sm"
-                onClick={onClose}
-                style={{
-                  borderRadius: "50%",
-                  width: "40px",
-                  height: "40px",
-                  padding: 0,
-                  color: "var(--text-secondary)",
-                }}
-              >
-                <IconX size={20} />
-              </Button>
-            </motion.div>
-
-            <motion.div
-              variants={contentVariants}
-              initial="hidden"
-              animate="visible"
-              style={{
-                flex: 1,
-                minHeight: 0,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              {/* Header */}
-              <motion.div variants={itemVariants} style={{ flexShrink: 0 }}>
-                <Title
-                  order={2}
-                  style={{
-                    fontSize: "1.8rem",
-                    fontWeight: 700,
-                    background:
-                      "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                    paddingRight: "3rem",
-                    marginBottom: "1.5rem",
-                  }}
-                >
-                  {title}
-                </Title>
-              </motion.div>
-
-              {/* Scrollable Content */}
-              <motion.div
-                variants={itemVariants}
-                style={{
-                  flex: 1,
-                  minHeight: 0,
-                  overflow: "auto",
-                  padding: "0 2px",
-                }}
-              >
-                {content}
-              </motion.div>
-            </motion.div>
+            {content}
           </motion.div>
-        </Modal>
+        </>
       )}
-    </AnimatePresence>
+    </AnimatedModal>
   );
 };

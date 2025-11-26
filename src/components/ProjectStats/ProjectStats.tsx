@@ -30,6 +30,74 @@ import { Section } from "../Layout";
 import { CompanyLogos } from "./CompanyLogos";
 import { FlippableStatCard } from "./FlippableStatCard";
 
+const FRAMEWORKS = new Set([
+  // Frontend Frameworks
+  "React",
+  "Angular",
+  "AngularJS",
+  "Vue",
+  "Vue.js",
+  "Svelte",
+  "Next.js",
+  "NextJS",
+  "Nuxt.js",
+  "React Native",
+  // Backend Frameworks
+  "Express",
+  "Express.js",
+  "express",
+  "Fastify",
+  "Koa",
+  "NestJS",
+  "Django",
+  "Flask",
+  "FastAPI",
+  "Spring",
+  "Spring Boot",
+  "Laravel",
+  "Symfony",
+  "CodeIgniter",
+  // UI/CSS Frameworks
+  "Bootstrap",
+  "Tailwind",
+  "Tailwind CSS",
+  "TailwindCSS",
+  "Material UI",
+  "Angular Material",
+  "Ant Design",
+  "Chakra UI",
+  "Mantine",
+  // Testing Frameworks
+  "Jest",
+  "Cypress",
+  "Playwright",
+  "Vitest",
+  "Mocha",
+  "Jasmine",
+  "Karma",
+  "Testcafe",
+  "MSTest",
+  // Mobile Frameworks
+  "Expo",
+  // Build Tools & Meta-Frameworks
+  "Vite",
+  "create-t3-app",
+  // Animation & Motion
+  "Framer Motion",
+  // Data Management
+  "Apollo",
+  "Prisma",
+  "Zustand",
+  "ngrx",
+  "TanStack Query",
+  "tRPC",
+  "Mongoose",
+  "knex.js",
+  // Specialized Frameworks
+  "LangChain",
+  "Socket.IO",
+]);
+
 export const ProjectStats = () => {
   const { isMobile } = useMediaQuery();
   const { t } = useTranslation();
@@ -39,86 +107,17 @@ export const ProjectStats = () => {
 
   const stats = useMemo(() => calculateProjectStats(projects), [projects]);
 
-  // Get the actual frameworks used in projects
+  // Get the actual frameworks used in psrojects
   const usedFrameworks = useMemo(() => {
-    const frameworks = new Set<string>();
-    projects.forEach((project) => {
-      [...project.primary_tags, ...project.tags].forEach((tag) => {
-        const FRAMEWORKS = [
-          // Frontend Frameworks
-          "React",
-          "Angular",
-          "AngularJS",
-          "Vue",
-          "Vue.js",
-          "Svelte",
-          "Next.js",
-          "NextJS",
-          "Nuxt.js",
-          "React Native",
-          // Backend Frameworks
-          "Express",
-          "Express.js",
-          "express",
-          "Fastify",
-          "Koa",
-          "NestJS",
-          "Django",
-          "Flask",
-          "FastAPI",
-          "Spring",
-          "Spring Boot",
-          "Laravel",
-          "Symfony",
-          "CodeIgniter",
-          // UI/CSS Frameworks
-          "Bootstrap",
-          "Tailwind",
-          "Tailwind CSS",
-          "TailwindCSS",
-          "Material UI",
-          "Angular Material",
-          "Ant Design",
-          "Chakra UI",
-          "Mantine",
-          // Testing Frameworks
-          "Jest",
-          "Cypress",
-          "Playwright",
-          "Vitest",
-          "Mocha",
-          "Jasmine",
-          "Karma",
-          "Testcafe",
-          "MSTest",
-          // Mobile Frameworks
-          "Expo",
-          // Build Tools & Meta-Frameworks
-          "Vite",
-          "create-t3-app",
-          // Animation & Motion
-          "Framer Motion",
-          // Data Management
-          "Apollo",
-          "Prisma",
-          "Zustand",
-          "ngrx",
-          "TanStack Query",
-          "tRPC",
-          "Mongoose",
-          "knex.js",
-          // Specialized Frameworks
-          "LangChain",
-          "Socket.IO",
-        ];
-        if (FRAMEWORKS.includes(tag)) {
-          frameworks.add(tag);
-        }
-      });
-    });
-    return Array.from(frameworks).sort((a, b) =>
-      a.toLowerCase().localeCompare(b.toLowerCase())
-    );
+    return Array.from(
+      new Set<string>(
+        projects.flatMap((project) =>
+          [...project.primary_tags, ...project.tags].filter((tag) =>
+            FRAMEWORKS.has(tag)
+          )
+        )
+      )
+    ).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
   }, [projects]);
 
   // Function to handle company logo clicks

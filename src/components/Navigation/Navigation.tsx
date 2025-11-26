@@ -25,7 +25,6 @@ import { LanguageSwitcher } from "../LanguageSwitcher";
 import { Container } from "../Layout";
 import { ThemeSwitcher } from "../ThemeSwitcher";
 
-// import logoImage from '../../assets/logo.webp';
 const logoImage = "/assets/logo.webp";
 
 export const Navigation = () => {
@@ -109,7 +108,7 @@ export const Navigation = () => {
               onClick={(e) => {
                 e.preventDefault();
                 if (isWorkshopPage) {
-                  window.location.href = "/";
+                  globalThis.location.href = "/";
                 } else {
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }

@@ -2,6 +2,8 @@ import { useMemo } from "react";
 
 import { useReducedMotion as useFramerReducedMotion } from "framer-motion";
 
+import { isSSR } from "../utils/environment";
+
 /**
  * Enhanced useReducedMotion hook that combines system preference with URL query parameter control
  * Supports ?no-motion to disable animations regardless of system settings
@@ -12,18 +14,18 @@ import { useReducedMotion as useFramerReducedMotion } from "framer-motion";
  * - ?no-motion=false (disables motion reduction)
  * - ?no-motion=0 (disables motion reduction)
  * This is especially helpful for users with weak devices or slow connections
+ *
+ * @returns boolean - true if motion should be reduced, false otherwise (defaults to false if unable to determine)
  */
-export const useReducedMotion = () => {
+export const useReducedMotion = (): boolean => {
   const systemReducedMotion = useFramerReducedMotion();
 
   const shouldReduceMotion = useMemo(() => {
-    // SSR safety check
-    if (typeof window === "undefined") {
-      return systemReducedMotion;
-    }
+    /* v8 ignore next */
+    if (isSSR()) return systemReducedMotion ?? false;
 
     // Check for query parameter
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(globalThis.location.search);
 
     if (urlParams.has("no-motion")) {
       const noMotionParam = urlParams.get("no-motion");
@@ -32,8 +34,8 @@ export const useReducedMotion = () => {
       return noMotionParam !== "false" && noMotionParam !== "0";
     }
 
-    // If no query parameter, use system preference
-    return systemReducedMotion;
+    // If no query parameter, use system preference (default to false if null)
+    return systemReducedMotion ?? false;
   }, [systemReducedMotion]);
 
   return shouldReduceMotion;

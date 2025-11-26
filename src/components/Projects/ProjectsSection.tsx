@@ -4,8 +4,8 @@ import { Stack, Text, Title } from "@mantine/core";
 
 import { motion } from "framer-motion";
 
+import { useContainerVariants, useItemVariants } from "@/hooks/useAnimations";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useFilterStore } from "@/stores/filterStore";
 
@@ -18,32 +18,16 @@ export const ProjectsSection = () => {
   const { t } = useTranslation();
   const projects = t.projectsData;
   const { selectedTags, selectedCustomer } = useFilterStore();
-  const shouldReduceMotion = useReducedMotion();
 
-  const containerVariants = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
-    visible: {
-      opacity: 1,
-      transition: shouldReduceMotion
-        ? {}
-        : {
-            staggerChildren: 0.15,
-            delayChildren: 0.2,
-          },
-    },
-  };
+  const containerVariants = useContainerVariants({
+    staggerChildren: 0.15,
+    delayChildren: 0.2,
+  });
 
-  const itemVariants = {
-    hidden: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      y: shouldReduceMotion ? 0 : 30,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: shouldReduceMotion ? {} : { duration: 0.6 },
-    },
-  };
+  const itemVariants = useItemVariants({
+    y: 30,
+    duration: 0.6,
+  });
 
   const filteredProjects = useMemo(() => {
     let filtered = projects;
@@ -106,11 +90,10 @@ export const ProjectsSection = () => {
             cols={{ mobile: 1, tablet: 2, desktop: 2 }}
             spacing={isMobile ? "md" : "lg"}
           >
-            {filteredProjects.map((project, index) => (
+            {filteredProjects.map((project) => (
               <ProjectCard
                 key={`${project.customer}-${project.title}`}
                 project={project}
-                index={index}
               />
             ))}
           </Grid>

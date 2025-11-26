@@ -2,8 +2,9 @@ import { useState } from "react";
 
 import { Box, Card, Stack, Text } from "@mantine/core";
 
-import { Variants, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
+import { useCardVariants, useHoverVariants } from "@/hooks/useAnimations";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 import { Project } from "@/types";
@@ -13,7 +14,6 @@ import { TagList } from "./TagList";
 
 interface ProjectCardProps {
   project: Project;
-  index: number;
 }
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
@@ -21,36 +21,17 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
   const [modalOpened, setModalOpened] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
-  const cardVariants: Variants = {
-    hidden: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      y: shouldReduceMotion ? 0 : 30,
-      scale: shouldReduceMotion ? 1 : 0.95,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: shouldReduceMotion
-        ? {}
-        : {
-            duration: 0.5,
-          },
-    },
-  };
+  const cardVariants = useCardVariants({
+    y: 30,
+    scale: 0.95,
+    duration: 0.5,
+  });
 
-  const hoverVariants: Variants = {
-    rest: { scale: 1, y: 0 },
-    hover: {
-      scale: shouldReduceMotion ? 1 : 1.02,
-      y: shouldReduceMotion ? 0 : -8,
-      transition: shouldReduceMotion
-        ? {}
-        : {
-            duration: 0.3,
-          },
-    },
-  };
+  const hoverVariants = useHoverVariants({
+    scale: 1.02,
+    y: -8,
+    duration: 0.3,
+  });
 
   return (
     <motion.div
@@ -124,8 +105,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
                   textAlign: "justify",
                 }}
               >
-                {(project.description && project.description[0]) ||
-                  t.project.noDescription}
+                {project.description?.[0] || t.project.noDescription}
               </Text>
             </Box>
 

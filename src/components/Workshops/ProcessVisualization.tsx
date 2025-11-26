@@ -6,6 +6,7 @@ import { Variants, motion } from "framer-motion";
 
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import type { StoryData } from "@/types";
+import { isSSR } from "@/utils/environment";
 
 import {
   InputCard,
@@ -20,17 +21,14 @@ interface ProcessVisualizationProps {
 }
 
 export const ProcessVisualization = ({ story }: ProcessVisualizationProps) => {
-  const shouldReduceMotionRaw = useReducedMotion();
-  const shouldReduceMotion = shouldReduceMotionRaw ?? false;
+  const shouldReduceMotion = useReducedMotion();
   const [isDesktopLayout, setIsDesktopLayout] = useState(
-    () => (typeof window !== "undefined" ? window.innerWidth >= 1280 : true) // Default to desktop for SSR
+    () => isSSR() || window.innerWidth >= 1280 // Default to desktop for SSR
   );
 
   useEffect(() => {
-    // SSR safety check
-    if (typeof window === "undefined") {
-      return;
-    }
+    /* v8 ignore next */
+    if (isSSR()) return;
 
     const handleResize = () => {
       setIsDesktopLayout(window.innerWidth >= 1280);
@@ -84,56 +82,7 @@ export const ProcessVisualization = ({ story }: ProcessVisualizationProps) => {
       }}
     >
       <Box>
-        {!isDesktopLayout ? (
-          // Mobile/Tablet: Vertikales Layout (< 1280px)
-          <Stack gap="0" align="center">
-            {/* Inputs Section */}
-            <Box style={{ width: "100%", maxWidth: "600px" }}>
-              <Group justify="center" gap="md" style={{ flexWrap: "wrap" }}>
-                {story.inputs.map((input, i: number) => (
-                  <InputCard
-                    key={`input-${i}`}
-                    input={input}
-                    index={i}
-                    shouldReduceMotion={shouldReduceMotion}
-                    layoutType="mobile"
-                  />
-                ))}
-              </Group>
-            </Box>
-
-            {/* Connection Lines: Inputs → Processing */}
-            <InputProcessingConnections
-              inputCount={story.inputs.length}
-              shouldReduceMotion={shouldReduceMotion}
-              isDesktop={false}
-            />
-
-            {/* Processing Section */}
-            <Box style={{ width: "100%", maxWidth: "400px" }}>
-              <ProcessingCard
-                story={story}
-                shouldReduceMotion={shouldReduceMotion}
-                delayOffset={story.inputs.length * 0.2 + 0.3}
-              />
-            </Box>
-
-            {/* Connection Line: Processing → Output */}
-            <ProcessingOutputConnection
-              shouldReduceMotion={shouldReduceMotion}
-              isDesktop={false}
-            />
-
-            {/* Output Section */}
-            <Box style={{ width: "100%", maxWidth: "500px" }}>
-              <OutputCard
-                output={story.output}
-                delayOffset={story.inputs.length * 0.2 + 0.6}
-                shouldReduceMotion={shouldReduceMotion}
-              />
-            </Box>
-          </Stack>
-        ) : (
+        {isDesktopLayout ? (
           // Desktop: Horizontales Layout (>= 1280px)
           <Box
             style={{
@@ -156,7 +105,7 @@ export const ProcessVisualization = ({ story }: ProcessVisualizationProps) => {
             >
               {story.inputs.map((input, i: number) => (
                 <InputCard
-                  key={`desktop-input-${i}`}
+                  key={`desktop-input-${input.title}`}
                   input={input}
                   index={i}
                   shouldReduceMotion={shouldReduceMotion}
@@ -202,6 +151,55 @@ export const ProcessVisualization = ({ story }: ProcessVisualizationProps) => {
               />
             </Box>
           </Box>
+        ) : (
+          // Mobile/Tablet: Vertikales Layout (< 1280px)
+          <Stack gap="0" align="center">
+            {/* Inputs Section */}
+            <Box style={{ width: "100%", maxWidth: "600px" }}>
+              <Group justify="center" gap="md" style={{ flexWrap: "wrap" }}>
+                {story.inputs.map((input, i: number) => (
+                  <InputCard
+                    key={`card-${input.title}`}
+                    input={input}
+                    index={i}
+                    shouldReduceMotion={shouldReduceMotion}
+                    layoutType="mobile"
+                  />
+                ))}
+              </Group>
+            </Box>
+
+            {/* Connection Lines: Inputs → Processing */}
+            <InputProcessingConnections
+              inputCount={story.inputs.length}
+              shouldReduceMotion={shouldReduceMotion}
+              isDesktop={false}
+            />
+
+            {/* Processing Section */}
+            <Box style={{ width: "100%", maxWidth: "400px" }}>
+              <ProcessingCard
+                story={story}
+                shouldReduceMotion={shouldReduceMotion}
+                delayOffset={story.inputs.length * 0.2 + 0.3}
+              />
+            </Box>
+
+            {/* Connection Line: Processing → Output */}
+            <ProcessingOutputConnection
+              shouldReduceMotion={shouldReduceMotion}
+              isDesktop={false}
+            />
+
+            {/* Output Section */}
+            <Box style={{ width: "100%", maxWidth: "500px" }}>
+              <OutputCard
+                output={story.output}
+                delayOffset={story.inputs.length * 0.2 + 0.6}
+                shouldReduceMotion={shouldReduceMotion}
+              />
+            </Box>
+          </Stack>
         )}
       </Box>
     </motion.div>

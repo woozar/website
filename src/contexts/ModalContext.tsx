@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useCallback, useMemo, useState } from "react";
 
 import { ImageModalData, ModalContext } from "./modal-context";
 
@@ -12,27 +12,30 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
     null
   );
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => {
+  const openModal = useCallback(() => setIsModalOpen(true), []);
+  const closeModal = useCallback(() => {
     setIsModalOpen(false);
     setImageModalData(null);
-  };
+  }, []);
 
-  const openImageModal = (data: ImageModalData) => {
+  const openImageModal = useCallback((data: ImageModalData) => {
     setImageModalData(data);
     setIsModalOpen(true);
-  };
+  }, []);
+
+  const contextValue = useMemo(
+    () => ({
+      isModalOpen,
+      imageModalData,
+      openModal,
+      closeModal,
+      openImageModal,
+    }),
+    [isModalOpen, imageModalData, openModal, closeModal, openImageModal]
+  );
 
   return (
-    <ModalContext.Provider
-      value={{
-        isModalOpen,
-        imageModalData,
-        openModal,
-        closeModal,
-        openImageModal,
-      }}
-    >
+    <ModalContext.Provider value={contextValue}>
       {children}
     </ModalContext.Provider>
   );

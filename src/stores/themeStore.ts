@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+import { isSSR } from "../utils/environment";
+
 export type Theme = "light" | "dark";
 
 interface ThemeStore {
@@ -11,8 +13,8 @@ interface ThemeStore {
 
 // Function to detect browser dark mode preference
 const detectBrowserTheme = (): Theme => {
-  if (typeof window !== "undefined" && window.matchMedia) {
-    const prefersDark = window.matchMedia(
+  if (!isSSR() && globalThis.matchMedia) {
+    const prefersDark = globalThis.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
     return prefersDark ? "dark" : "light";
@@ -27,7 +29,7 @@ export const useThemeStore = create<ThemeStore>()(
       setTheme: (theme) => {
         set({ theme });
         // Update document data attribute for CSS
-        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.dataset.theme = theme;
       },
       toggleTheme: () => {
         const currentTheme = get().theme;
@@ -40,7 +42,7 @@ export const useThemeStore = create<ThemeStore>()(
       onRehydrateStorage: () => (state) => {
         // Ensure data attribute is set after rehydration
         if (state?.theme) {
-          document.documentElement.setAttribute("data-theme", state.theme);
+          document.documentElement.dataset.theme = state.theme;
         }
       },
     }

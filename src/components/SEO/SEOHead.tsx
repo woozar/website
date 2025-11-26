@@ -105,7 +105,7 @@ export const SEOHead = ({
       if (!script) {
         script = document.createElement("script");
         script.type = "application/ld+json";
-        script.setAttribute("data-id", id);
+        script.dataset.id = id;
         document.head.appendChild(script);
       }
       script.textContent = JSON.stringify(data);

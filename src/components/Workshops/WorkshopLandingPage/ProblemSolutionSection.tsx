@@ -1,4 +1,4 @@
-import { Box, Card, List, Stack, ThemeIcon, Title } from "@mantine/core";
+import { Box, ThemeIcon } from "@mantine/core";
 
 import {
   IconAlertTriangle,
@@ -9,10 +9,10 @@ import {
 
 import { Variants, motion } from "framer-motion";
 
-import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 
 import { Grid } from "../../Layout";
+import { ProblemSolutionCard } from "./ProblemSolutionCard";
 
 interface ProblemSolutionSectionProps {
   itemVariants: Variants;
@@ -24,7 +24,6 @@ export const ProblemSolutionSection = ({
   cardVariants,
 }: ProblemSolutionSectionProps) => {
   const { t } = useTranslation();
-  const shouldReduceMotion = useReducedMotion();
 
   return (
     <Box style={{ marginTop: "2rem" }}>
@@ -35,134 +34,31 @@ export const ProblemSolutionSection = ({
         animate="visible"
       >
         <Grid cols={{ mobile: 1, tablet: 2, desktop: 2 }} spacing="xl">
-          <motion.div
-            variants={cardVariants}
-            initial="hidden"
-            animate="visible"
-            whileHover={
-              shouldReduceMotion
-                ? {}
-                : {
-                    y: -5,
-                    transition: { duration: 0.2 },
-                  }
+          <ProblemSolutionCard
+            title={t.workshop.problem.title}
+            points={t.workshop.problem.points}
+            icon={IconAlertTriangle}
+            iconGradient="linear-gradient(135deg, #ff6b35, #d32f2f)"
+            listIcon={
+              <ThemeIcon color="red" size={20} radius="xl">
+                <IconX size={12} />
+              </ThemeIcon>
             }
-          >
-            <Card
-              shadow="sm"
-              padding="xl"
-              radius="lg"
-              withBorder
-              style={{
-                height: "100%",
-                borderColor: "var(--border-color)",
-                backgroundColor: "var(--background-primary)",
-                cursor: "default",
-              }}
-            >
-              <Stack gap="md">
-                <Box
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1rem",
-                  }}
-                >
-                  <ThemeIcon
-                    size="xl"
-                    style={{
-                      background: "linear-gradient(135deg, #ff6b35, #d32f2f)",
-                      color: "white",
-                    }}
-                  >
-                    <IconAlertTriangle size={28} />
-                  </ThemeIcon>
-                  <Title order={3} c="var(--text-primary)">
-                    {t.workshop.problem.title}
-                  </Title>
-                </Box>
-                <List
-                  spacing="sm"
-                  icon={
-                    <ThemeIcon color="red" size={20} radius="xl">
-                      <IconX size={12} />
-                    </ThemeIcon>
-                  }
-                >
-                  {t.workshop.problem.points.map(
-                    (point: string, index: number) => (
-                      <List.Item key={index}>{point}</List.Item>
-                    )
-                  )}
-                </List>
-              </Stack>
-            </Card>
-          </motion.div>
+            cardVariants={cardVariants}
+          />
 
-          <motion.div
-            variants={cardVariants}
-            initial="hidden"
-            animate="visible"
-            whileHover={
-              shouldReduceMotion
-                ? {}
-                : {
-                    y: -5,
-                    transition: { duration: 0.2 },
-                  }
+          <ProblemSolutionCard
+            title={t.workshop.solution.title}
+            points={t.workshop.solution.points}
+            icon={IconBrain}
+            iconGradient="linear-gradient(135deg, var(--primary-orange), var(--primary-red))"
+            listIcon={
+              <ThemeIcon color="green" size={20} radius="xl">
+                <IconCheck size={12} />
+              </ThemeIcon>
             }
-          >
-            <Card
-              shadow="sm"
-              padding="xl"
-              radius="lg"
-              withBorder
-              style={{
-                height: "100%",
-                borderColor: "var(--border-color)",
-                backgroundColor: "var(--background-primary)",
-                cursor: "default",
-              }}
-            >
-              <Stack gap="md">
-                <Box
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1rem",
-                  }}
-                >
-                  <ThemeIcon
-                    size="xl"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, var(--primary-orange), var(--primary-red))",
-                      color: "white",
-                    }}
-                  >
-                    <IconBrain size={28} />
-                  </ThemeIcon>
-                  <Title order={3} c="var(--text-primary)">
-                    {t.workshop.solution.title}
-                  </Title>
-                </Box>
-                <List
-                  spacing="sm"
-                  icon={
-                    <ThemeIcon color="green" size={20} radius="xl">
-                      <IconCheck size={12} />
-                    </ThemeIcon>
-                  }
-                >
-                  {t.workshop.solution.points.map(
-                    (point: string, index: number) => (
-                      <List.Item key={index}>{point}</List.Item>
-                    )
-                  )}
-                </List>
-              </Stack>
-            </Card>
-          </motion.div>
+            cardVariants={cardVariants}
+          />
         </Grid>
       </motion.div>
     </Box>

@@ -2,7 +2,7 @@ import { fireEvent, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { useThemeStore } from "@/stores/themeStore";
-import { customRender as render } from "@/test/render";
+import { render } from "@/test/test-utils";
 
 import { ThemeSwitcher } from "./ThemeSwitcher";
 

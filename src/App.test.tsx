@@ -1,12 +1,16 @@
 import { screen, render as testingLibraryRender } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import { BrowserRouter } from "react-router-dom";
+
 import App from "./App";
 import { Language, useLanguageStore } from "./stores/languageStore";
-import { AllTheProvidersWithRouter } from "./test/router-providers";
+import { AllTheProviders } from "./test/router-providers";
 
 const render = (ui: React.ReactElement) =>
-  testingLibraryRender(ui, { wrapper: AllTheProvidersWithRouter });
+  testingLibraryRender(<BrowserRouter>{ui}</BrowserRouter>, {
+    wrapper: (props) => <AllTheProviders noRouter {...props} />,
+  });
 
 // Mock all child components
 vi.mock("./components/Navigation", () => ({
@@ -86,7 +90,11 @@ describe("App", () => {
 
     // Rerender with German
     mockUseLanguageStore.mockReturnValue("de");
-    rerender(<App />);
+    rerender(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
 
     expect(document.documentElement.lang).toBe("de");
   });

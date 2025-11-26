@@ -2,6 +2,9 @@
 
 set -e
 
+echo "🗑️  Cleaning up dist-server folder..."
+rm -rf dist-server
+
 # Load environment variables
 if [ -f .env ]; then
   source .env

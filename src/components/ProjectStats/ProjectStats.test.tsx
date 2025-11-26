@@ -7,7 +7,7 @@ import { useReducedMotion } from "framer-motion";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 // Import after mocking
 import { useTranslation } from "@/hooks/useTranslation";
-import { customRender as render } from "@/test/render";
+import { render } from "@/test/test-utils";
 import { de } from "@/translations/de";
 
 import { ProjectStats } from "./ProjectStats";

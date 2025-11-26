@@ -23,8 +23,13 @@ import {
 
 import { motion } from "framer-motion";
 
+import {
+  useContainerVariants,
+  useItemVariants,
+  useWhileHover,
+  useWhileTap,
+} from "@/hooks/useAnimations";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 
 import { Section } from "../Layout";
@@ -33,34 +38,17 @@ import { LegalModal } from "../Modal/LegalModal";
 export const Contact = () => {
   const { isMobile } = useMediaQuery();
   const { t } = useTranslation();
-  const shouldReduceMotion = useReducedMotion();
   const [impressumOpened, setImpressumOpened] = useState(false);
   const [datenschutzOpened, setDatenschutzOpened] = useState(false);
 
-  const containerVariants = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
-    visible: {
-      opacity: 1,
-      transition: shouldReduceMotion
-        ? {}
-        : {
-            staggerChildren: 0.2,
-            delayChildren: 0.1,
-          },
-    },
-  };
+  const containerVariants = useContainerVariants({
+    staggerChildren: 0.2,
+    delayChildren: 0.1,
+  });
 
-  const itemVariants = {
-    hidden: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      y: shouldReduceMotion ? 0 : 20,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: shouldReduceMotion ? {} : { duration: 0.6 },
-    },
-  };
+  const itemVariants = useItemVariants({ y: 20, duration: 0.6 });
+  const socialHover = useWhileHover({ type: "social" });
+  const tap = useWhileTap();
 
   const contactItems = [
     {
@@ -215,8 +203,8 @@ export const Contact = () => {
                 {socialLinks.map((link) => (
                   <motion.div
                     key={link.label}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
+                    whileHover={socialHover}
+                    whileTap={tap}
                   >
                     <Button
                       component="a"

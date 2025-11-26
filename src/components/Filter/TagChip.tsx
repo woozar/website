@@ -1,7 +1,9 @@
 /// <reference types="../../css-modules" />
 import { Badge, type BadgeProps } from "@mantine/core";
 
-import { Variants, motion } from "framer-motion";
+import { motion } from "framer-motion";
+
+import { useChipVariants } from "@/hooks/useAnimations";
 
 import styles from "./TagChip.module.css";
 
@@ -26,11 +28,8 @@ export const TagChip = ({
     onClick?.(tag, e);
   };
 
-  const chipVariants: Variants = {
-    idle: { scale: 1 },
-    hover: { scale: 1.05 },
-    tap: { scale: 0.95 },
-  };
+  const { variants: chipVariants, transition: chipTransition } =
+    useChipVariants();
 
   return (
     <motion.div
@@ -38,7 +37,7 @@ export const TagChip = ({
       initial="idle"
       whileHover="hover"
       whileTap="tap"
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      transition={chipTransition}
     >
       <Badge
         size="sm"

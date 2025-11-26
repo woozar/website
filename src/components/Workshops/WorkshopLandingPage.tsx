@@ -2,12 +2,16 @@ import { Box, Button, Card, List, Stack, Text, Title } from "@mantine/core";
 
 import { IconHome } from "@tabler/icons-react";
 
-import { Variants, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { useLocation } from "react-router-dom";
 
+import {
+  useCardVariants,
+  useItemVariants,
+  useWhileHover,
+} from "@/hooks/useAnimations";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
 
 import { Contact } from "../Contact/Contact";
@@ -21,34 +25,11 @@ import { WorkshopDetailsSection } from "./WorkshopLandingPage/WorkshopDetailsSec
 export const WorkshopLandingPage = () => {
   const { isMobile } = useMediaQuery();
   const { t } = useTranslation();
-  const shouldReduceMotion = useReducedMotion();
   const location = useLocation();
+  const cardHover = useWhileHover({ type: "card" });
 
-  const itemVariants: Variants = {
-    hidden: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      y: shouldReduceMotion ? 0 : 30,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: shouldReduceMotion ? {} : { duration: 0.6, ease: "easeOut" },
-    },
-  };
-
-  const cardVariants: Variants = {
-    hidden: {
-      opacity: shouldReduceMotion ? 1 : 0,
-      y: shouldReduceMotion ? 0 : 40,
-      scale: shouldReduceMotion ? 1 : 0.95,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: shouldReduceMotion ? {} : { duration: 0.6, ease: "easeOut" },
-    },
-  };
+  const itemVariants = useItemVariants({ y: 30 });
+  const cardVariants = useCardVariants({ y: 40 });
 
   const handleWorkshopInquiry = () => {
     const subject = encodeURIComponent(
@@ -62,7 +43,7 @@ Bitte kontaktieren Sie mich für ein unverbindliches Gespräch.
 
 Viele Grüße`);
 
-    window.location.href = `mailto:workshops@12-of-spades.com?subject=${subject}&body=${body}`;
+    globalThis.location.href = `mailto:workshops@12-of-spades.com?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -131,21 +112,14 @@ Viele Grüße`);
               </Stack>
 
               <Grid cols={{ mobile: 1, tablet: 1, desktop: 2 }} spacing="xl">
-                {t.workshop.agenda.items.map((item, index: number) => (
+                {t.workshop.agenda.items.map((item) => (
                   <motion.div
-                    key={index}
+                    key={item.title}
                     variants={cardVariants}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.01 }}
-                    whileHover={
-                      shouldReduceMotion
-                        ? {}
-                        : {
-                            y: -5,
-                            transition: { duration: 0.2 },
-                          }
-                    }
+                    whileHover={cardHover}
                   >
                     <Card
                       shadow="sm"
@@ -170,11 +144,9 @@ Viele Grüße`);
                           {item.description}
                         </Text>
                         <List spacing="xs" size="sm">
-                          {item.points.map(
-                            (point: string, pointIndex: number) => (
-                              <List.Item key={pointIndex}>{point}</List.Item>
-                            )
-                          )}
+                          {item.points.map((point: string) => (
+                            <List.Item key={point}>{point}</List.Item>
+                          ))}
                         </List>
                       </Stack>
                     </Card>
@@ -207,7 +179,7 @@ Viele Grüße`);
                 <Stack gap="xl" style={{ marginTop: "1rem" }}>
                   {t.workshop.process.steps.map((step, index: number) => (
                     <motion.div
-                      key={index}
+                      key={step.title}
                       variants={cardVariants}
                       initial="hidden"
                       whileInView="visible"
@@ -265,30 +237,28 @@ Viele Grüße`);
 
                           {step.options && (
                             <Stack gap="md" style={{ marginTop: "1rem" }}>
-                              {step.options.map(
-                                (option, optionIndex: number) => (
-                                  <Box
-                                    key={optionIndex}
-                                    style={{
-                                      backgroundColor:
-                                        "var(--background-secondary)",
-                                      padding: "1rem",
-                                      borderRadius: "8px",
-                                      borderLeft:
-                                        "4px solid var(--primary-orange)",
-                                    }}
-                                  >
-                                    <Stack gap="xs">
-                                      <Text fw={600} c="var(--text-primary)">
-                                        {option.title}
-                                      </Text>
-                                      <Text size="sm" c="var(--text-secondary)">
-                                        {option.description}
-                                      </Text>
-                                    </Stack>
-                                  </Box>
-                                )
-                              )}
+                              {step.options.map((option) => (
+                                <Box
+                                  key={option.title}
+                                  style={{
+                                    backgroundColor:
+                                      "var(--background-secondary)",
+                                    padding: "1rem",
+                                    borderRadius: "8px",
+                                    borderLeft:
+                                      "4px solid var(--primary-orange)",
+                                  }}
+                                >
+                                  <Stack gap="xs">
+                                    <Text fw={600} c="var(--text-primary)">
+                                      {option.title}
+                                    </Text>
+                                    <Text size="sm" c="var(--text-secondary)">
+                                      {option.description}
+                                    </Text>
+                                  </Stack>
+                                </Box>
+                              ))}
                             </Stack>
                           )}
                         </Stack>

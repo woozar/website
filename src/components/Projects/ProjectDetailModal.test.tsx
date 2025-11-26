@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import { useReducedMotion } from "framer-motion";
 
-import { customRender as render } from "@/test/render";
+import { render } from "@/test/test-utils";
 import { Project } from "@/types";
 
 import { ProjectDetailModal } from "./ProjectDetailModal";
@@ -137,9 +137,11 @@ describe("ProjectDetailModal", () => {
   it("should apply correct styles to markdown elements", () => {
     render(<ProjectDetailModal {...defaultProps} />);
 
-    // Check if link has the correct color style
+    // Check if link has the correct class and attributes
     const link = screen.getByRole("link");
-    expect(link).toHaveStyle({ color: "var(--primary-orange)" });
+    expect(link).toHaveClass("markdown-link");
+    expect(link).toHaveAttribute("target", "_blank");
+    expect(link).toHaveAttribute("rel", "noopener noreferrer");
   });
 
   it("should handle markdown formatting in multiple paragraphs", () => {

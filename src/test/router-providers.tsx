@@ -6,10 +6,12 @@ import { BrowserRouter } from "react-router-dom";
 
 import { ModalProvider } from "../contexts/ModalContext";
 
-export const AllTheProvidersWithRouter = ({
+export const AllTheProviders = ({
   children,
+  noRouter = false,
 }: {
   children: React.ReactNode;
+  noRouter?: boolean;
 }) => {
   // Create portal containers for Mantine if they don't exist
   React.useEffect(() => {
@@ -30,11 +32,15 @@ export const AllTheProvidersWithRouter = ({
     createPortalContainer("mantine-modals-container");
   }, []);
 
-  return (
+  const content = (
     <MantineProvider defaultColorScheme="light">
-      <BrowserRouter>
-        <ModalProvider>{children}</ModalProvider>
-      </BrowserRouter>
+      <ModalProvider>{children}</ModalProvider>
     </MantineProvider>
   );
+
+  if (noRouter) {
+    return content;
+  }
+
+  return <BrowserRouter>{content}</BrowserRouter>;
 };

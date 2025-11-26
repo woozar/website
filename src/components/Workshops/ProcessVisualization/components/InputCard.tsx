@@ -36,7 +36,7 @@ export const InputCard = ({
 
   return (
     <motion.div
-      key={`input-${index}`}
+      key={`input-${input.title}`}
       variants={boxVariants}
       initial="hidden"
       whileInView="visible"

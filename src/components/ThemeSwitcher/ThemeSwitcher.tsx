@@ -2,6 +2,9 @@ import { Button } from "@mantine/core";
 
 import { IconMoon, IconSun } from "@tabler/icons-react";
 
+import { motion } from "framer-motion";
+
+import { useWhileHover, useWhileTap } from "@/hooks/useAnimations";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useThemeStore } from "@/stores/themeStore";
 
@@ -16,26 +19,15 @@ export const ThemeSwitcher = ({ variant = "desktop" }: ThemeSwitcherProps) => {
   const isDark = theme === "dark";
   const Icon = isDark ? IconSun : IconMoon;
 
+  const buttonHover = useWhileHover({ type: "button" });
+  const buttonTap = useWhileTap();
+
   const buttonStyle = {
     borderColor: "var(--primary-orange)",
     color: "var(--primary-orange)",
     background: "transparent",
     border: "1px solid var(--primary-orange)",
     borderRadius: "0.5rem",
-  };
-
-  const hoverStyle = {
-    "&:hover": {
-      background: "rgba(255, 107, 53, 0.08)",
-      transform: "translateY(-1px)",
-    },
-  };
-
-  const transitionStyle = {
-    transition: "all 0.2s ease",
-    "@media (prefers-reduced-motion: reduce)": {
-      transition: "none",
-    },
   };
 
   if (variant === "mobile") {
@@ -80,22 +72,22 @@ export const ThemeSwitcher = ({ variant = "desktop" }: ThemeSwitcherProps) => {
   }
 
   return (
-    <Button
-      variant="outline"
-      size="xs"
-      onClick={toggleTheme}
-      style={{
-        ...buttonStyle,
-        ...transitionStyle,
-        minWidth: "40px",
-        height: "28px",
-        fontSize: "1rem",
-        padding: "0 8px",
-      }}
-      styles={{ root: { ...hoverStyle, ...transitionStyle } }}
-      title={isDark ? t.theme.switchToLight : t.theme.switchToDark}
-    >
-      <Icon size={16} />
-    </Button>
+    <motion.div whileHover={buttonHover} whileTap={buttonTap}>
+      <Button
+        variant="outline"
+        size="xs"
+        onClick={toggleTheme}
+        style={{
+          ...buttonStyle,
+          minWidth: "40px",
+          height: "28px",
+          fontSize: "1rem",
+          padding: "0 8px",
+        }}
+        title={isDark ? t.theme.switchToLight : t.theme.switchToDark}
+      >
+        <Icon size={16} />
+      </Button>
+    </motion.div>
   );
 };
