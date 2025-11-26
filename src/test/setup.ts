@@ -2,8 +2,8 @@ import "@testing-library/jest-dom";
 import { cleanup } from "@testing-library/react";
 import { afterEach, beforeAll, vi } from "vitest";
 
-// Mock window.matchMedia
-Object.defineProperty(window, "matchMedia", {
+// Mock globalThis.matchMedia
+Object.defineProperty(globalThis, "matchMedia", {
   writable: true,
   value: vi.fn().mockImplementation((query) => ({
     matches: false,
@@ -18,14 +18,14 @@ Object.defineProperty(window, "matchMedia", {
 });
 
 // Mock ResizeObserver
-global.ResizeObserver = vi.fn().mockImplementation(() => ({
+globalThis.ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
 }));
 
 // Mock IntersectionObserver
-global.IntersectionObserver = vi.fn().mockImplementation(() => ({
+globalThis.IntersectionObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -43,19 +43,19 @@ const localStorageMock = {
   length: 0,
   key: vi.fn(),
 };
-Object.defineProperty(window, "localStorage", {
+Object.defineProperty(globalThis, "localStorage", {
   value: localStorageMock,
 });
 
 // Mock sessionStorage
-Object.defineProperty(window, "sessionStorage", {
+Object.defineProperty(globalThis, "sessionStorage", {
   value: localStorageMock,
 });
 
 // Mock navigator
-Object.defineProperty(window, "navigator", {
+Object.defineProperty(globalThis, "navigator", {
   value: {
-    ...window.navigator,
+    ...globalThis.navigator,
     language: "en-US",
     languages: ["en-US", "en"],
   },
@@ -65,7 +65,7 @@ Object.defineProperty(window, "navigator", {
 vi.mock("framer-motion", async () => {
   const React = (await vi.importActual("react")) as any;
 
-  const motionProps = [
+  const motionProps = new Set([
     "animate",
     "initial",
     "exit",
@@ -94,12 +94,12 @@ vi.mock("framer-motion", async () => {
     "onViewportEnter",
     "onViewportLeave",
     "viewport",
-  ];
+  ]);
 
   const filterProps = (props: any) => {
-    const filtered = { ...props };
-    motionProps.forEach((prop) => delete filtered[prop]);
-    return filtered;
+    return Object.fromEntries(
+      Object.entries(props).filter(([key]) => !motionProps.has(key))
+    );
   };
 
   const createMotionComponent = (element: string) => {

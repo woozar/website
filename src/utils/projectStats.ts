@@ -24,7 +24,7 @@ export interface ProjectStats {
 }
 
 // Define common frameworks for categorization
-const FRAMEWORKS = [
+const FRAMEWORKS = new Set([
   "React",
   "Angular",
   "Vue",
@@ -60,7 +60,7 @@ const FRAMEWORKS = [
   "T3 Stack",
   "T3",
   "create-t3-app",
-];
+]);
 
 export const calculateProjectStats = (projects: Project[]): ProjectStats => {
   const totalProjects = projects.length;
@@ -72,34 +72,34 @@ export const calculateProjectStats = (projects: Project[]): ProjectStats => {
   const companies = new Set<string>();
   const categories = new Map<string, number>();
 
-  projects.forEach((project) => {
+  for (const project of projects) {
     // Count companies
     companies.add(project.customer);
 
     // Count primary tags
-    project.primary_tags?.forEach((tag) => {
+    for (const tag of project.primary_tags) {
       primaryTagCount.set(tag, (primaryTagCount.get(tag) || 0) + 1);
       technologyCount.set(tag, (technologyCount.get(tag) || 0) + 1);
 
       // Check if it's a framework
-      if (FRAMEWORKS.includes(tag)) {
+      if (FRAMEWORKS.has(tag)) {
         frameworks.add(tag);
       }
 
       // Categorize primary tags
       categories.set(tag, (categories.get(tag) || 0) + 1);
-    });
+    }
 
     // Count secondary tags
-    project.tags?.forEach((tag) => {
+    for (const tag of project.tags) {
       technologyCount.set(tag, (technologyCount.get(tag) || 0) + 1);
 
       // Check if it's a framework
-      if (FRAMEWORKS.includes(tag)) {
+      if (FRAMEWORKS.has(tag)) {
         frameworks.add(tag);
       }
-    });
-  });
+    }
+  }
 
   // Convert to arrays and sort
   const topTechnologies: TechnologyStats[] = Array.from(

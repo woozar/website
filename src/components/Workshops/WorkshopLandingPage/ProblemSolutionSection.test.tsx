@@ -48,7 +48,7 @@ describe("ProblemSolutionSection", () => {
     mockUseReducedMotion.mockReturnValue(false);
 
     // Mock matchMedia
-    Object.defineProperty(window, "matchMedia", {
+    Object.defineProperty(globalThis, "matchMedia", {
       writable: true,
       value: vi.fn().mockImplementation((query) => ({
         matches: false,

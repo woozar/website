@@ -125,7 +125,7 @@ export const SuccessStories = () => {
               const IconComponent = story.icon;
               return (
                 <Button
-                  key={index}
+                  key={story.title}
                   variant={selectedStory === index ? "filled" : "outline"}
                   onClick={() => setSelectedStory(index)}
                   leftSection={<IconComponent size={16} />}

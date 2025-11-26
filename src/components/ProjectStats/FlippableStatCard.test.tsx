@@ -6,7 +6,7 @@ import { IconCode } from "@tabler/icons-react";
 // Import after mocking
 import { useReducedMotion } from "framer-motion";
 
-import { customRender as render } from "@/test/render";
+import { render } from "@/test/test-utils";
 
 import { FlippableStatCard } from "./FlippableStatCard";
 

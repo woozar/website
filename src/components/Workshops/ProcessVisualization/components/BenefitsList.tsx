@@ -14,9 +14,9 @@ interface BenefitsListProps {
 export const BenefitsList = ({ benefits }: BenefitsListProps) => {
   const { t } = useTranslation();
 
-  const renderBenefitItem = (benefit: string, index: number) => (
+  const renderBenefitItem = (benefit: string) => (
     <Box
-      key={index}
+      key={benefit}
       style={{
         display: "flex",
         alignItems: "flex-start",

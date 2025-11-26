@@ -1,7 +1,8 @@
 import { fireEvent, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-import { customRender as render } from "../../test/render";
+import { render } from "@/test/test-utils";
+
 import { TagChip } from "./TagChip";
 
 // framer-motion is globally mocked in test setup

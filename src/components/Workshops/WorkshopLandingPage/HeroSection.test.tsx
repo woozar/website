@@ -45,14 +45,14 @@ describe("HeroSection", () => {
     });
 
     // Mock window properties
-    Object.defineProperty(window, "innerWidth", {
+    Object.defineProperty(globalThis, "innerWidth", {
       writable: true,
       configurable: true,
       value: 1280,
     });
 
     // Mock matchMedia
-    Object.defineProperty(window, "matchMedia", {
+    Object.defineProperty(globalThis, "matchMedia", {
       writable: true,
       value: vi.fn().mockImplementation((query) => ({
         matches: false,

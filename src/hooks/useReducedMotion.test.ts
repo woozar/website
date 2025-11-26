@@ -19,8 +19,8 @@ describe("useReducedMotion", () => {
   const originalLocation = window.location;
 
   beforeEach(() => {
-    // Mock window.location.search
-    Object.defineProperty(window, "location", {
+    // Mock globalThis.location.search
+    Object.defineProperty(globalThis, "location", {
       value: {
         ...originalLocation,
         search: "",

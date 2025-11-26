@@ -46,9 +46,7 @@ export function AppProvider({ children }: Readonly<AppProviderProps>) {
 
   useEffect(() => {
     // Set initial data attribute on mount
-    if (typeof document !== "undefined") {
-      document.documentElement.setAttribute("data-theme", currentTheme);
-    }
+    if (document) document.documentElement.dataset.theme = currentTheme;
   }, [currentTheme]);
 
   return (

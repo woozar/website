@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { MediaQueries } from "../types";
+import { isSSR } from "../utils/environment";
 
 export const useMediaQuery = (): MediaQueries => {
   const [mediaQueries, setMediaQueries] = useState<MediaQueries>({
@@ -10,10 +11,8 @@ export const useMediaQuery = (): MediaQueries => {
   });
 
   useEffect(() => {
-    // SSR safety check
-    if (typeof window === "undefined") {
-      return;
-    }
+    /* v8 ignore next */
+    if (isSSR()) return;
 
     const updateMediaQueries = () => {
       const width = window.innerWidth;

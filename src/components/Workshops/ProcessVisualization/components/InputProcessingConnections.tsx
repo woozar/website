@@ -37,70 +37,73 @@ export const InputProcessingConnections = ({
           viewBox="0 0 120 200"
           preserveAspectRatio="xMidYMid meet"
         >
-          {Array.from({ length: inputCount }).map((_, i: number) => {
-            const totalInputs = inputCount;
-            const yStart =
-              totalInputs === 1
-                ? 100
-                : (i / Math.max(totalInputs - 1, 1)) * 160 + 20;
-            const yEnd = 100;
+          {Array.from({ length: inputCount })
+            // the index is the new item
+            .map((_, i: number) => i)
+            .map((item) => {
+              const totalInputs = inputCount;
+              const yStart =
+                totalInputs === 1
+                  ? 100
+                  : (item / Math.max(totalInputs - 1, 1)) * 160 + 20;
+              const yEnd = 100;
 
-            return (
-              <g key={`connection-${i}`}>
-                <motion.path
-                  d={
-                    totalInputs === 1
-                      ? `M10,100 L110,100`
-                      : `M10,${yStart} Q60,${(yStart + yEnd) / 2} 110,${yEnd}`
-                  }
-                  stroke="var(--border-color)"
-                  strokeWidth="2"
-                  fill="none"
-                  variants={connectionVariants}
-                  initial="hidden"
-                  animate="visible"
-                />
-                <circle r="3" fill="var(--primary-orange)" opacity="0">
-                  <animateMotion
-                    dur="2.5s"
-                    repeatCount="indefinite"
-                    begin={`${i * 0.8}s`}
-                    path={
+              return (
+                <g key={`connection-${item}`}>
+                  <motion.path
+                    d={
                       totalInputs === 1
                         ? `M10,100 L110,100`
                         : `M10,${yStart} Q60,${(yStart + yEnd) / 2} 110,${yEnd}`
                     }
+                    stroke="var(--border-color)"
+                    strokeWidth="2"
+                    fill="none"
+                    variants={connectionVariants}
+                    initial="hidden"
+                    animate="visible"
                   />
-                  <animate
-                    attributeName="opacity"
-                    values="0;0.2;1;1;0.2;0"
-                    dur="2.5s"
-                    repeatCount="indefinite"
-                    begin={`${i * 0.8}s`}
-                  />
-                </circle>
-                <circle r="2" fill="var(--primary-orange)" opacity="0">
-                  <animateMotion
-                    dur="2.5s"
-                    repeatCount="indefinite"
-                    begin={`${i * 0.8 + 1.2}s`}
-                    path={
-                      totalInputs === 1
-                        ? `M10,100 L110,100`
-                        : `M10,${yStart} Q60,${(yStart + yEnd) / 2} 110,${yEnd}`
-                    }
-                  />
-                  <animate
-                    attributeName="opacity"
-                    values="0;0.1;0.7;0.7;0.1;0"
-                    dur="2.5s"
-                    repeatCount="indefinite"
-                    begin={`${i * 0.8 + 1.2}s`}
-                  />
-                </circle>
-              </g>
-            );
-          })}
+                  <circle r="3" fill="var(--primary-orange)" opacity="0">
+                    <animateMotion
+                      dur="2.5s"
+                      repeatCount="indefinite"
+                      begin={`${item * 0.8}s`}
+                      path={
+                        totalInputs === 1
+                          ? `M10,100 L110,100`
+                          : `M10,${yStart} Q60,${(yStart + yEnd) / 2} 110,${yEnd}`
+                      }
+                    />
+                    <animate
+                      attributeName="opacity"
+                      values="0;0.2;1;1;0.2;0"
+                      dur="2.5s"
+                      repeatCount="indefinite"
+                      begin={`${item * 0.8}s`}
+                    />
+                  </circle>
+                  <circle r="2" fill="var(--primary-orange)" opacity="0">
+                    <animateMotion
+                      dur="2.5s"
+                      repeatCount="indefinite"
+                      begin={`${item * 0.8 + 1.2}s`}
+                      path={
+                        totalInputs === 1
+                          ? `M10,100 L110,100`
+                          : `M10,${yStart} Q60,${(yStart + yEnd) / 2} 110,${yEnd}`
+                      }
+                    />
+                    <animate
+                      attributeName="opacity"
+                      values="0;0.1;0.7;0.7;0.1;0"
+                      dur="2.5s"
+                      repeatCount="indefinite"
+                      begin={`${item * 0.8 + 1.2}s`}
+                    />
+                  </circle>
+                </g>
+              );
+            })}
         </svg>
       </Box>
     );
@@ -124,56 +127,59 @@ export const InputProcessingConnections = ({
         viewBox="0 0 100 60"
         preserveAspectRatio="xMidYMid meet"
       >
-        {Array.from({ length: inputCount }).map((_, i: number) => {
-          const totalInputs = inputCount;
-          const spacing = 160 / (totalInputs + 1);
-          const startX = (i + 1) * spacing - 30;
-          const endX = 50;
+        {Array.from({ length: inputCount })
+          // the index is the new item
+          .map((_, i: number) => i)
+          .map((i) => {
+            const totalInputs = inputCount;
+            const spacing = 160 / (totalInputs + 1);
+            const startX = (i + 1) * spacing - 30;
+            const endX = 50;
 
-          return (
-            <g key={`connection-${i}`}>
-              <motion.path
-                d={`M${startX},10 Q${(startX + endX) / 2},30 ${endX},50`}
-                stroke="var(--border-color)"
-                strokeWidth="2"
-                fill="none"
-                variants={connectionVariants}
-                initial="hidden"
-                animate="visible"
-              />
-              <circle r="3" fill="var(--primary-orange)" opacity="0">
-                <animateMotion
-                  dur="2.5s"
-                  repeatCount="indefinite"
-                  begin={`${i * 0.8}s`}
-                  path={`M${startX},10 Q${(startX + endX) / 2},30 ${endX},50`}
+            return (
+              <g key={`connection-${i}`}>
+                <motion.path
+                  d={`M${startX},10 Q${(startX + endX) / 2},30 ${endX},50`}
+                  stroke="var(--border-color)"
+                  strokeWidth="2"
+                  fill="none"
+                  variants={connectionVariants}
+                  initial="hidden"
+                  animate="visible"
                 />
-                <animate
-                  attributeName="opacity"
-                  values="0;0.2;1;1;0.2;0"
-                  dur="2.5s"
-                  repeatCount="indefinite"
-                  begin={`${i * 0.8}s`}
-                />
-              </circle>
-              <circle r="2" fill="var(--primary-orange)" opacity="0">
-                <animateMotion
-                  dur="2.5s"
-                  repeatCount="indefinite"
-                  begin={`${i * 0.8 + 1.2}s`}
-                  path={`M${startX},10 Q${(startX + endX) / 2},30 ${endX},50`}
-                />
-                <animate
-                  attributeName="opacity"
-                  values="0;0.1;0.7;0.7;0.1;0"
-                  dur="2.5s"
-                  repeatCount="indefinite"
-                  begin={`${i * 0.8 + 1.2}s`}
-                />
-              </circle>
-            </g>
-          );
-        })}
+                <circle r="3" fill="var(--primary-orange)" opacity="0">
+                  <animateMotion
+                    dur="2.5s"
+                    repeatCount="indefinite"
+                    begin={`${i * 0.8}s`}
+                    path={`M${startX},10 Q${(startX + endX) / 2},30 ${endX},50`}
+                  />
+                  <animate
+                    attributeName="opacity"
+                    values="0;0.2;1;1;0.2;0"
+                    dur="2.5s"
+                    repeatCount="indefinite"
+                    begin={`${i * 0.8}s`}
+                  />
+                </circle>
+                <circle r="2" fill="var(--primary-orange)" opacity="0">
+                  <animateMotion
+                    dur="2.5s"
+                    repeatCount="indefinite"
+                    begin={`${i * 0.8 + 1.2}s`}
+                    path={`M${startX},10 Q${(startX + endX) / 2},30 ${endX},50`}
+                  />
+                  <animate
+                    attributeName="opacity"
+                    values="0;0.1;0.7;0.7;0.1;0"
+                    dur="2.5s"
+                    repeatCount="indefinite"
+                    begin={`${i * 0.8 + 1.2}s`}
+                  />
+                </circle>
+              </g>
+            );
+          })}
       </svg>
     </Box>
   );
