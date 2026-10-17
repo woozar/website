@@ -4,6 +4,8 @@ import { Box, Card, Stack, Text } from "@mantine/core";
 
 import { motion } from "framer-motion";
 
+import ReactMarkdown from "react-markdown";
+
 import { useCardVariants, useHoverVariants } from "@/hooks/useAnimations";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -93,6 +95,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
             {/* Description */}
             <Box>
               <Text
+                component="div"
                 size="md"
                 c="var(--text-secondary)"
                 style={{
@@ -105,7 +108,26 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
                   textAlign: "justify",
                 }}
               >
-                {project.description?.[0] || t.project.noDescription}
+                {project.description?.[0] ? (
+                  <ReactMarkdown
+                    components={{
+                      // Keep the preview inline so the line clamp still works
+                      p: ({ children }) => <span>{children}</span>,
+                      // Links would compete with the card click, so render them as text
+                      a: ({ children }) => <span>{children}</span>,
+                      strong: ({ ...props }) => (
+                        <strong
+                          {...props}
+                          style={{ color: "var(--text-primary)" }}
+                        />
+                      ),
+                    }}
+                  >
+                    {project.description[0]}
+                  </ReactMarkdown>
+                ) : (
+                  t.project.noDescription
+                )}
               </Text>
             </Box>
 

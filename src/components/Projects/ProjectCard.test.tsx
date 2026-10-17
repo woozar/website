@@ -69,6 +69,28 @@ describe("ProjectCard", () => {
     ).toBeInTheDocument();
   });
 
+  it("should render markdown bold text in the description preview as strong element without asterisks", () => {
+    const projectWithMarkdown = {
+      ...mockProject,
+      description: ["I am building an **AI portal** for procurement."],
+    };
+    render(<ProjectCard project={projectWithMarkdown} />);
+
+    const bold = screen.getByText("AI portal");
+    expect(bold.tagName).toBe("STRONG");
+    expect(screen.queryByText(/\*\*/)).not.toBeInTheDocument();
+  });
+
+  it("should render markdown links in the description preview as plain text instead of anchors", () => {
+    const projectWithLink = {
+      ...mockProject,
+      description: ["Code is on [GitHub](https://github.com/woozar/website)."],
+    };
+    render(<ProjectCard project={projectWithLink} />);
+
+    expect(screen.getByText("GitHub").closest("a")).toBeNull();
+  });
+
   it("should render default description when description is missing", () => {
     const projectWithoutDescription = { ...mockProject, description: [] };
     render(<ProjectCard project={projectWithoutDescription} />);
@@ -196,7 +218,7 @@ describe("ProjectCard", () => {
     expect(
       screen.getByText((content, element) => {
         return (
-          element?.tagName.toLowerCase() === "p" &&
+          element?.tagName.toLowerCase() === "span" &&
           content.includes("Very long description that should be truncated.")
         );
       })

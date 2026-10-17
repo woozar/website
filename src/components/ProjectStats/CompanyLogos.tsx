@@ -30,6 +30,11 @@ export const CompanyLogos = ({ onCompanyClick }: CompanyLogosProps) => {
 
   const companyLogos = [
     {
+      name: "EnBW",
+      fileName: "enbw-logo.png",
+      fallbackColor: "#000099",
+    },
+    {
       name: "Siemens AG",
       fileName: "siemens-logo.svg",
       fallbackColor: "#009999",
@@ -43,11 +48,6 @@ export const CompanyLogos = ({ onCompanyClick }: CompanyLogosProps) => {
       name: "KUKA AG",
       fileName: "kuka-logo.svg",
       fallbackColor: "#FF8800",
-    },
-    {
-      name: "Saurer AG",
-      fileName: "saurer-logo.png",
-      fallbackColor: "#1E40AF",
     },
     {
       name: "Paessler AG",

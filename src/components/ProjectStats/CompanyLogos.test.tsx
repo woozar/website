@@ -42,11 +42,19 @@ describe("CompanyLogos", () => {
     expect(screen.getByAltText("Siemens AG")).toBeInTheDocument();
     expect(screen.getByAltText("DMG MORI")).toBeInTheDocument();
     expect(screen.getByAltText("KUKA AG")).toBeInTheDocument();
-    expect(screen.getByAltText("Saurer AG")).toBeInTheDocument();
+    expect(screen.getByAltText("EnBW")).toBeInTheDocument();
     expect(screen.getByAltText("Sikant GmbH")).toBeInTheDocument();
     expect(screen.getByAltText("ChatYourData GmbH")).toBeInTheDocument();
     expect(screen.getByAltText("Paessler AG")).toBeInTheDocument();
     expect(screen.getByAltText("T3 Software")).toBeInTheDocument();
+  });
+
+  it("should render EnBW as the first company logo", () => {
+    renderComponent({ onCompanyClick: mockOnCompanyClick });
+
+    const logos = screen.getAllByRole("img");
+    expect(logos[0]).toHaveAttribute("alt", "EnBW");
+    expect(logos[0]).toHaveAttribute("src", "/assets/logos/enbw-logo.png");
   });
 
   it("should call onCompanyClick when a logo is clicked", () => {
@@ -163,10 +171,10 @@ describe("CompanyLogos", () => {
     renderComponent({ onCompanyClick: mockOnCompanyClick });
 
     const companies = [
+      "EnBW",
       "Siemens AG",
       "DMG MORI",
       "KUKA AG",
-      "Saurer AG",
       "Sikant GmbH",
       "ChatYourData GmbH",
       "Paessler AG",
