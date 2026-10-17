@@ -157,12 +157,12 @@ describe("ProjectsSection", () => {
       const primaryTagsElements = screen.getAllByTestId("primary-tags");
       const secondaryTagsElements = screen.getAllByTestId("secondary-tags");
 
-      // Check that first project has React and TypeScript tags (Moderne Portfolio-Website)
-      expect(primaryTagsElements[0]).toHaveTextContent("React");
+      // Check that first project has its primary tags (KI-Portal für den Einkauf)
+      expect(primaryTagsElements[0]).toHaveTextContent("Multi-Tenancy");
       expect(primaryTagsElements[0]).toHaveTextContent("TypeScript");
 
       // Check that secondary tags are rendered
-      expect(secondaryTagsElements[0]).toHaveTextContent("Claude Code");
+      expect(secondaryTagsElements[0]).toHaveTextContent("Entra ID");
     });
   });
 
