@@ -4,7 +4,7 @@ import { Box, Card, Stack, Text } from "@mantine/core";
 
 import { motion } from "framer-motion";
 
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown, { Components } from "react-markdown";
 
 import { useCardVariants, useHoverVariants } from "@/hooks/useAnimations";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -17,6 +17,16 @@ import { TagList } from "./TagList";
 interface ProjectCardProps {
   project: Project;
 }
+
+const previewMarkdownComponents: Components = {
+  // Keep the preview inline so the line clamp still works
+  p: ({ children }) => <span>{children}</span>,
+  // Links would compete with the card click, so render them as text
+  a: ({ children }) => <span>{children}</span>,
+  strong: ({ ...props }) => (
+    <strong {...props} style={{ color: "var(--text-primary)" }} />
+  ),
+};
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
   const { t } = useTranslation();
@@ -109,20 +119,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
                 }}
               >
                 {project.description?.[0] ? (
-                  <ReactMarkdown
-                    components={{
-                      // Keep the preview inline so the line clamp still works
-                      p: ({ children }) => <span>{children}</span>,
-                      // Links would compete with the card click, so render them as text
-                      a: ({ children }) => <span>{children}</span>,
-                      strong: ({ ...props }) => (
-                        <strong
-                          {...props}
-                          style={{ color: "var(--text-primary)" }}
-                        />
-                      ),
-                    }}
-                  >
+                  <ReactMarkdown components={previewMarkdownComponents}>
                     {project.description[0]}
                   </ReactMarkdown>
                 ) : (

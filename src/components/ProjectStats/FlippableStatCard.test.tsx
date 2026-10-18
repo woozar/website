@@ -153,6 +153,19 @@ describe("FlippableStatCard", () => {
     expect(screen.getByText("Used Frameworks")).toBeInTheDocument();
   });
 
+  it("should display exactly one side at a time with reduced motion", () => {
+    mockUseReducedMotion.mockReturnValue(true);
+    render(<FlippableStatCard {...defaultProps} />);
+
+    expect(screen.getByText("Test frameworks used")).toBeVisible();
+    expect(screen.getByText("Used Frameworks")).not.toBeVisible();
+
+    fireEvent.click(screen.getByRole("button"));
+
+    expect(screen.getByText("Test frameworks used")).not.toBeVisible();
+    expect(screen.getByText("Used Frameworks")).toBeVisible();
+  });
+
   it("should render with correct tabIndex", () => {
     render(<FlippableStatCard {...defaultProps} />);
 

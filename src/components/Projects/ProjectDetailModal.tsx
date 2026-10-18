@@ -2,7 +2,7 @@ import { Stack, Text, Title } from "@mantine/core";
 
 import { motion } from "framer-motion";
 
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown, { Components } from "react-markdown";
 
 import { useContainerVariants, useModalVariants } from "@/hooks/useAnimations";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -16,6 +16,29 @@ interface ProjectDetailModalProps {
   opened: boolean;
   onClose: () => void;
 }
+
+const detailMarkdownComponents: Components = {
+  // Style links
+  a: ({ children, ...props }) => (
+    <a
+      {...props}
+      style={{ textDecoration: "none" }}
+      className="markdown-link"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {children}
+    </a>
+  ),
+  // Style paragraphs
+  p: ({ ...props }) => <p {...props} style={{ marginBottom: "1rem" }} />,
+  // Style strong/bold text
+  strong: ({ ...props }) => (
+    <strong {...props} style={{ color: "var(--text-primary)" }} />
+  ),
+  // Style emphasis/italic text
+  em: ({ ...props }) => <em {...props} style={{ fontStyle: "italic" }} />,
+};
 
 export const ProjectDetailModal = ({
   project,
@@ -86,37 +109,7 @@ export const ProjectDetailModal = ({
                     fontSize: "1rem",
                   }}
                 >
-                  <ReactMarkdown
-                    components={{
-                      // Style links
-                      a: ({ children, ...props }) => (
-                        <a
-                          {...props}
-                          style={{ textDecoration: "none" }}
-                          className="markdown-link"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {children}
-                        </a>
-                      ),
-                      // Style paragraphs
-                      p: ({ ...props }) => (
-                        <p {...props} style={{ marginBottom: "1rem" }} />
-                      ),
-                      // Style strong/bold text
-                      strong: ({ ...props }) => (
-                        <strong
-                          {...props}
-                          style={{ color: "var(--text-primary)" }}
-                        />
-                      ),
-                      // Style emphasis/italic text
-                      em: ({ ...props }) => (
-                        <em {...props} style={{ fontStyle: "italic" }} />
-                      ),
-                    }}
-                  >
+                  <ReactMarkdown components={detailMarkdownComponents}>
                     {project.description.join("\n\n")}
                   </ReactMarkdown>
                 </div>

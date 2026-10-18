@@ -61,6 +61,44 @@ const CardFlipIndicator = ({
   </ActionIcon>
 );
 
+const cardBaseStyle: React.CSSProperties = {
+  width: "100%",
+  height: "100%",
+  textAlign: "center",
+  borderColor: "var(--border-color)",
+  backgroundColor: "var(--background-primary)",
+};
+
+// With reduced motion there is no 3D flip: exactly one side is displayed at a time
+const getFrontCardStyle = (
+  shouldReduceMotion: boolean,
+  isFlipped: boolean
+): React.CSSProperties => {
+  const hideFront = shouldReduceMotion && isFlipped;
+  return {
+    ...cardBaseStyle,
+    position: hideFront ? "absolute" : "relative",
+    backfaceVisibility: "hidden",
+    transform: shouldReduceMotion ? "none" : "rotateY(0deg)",
+    display: hideFront ? "none" : "block",
+    zIndex: isFlipped ? 1 : 2,
+  };
+};
+
+const getBackCardStyle = (
+  shouldReduceMotion: boolean,
+  isFlipped: boolean
+): React.CSSProperties => ({
+  ...cardBaseStyle,
+  position: shouldReduceMotion ? "relative" : "absolute",
+  top: 0,
+  left: 0,
+  backfaceVisibility: shouldReduceMotion ? "visible" : "hidden",
+  transform: shouldReduceMotion ? "none" : "rotateY(180deg)",
+  display: shouldReduceMotion && !isFlipped ? "none" : "block",
+  zIndex: isFlipped ? 2 : 1,
+});
+
 export const FlippableStatCard = ({
   icon: Icon,
   title,
@@ -84,8 +122,6 @@ export const FlippableStatCard = ({
     }
   };
 
-  // If user prefers reduced motion, show back content immediately when requested
-  const showBackContent = shouldReduceMotion ? isFlipped : false;
   const animationProps = shouldReduceMotion
     ? {}
     : {
@@ -124,19 +160,7 @@ export const FlippableStatCard = ({
           padding="md"
           radius="lg"
           withBorder
-          style={{
-            position:
-              shouldReduceMotion && showBackContent ? "absolute" : "relative",
-            width: "100%",
-            height: "100%",
-            textAlign: "center",
-            borderColor: "var(--border-color)",
-            backgroundColor: "var(--background-primary)",
-            backfaceVisibility: "hidden",
-            transform: shouldReduceMotion ? "none" : "rotateY(0deg)",
-            display: shouldReduceMotion && showBackContent ? "none" : "block",
-            zIndex: isFlipped ? 1 : 2,
-          }}
+          style={getFrontCardStyle(shouldReduceMotion, isFlipped)}
         >
           <CardFlipIndicator
             isFlipped={isFlipped}
@@ -184,20 +208,7 @@ export const FlippableStatCard = ({
           padding="md"
           radius="lg"
           withBorder
-          style={{
-            position: shouldReduceMotion ? "relative" : "absolute",
-            top: shouldReduceMotion ? 0 : "0",
-            left: shouldReduceMotion ? 0 : "0",
-            width: "100%",
-            height: "100%",
-            textAlign: "center",
-            borderColor: "var(--border-color)",
-            backgroundColor: "var(--background-primary)",
-            backfaceVisibility: shouldReduceMotion ? "visible" : "hidden",
-            transform: shouldReduceMotion ? "none" : "rotateY(180deg)",
-            display: shouldReduceMotion && !showBackContent ? "none" : "block",
-            zIndex: isFlipped ? 2 : 1,
-          }}
+          style={getBackCardStyle(shouldReduceMotion, isFlipped)}
         >
           <CardFlipIndicator
             isFlipped={isFlipped}
