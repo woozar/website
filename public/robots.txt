@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://12ofspades.com/sitemap.xml
+Sitemap: https://12-of-spades.com/sitemap.xml
