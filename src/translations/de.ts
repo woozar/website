@@ -1,3 +1,5 @@
+import { microsoftEnbwArticle } from "./press";
+
 export const de = {
   navigation: {
     services: "Services",
@@ -37,6 +39,10 @@ export const de = {
     ],
     contactButton: "Kontakt aufnehmen",
     projectsButton: "Projekte ansehen",
+    featured: {
+      label: "Featured bei Microsoft",
+      text: "Das KI-Portal für den EnBW-Einkauf, an dem ich als AI Solution Architect maßgeblich mitentwickle, dient Microsoft als Praxisbeispiel für agentische KI.",
+    },
   },
   services: {
     title: "Meine Services",
@@ -274,6 +280,13 @@ export const de = {
   project: {
     technologies: "Technologien",
     noDescription: "Keine Beschreibung verfügbar",
+    press: "In der Presse",
+  },
+  press: {
+    languageHint: {
+      de: "Artikel auf Deutsch",
+      en: "Artikel auf Englisch",
+    },
   },
   workshop: {
     seo: {
@@ -576,6 +589,7 @@ export const de = {
     {
       customer: "EnBW Energie Baden-Württemberg AG",
       title: "KI-Portal für den Einkauf",
+      references: [{ ...microsoftEnbwArticle, badge: "Microsoft Showcase" }],
       description: [
         "Als **AI Solution Architect** bin ich Teil eines vierköpfigen Teams aus Architekten und Entwicklern, das für den Einkauf der EnBW ein **KI-Portal** entwickelt – eine gemeinsame Plattform für alle KI-Use-Cases der Abteilung. Use Cases werden als *Module* eingehängt und teilen sich u. a. Benutzerverwaltung, Berechtigungen, Hintergrundverarbeitung und UI-Komponenten.",
         "Leitgedanke aller KI-Projekte bei der EnBW ist die **Befähigung der Fachabteilungen**: Alles ist so entworfen, dass sie das System später *eigenständig* weiter verbessern können – Agents, Regelwerke und Testkataloge werden direkt über die Oberfläche gepflegt und versioniert.",
@@ -632,8 +646,9 @@ export const de = {
     {
       customer: "EnBW Energie Baden-Württemberg AG",
       title: "KI-Portal Use Case: Vertragsanalyse",
+      references: [{ ...microsoftEnbwArticle, badge: "Microsoft Showcase" }],
       description: [
-        "Als Portal-Team haben wir für den EnBW-Einkauf eine **KI-gestützte Vertragsanalyse** entwickelt. Grundlage ist ein Regelwerk aus rund **8000 Regeln**, das die Juristen des Einkaufs für die Einkäufer erstellt haben und laufend weiter pflegen. Mit unserem Tool können die Einkäufer die Bedingungen von Lieferantenverträgen nun automatisiert gegen dieses Regelwerk auswerten, statt sie manuell zu prüfen. Nebenbei ist dadurch auch die Nutzung *nicht datenschutzkonformer* KI-Assistenten zurückgegangen.",
+        "Als Portal-Team haben wir für den EnBW-Einkauf eine **KI-gestützte Vertragsanalyse** entwickelt. Grundlage ist ein Regelwerk aus rund **8000 Regeln**, das die Juristen des Einkaufs für die Einkäufer erstellt haben und laufend weiter pflegen. Mit unserem Tool können die Einkäufer die Bedingungen von Lieferantenverträgen nun automatisiert gegen dieses Regelwerk auswerten, statt sie manuell zu prüfen. Nebenbei ist dadurch auch die Nutzung *nicht datenschutzkonformer* KI-Assistenten zurückgegangen. Bei der EnBW ist die Anwendung als **Contract Management Agent** im Einsatz.",
         "Das Regelwerk ist *versioniert*: Vertragsvorlagen bestehen aus Klauseln, zu denen jeweils Regeln mit **Ampel-Logik** hinterlegt sind – grüner Standard, gelber Verhandlungskorridor und rote No-Gos. Ergänzt wird das durch ein unternehmensweites Klauselregister. Import und Export der Regelwerke erfolgen bequem über Excel, und auch die Pflege der Regeln selbst wird durch den Einsatz von KI vereinfacht und beschleunigt.",
         "Hochgeladene Verträge werden mit Hilfe unterschiedlicher **Azure Services** und **KI-Agenten** gegen das Regelwerk ausgewertet. Das Ergebnis wird übersichtlich zusammengefasst, und zu jeder Analyse steht ein Chat für Rückfragen bereit.",
         "Als Nächstes erweitern wir die Anwendung um die **Erstellung von Verträgen** und entwickeln einen Workflow, der den **Verhandlungsprozess** unterstützt – mit Vorschlägen und Anpassungen am Vertrag. Außerdem kommt ein Tool hinzu, mit dem sich **Angebote unterschiedlicher Lieferanten** miteinander vergleichen lassen.",
@@ -670,8 +685,9 @@ export const de = {
     {
       customer: "EnBW Energie Baden-Württemberg AG",
       title: "KI-Portal Use Case: Einkaufs-Chatbot",
+      references: [{ ...microsoftEnbwArticle, badge: "Microsoft Showcase" }],
       description: [
-        "Der erste Use Case, den wir als Portal-Team entwickelt haben, war ein **Chatbot für den Einkauf**. Mitarbeitende können damit Fragen zu Einkaufsdaten in natürlicher Sprache stellen: Der Chatbot übersetzt sie in Datenbankabfragen, prüft die Ergebnisse auf Plausibilität und bereitet sie als Antwort, Tabelle oder Diagramm auf – auf Wunsch auch als Excel- oder PowerPoint-Export.",
+        "Der erste Use Case, den wir als Portal-Team entwickelt haben, war ein **Chatbot für den Einkauf**. Mitarbeitende können damit Fragen zu Einkaufsdaten in natürlicher Sprache stellen: Der Chatbot übersetzt sie in Datenbankabfragen, prüft die Ergebnisse auf Plausibilität und bereitet sie als Antwort, Tabelle oder Diagramm auf – auf Wunsch auch als Excel- oder PowerPoint-Export. Bei der EnBW ist der Chatbot unter dem Namen **Talk2Einkauf** im Einsatz.",
         "Der Chatbot baut auf der **Agent-Engine** des Portals auf: Spezialisierte Agents für Datenanalyse und Plausibilitätsprüfung arbeiten als Sub-Agents zusammen und greifen über eigene **Tools** auf die Datenprodukte des Einkaufs zu. Antworten werden gestreamt, Analysen lassen sich speichern und wiederverwenden, und Exporte laufen als Hintergrundaufgaben, ohne die Oberfläche zu blockieren.",
         "Umgesetzt ist der Chatbot mit dem **Vercel AI SDK** und **aktuellen GPT-Modellen** über Azure AI Foundry sowie **Claude**-Modellen von Anthropic. Die SQL-Abfragen werden vor der Ausführung validiert, damit ausschließlich lesende Zugriffe auf die Einkaufsdaten möglich sind.",
         "Das Projekt läuft aktuell weiter.",
@@ -749,8 +765,9 @@ export const de = {
     {
       customer: "EnBW Energie Baden-Württemberg AG",
       title: "KI-gestützte Lieferkettenanalyse",
+      references: [{ ...microsoftEnbwArticle, badge: "Microsoft Showcase" }],
       description: [
-        "Für das **Supply Chain Management** der EnBW ist neuerdings eine KI-gestützte Anwendung im Einsatz. Sie ist ursprünglich als **Plugin des KI-Portals** entstanden, und ich habe als *Teil des Teams* daran mitgearbeitet.",
+        "Für das **Supply Chain Management** der EnBW ist neuerdings eine KI-gestützte Anwendung im Einsatz. Sie ist ursprünglich als **Plugin des KI-Portals** entstanden, und ich habe als *Teil des Teams* daran mitgearbeitet. Bei der EnBW ist sie unter dem Namen **Supply Chain Tower** bekannt.",
         "Für alle angebotenen Produkte kann die KI mit einer Analyse beauftragt werden: Sie ermittelt, aus welchen Bestandteilen ein Produkt besteht und wer diese potenziell bzw. wahrscheinlich liefert. Das Ergebnis ist ein **Lieferketten-Baum**, der die Abhängigkeiten über mehrere Ebenen sichtbar macht.",
         "Perspektivisch soll die Anwendung außerdem auf **Ereignisse** wie Naturkatastrophen oder politische Entwicklungen – etwa Kriege – reagieren und zeigen, an welchen Stellen die Lieferkette beeinträchtigt sein kann.",
         "Weil die Use Cases unterschiedlichen **Kostenstellen** zugeordnet sind, wurde für die Lieferkettenanalyse ein eigenes Team *abgespalten*. Für die zuständige Abteilung wird parallel eine **eigene Instanz des KI-Portals** aufgebaut, auf der dieses Team die Anwendung nun ohne uns weiterentwickelt. Mit dem Team arbeiten wir weiterhin eng zusammen.",

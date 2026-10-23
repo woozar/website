@@ -15,9 +15,11 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useModal } from "@/hooks/useModal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useTranslation } from "@/hooks/useTranslation";
+import { microsoftEnbwArticle } from "@/translations/press";
 
 import { CtaButton } from "../CtaButton.tsx";
 import { Section } from "../Layout";
+import { PressLink } from "../Press";
 
 const heroPortrait = "/assets/hero-portrait.webp";
 
@@ -188,6 +190,36 @@ export const Hero = () => {
                   </Button>
                 </motion.div>
               </Group>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <Box
+                component="aside"
+                aria-label={t.hero.featured.label}
+                style={{
+                  borderLeft: "3px solid var(--primary-orange)",
+                  paddingLeft: "1rem",
+                  textAlign: "left",
+                  maxWidth: "36rem",
+                  marginInline: isMobile || isTablet ? "auto" : undefined,
+                }}
+              >
+                <Stack gap="xs">
+                  <Text
+                    size="xs"
+                    fw={700}
+                    tt="uppercase"
+                    c="var(--primary-orange)"
+                    style={{ letterSpacing: "0.08em" }}
+                  >
+                    {t.hero.featured.label}
+                  </Text>
+                  <Text size="sm" c="var(--text-secondary)">
+                    {t.hero.featured.text}
+                  </Text>
+                  <PressLink reference={microsoftEnbwArticle} />
+                </Stack>
+              </Box>
             </motion.div>
           </Stack>
 

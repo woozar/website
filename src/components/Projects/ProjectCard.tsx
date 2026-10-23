@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Box, Card, Stack, Text } from "@mantine/core";
+import { Badge, Box, Card, Group, Stack, Text } from "@mantine/core";
 
 import { motion } from "framer-motion";
 
@@ -38,6 +38,10 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
     scale: 0.95,
     duration: 0.5,
   });
+
+  const showcaseBadges = (project.references ?? []).filter(
+    (reference) => reference.badge
+  );
 
   const hoverVariants = useHoverVariants({
     scale: 1.02,
@@ -100,6 +104,33 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
               >
                 {project.customer}
               </Text>
+              {showcaseBadges.length > 0 && (
+                <Group gap="xs">
+                  {showcaseBadges.map((reference) => (
+                    <Badge
+                      key={reference.url}
+                      variant="light"
+                      color="gray"
+                      radius="sm"
+                      leftSection={
+                        reference.favicon && (
+                          <img
+                            src={reference.favicon}
+                            alt=""
+                            aria-hidden="true"
+                            width={12}
+                            height={12}
+                            style={{ display: "block" }}
+                          />
+                        )
+                      }
+                      style={{ textTransform: "none" }}
+                    >
+                      {reference.badge}
+                    </Badge>
+                  ))}
+                </Group>
+              )}
             </Stack>
 
             {/* Description */}

@@ -1,3 +1,5 @@
+import { microsoftEnbwArticle } from "./press";
+
 export const en = {
   navigation: {
     services: "Services",
@@ -37,6 +39,10 @@ export const en = {
     ],
     contactButton: "Get in Touch",
     projectsButton: "View Projects",
+    featured: {
+      label: "Featured by Microsoft",
+      text: "The AI portal for EnBW's procurement department, which I am a key contributor to as AI Solution Architect, serves Microsoft as a showcase for agentic AI.",
+    },
   },
   services: {
     title: "My Services",
@@ -273,6 +279,13 @@ export const en = {
   project: {
     technologies: "Technologies",
     noDescription: "No description available",
+    press: "In the Press",
+  },
+  press: {
+    languageHint: {
+      de: "article in German",
+      en: "article in English",
+    },
   },
   workshop: {
     seo: {
@@ -576,6 +589,12 @@ export const en = {
     {
       customer: "EnBW Energie Baden-Württemberg AG",
       title: "AI Portal for Procurement",
+      references: [
+        {
+          ...microsoftEnbwArticle,
+          badge: "Microsoft Showcase",
+        },
+      ],
       description: [
         "As an **AI Solution Architect**, I am part of a four-person team of architects and developers that develops an **AI portal** for EnBW's procurement department – a shared platform for all of the department's AI use cases. Use cases are plugged in as *modules* and share, among other things, user management, permissions, background processing, and UI components.",
         "The guiding principle behind all of EnBW's AI projects is **empowering the business departments**: everything is designed so that they can later keep improving the system *on their own* – agents, rule sets, and test catalogs are maintained and versioned directly through the UI.",
@@ -632,8 +651,14 @@ export const en = {
     {
       customer: "EnBW Energie Baden-Württemberg AG",
       title: "AI Portal Use Case: Contract Analysis",
+      references: [
+        {
+          ...microsoftEnbwArticle,
+          badge: "Microsoft Showcase",
+        },
+      ],
       description: [
-        "As the portal team, we developed an **AI-powered contract analysis** for EnBW's procurement department. It is based on a rule set of around **8,000 rules** that the procurement lawyers created for the buyers and keep maintaining. With our tool, buyers can now evaluate the terms of supplier contracts against this rule set automatically instead of checking them manually. As a side effect, the use of AI assistants that were *not compliant with data protection* requirements has also decreased.",
+        "As the portal team, we developed an **AI-powered contract analysis** for EnBW's procurement department. It is based on a rule set of around **8,000 rules** that the procurement lawyers created for the buyers and keep maintaining. With our tool, buyers can now evaluate the terms of supplier contracts against this rule set automatically instead of checking them manually. As a side effect, the use of AI assistants that were *not compliant with data protection* requirements has also decreased. At EnBW, the application is in use as the **Contract Management Agent**.",
         "The rule set is *versioned*: contract templates consist of clauses, each with rules following a **traffic-light logic** – green standard, yellow negotiation corridor, and red no-gos. This is complemented by a company-wide clause register. Rule sets can be conveniently imported and exported via Excel, and maintaining the rules themselves is also simplified and accelerated by AI.",
         "Uploaded contracts are evaluated against the rule set with the help of various **Azure services** and **AI agents**. The result is summarized clearly, and every analysis comes with a chat for follow-up questions.",
         "Next, we are extending the application to **create contracts** and developing a workflow that supports the **negotiation process** – with suggestions and adjustments to the contract. In addition, a tool for comparing **offers from different suppliers** is being added.",
@@ -670,8 +695,14 @@ export const en = {
     {
       customer: "EnBW Energie Baden-Württemberg AG",
       title: "AI Portal Use Case: Procurement Chatbot",
+      references: [
+        {
+          ...microsoftEnbwArticle,
+          badge: "Microsoft Showcase",
+        },
+      ],
       description: [
-        "The first use case we built as the portal team was a **procurement chatbot**. It lets employees ask questions about procurement data in natural language: the chatbot translates them into database queries, checks the results for plausibility, and presents them as an answer, table, or chart – optionally also as an Excel or PowerPoint export.",
+        "The first use case we built as the portal team was a **procurement chatbot**. It lets employees ask questions about procurement data in natural language: the chatbot translates them into database queries, checks the results for plausibility, and presents them as an answer, table, or chart – optionally also as an Excel or PowerPoint export. At EnBW, the chatbot is in use under the name **Talk2Einkauf**.",
         "The chatbot is built on the portal's **agent engine**: specialized agents for data analysis and plausibility checks work together as sub-agents and access the procurement data products through dedicated **tools**. Responses are streamed, analyses can be saved and reused, and exports run as background tasks without blocking the UI.",
         "Technically, it uses the **Vercel AI SDK** with **current GPT models** via Azure AI Foundry as well as Anthropic's **Claude** models. SQL queries are validated before execution to ensure only read access to the procurement data is possible.",
         "The project is still ongoing.",
@@ -749,8 +780,14 @@ export const en = {
     {
       customer: "EnBW Energie Baden-Württemberg AG",
       title: "AI-Powered Supply Chain Analysis",
+      references: [
+        {
+          ...microsoftEnbwArticle,
+          badge: "Microsoft Showcase",
+        },
+      ],
       description: [
-        "For EnBW's **supply chain management**, an AI-powered application has recently gone live. It was originally built as a **plugin of the AI portal**, and I worked on it as *part of the team*.",
+        "For EnBW's **supply chain management**, an AI-powered application has recently gone live. It was originally built as a **plugin of the AI portal**, and I worked on it as *part of the team*. At EnBW, it is known as the **Supply Chain Tower**.",
         "For any product on offer, the AI can be tasked with an analysis: it determines which components the product consists of and who potentially or most likely supplies them. The result is a **supply chain tree** that makes dependencies visible across several levels.",
         "In the future, the application is also meant to react to **events** such as natural disasters or political developments – for example wars – and show where the supply chain may be affected.",
         "Because the use cases belong to different **cost centers**, a separate team was *spun off* for the supply chain analysis. A **dedicated instance of the AI portal** is being built in parallel for the responsible department, on which this team now continues developing the application without us. We continue to work closely with the team.",

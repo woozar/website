@@ -90,6 +90,22 @@ describe("Hero", () => {
     expect(screen.getByText("Projekte ansehen")).toBeInTheDocument();
   });
 
+  it("should link the featured Microsoft article in a new tab", () => {
+    render(<Hero />);
+
+    const featured = screen.getByRole("complementary", {
+      name: de.hero.featured.label,
+    });
+    expect(featured).toHaveTextContent(de.hero.featured.text);
+
+    const link = screen.getByRole("link", { name: /Mission Einkauf/ });
+    expect(link).toHaveAttribute(
+      "href",
+      "https://news.microsoft.com/source/emea/features/mission-einkauf-mit-agenten-auf-der-suche-nach-den-lieferketten-der-zukunft"
+    );
+    expect(link).toHaveAttribute("target", "_blank");
+  });
+
   it("should render hero portrait image", () => {
     render(<Hero />);
 

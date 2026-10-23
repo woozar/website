@@ -1,3 +1,16 @@
+import { Language } from "@/stores/languageStore";
+
+export interface PressReference {
+  title: string;
+  source: string;
+  url: string;
+  favicon?: string;
+  // Short label shown as badge on the project card
+  badge?: string;
+  // Language of the article, shown as hint if it differs from the UI language
+  language?: Language;
+}
+
 export interface Project {
   customer: string;
   title: string;
@@ -5,6 +18,7 @@ export interface Project {
   primary_tags: string[];
   tags: string[];
   comment?: string;
+  references?: PressReference[];
 }
 
 export interface ProjectsData {

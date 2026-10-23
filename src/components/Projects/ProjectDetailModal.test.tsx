@@ -67,6 +67,35 @@ describe("ProjectDetailModal", () => {
     expect(screen.getByText("Technologies")).toBeInTheDocument();
   });
 
+  it("should render the press section with a link to each reference", () => {
+    render(
+      <ProjectDetailModal
+        {...defaultProps}
+        project={{
+          ...mockProject,
+          references: [
+            {
+              title: "Showcase Article",
+              source: "Microsoft Source EMEA",
+              url: "https://example.com/showcase",
+            },
+          ],
+        }}
+      />
+    );
+
+    expect(screen.getByText("In the Press")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: /Showcase Article/ })
+    ).toHaveAttribute("href", "https://example.com/showcase");
+  });
+
+  it("should not render the press section when the project has no references", () => {
+    render(<ProjectDetailModal {...defaultProps} />);
+
+    expect(screen.queryByText("In the Press")).not.toBeInTheDocument();
+  });
+
   it("should render markdown content correctly", () => {
     render(<ProjectDetailModal {...defaultProps} />);
 
