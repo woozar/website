@@ -107,6 +107,57 @@ describe("ProjectCard", () => {
     expect(screen.getByText("No description available")).toBeInTheDocument();
   });
 
+  it("should show a badge with the label of each reference that has a badge", () => {
+    const projectWithReference: Project = {
+      ...mockProject,
+      references: [
+        {
+          title: "Article",
+          source: "Source",
+          url: "https://example.com/a",
+          badge: "Microsoft Showcase",
+        },
+        {
+          title: "Other Article",
+          source: "Source",
+          url: "https://example.com/b",
+        },
+      ],
+    };
+    render(<ProjectCard project={projectWithReference} />);
+
+    expect(screen.getAllByText(/Showcase/)).toHaveLength(1);
+    expect(screen.getByText("Microsoft Showcase")).toBeInTheDocument();
+  });
+
+  it("should not show a showcase badge for projects without references", () => {
+    render(<ProjectCard project={mockProject} />);
+
+    expect(screen.queryByText("Microsoft Showcase")).not.toBeInTheDocument();
+  });
+
+  it("should open the modal when the showcase badge is clicked", () => {
+    render(
+      <ProjectCard
+        project={{
+          ...mockProject,
+          references: [
+            {
+              title: "Article",
+              source: "Source",
+              url: "https://example.com/a",
+              badge: "Microsoft Showcase",
+            },
+          ],
+        }}
+      />
+    );
+
+    fireEvent.click(screen.getByText("Microsoft Showcase"));
+
+    expect(screen.getByTestId("project-modal")).toBeInTheDocument();
+  });
+
   it("should render TagList with primary and secondary tags", () => {
     render(<ProjectCard project={mockProject} />);
 

@@ -9,6 +9,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { Project } from "@/types";
 
 import { AnimatedModal } from "../Modal/AnimatedModal";
+import { PressLink } from "../Press";
 import { TagList } from "./TagList";
 
 interface ProjectDetailModalProps {
@@ -114,6 +115,18 @@ export const ProjectDetailModal = ({
                   </ReactMarkdown>
                 </div>
               </Stack>
+
+              {/* Press references */}
+              {project.references && project.references.length > 0 && (
+                <Stack gap="sm">
+                  <Text fw={600} size="sm" c="var(--text-primary)">
+                    {t.project.press}
+                  </Text>
+                  {project.references.map((reference) => (
+                    <PressLink key={reference.url} reference={reference} />
+                  ))}
+                </Stack>
+              )}
 
               {/* All Tags */}
               <div>
