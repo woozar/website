@@ -117,7 +117,7 @@ npm install && npm run dev
 
 ```bash
 npm run dev          # Development Server
-npm run build:zip    # Tests, Build, ZIP, SonarQube + FTPS-Upload
+npm run publish      # Tests, Build, ZIP, SonarQube + FTPS-Upload
 npm run test         # Tests mit Vitest
 npm run lint         # Code Quality Check
 ```
@@ -131,7 +131,7 @@ npm run lint         # Code Quality Check
 
 ### **Deployment**
 
-`npm run build:zip` lädt den Build nach bestandenem SonarQube-Quality-Gate per FTPS auf den Webspace hoch und gleicht dabei ab (`lftp mirror --delete`). Voraussetzungen:
+`npm run publish` lädt den Build nach bestandenem SonarQube-Quality-Gate per FTPS auf den Webspace hoch und gleicht dabei ab (`lftp mirror --delete`). Voraussetzungen:
 
 - `lftp` installiert (`brew install lftp`)
 - `FTP_USER` und `FTP_PASSWORD` in `.env` – fehlen sie, wird nur `website.zip` erstellt
