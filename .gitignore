@@ -32,3 +32,6 @@ coverage/
 *.zip
 .scannerwork
 
+
+# Claude Code
+.claude/
